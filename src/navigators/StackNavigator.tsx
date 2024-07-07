@@ -1,8 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {StackMenu} from './constants/index';
-import {StackParamList} from './types/index';
-import Home from '../screens/Home';
+import {StackMenu} from '@navigators/constants';
+import {StackParamList } from '@navigators/types';
+import Home from '@screens/Home';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
