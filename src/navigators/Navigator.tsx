@@ -1,5 +1,4 @@
 import {NavigationContainer} from '@react-navigation/native';
-
 import StackNavigator from './StackNavigator';
 
 const Navigator = () => {
