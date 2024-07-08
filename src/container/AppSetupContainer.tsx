@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import ReactQuerySetting from './react-query';
+import ReactQuerySetting from '@libs/react-query';
 
 type AppSetupWrapperProps = {children: ReactNode};
 
