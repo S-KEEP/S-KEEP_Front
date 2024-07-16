@@ -3,11 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "husky install",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
+  },
+  "jira-prepare-commit-msg": {
+    "messagePattern": "[$J] $M",
+    "allowEmptyCommitMessage": false,
+    "ignoredBranchesPattern": "^(master|main|dev|develop|development|release)$"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.17",
@@ -37,7 +43,9 @@
     "babel-jest": "^29.6.3",
     "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "^8.19.0",
+    "husky": "^9.0.11",
     "jest": "^29.6.3",
+    "jira-prepare-commit-msg": "^1.7.2",
     "prettier": "^3.3.2",
     "react-test-renderer": "18.2.0",
     "typescript": "5.0.4"
