@@ -1,14 +1,16 @@
 import * as React from 'react';
-import {Button, View, Text} from 'react-native';
+import {Button, View, Text, StyleSheet} from 'react-native';
 import {NavigationContainer, ParamListBase} from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import MapView, {Marker} from 'react-native-maps';
 
 type RootStackParamList = {
   Home: undefined;
   Details: undefined;
+  Map: undefined;
 };
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
@@ -28,6 +30,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       />
+      <Button title="Go to Map" onPress={() => navigation.navigate('Map')} />
     </View>
   );
 }
@@ -40,6 +43,40 @@ function DetailsScreen() {
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    height: 400,
+    width: 400,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+});
+
+function MapScreen() {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Map Screen</Text>
+
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}>
+          <Marker coordinate={{latitude: 37.78825, longitude: -122.4324}} />
+        </MapView>
+      </View>
+    </View>
+  );
+}
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
@@ -48,6 +85,7 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Map" component={MapScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
