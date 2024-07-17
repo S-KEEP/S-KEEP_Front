@@ -5,10 +5,17 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import HomeIc from './src/assets/icon/home.svg';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import Category from './src/screens/CategoryTab';
+import Etc from './src/screens/EtcTab';
+import Navigator from './src/navigators/Navigator';
 
 type RootStackParamList = {
   Home: undefined;
   Details: undefined;
+  Category: undefined;
+  Etc: undefined;
 };
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
@@ -28,6 +35,14 @@ function HomeScreen({navigation}: HomeScreenProps) {
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       />
+
+      <Button
+        title="Go to Category"
+        onPress={() => navigation.navigate('Category')}
+      />
+
+      <Button title="Go to Etc" onPress={() => navigation.navigate('Etc')} />
+      <HomeIc />
     </View>
   );
 }
@@ -42,15 +57,20 @@ function DetailsScreen() {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function App() {
+const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //     <Stack.Screen name="Home" component={HomeScreen} />
+    //     <Stack.Screen name="Details" component={DetailsScreen} />
+    //     <Stack.Screen name="Category" component={Category} />
+    //     <Stack.Screen name="Etc" component={Etc} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
+    <SafeAreaProvider>
+      <Navigator />
+    </SafeAreaProvider>
   );
-}
+};
 
 export default App;

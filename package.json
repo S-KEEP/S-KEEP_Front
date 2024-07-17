@@ -16,6 +16,7 @@
     "ignoredBranchesPattern": "^(master|main|dev|develop|development|release)$"
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.6.0",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.10.0",
     "@tanstack/react-query": "^5.50.1",
