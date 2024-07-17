@@ -18,6 +18,8 @@ import EtcIc from '../assets/icon/etc.svg';
 
 import Icon from '../components/Icon';
 import React from 'react';
+import Friend from '../screens/FriendTab';
+import Map from '../screens/MapTab';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -28,15 +30,24 @@ export default function TabNavigator() {
     <Tab.Navigator
       screenOptions={({route}) => screenOptions({route, bottomSize})}>
       <Tab.Screen
+        name={TabMenu.Friend}
+        component={Friend}
+        options={{tabBarLabel: TabBarLabel.Friend}}
+      />
+      <Tab.Screen
         name={TabMenu.Home}
         component={Home}
         options={{tabBarLabel: TabBarLabel.Home}}
       />
-
       <Tab.Screen
         name={TabMenu.Category}
         component={Category}
         options={{tabBarLabel: TabBarLabel.Category}}
+      />
+      <Tab.Screen
+        name={TabMenu.Map}
+        component={Map}
+        options={{tabBarLabel: TabBarLabel.Map}}
       />
 
       <Tab.Screen

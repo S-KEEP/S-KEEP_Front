@@ -7,4 +7,6 @@ export const enum TabMenu {
   Home = 'Home',
   Category = 'Category',
   Etc = 'Etc',
+  Friend = 'Friend',
+  Map = 'Map',
 }
