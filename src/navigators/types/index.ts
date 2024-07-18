@@ -6,8 +6,6 @@ export type TabParamList = {
   Home: undefined;
   Category: undefined;
   Etc: undefined;
-  Friend: undefined;
-  Map: undefined;
 };
 
 export type StackScreenName = keyof StackParamList;

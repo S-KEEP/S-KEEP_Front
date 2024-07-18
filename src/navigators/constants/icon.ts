@@ -1,7 +1,5 @@
 export const TabNavigatorIcon = {
-  Home: 'Home',
-  Category: 'Category',
-  Etc: 'Etc',
-  Friend: 'Friend',
-  Map: 'Map',
+  Home: 'HomeIc',
+  Category: 'CategoryIc',
+  Etc: 'EtcIc',
 } as const;

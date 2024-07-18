@@ -10,6 +10,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Category from './src/screens/CategoryTab';
 import Etc from './src/screens/EtcTab';
 import Navigator from './src/navigators/Navigator';
+import Icon from './src/components/Icon';
 
 type RootStackParamList = {
   Home: undefined;
@@ -59,14 +60,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen name="Home" component={HomeScreen} />
-    //     <Stack.Screen name="Details" component={DetailsScreen} />
-    //     <Stack.Screen name="Category" component={Category} />
-    //     <Stack.Screen name="Etc" component={Etc} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
     <SafeAreaProvider>
       <Navigator />
     </SafeAreaProvider>
