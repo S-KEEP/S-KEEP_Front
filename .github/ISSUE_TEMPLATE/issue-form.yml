@@ -1,7 +1,7 @@
 name: 'S-KEEP Front 이슈 생성'
 description: 'S-KEEP Front Repo에 이슈를 생성하며, 생성된 이슈는 Jira와 연동됩니다.'
 labels: [feat💡]
-title: '이슈 이름을 작성해주세요'
+title: '[FRONT] 이슈 제목'
 body:
   - type: input
     id: parentKey
@@ -11,7 +11,7 @@ body:
       placeholder: 'SKP-00'
     validations:
       required: true
-      
+
   - type: input
     id: branch
     attributes:
@@ -19,7 +19,7 @@ body:
       description: '영어로 브랜치명을 작성해주세요'
     validations:
       required: true
-      
+
   - type: input
     id: description
     attributes:

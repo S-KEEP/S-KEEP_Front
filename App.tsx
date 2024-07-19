@@ -5,12 +5,18 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import MapView, {Marker} from 'react-native-maps';
+import HomeIc from './src/assets/icon/home.svg';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import Category from './src/screens/CategoryTab';
+import Etc from './src/screens/EtcTab';
+import Navigator from './src/navigators/Navigator';
+import Icon from './src/components/Icon';
 
 type RootStackParamList = {
   Home: undefined;
   Details: undefined;
-  Map: undefined;
+  Category: undefined;
+  Etc: undefined;
 };
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
@@ -30,7 +36,14 @@ function HomeScreen({navigation}: HomeScreenProps) {
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       />
-      <Button title="Go to Map" onPress={() => navigation.navigate('Map')} />
+
+      <Button
+        title="Go to Category"
+        onPress={() => navigation.navigate('Category')}
+      />
+
+      <Button title="Go to Etc" onPress={() => navigation.navigate('Etc')} />
+      <HomeIc />
     </View>
   );
 }
@@ -56,39 +69,35 @@ const styles = StyleSheet.create({
   },
 });
 
-function MapScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Map Screen</Text>
+// function MapScreen() {
+//   return (
+//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Text>Map Screen</Text>
 
-      <View style={styles.container}>
-        <MapView
-          style={styles.map}
-          region={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}>
-          <Marker coordinate={{latitude: 37.78825, longitude: -122.4324}} />
-        </MapView>
-      </View>
-    </View>
-  );
-}
+//       <View style={styles.container}>
+//         <MapView
+//           style={styles.map}
+//           region={{
+//             latitude: 37.78825,
+//             longitude: -122.4324,
+//             latitudeDelta: 0.015,
+//             longitudeDelta: 0.0121,
+//           }}>
+//           <Marker coordinate={{latitude: 37.78825, longitude: -122.4324}} />
+//         </MapView>
+//       </View>
+//     </View>
+//   );
+// }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function App() {
+const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-        <Stack.Screen name="Map" component={MapScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <Navigator />
+    </SafeAreaProvider>
   );
-}
+};
 
 export default App;
