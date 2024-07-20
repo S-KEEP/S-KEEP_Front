@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {flexBox, wrapper} from '../styles/styleUtils';
+import {flexBox, wrapper} from '../styles/common';
 import {theme} from '../styles';
 import MapView, {Marker} from 'react-native-maps';
 import {IcCancel, IcDown} from '../assets/icon';

@@ -1,8 +1,9 @@
-import {Animated, Text, View} from 'react-native';
+import {Animated, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {flexBox, wrapper} from '../styles/styleUtils';
+import {flexBox, wrapper} from '../styles/common';
 import {theme} from '../styles';
 import {StackScreenProps} from '../navigators/types';
+import Swiper from 'react-native-swiper';
 import {
   IcCancel,
   IcFolder,
@@ -12,7 +13,6 @@ import {
   IcRotate,
   IcTarget,
 } from '../assets/icon';
-import {useRef} from 'react';
 
 export default function AnalyzeResult({navigation}: StackScreenProps) {
   return (
@@ -36,14 +36,7 @@ export default function AnalyzeResult({navigation}: StackScreenProps) {
         이제 스킵에서 인천대공원과 관련된 더 많은 정보를 받아볼 수 있어요
       </Text>
 
-      <View style={{position: 'relative'}}>
-        <MyPager />
-
-        <IcPaginationLeft style={{position: 'absolute', left: 10, top: 150}} />
-        <IcPaginationRight
-          style={{position: 'absolute', right: 10, top: 150}}
-        />
-      </View>
+      <MyPager />
 
       <View
         style={{
@@ -77,30 +70,29 @@ export default function AnalyzeResult({navigation}: StackScreenProps) {
 
 const MyPager = () => {
   return (
-    <View>
-      <View key="1">
-        <Text>First page</Text>
+    <Swiper
+      showsButtons={true}
+      showsPagination={false}
+      loop={false}
+      style={{marginTop: 30}}
+      prevButton={<IcPaginationLeft style={{marginTop: -120}} />}
+      nextButton={<IcPaginationRight style={{marginTop: -120}} />}>
+      <View style={{flex: 1}}>
         <Info />
       </View>
-      <View key="2">
-        <Text>Second page</Text>
+      <View style={{flex: 1}}>
         <Info />
       </View>
-      <View key="3">
-        <Text>Third page</Text>
+      <View style={{flex: 1}}>
         <Info />
       </View>
-      <View key="4">
-        <Text>Fourth page</Text>
-        <Info />
-      </View>
-    </View>
+    </Swiper>
   );
 };
 
 const Info = () => {
   return (
-    <View>
+    <View style={{...flexBox('column'), gap: 20}}>
       <View
         style={{
           width: 200,
@@ -108,7 +100,7 @@ const Info = () => {
           backgroundColor: '#D9D9D9',
           borderRadius: 20,
           marginHorizontal: 'auto',
-          marginVertical: 40,
+          // marginVertical: 40,
         }}
       />
 

@@ -1,7 +1,7 @@
 import {Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {theme} from '../styles';
-import {flexBox, wrapper} from '../styles/styleUtils';
+import {flexBox, wrapper} from '../styles/common';
 import {StackScreenProps} from '../navigators/types';
 
 export default function Analyze({navigation}: StackScreenProps) {
