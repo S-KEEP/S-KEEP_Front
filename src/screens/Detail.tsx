@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {flexBox, wrapper} from '../styles/styleUtils';
 import {theme} from '../styles';
+import MapView, {MapMarker, Marker, Polygon} from 'react-native-maps';
 
 export default function Detail() {
   return (
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
 function MapScreen() {
   return (
     <View style={styles.container}>
-      {/* <MapView
+      <MapView
         style={styles.map}
         region={{
           latitude: 37.78825,
@@ -59,7 +60,7 @@ function MapScreen() {
           longitudeDelta: 0.0121,
         }}>
         <Marker coordinate={{latitude: 37.78825, longitude: -122.4324}} />
-      </MapView> */}
+      </MapView>
     </View>
   );
 }

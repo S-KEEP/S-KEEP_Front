@@ -8869,9 +8869,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-maps@npm:^1.15.6":
-  version: 1.15.6
-  resolution: "react-native-maps@npm:1.15.6"
+"react-native-maps@npm:^1.15.7":
+  version: 1.15.7
+  resolution: "react-native-maps@npm:1.15.7"
   dependencies:
     "@types/geojson": ^7946.0.13
   peerDependencies:
@@ -8881,7 +8881,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-web:
       optional: true
-  checksum: 42baf0dfa930f799ad7ab833215511dbee72fb02622feef67d62c1fc111585e8fa73c20e7f3e292bd233876a453ae3129e2a7144b43375cd0ffe834907858405
+  checksum: b111d82e93064f5447d86a0b77d98773ad092bd43d72b2f5cc70e5ec93e620933c91eb70a76d486f5a7cf71759535d00ef3a0ae6bfa1bd27b1106d4b9804b4e9
   languageName: node
   linkType: hard
 
@@ -9630,7 +9630,7 @@ __metadata:
     prettier: ^3.3.2
     react: 18.2.0
     react-native: 0.74.3
-    react-native-maps: ^1.15.6
+    react-native-maps: ^1.15.7
     react-native-safe-area-context: ^4.10.7
     react-native-screens: ^3.32.0
     react-native-svg: ^15.3.0

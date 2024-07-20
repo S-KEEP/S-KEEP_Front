@@ -33,4 +33,10 @@ module.exports = {
       },
     ],
   ],
+  overrides: [
+    {
+      test: fileName => !fileName.includes('node_modules/react-native-maps'),
+      plugins: [['@babel/plugin-transform-private-methods', {loose: true}]],
+    },
+  ],
 };
