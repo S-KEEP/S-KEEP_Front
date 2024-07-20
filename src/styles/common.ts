@@ -1,5 +1,5 @@
 // common.ts
-import {ViewStyle} from 'react-native';
+import {View, ViewStyle} from 'react-native';
 import {theme} from './theme';
 
 export const flexBox = (
@@ -25,4 +25,15 @@ export const wrapper: ViewStyle = {
   padding: 28,
   backgroundColor: theme.palette.white,
   // flex: 1,
+};
+
+export const wrapperFull: ViewStyle = {
+  width: '100%',
+  height: '100%',
+  paddingVertical: 28,
+  backgroundColor: theme.palette.white,
+};
+
+export const padding: ViewStyle = {
+  paddingHorizontal: 28,
 };

@@ -4,7 +4,7 @@ import {StackMenu} from '../navigators/constants/menu';
 import {StackParamList} from '../navigators/types';
 import Home from '../screens/Home';
 import Analyze from '../screens/Analyze';
-import AnalyzeResult from '../screens/AnalyzeResult';
+import AnalyzeResult from '../screens/AnalyzeResult/AnalyzeResult';
 import Detail from '../screens/Detail';
 
 const Stack = createNativeStackNavigator<StackParamList>();

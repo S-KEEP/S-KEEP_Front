@@ -1,6 +1,6 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {flexBox, wrapper} from '../styles/common';
+import {flexBox, padding, wrapper, wrapperFull} from '../styles/common';
 import {theme} from '../styles';
 import MapView, {Marker} from 'react-native-maps';
 import {IcCancel, IcDown, IcFolder} from '../assets/icon';
@@ -8,8 +8,8 @@ import {StackScreenProps} from '../navigators/types';
 
 export default function Detail({navigation}: StackScreenProps) {
   return (
-    <SafeAreaView style={{...wrapper}}>
-      <IcCancel onPress={() => navigation.pop()} />
+    <SafeAreaView style={{...wrapperFull}}>
+      <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
 
       <MapScreen />
 
@@ -18,6 +18,7 @@ export default function Detail({navigation}: StackScreenProps) {
           marginTop: 50,
           ...flexBox('row', 'flex-start'),
           gap: 20,
+          ...padding,
         }}>
         <View
           style={{
