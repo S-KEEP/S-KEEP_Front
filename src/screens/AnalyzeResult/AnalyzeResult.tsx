@@ -1,20 +1,31 @@
-import {Text, View} from 'react-native';
+import {Text, Touchable, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {flexBox, wrapper} from '../../styles/common';
-import {theme} from '../../styles';
+import {wrapper} from '../../styles/common';
 import {StackScreenProps} from '../../navigators/types';
 import {IcCancel, IcRotate} from '../../assets/icon';
 import Button from '../../components/common/Button/Button';
 import ResultSwiper from '../../components/ResultSwiper/ResultSwiper/ResultSwiper';
 import dummies from './dummies.json';
 import styles from './AnalyzeResult.styles';
+import {useState} from 'react';
 
 export default function AnalyzeResult({navigation}: StackScreenProps) {
-  const result = dummies.results;
+  const [result, setResult] = useState(dummies.results[0]);
+
+  function handleGoBack() {
+    navigation.pop();
+  }
+  function handleGoDetail() {
+    navigation.navigate('Detail');
+  }
+  function handleRetry() {
+    if (result.length > 1) setResult(dummies.results[1]);
+    else setResult(dummies.results[0]);
+  }
 
   return (
     <SafeAreaView style={{...wrapper}}>
-      <IcCancel onPress={() => navigation.pop()} />
+      <IcCancel onPress={handleGoBack} />
 
       {result.length > 1 ? (
         <Text style={styles.title}>
@@ -30,15 +41,12 @@ export default function AnalyzeResult({navigation}: StackScreenProps) {
 
       <ResultSwiper items={result} />
 
-      <Button
-        text="확인하러 가기"
-        onPress={() => navigation.navigate('Detail')}
-      />
+      <Button text="확인하러 가기" onPress={handleGoDetail} />
 
-      <View style={styles.retryContainer}>
+      <TouchableOpacity style={styles.retryContainer} onPress={handleRetry}>
         <Text style={styles.retryText}>다시 분석하기</Text>
         <IcRotate />
-      </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
