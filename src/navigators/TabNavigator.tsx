@@ -28,6 +28,7 @@ export default function TabNavigator() {
         component={Category}
         options={{tabBarLabel: TabBarLabel.Category}}
       />
+
       <Tab.Screen
         name={TabMenu.Home}
         component={Home}

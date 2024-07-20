@@ -1,6 +1,12 @@
 import {RouteProp} from '@react-navigation/native';
 
-export type StackParamList = {Home: undefined; TabNavigator: undefined};
+export type StackParamList = {
+  Home: undefined;
+  TabNavigator: undefined;
+  Analyze: undefined;
+  AnalyzeResult: undefined;
+  Detail: undefined;
+};
 
 export type TabParamList = {
   Home: undefined;
