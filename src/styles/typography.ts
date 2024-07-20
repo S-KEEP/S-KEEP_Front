@@ -1,6 +1,41 @@
 import {StyleSheet} from 'react-native';
 
 export const typographyStyles = StyleSheet.create({
+  /** Title - Pretendard SemiBold 21 */
+  title_sb_21: {
+    fontSize: 21,
+    fontFamily: 'Pretendard SemiBold',
+  },
+  /** Title - Pretendard Medium 16 */
+  title_m_16: {
+    fontSize: 16,
+    fontFamily: 'Pretendard Medium',
+  },
+
+  /** Body - Pretendard SemiBold 17 */
+  body_sb_17: {
+    fontSize: 17,
+    fontFamily: 'Pretendard SemiBold',
+  },
+  /** Body - Pretendard Medium 16 */
+  body_m_16: {
+    fontSize: 16,
+    fontFamily: 'Pretendard Medium',
+  },
+  /** Body - Pretendard Medium 15 */
+  body_m_15: {
+    fontSize: 15,
+    fontFamily: 'Pretendard Medium',
+  },
+
+  /** Text - Pretendard Medium 11 */
+  text_m_11: {
+    fontSize: 11,
+    fontFamily: 'Pretendard Medium',
+  },
+
+  ///////////////////////////////////////////////////////////////////////
+
   /** Title1_m - size: 24, weight: 700 */
   Title1Bold: {
     fontSize: 24,
