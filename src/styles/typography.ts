@@ -34,6 +34,12 @@ export const typographyStyles = StyleSheet.create({
     fontFamily: 'Pretendard Medium',
   },
 
+  /** Button - Pretendard SemiBold 15 */
+  button_sb_15: {
+    fontSize: 15,
+    fontFamily: 'Pretendard SemiBold',
+  },
+
   ///////////////////////////////////////////////////////////////////////
 
   /** Title1_m - size: 24, weight: 700 */

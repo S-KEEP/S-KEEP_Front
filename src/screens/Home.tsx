@@ -1,13 +1,9 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Button, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {StackParamList} from '../navigators/types';
-import {Header} from 'react-native/Libraries/NewAppScreen';
+import {StackScreenProps} from '../navigators/types';
 
-type HomeProps = {
-  navigation: NativeStackNavigationProp<StackParamList, 'Home'>;
-};
-export default function Home({navigation}: HomeProps) {
+export default function Home({navigation}: StackScreenProps) {
   return (
     <View>
       <SafeAreaView>

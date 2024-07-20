@@ -1,4 +1,5 @@
 import {RouteProp} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type StackParamList = {
   Home: undefined;
@@ -19,4 +20,8 @@ export type TabScreenName = keyof TabParamList;
 
 export type TabRouteProps = {
   route: RouteProp<TabParamList, TabScreenName>;
+};
+
+export type StackScreenProps = {
+  navigation: NativeStackNavigationProp<StackParamList>;
 };
