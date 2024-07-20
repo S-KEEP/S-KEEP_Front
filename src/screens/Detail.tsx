@@ -1,9 +1,9 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {flexBox, wrapper} from '../styles/common';
 import {theme} from '../styles';
 import MapView, {Marker} from 'react-native-maps';
-import {IcCancel, IcDown} from '../assets/icon';
+import {IcCancel, IcDown, IcFolder} from '../assets/icon';
 import {StackScreenProps} from '../navigators/types';
 
 export default function Detail({navigation}: StackScreenProps) {
@@ -76,7 +76,14 @@ function MapScreen() {
           latitudeDelta: 0.015,
           longitudeDelta: 0.0121,
         }}>
-        <Marker coordinate={{latitude: 37.78825, longitude: -122.4324}} />
+        <Marker
+          coordinate={{latitude: 37.78825, longitude: -122.4324}}
+          pinColor={theme.palette.primary}>
+          <Image
+            source={require('./../assets/icon/ic_pin.png')}
+            style={{height: 35, width: 35, resizeMode: 'contain'}}
+          />
+        </Marker>
       </MapView>
     </View>
   );
