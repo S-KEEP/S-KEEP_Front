@@ -2,16 +2,23 @@ import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {flexBox, wrapper} from '../styles/styleUtils';
 import {theme} from '../styles';
-import MapView, {MapMarker, Marker, Polygon} from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
+import {IcCancel, IcDown} from '../assets/icon';
+import {StackScreenProps} from '../navigators/types';
 
-export default function Detail() {
+export default function Detail({navigation}: StackScreenProps) {
   return (
     <SafeAreaView style={{...wrapper}}>
-      <Text> X </Text>
+      <IcCancel onPress={() => navigation.pop()} />
 
       <MapScreen />
 
-      <View style={{marginTop: 50, ...flexBox('row', 'flex-start'), gap: 20}}>
+      <View
+        style={{
+          marginTop: 50,
+          ...flexBox('row', 'flex-start'),
+          gap: 20,
+        }}>
         <View
           style={{
             width: 100,
@@ -24,9 +31,19 @@ export default function Detail() {
 
         <View>
           <Text style={{...theme.typography.body_sb_17}}>인천대공원</Text>
-          <Text style={{...theme.typography.body_m_16, marginTop: 10}}>
-            가나다라마바사아자차카타
-          </Text>
+
+          <View style={{...flexBox('row', 'flex-start', 'center')}}>
+            <Text
+              numberOfLines={1}
+              style={{
+                ...theme.typography.body_m_16,
+                marginTop: 10,
+                width: '70%',
+              }}>
+              가나다라마바사아자차카타dddddd가나다라마바사아자차카타dddddd가나다라마바사아자차카타dddddd가나다라마바사아자차카타dddddd
+            </Text>
+            <IcDown />
+          </View>
         </View>
       </View>
     </SafeAreaView>
