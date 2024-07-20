@@ -4,8 +4,8 @@ import {theme} from '../../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    ...flexBox('column'),
-    gap: 20,
+    marginHorizontal: 10,
+    height: '90%',
   },
   image: {
     width: 200,
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     borderColor: '#EDEDED',
     borderWidth: 2,
     borderRadius: 10,
+    marginTop: 30,
   },
   boxItem: {...flexBox(), gap: 7},
   text: {

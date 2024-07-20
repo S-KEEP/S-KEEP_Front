@@ -1,4 +1,4 @@
-import {Text, Touchable, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {wrapper} from '../../styles/common';
 import {StackScreenProps} from '../../navigators/types';

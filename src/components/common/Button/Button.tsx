@@ -19,9 +19,8 @@ const styles = StyleSheet.create({
   container: {
     ...flexBox(),
     backgroundColor: theme.palette.primary,
-    borderRadius: 12,
-    paddingVertical: 20,
-    paddingHorizontal: 122,
+    borderRadius: 10,
+    paddingVertical: '5%',
   },
   text: {
     ...theme.typography.button_sb_15,
