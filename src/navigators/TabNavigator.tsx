@@ -5,7 +5,6 @@ import {
 } from '@react-navigation/bottom-tabs';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {theme} from '../styles/theme';
-import HomeIc from '../assets/icon/home.svg';
 import CategoryIc from '../assets/icon/category.svg';
 import EtcIc from '../assets/icon/etc.svg';
 import {TabMenu} from '../navigators/constants/menu';
@@ -14,6 +13,8 @@ import Home from '../screens/Home';
 import Category from '../screens/CategoryTab';
 import Etc from '../screens/EtcTab';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
+import {IcCategory, IcEtc, IcHome} from '../assets/icon';
+import {StyleProp, ViewStyle} from 'react-native';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -44,32 +45,28 @@ export default function TabNavigator() {
   );
 }
 
+const iconStyle: StyleProp<ViewStyle> = {
+  position: 'absolute',
+  bottom: 0,
+};
+
 const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
+  const iconColor = focused ? theme.palette.primary : theme.palette.gray4;
+
   switch (routeName) {
     case TabMenu.Home:
       return (
-        <HomeIc
-          width={24}
-          height={24}
+        <IcHome
+          width={60}
+          height={60}
           fill={focused ? theme.palette.primary : theme.palette.gray4}
+          style={iconStyle}
         />
       );
     case TabMenu.Category:
-      return (
-        <CategoryIc
-          width={24}
-          height={24}
-          fill={focused ? theme.palette.primary : theme.palette.gray4}
-        />
-      );
+      return <IcCategory width={24} height={24} fill={iconColor} />;
     case TabMenu.Etc:
-      return (
-        <EtcIc
-          width={24}
-          height={24}
-          fill={focused ? theme.palette.primary : theme.palette.gray4}
-        />
-      );
+      return <IcEtc width={24} height={24} fill={iconColor} />;
     default:
       return null;
   }

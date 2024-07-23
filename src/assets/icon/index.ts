@@ -1,9 +1,10 @@
 export {default as HomeIc} from './home.svg';
-export {default as CategoryIc} from './category.svg';
-export {default as EtcIc} from './etc.svg';
+export {default as IcCategory} from './ic_category.svg';
+export {default as IcEtc} from './ic_etc.svg';
 export {default as IcCancel} from './ic_cancel.svg';
 export {default as IcFolder} from './ic_folder.svg';
 export {default as IcLeft} from './ic_left.svg';
+export {default as IcHome} from './ic_home.svg';
 export {default as IcMarker} from './ic_marker.svg';
 export {default as IcRotate} from './ic_rotate.svg';
 export {default as IcTarget} from './ic_target.svg';
