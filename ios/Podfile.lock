@@ -4,30 +4,6 @@ PODS:
   - FBLazyVector (0.74.3)
   - fmt (9.1.0)
   - glog (0.3.5)
-  - Google-Maps-iOS-Utils (4.2.2):
-    - Google-Maps-iOS-Utils/Clustering (= 4.2.2)
-    - Google-Maps-iOS-Utils/Geometry (= 4.2.2)
-    - Google-Maps-iOS-Utils/GeometryUtils (= 4.2.2)
-    - Google-Maps-iOS-Utils/Heatmap (= 4.2.2)
-    - Google-Maps-iOS-Utils/QuadTree (= 4.2.2)
-    - GoogleMaps (~> 7.3)
-  - Google-Maps-iOS-Utils/Clustering (4.2.2):
-    - Google-Maps-iOS-Utils/QuadTree
-    - GoogleMaps (~> 7.3)
-  - Google-Maps-iOS-Utils/Geometry (4.2.2):
-    - GoogleMaps (~> 7.3)
-  - Google-Maps-iOS-Utils/GeometryUtils (4.2.2):
-    - GoogleMaps (~> 7.3)
-  - Google-Maps-iOS-Utils/Heatmap (4.2.2):
-    - Google-Maps-iOS-Utils/QuadTree
-    - GoogleMaps (~> 7.3)
-  - Google-Maps-iOS-Utils/QuadTree (4.2.2):
-    - GoogleMaps (~> 7.3)
-  - GoogleMaps (7.4.0):
-    - GoogleMaps/Maps (= 7.4.0)
-  - GoogleMaps/Base (7.4.0)
-  - GoogleMaps/Maps (7.4.0):
-    - GoogleMaps/Base
   - hermes-engine (0.74.3):
     - hermes-engine/Pre-built (= 0.74.3)
   - hermes-engine/Pre-built (0.74.3)
@@ -1229,8 +1205,6 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - Google-Maps-iOS-Utils
-  - GoogleMaps
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
@@ -1258,7 +1232,6 @@ DEPENDENCIES:
   - React-jsitracing (from `../node_modules/react-native/ReactCommon/hermes/executor/`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
-  - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -1290,8 +1263,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Google-Maps-iOS-Utils
-    - GoogleMaps
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -1356,8 +1327,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
-  react-native-google-maps:
-    :path: "../node_modules/react-native-maps"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
   react-native-safe-area-context:
@@ -1421,8 +1390,6 @@ SPEC CHECKSUMS:
   FBLazyVector: 7e977dd099937dc5458851233141583abba49ff2
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
-  Google-Maps-iOS-Utils: f77eab4c4326d7e6a277f8e23a0232402731913a
-  GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
   hermes-engine: 1f547997900dd0752dc0cc0ae6dd16173c49e09b
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
   RCTDeprecation: 4c7eeb42be0b2e95195563c49be08d0b839d22b4
@@ -1479,6 +1446,6 @@ SPEC CHECKSUMS:
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 04f1db30bb810187397fa4c37dd1868a27af229c
 
-PODFILE CHECKSUM: 5727e5d17e48be763b72f94e58ea83d64ca44ad4
+PODFILE CHECKSUM: fb0bfaed3b5576c1100fd7d182d99f381a18e12d
 
 COCOAPODS: 1.15.2
