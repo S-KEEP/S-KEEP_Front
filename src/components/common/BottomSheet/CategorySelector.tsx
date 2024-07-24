@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import {IcActivity, IcFood, IcNature, IcVacation} from '../../../assets/icon';
-import {theme} from '../../../styles';
-import {flexBox} from '../../../styles/common';
 import Button from '../Button/Button';
+import styles from './CategorySelector.style';
 
 interface Category {
   id: string;
@@ -18,14 +17,12 @@ const categories: Category[] = [
   {id: '4', name: '맛집', icon: <IcFood />},
 ];
 
-const CategorySelector: React.FC = () => {
+function CategorySelector() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  const handleGoDetail = () => {};
-
   const handleCategorySelect = (id: string) => {
     setSelectedCategory(id);
   };
+  const handleNothingYet = () => {};
 
   const renderItem = ({item}: {item: Category}) => (
     <TouchableOpacity
@@ -39,10 +36,6 @@ const CategorySelector: React.FC = () => {
     </TouchableOpacity>
   );
 
-  function alert(arg0: string): void {
-    throw new Error('Function not implemented.');
-  }
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>변경할 카테고리를 선택해 주세요!</Text>
@@ -52,45 +45,11 @@ const CategorySelector: React.FC = () => {
         keyExtractor={item => item.id}
         style={styles.list}
       />
-      <TouchableOpacity onPress={() => alert('카테고리 변경')}>
-        <Button text="변경하기" onPress={handleGoDetail} />
+      <TouchableOpacity>
+        <Button text="변경하기" onPress={handleNothingYet} />
       </TouchableOpacity>
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-    marginBottom: 20,
-  },
-  title: {
-    ...theme.typography.body_sb_17,
-    marginBottom: 20,
-  },
-  list: {
-    marginBottom: 20,
-  },
-  categoryItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  selectedCategoryItem: {
-    backgroundColor: '#e0e0e0',
-  },
-  icon: {
-    width: 40,
-    height: 40,
-    marginRight: 20,
-  },
-  categoryText: {
-    fontSize: 16,
-  },
-});
+}
 
 export default CategorySelector;

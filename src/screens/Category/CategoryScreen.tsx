@@ -1,6 +1,6 @@
 import {View, Button, StyleSheet, Text} from 'react-native';
 import {useCallback, useMemo, useRef} from 'react';
-import CategorySelector from '../../components/common/BottomSheet/Category';
+import CategorySelector from '../../components/common/BottomSheet/CategorySelector';
 import {BottomSheetBackdrop, BottomSheetModal} from '@gorhom/bottom-sheet';
 import styles from './CategoryScreen.style';
 
