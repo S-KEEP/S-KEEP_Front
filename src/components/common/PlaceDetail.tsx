@@ -1,63 +1,40 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {IcDown} from '../../assets/icon';
-import {theme} from '../../styles';
-import {flexBox, padding} from '../../styles/common';
+import styles from './PlaceDetail.style';
 
 interface RegionProps {
   title: string;
   description: string;
+  imageSrc: string;
 }
 
-const PlaceDetail: React.FC<RegionProps> = ({title, description}) => {
+export default function PlaceDetail({
+  title,
+  description,
+  imageSrc,
+}: RegionProps) {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleToggle = () => {
+    setExpanded(!expanded);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.image}></View>
+      <Image source={{uri: imageSrc}} style={styles.image} />
 
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.addressBox}>
-          <Text numberOfLines={1} style={styles.address}>
-            가나다라마바사아자차카타dddddd가나다라마바사아자차카타dddddd가나다라마바사아자차카타dddddd가나다라마바사아자차카타dddddd
+          <Text numberOfLines={expanded ? undefined : 1} style={styles.address}>
+            {description}
           </Text>
-          <IcDown />
+          <TouchableOpacity onPress={handleToggle}>
+            <IcDown />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 50,
-    ...flexBox('row', 'flex-start'),
-    gap: 20,
-    ...padding,
-    top: 50,
-  },
-
-  image: {
-    width: 80,
-    height: 80,
-
-    backgroundColor: '#D9D9D9',
-    borderRadius: 10,
-  },
-  addressBox: {
-    ...flexBox('row', 'flex-start', 'center'),
-  },
-
-  address: {...theme.typography.body_m_16, marginTop: 10, width: '70%'},
-  textContainer: {
-    flex: 1,
-  },
-  title: {
-    ...theme.typography.body_sb_17,
-  },
-  description: {
-    fontSize: 14,
-    color: '#555',
-  },
-});
-
-export default PlaceDetail;
+}
