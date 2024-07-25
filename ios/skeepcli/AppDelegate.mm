@@ -2,12 +2,10 @@
 
 #import <React/RCTBundleURLProvider.h>
 
-#import <GoogleMaps/GoogleMaps.h>
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [GMSServices provideAPIKey:@"AIzaSyCvhGC3q0h2V6gdTXv-sDfr3AL6R7l92Ms"];
   self.moduleName = @"skeepcli";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
