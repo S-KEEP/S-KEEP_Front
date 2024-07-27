@@ -3089,6 +3089,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-native-share-menu@npm:^5.0.5":
+  version: 5.0.5
+  resolution: "@types/react-native-share-menu@npm:5.0.5"
+  checksum: a445a8dd4895eac21dbaf8ba71758d9032c3b69d1fc3ea596c72cbbfd2e69f09424b15f03a925817fba5f725622188f9b3d51ff48e88a89a5e620bd50fd9092d
+  languageName: node
+  linkType: hard
+
 "@types/react-native@npm:^0.73.0":
   version: 0.73.0
   resolution: "@types/react-native@npm:0.73.0"
@@ -9635,6 +9642,7 @@ __metadata:
     "@tanstack/react-query": ^5.50.1
     "@types/react": ^18.3.3
     "@types/react-native": ^0.73.0
+    "@types/react-native-share-menu": ^5.0.5
     "@types/react-test-renderer": ^18.0.0
     "@typescript-eslint/eslint-plugin": ^7.15.0
     "@typescript-eslint/parser": ^7.15.0
