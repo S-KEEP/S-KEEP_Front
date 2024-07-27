@@ -59,5 +59,7 @@
 		<string>Pretendard-SemiBold.ttf</string>
 		<string>Pretendard-Thin.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>스크린샷 이미지 첨부를 위해 사용합니다</string>
 </dict>
 </plist>
