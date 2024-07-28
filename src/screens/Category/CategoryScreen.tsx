@@ -3,6 +3,7 @@ import {useCallback, useMemo, useRef} from 'react';
 import CategorySelector from '../../components/common/BottomSheet/CategorySelector';
 import {BottomSheetBackdrop, BottomSheetModal} from '@gorhom/bottom-sheet';
 import styles from './CategoryScreen.style';
+import AppleLogin from '../../components/Login/AppleLogin';
 
 export default function Category() {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -24,7 +25,7 @@ export default function Category() {
         title="Present Modal"
         color="black"
       />
-
+      <AppleLogin />
       <BottomSheetModal
         ref={bottomSheetModalRef}
         index={1}
