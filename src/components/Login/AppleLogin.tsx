@@ -2,41 +2,59 @@ import React from 'react';
 import appleAuth, {
   AppleButton,
 } from '@invertase/react-native-apple-authentication';
-
-async function handleSignInApple() {
-  try {
-    // performs login request
-    const appleAuthRequestResponse = await appleAuth.performRequest({
-      requestedOperation: appleAuth.Operation.LOGIN,
-      // Note: it appears putting FULL_NAME first is important, see issue #293
-      requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
-    });
-
-    // Log the response from Apple
-    console.log('Apple Auth Request Response:', appleAuthRequestResponse);
-
-    // get current authentication state for user
-    // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
-    const credentialState = await appleAuth.getCredentialStateForUser(
-      appleAuthRequestResponse.user,
-    );
-
-    // Log the credential state
-    console.log('Credential State:', credentialState);
-
-    // use credentialState response to ensure the user is authenticated
-    if (credentialState === appleAuth.State.AUTHORIZED) {
-      // user is authenticated
-      console.log('User is authenticated');
-    } else {
-      console.log('User is not authenticated');
-    }
-  } catch (error) {
-    console.error('Apple Sign In Error:', error);
-  }
-}
+import {appleClient} from '../../apis/appleClients';
+import useSocialLoginMutation from '../../hooks/auth/useSocialLoginMutation';
+import useAuthStorage from '../../hooks/auth/useAuthStorage';
+import {useSetRecoilState} from 'recoil';
+import {userInfoState} from '../../libs/recoil/states/userInfo';
+import {authApi} from '../../apis/authApi';
 
 function AppleLogin() {
+  const {setAuthData} = useAuthStorage();
+  const setUserInfo = useSetRecoilState(userInfoState);
+
+  const {authMutation} = useSocialLoginMutation();
+
+  const handlePressAppleLoginButton = async () => {
+    try {
+      const {
+        email,
+        user,
+        fullName,
+        identityToken: idToken,
+        authorizationCode: code,
+      } = await appleClient.fetchLogin();
+
+      const authState = await appleClient.getUserAuthState(user);
+
+      if (idToken && authState === appleAuth.State.AUTHORIZED) {
+        const body = {
+          state: null,
+          code,
+          id_token: idToken,
+          user: {
+            email,
+            name: {
+              firstName: fullName?.givenName || '',
+              lastName: fullName?.familyName || '',
+            },
+          },
+        };
+
+        const response = await authApi.postLoginUser(body);
+
+        if (response) {
+          const {accessToken, refreshToken} = response;
+          setAuthData({accessToken, refreshToken});
+          console.log(accessToken);
+          setUserInfo({username: fullName?.nickname || '회원'});
+        }
+      }
+    } catch (error) {
+      console.error('Apple Sign In Error:', error);
+    }
+  };
+
   return (
     <AppleButton
       buttonStyle={AppleButton.Style.WHITE}
@@ -45,7 +63,7 @@ function AppleLogin() {
         width: '100%', // You must specify a width
         height: 45, // You must specify a height
       }}
-      onPress={handleSignInApple}
+      onPress={handlePressAppleLoginButton}
     />
   );
 }
