@@ -8,6 +8,9 @@ import useAuthStorage from '../../hooks/auth/useAuthStorage';
 import {useSetRecoilState} from 'recoil';
 import {userInfoState} from '../../libs/recoil/states/userInfo';
 import {authApi} from '../../apis/authApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './AppleLogin.style';
+import {View} from 'react-native';
 
 function AppleLogin() {
   const {setAuthData} = useAuthStorage();
@@ -40,14 +43,16 @@ function AppleLogin() {
             },
           },
         };
-
+        console.log(body);
         const response = await authApi.postLoginUser(body);
 
         if (response) {
           const {accessToken, refreshToken} = response;
           setAuthData({accessToken, refreshToken});
-          console.log(accessToken);
-          setUserInfo({username: fullName?.nickname || '회원'});
+          setUserInfo({username: fullName?.givenName || '회원'});
+
+          await AsyncStorage.setItem('accessToken', accessToken);
+          await AsyncStorage.setItem('refreshToken', refreshToken);
         }
       }
     } catch (error) {
@@ -56,15 +61,13 @@ function AppleLogin() {
   };
 
   return (
-    <AppleButton
-      buttonStyle={AppleButton.Style.WHITE}
-      buttonType={AppleButton.Type.SIGN_IN}
-      style={{
-        width: '100%', // You must specify a width
-        height: 45, // You must specify a height
-      }}
-      onPress={handlePressAppleLoginButton}
-    />
+    <View style={styles.container}>
+      <AppleButton
+        buttonType={AppleButton.Type.SIGN_IN}
+        style={styles.appleButtonStyle}
+        onPress={handlePressAppleLoginButton}
+      />
+    </View>
   );
 }
 
