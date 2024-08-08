@@ -7,15 +7,14 @@ import useSocialLoginMutation from '../../hooks/auth/useSocialLoginMutation';
 import useAuthStorage from '../../hooks/auth/useAuthStorage';
 import {useSetRecoilState} from 'recoil';
 import {userInfoState} from '../../libs/recoil/states/userInfo';
-import {authApi} from '../../apis/authApi';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {authState} from '../../libs/recoil/states/auth';
 import styles from './AppleLogin.style';
 import {View} from 'react-native';
 
 function AppleLogin() {
   const {setAuthData} = useAuthStorage();
   const setUserInfo = useSetRecoilState(userInfoState);
-
+  const setAuth = useSetRecoilState(authState);
   const {authMutation} = useSocialLoginMutation();
 
   const handlePressAppleLoginButton = async () => {
@@ -27,36 +26,39 @@ function AppleLogin() {
         identityToken: idToken,
         authorizationCode: code,
       } = await appleClient.fetchLogin();
-
       const authState = await appleClient.getUserAuthState(user);
 
+      const username = fullName?.givenName || fullName?.familyName || '회원';
+
       if (idToken && authState === appleAuth.State.AUTHORIZED) {
-        const body = {
-          state: null,
-          code,
-          id_token: idToken,
-          user: {
-            email,
-            name: {
-              firstName: fullName?.givenName || '',
-              lastName: fullName?.familyName || '',
+        authMutation.mutate(
+          {
+            id_token: idToken,
+            code,
+            user: {
+              email,
+              name: {
+                firstName: fullName?.givenName || '',
+                lastName: fullName?.familyName || '',
+              },
+            },
+            state: null,
+          },
+          {
+            onError: error => {
+              console.error('Apple Sign In Error ---- ✈️', error);
+            },
+            onSuccess: async ({accessToken, refreshToken}) => {
+              setAuthData({accessToken, refreshToken});
+              setUserInfo({username});
+
+              setAuth({isAuthenticated: true});
             },
           },
-        };
-        console.log(body);
-        const response = await authApi.postLoginUser(body);
-
-        if (response) {
-          const {accessToken, refreshToken} = response;
-          setAuthData({accessToken, refreshToken});
-          setUserInfo({username: fullName?.givenName || '회원'});
-
-          await AsyncStorage.setItem('accessToken', accessToken);
-          await AsyncStorage.setItem('refreshToken', refreshToken);
-        }
+        );
       }
     } catch (error) {
-      console.error('Apple Sign In Error:', error);
+      console.error('Apple Sign In Error ---- ✈️', error);
     }
   };
 

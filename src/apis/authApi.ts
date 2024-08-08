@@ -12,19 +12,13 @@ export const authApi = {
     };
   }): Promise<AuthResponseDto> => {
     const response = await axiosApi.post(`/api/auth/apple/login`, body);
-    console.log('바디', response.data); //accessToken & refreshToken
     return response.data;
   },
 
   postLogoutUser: async (body: {refreshToken: string}) => {
-    const response = await axiosApi.post('/auth/logout', {
+    const response = await axiosApi.post('/api/auth/logoutt', {
       refreshToken: body.refreshToken,
     });
-    return response.data.result;
-  },
-
-  deleteUser: async () => {
-    const response = await axiosApi.delete('/auth/withdrawal');
     return response.data.result;
   },
 };

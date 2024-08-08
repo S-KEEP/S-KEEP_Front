@@ -7,6 +7,7 @@ export type StackParamList = {
   Analyze: undefined;
   AnalyzeResult: undefined;
   Detail: undefined;
+  Login: undefined;
 };
 
 export type TabParamList = {
