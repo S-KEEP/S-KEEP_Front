@@ -5,8 +5,6 @@ import {
 } from '@react-navigation/bottom-tabs';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {theme} from '../styles/theme';
-import CategoryIc from '../assets/icon/category.svg';
-import EtcIc from '../assets/icon/etc.svg';
 import {TabMenu} from '../navigators/constants/menu';
 import {TabBarLabel} from '../navigators/constants/label';
 import Home from '../screens/Home';

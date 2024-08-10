@@ -15,3 +15,11 @@ export {default as IcActivity} from './ic_exciting.svg';
 export {default as IcNature} from './ic_nature.svg';
 export {default as IcVacation} from './ic_vacation.svg';
 export {default as IcFood} from './ic_food.svg';
+
+export {default as IcCardActivity} from './ic_card_activity.svg';
+export {default as IcCardFestival} from './ic_card_festival.svg';
+export {default as IcCardFood} from './ic_card_food.svg';
+export {default as IcCardHistory} from './ic_card_history.svg';
+export {default as IcCardNature} from './ic_card_nature.svg';
+export {default as IcCardRest} from './ic_card_rest.svg';
+export {default as IcCardShopping} from './ic_card_shopping.svg';

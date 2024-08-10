@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {theme} from '../../styles';
+import {padding} from '../../styles/common';
 
 const styles = StyleSheet.create({
   title: {
@@ -13,9 +14,9 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   container: {
+    marginTop: 50,
     flex: 1,
-    padding: 24,
-    justifyContent: 'center',
+    ...padding,
   },
   contentContainer: {
     flex: 1,
