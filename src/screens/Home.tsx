@@ -1,10 +1,20 @@
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Button, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StackScreenProps} from '../navigators/types';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {usePostLocation} from '../hooks/mutations/location/usePostLocation';
 
 export default function Home({navigation}: StackScreenProps) {
+  const {mutate} = usePostLocation({
+    onSuccess: res => {
+      console.log('^^ ', res);
+    },
+    onError: e => {
+      console.error('ㅠㅠ ', e);
+      console.error('ㅠㅠ ', e.message);
+    },
+  });
+
   async function goToImageLibrary() {
     const {didCancel, errorCode, errorMessage, assets} =
       await launchImageLibrary({
@@ -15,7 +25,32 @@ export default function Home({navigation}: StackScreenProps) {
     console.log(
       `didCancel: ${didCancel} errorCode: ${errorCode} errorMessage: ${errorMessage}`,
     );
-    console.log('>> ', assets);
+
+    const formData = new FormData();
+    if (assets) {
+      console.log('>> ', assets);
+
+      for (let i = 0; i < assets.length; i++) {
+        const asset = assets[i];
+        console.log('-- ', asset.uri);
+
+        var photo = {
+          uri: asset.uri,
+          type: 'multipart/form-data',
+          name: `${asset.fileName}`,
+        };
+
+        if (!asset.uri) return;
+        const response = await fetch(asset.uri);
+        const blob = await response.blob();
+
+        // 각 파일을 개별적으로 추가, 파일 이름을 적절히 지정
+        formData.append(`file`, photo);
+      }
+
+      console.log('***!!!', formData);
+      mutate(formData);
+    }
   }
 
   return (
