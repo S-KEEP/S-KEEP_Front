@@ -4,3 +4,10 @@ export interface CardProps {
   IconComponent: React.ComponentType;
   backgroundColor: string;
 }
+
+export interface CardData {
+  backgroundColor: string;
+  title: string;
+  description: string;
+  IconComponent: React.ComponentType<{}>;
+}

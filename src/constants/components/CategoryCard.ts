@@ -8,40 +8,22 @@ import {
   IcCardShopping,
 } from '../../assets/icon';
 
-export const CARD_DATA = [
-  {
-    title: 'Activity',
-    description: '퇴사하고 싶을 때 가려고 모아둔 곳',
-    IconComponent: IcCardActivity,
-  },
-  {
-    title: 'Festival',
-    description: '퇴사하고 싶을 때 가려고 모아둔 곳',
-    IconComponent: IcCardFestival,
-  },
-  {
-    title: 'Food',
-    description: '퇴사하고 싶을 때 가려고 모아둔 곳',
-    IconComponent: IcCardFood,
-  },
-  {
-    title: 'History',
-    description: '퇴사하고 싶을 때 가려고 모아둔 곳',
-    IconComponent: IcCardHistory,
-  },
-  {
-    title: 'Nature',
-    description: '퇴사하고 싶을 때 가려고 모아둔 곳',
-    IconComponent: IcCardNature,
-  },
-  {
-    title: 'Rest',
-    description: '퇴사하고 싶을 때 가려고 모아둔 곳',
-    IconComponent: IcCardRest,
-  },
-  {
-    title: 'Shopping',
-    description: '퇴사하고 싶을 때 가려고 모아둔 곳',
-    IconComponent: IcCardShopping,
-  },
-];
+export const ICON_MAPS: Record<string, React.ComponentType<{}>> = {
+  익사이팅: IcCardActivity,
+  '문화/축제': IcCardFestival,
+  맛집: IcCardFood,
+  '역사/유적지': IcCardHistory,
+  '공연/자연': IcCardNature,
+  휴식: IcCardRest,
+  '쇼핑/도심': IcCardShopping,
+};
+
+export const COLOR_MAP: Record<string, string> = {
+  휴식: '#C8EEFF',
+  '공연/자연': '#CBF6C4',
+  '문화/축제': '#FFF4CC',
+  '쇼핑/도심': '#E3CCFF',
+  '역사/유적지': '#E3E3E3',
+  맛집: '#FFCFA2',
+  익사이팅: '#BEFBF0',
+};

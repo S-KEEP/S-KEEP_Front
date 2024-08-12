@@ -1,21 +1,31 @@
 import React from 'react';
+import styles from './CategoryScreen.style';
 import {View, Text, FlatList, Dimensions, StyleSheet} from 'react-native';
-import {CARD_DATA} from '../../constants/components/CategoryCard';
 import Card from '../../components/common/CategoryCard/CategoryCard';
-
-interface CardData {
-  title: string;
-  description: string;
-  IconComponent: React.ComponentType<{}>;
-}
+import {theme} from '../../styles';
+import {IcCardRest} from '../../assets/icon';
+import {useGetCategoryListQuery} from '../../hooks/queries/category/useGetCategoryList';
+import {COLOR_MAP, ICON_MAPS} from '../../constants/components/CategoryCard';
+import {CardData} from '../../types/components/category/category';
 
 export default function Category() {
+  const cardListData = useGetCategoryListQuery();
+  console.log('cardListData:', cardListData);
+
+  const mappedData = cardListData.map(item => ({
+    title: item.name,
+    description: item.description,
+    IconComponent: ICON_MAPS[item.name] || IcCardRest,
+    backgroundColor: COLOR_MAP[item.name] || theme.palette.white,
+  }));
+
   const renderItem = ({item}: {item: CardData}) => (
     <View style={styles.cardWrapper}>
       <Card
         title={item.title}
         description={item.description}
         IconComponent={item.IconComponent}
+        backgroundColor={item.backgroundColor}
       />
     </View>
   );
@@ -27,34 +37,16 @@ export default function Category() {
         명소를 기록해봐요
       </Text>
       <FlatList
-        data={CARD_DATA}
+        data={mappedData}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
         snapToAlignment="center"
         decelerationRate="fast"
-        snapToInterval={Dimensions.get('window').width - 60} // Adjust based on card width
+        snapToInterval={Dimensions.get('window').width - 60}
         contentContainerStyle={styles.cardContainer}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 50,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  cardContainer: {
-    marginTop: 20,
-  },
-  cardWrapper: {
-    width: Dimensions.get('window').width - 150,
-  },
-});
