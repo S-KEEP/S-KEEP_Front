@@ -24,7 +24,6 @@ export const wrapper: ViewStyle = {
   height: '100%',
   padding: 28,
   backgroundColor: theme.palette.white,
-  // flex: 1,
 };
 
 export const wrapperFull: ViewStyle = {

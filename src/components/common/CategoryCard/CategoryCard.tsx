@@ -11,10 +11,10 @@ interface CardProps {
 function Card({title, description, IconComponent}: CardProps) {
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.iconContainer}>
         <IconComponent />
       </View>
-      <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
     </View>
   );

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {theme} from '../../styles';
-import {padding} from '../../styles/common';
+import {flexBox, padding} from '../../styles/common';
 
 const styles = StyleSheet.create({
   title: {
@@ -14,12 +14,15 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   container: {
+    backgroundColor: theme.palette.white,
     marginTop: 50,
     flex: 1,
     ...padding,
   },
-  contentContainer: {
-    flex: 1,
+  cardContainer: {
+    ...flexBox('row'),
+    marginTop: 80,
+    gap: 25,
   },
 });
 

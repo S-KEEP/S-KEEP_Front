@@ -4,12 +4,13 @@ import {theme} from '../../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#E0F7FA', // This color can be customized or passed as a prop
+    backgroundColor: '#E0F7FA',
     borderRadius: 10,
     padding: 20,
     alignItems: 'center',
-    marginHorizontal: 10,
-    width: 150,
+
+    width: 210,
+    height: 235,
   },
   iconContainer: {
     marginBottom: 10,
