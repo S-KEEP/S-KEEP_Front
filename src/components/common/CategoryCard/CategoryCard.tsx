@@ -1,16 +1,16 @@
 import React from 'react';
-import {View, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import {View, Text} from 'react-native';
 import styles from './CategoryCard.style';
+import {CardProps} from '../../../types/components/category/category';
 
-interface CardProps {
-  title: string;
-  description: string;
-  IconComponent: React.ComponentType;
-}
-
-function Card({title, description, IconComponent}: CardProps) {
+export default function Card({
+  title,
+  description,
+  IconComponent,
+  backgroundColor,
+}: CardProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor}]}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.iconContainer}>
         <IconComponent />
@@ -19,5 +19,3 @@ function Card({title, description, IconComponent}: CardProps) {
     </View>
   );
 }
-
-export default Card;
