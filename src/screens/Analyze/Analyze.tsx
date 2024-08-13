@@ -3,8 +3,39 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {theme} from '../../styles';
 import {flexBox, wrapper} from '../../styles/common';
 import {StackScreenProps} from '../../navigators/types';
+import {usePostLocation} from '../../hooks/mutations/location/usePostLocation';
+import {useEffect} from 'react';
 
-export default function Analyze({navigation}: StackScreenProps) {
+type AnalyzeProps = StackScreenProps<'Analyze'>;
+export default function Analyze({navigation, route}: AnalyzeProps) {
+  const {formData} = route.params ?? {};
+
+  const {mutate} = usePostLocation({
+    onSuccess: res => {
+      const {errorCode, message, result} = res;
+
+      if (errorCode) {
+        console.error(`${errorCode} - ${message}`);
+        navigation.pop();
+        return;
+      }
+
+      console.log('[Analyze] ', res.result.userLocationList);
+      navigation.replace('AnalyzeResult', {
+        userLocationList: result.userLocationList,
+      });
+    },
+    onError: e => {
+      console.error('[Analyze] ', e);
+    },
+  });
+
+  useEffect(() => {
+    console.log('Received formData:', formData);
+
+    if (formData) mutate(formData);
+  }, [formData]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.image} />

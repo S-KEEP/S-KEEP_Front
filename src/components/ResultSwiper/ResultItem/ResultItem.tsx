@@ -1,31 +1,31 @@
-import {ScrollView, Text, View} from 'react-native';
+import {Image, ScrollView, Text, View} from 'react-native';
 import {IcFolder, IcMarker, IcTarget} from '../../../assets/icon';
 import styles from './ResultItem.style';
-import {Result} from '../ResultSwiper/ResultSwiper';
+import {UserLocation} from '../../../types/dtos/location';
 
 interface ResultItemProps {
-  item: Result;
+  item: UserLocation;
 }
 export default function ResultItem({item}: ResultItemProps) {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <View style={styles.image} />
+        <Image source={{uri: item.photoUrl}} style={styles.image} />
 
         <View style={styles.box}>
           <View style={styles.boxItem}>
             <IcMarker />
-            <Text style={styles.text}>{item.title}</Text>
+            <Text style={styles.text}>{item.id}</Text>
           </View>
 
           <View style={styles.boxItem}>
             <IcTarget />
-            <Text style={styles.text}>{item.address}</Text>
+            <Text style={styles.text}>{item.location.kakaoMapId}</Text>
           </View>
 
           <View style={styles.boxItem}>
             <IcFolder />
-            <Text style={styles.text}>{item.category}</Text>
+            <Text style={styles.text}>{item.userCategory.title}</Text>
           </View>
         </View>
       </ScrollView>

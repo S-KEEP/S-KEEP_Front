@@ -6,7 +6,8 @@ import {IcCancel, IcDown} from '../../assets/icon';
 import {StackScreenProps} from '../../navigators/types';
 import Map from '../../components/Detail/Map';
 
-export default function Detail({navigation}: StackScreenProps) {
+type DetailProps = StackScreenProps<'Detail'>;
+export default function Detail({navigation}: DetailProps) {
   return (
     <SafeAreaView style={{...wrapperFull}}>
       <IcCancel onPress={() => navigation.pop()} style={{...padding}} />

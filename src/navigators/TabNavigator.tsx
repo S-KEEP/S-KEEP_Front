@@ -12,12 +12,47 @@ import Category from '../screens/Category/CategoryScreen';
 import MoreSettingScreen from '../screens/MoreSettings/MoreSetteingScreen';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
 import {IcCategory, IcEtc, IcHome} from '../assets/icon';
-import {StyleProp, ViewStyle} from 'react-native';
+import {StyleProp, TouchableOpacity, ViewStyle} from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
+import useNavigator from './hooks/useNavigator';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
   const {bottom: bottomSize} = useSafeAreaInsets();
+  const {stackNavigation} = useNavigator();
+
+  async function handleGoToGallery() {
+    const {didCancel, errorCode, errorMessage, assets} =
+      await launchImageLibrary({
+        mediaType: 'photo',
+        selectionLimit: 10,
+      });
+
+    if (didCancel || errorCode) {
+      console.log(
+        `didCancel: ${didCancel} errorCode: ${errorCode} errorMessage: ${errorMessage}`,
+      );
+    }
+
+    const formData = new FormData();
+    if (assets) {
+      for (let i = 0; i < assets.length; i++) {
+        const asset = assets[i];
+
+        const photo = {
+          uri: asset.uri,
+          type: 'multipart/form-data',
+          name: `${asset.fileName}`,
+        };
+
+        formData.append(`file`, photo);
+      }
+
+      console.log('[TabNavigator] FormData ', formData);
+      stackNavigation.navigate('Analyze', {formData});
+    }
+  }
 
   return (
     <Tab.Navigator
@@ -31,7 +66,17 @@ export default function TabNavigator() {
       <Tab.Screen
         name={TabMenu.Home}
         component={Home}
-        options={{tabBarLabel: TabBarLabel.Home}}
+        options={{
+          tabBarLabel: TabBarLabel.Home,
+          tabBarButton: props => (
+            <TouchableOpacity
+              {...props}
+              style={[props.style, {marginBottom: 17}]}
+              onPress={handleGoToGallery}>
+              {getTabBarIcon(TabMenu.Home, false)}
+            </TouchableOpacity>
+          ),
+        }}
       />
 
       <Tab.Screen
@@ -76,7 +121,7 @@ const screenOptions: (
   tabBarIcon: ({focused}: {focused: boolean}) =>
     getTabBarIcon(route.name, focused),
   tabBarIconStyle: {
-    marginTop: route.name === TabMenu.Home ? 17 : 4,
+    marginTop: 4, // route.name === TabMenu.Home ? 17 :
   },
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,

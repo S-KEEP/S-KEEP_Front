@@ -2,15 +2,10 @@ import Swiper from 'react-native-swiper';
 import {IcPaginationLeft, IcPaginationRight} from '../../../assets/icon';
 import {TouchableOpacity, View} from 'react-native';
 import ResultItem from '../ResultItem/ResultItem';
-import {theme} from '../../../styles';
+import {UserLocation} from '../../../types/dtos/location';
 
-export interface Result {
-  title: string;
-  address: string;
-  category: string;
-}
 interface ResultSwiperProps {
-  items: Result[];
+  items: UserLocation[];
 }
 export default function ResultSwiper({items}: ResultSwiperProps) {
   return (

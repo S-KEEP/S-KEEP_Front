@@ -1,8 +1,8 @@
 export interface UserLocation {
   id: number;
   photoUrl: string;
-  location: object;
-  userCategory: object;
+  location: Location;
+  userCategory: Category;
 }
 
 export interface Location {
