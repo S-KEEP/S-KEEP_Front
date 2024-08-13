@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
       console.log('🔯 Mutation onSuccess');
       console.log(data);
 
-      await handleOnSuccess(mutation?.meta?.response);
+      // await handleOnSuccess(mutation?.meta?.response);
     },
     onError: (error, _variables, _context, mutation) => {
       console.log('🔯 Mutation onError');
