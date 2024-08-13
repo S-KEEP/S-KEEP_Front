@@ -34,25 +34,27 @@ const CategoryBottomSheet = forwardRef<
   }));
 
   const cardListData = useGetCategoryListQuery();
-  const [selected, setSelected] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
-  const handleCategorySelect = (id: number) => {
-    setSelected(id);
+  const handleCategorySelect = (index: number) => {
+    setSelectedIndex(index);
   };
 
-  const renderItem = ({item}: {item: CardEntity}) => (
+  const renderItem = ({item, index}: {item: CardEntity; index: number}) => (
     <TouchableOpacity
       style={[
         styles.categoryItem,
-        selected === item.id && styles.selectedCategoryItem,
+        selectedIndex === index && styles.selectedCategoryItem,
       ]}
-      onPress={() => handleCategorySelect(item.id)}>
+      onPress={() => handleCategorySelect(index)}>
       <CategoryItem category={cardEntityToCategoryMapper(item)} />
     </TouchableOpacity>
   );
 
   const handleModify = () => {
-    const newCategory = cardEntityToCategoryMapper(cardListData[selected]);
+    const newCategory = cardEntityToCategoryMapper(cardListData[selectedIndex]);
+
+    console.log('Selected Category:', newCategory);
     onModify(newCategory);
   };
 
@@ -64,6 +66,7 @@ const CategoryBottomSheet = forwardRef<
         <BottomSheetFlatList
           data={cardListData}
           renderItem={renderItem}
+          keyExtractor={item => item.id.toString()}
           style={styles.list}
         />
 

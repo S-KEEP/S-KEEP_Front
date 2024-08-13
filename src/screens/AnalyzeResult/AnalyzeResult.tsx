@@ -7,13 +7,17 @@ import Button from '../../components/common/Button/Button';
 import ResultSwiper from '../../components/ResultSwiper/ResultSwiper/ResultSwiper';
 import styles from './AnalyzeResult.styles';
 import {useEffect, useRef} from 'react';
-import CategoryBottomSheet from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
+import CategoryBottomSheet, {
+  CategoryBottomSheetRef,
+} from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
+import {Category} from '../../types/dtos/location';
 
 type AnalyzeResultProps = StackScreenProps<'AnalyzeResult'>;
 export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
   const {userLocationList} = route.params;
 
   const indexRef = useRef(0);
+  const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
 
   useEffect(() => {
     console.log('userLocationList', userLocationList);
@@ -29,6 +33,12 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
 
   function handleGoDetail() {
     navigation.navigate('Detail', {id: userLocationList[indexRef.current].id});
+  }
+
+  function handleOnModify(category: Category) {
+    console.log('New Category!', category);
+
+    // validataion - 기존과 같은지 비교
   }
 
   function handleRetry() {}
@@ -52,7 +62,7 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
       <ResultSwiper
         items={userLocationList}
         onIndexChanged={handleIndexChanged}
-        onModify={() => {}}
+        onModify={() => bottomSheetRef.current?.open()}
       />
 
       <Button text="확인하러 가기" onPress={handleGoDetail} />
@@ -63,7 +73,7 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
       </TouchableOpacity>
 
       {/* 카테고리 수정 바텀시트 */}
-      <CategoryBottomSheet />
+      <CategoryBottomSheet ref={bottomSheetRef} onModify={handleOnModify} />
     </SafeAreaView>
   );
 }
