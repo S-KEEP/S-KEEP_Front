@@ -8,7 +8,7 @@ import {useEffect} from 'react';
 
 type AnalyzeProps = StackScreenProps<'Analyze'>;
 export default function Analyze({navigation, route}: AnalyzeProps) {
-  const {formData} = route.params ?? {};
+  const {formData} = route.params;
 
   const {mutate} = usePostLocation({
     onSuccess: res => {
@@ -39,11 +39,7 @@ export default function Analyze({navigation, route}: AnalyzeProps) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.image} />
-      <Text
-        onPress={() => navigation.navigate('AnalyzeResult')}
-        style={styles.title}>
-        스크린샷을 분석 중이에요!
-      </Text>
+      <Text style={styles.title}>스크린샷을 분석 중이에요!</Text>
       <Text style={styles.subtitle}>조금만 기다려주세요</Text>
     </SafeAreaView>
   );
