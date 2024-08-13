@@ -25,5 +25,5 @@ export const useGetUserInfoQuery = () => {
     queryFn: userInfoApi.getUserInfoList,
   });
 
-  return userInfoData!;
+  return userInfoData;
 };

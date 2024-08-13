@@ -1,29 +1,43 @@
-import {View, Text, ScrollView} from 'react-native';
-import {IcApple, IcProfile} from '../../assets/icon';
+import React from 'react';
+import {View, Text, ScrollView, Alert} from 'react-native';
 import {useGetUserInfoQuery} from '../../hooks/queries/moreSettings/useGetUserInfo';
 import styles from './MoreSettingScreen.style';
-import Settings from '../../components/MoreSetting/Settings';
+import {StackScreenProps} from '../../navigators/types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSetRecoilState} from 'recoil';
+import {authState} from '../../libs/recoil/states/auth';
+import Profile from '../../components/MoreSetting/Profile';
+import SettingsList from '../../components/MoreSetting/SettingList';
 
-export default function MoreSettingScreen() {
+export default function MoreSettingScreen({navigation}: StackScreenProps) {
   const userInfoData = useGetUserInfoQuery();
+  const setAuth = useSetRecoilState(authState);
+
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.clear();
+      navigation.navigate('LoginScreen');
+      setAuth({isAuthenticated: false});
+      Alert.alert('로그아웃', '성공적으로 로그아웃되었습니다.');
+    } catch (error) {
+      console.error('Error clearing AsyncStorage:', error);
+      Alert.alert('로그아웃 실패', '로그아웃 중 문제가 발생했습니다.');
+    }
+  };
+
+  if (!userInfoData) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.profileSection}>
-        <IcProfile width={60} height={60} />
-        <View style={styles.profileTextContainer}>
-          <Text style={styles.name}>{userInfoData.user.name}</Text>
-          <View style={styles.emailContainer}>
-            <Text style={styles.email}>{userInfoData.user.email}</Text>
-            {userInfoData.user.provider === 'APPLE' && (
-              <IcApple width={18} height={18} style={styles.appleIcon} />
-            )}
-          </View>
-        </View>
-      </View>
-
+      <Profile userInfo={userInfoData.user} />
       <View style={styles.divider} />
-      <Settings />
+      <SettingsList onLogout={handleLogout} />
     </ScrollView>
   );
 }

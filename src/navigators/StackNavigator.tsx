@@ -6,6 +6,8 @@ import Home from '../screens/Home';
 import AnalyzeResult from '../screens/AnalyzeResult/AnalyzeResult';
 import Detail from '../screens/Detail/Detail';
 import Analyze from '../screens/Analyze/Analyze';
+import LoginScreen from '../screens/Login/LoginScreen';
+import MoreSettingScreen from '../screens/MoreSetting/MoreSetteingScreen';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -19,6 +21,8 @@ export default function StackNavigator() {
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name={StackMenu.TabNavigator} component={TabNavigator} />
       <Stack.Screen name={StackMenu.Home} component={Home} />
+      <Stack.Screen name={StackMenu.LoginScreen} component={LoginScreen} />
+      <Stack.Screen name={StackMenu.MoreSetting} component={MoreSettingScreen} />
 
       <Stack.Screen name={StackMenu.Analyze} component={Analyze} />
       <Stack.Screen name={StackMenu.AnalyzeResult} component={AnalyzeResult} />

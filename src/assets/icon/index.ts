@@ -26,3 +26,4 @@ export {default as IcCardShopping} from './ic_card_shopping.svg';
 
 export {default as IcProfile} from './ic_profile.svg';
 export {default as IcApple} from './ic_apple.svg';
+export {default as IcRight} from './ic_right.svg';

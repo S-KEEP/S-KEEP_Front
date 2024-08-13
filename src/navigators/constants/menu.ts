@@ -4,6 +4,8 @@ export const enum StackMenu {
   Analyze = 'Analyze',
   AnalyzeResult = 'AnalyzeResult',
   Detail = 'Detail',
+  LoginScreen = 'LoginScreen',
+  MoreSetting = 'MoreSetting',
 }
 
 export const enum TabMenu {

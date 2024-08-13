@@ -6,10 +6,7 @@ import {lightPalette} from '../styles';
 import LoginScreen from '../screens/Login/LoginScreen';
 import localStorage from '../libs/async-storage';
 import {TokenKeys} from '../libs/async-storage/constants/keys';
-import {axiosApi} from '../apis/axiosInstance';
 import useInitialData from '../hooks/auth/useInitialData';
-import {authApi} from '../apis/authApi';
-import {userInfoState} from '../libs/recoil/states/userInfo';
 
 const theme = {
   ...DefaultTheme,
@@ -18,35 +15,24 @@ const theme = {
 
 const Navigator = () => {
   const {authData, setAuthData} = useInitialData();
-  const setUserInfo = useSetRecoilState(userInfoState);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const refreshToken = await localStorage.get(TokenKeys.RefreshToken);
-        if (refreshToken !== null) {
-          try {
-            const response = await axiosApi.post('/api/auth/jwt/reissue', {
-              refreshToken,
-            });
-            const result = response.data.result;
-
-            await localStorage.set(TokenKeys.AccessToken, result.accessToken);
-            await localStorage.set(TokenKeys.RefreshToken, result.refreshToken);
-
-            if (!!result.accessToken && !!result.refreshToken) {
-              setAuthData({isAuthenticated: true});
-            }
-          } catch (e) {
-            await authApi.postLogoutUser({refreshToken});
-            console.error('refreshToken 로그아웃 실패 ---- ✈️', e);
-          }
+        const accessToken = await localStorage.get(TokenKeys.AccessToken);
+        if (accessToken) {
+          setAuthData({isAuthenticated: true});
+        } else {
+          setAuthData({isAuthenticated: false});
         }
-      } catch (error) {}
+      } catch (error) {
+        setAuthData({isAuthenticated: false});
+        console.error('Error checking authentication: --- ✈️', error);
+      }
     };
 
     checkAuth();
-  }, [setAuthData, setUserInfo]);
+  }, [setAuthData]);
 
   return (
     <NavigationContainer theme={theme}>

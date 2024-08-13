@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {IcDown} from '../../assets/icon';
+import {IcDown} from '../../../assets/icon';
 import styles from './PlaceDetail.style';
 
 interface RegionProps {

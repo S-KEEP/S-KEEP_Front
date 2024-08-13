@@ -8,30 +8,7 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     backgroundColor: theme.palette.white,
   },
-  profileSection: {
-    ...flexBox('row', 'flex-start'),
-    paddingLeft: 20,
-    paddingBottom: 20,
-  },
-  profileTextContainer: {
-    marginLeft: 15,
-    gap: 5,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  emailContainer: {
-    ...flexBox('row', 'center'),
-  },
-  email: {
-    fontSize: 14,
-    color: theme.palette.gray5,
-    marginRight: 5,
-  },
-  appleIcon: {
-    marginLeft: 5,
-  },
+  loadingContainer: {},
   divider: {
     height: 1,
     backgroundColor: theme.palette.gray3,
