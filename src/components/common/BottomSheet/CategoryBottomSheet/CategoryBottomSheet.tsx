@@ -51,8 +51,9 @@ const CategoryBottomSheet = forwardRef<
     </TouchableOpacity>
   );
 
-  const handleNothingYet = () => {
-    // onModify(selectedCategory)
+  const handleModify = () => {
+    const newCategory = cardEntityToCategoryMapper(cardListData[selected]);
+    onModify(newCategory);
   };
 
   return (
@@ -66,9 +67,7 @@ const CategoryBottomSheet = forwardRef<
           style={styles.list}
         />
 
-        <TouchableOpacity>
-          <Button text="변경하기" onPress={handleNothingYet} />
-        </TouchableOpacity>
+        <Button text="변경하기" onPress={handleModify} />
       </View>
     </BottomSheet>
   );

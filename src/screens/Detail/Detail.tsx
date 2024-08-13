@@ -12,6 +12,7 @@ import CategoryBottomSheet, {
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
 import {useRef} from 'react';
 import CategoryItem from '../../components/common/Category/CategoryItem/CategoryItem';
+import {Category} from '../../types/dtos/location';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -25,8 +26,10 @@ export default function Detail({navigation, route}: DetailProps) {
     return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
   }
 
-  function handleOnModify() {
-    if (bottomSheetRef.current) bottomSheetRef.current.open();
+  function handleOnModify(category: Category) {
+    console.log('New Category!', category);
+
+    // validataion - 기존과 같은지 비교
   }
 
   return (
@@ -54,10 +57,10 @@ export default function Detail({navigation, route}: DetailProps) {
 
       <View style={styles.box}>
         <CategoryItem category={location.userCategory} />
-        <ModifyButton onPress={handleOnModify} />
+        <ModifyButton onPress={() => bottomSheetRef.current?.open()} />
       </View>
 
-      {/* <CategoryBottomSheet ref={bottomSheetRef} /> */}
+      <CategoryBottomSheet ref={bottomSheetRef} onModify={handleOnModify} />
     </SafeAreaView>
   );
 }
