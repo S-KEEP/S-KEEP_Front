@@ -8,10 +8,10 @@ export default function Home({navigation}: StackScreenProps) {
   const {mutate} = usePostLocation({
     onSuccess: res => {
       console.log('^^ ', res);
+      console.log('List!', res.result.userLocationList);
     },
     onError: e => {
       console.error('ㅠㅠ ', e);
-      console.error('ㅠㅠ ', e.message);
     },
   });
 
@@ -39,10 +39,6 @@ export default function Home({navigation}: StackScreenProps) {
           type: 'multipart/form-data',
           name: `${asset.fileName}`,
         };
-
-        if (!asset.uri) return;
-        const response = await fetch(asset.uri);
-        const blob = await response.blob();
 
         // 각 파일을 개별적으로 추가, 파일 이름을 적절히 지정
         formData.append(`file`, photo);
