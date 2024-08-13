@@ -23,3 +23,6 @@ export {default as IcCardHistory} from './ic_card_history.svg';
 export {default as IcCardNature} from './ic_card_nature.svg';
 export {default as IcCardRest} from './ic_card_rest.svg';
 export {default as IcCardShopping} from './ic_card_shopping.svg';
+
+export {default as IcProfile} from './ic_profile.svg';
+export {default as IcApple} from './ic_apple.svg';

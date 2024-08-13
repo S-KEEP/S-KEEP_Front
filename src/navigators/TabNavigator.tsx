@@ -9,7 +9,7 @@ import {TabMenu} from '../navigators/constants/menu';
 import {TabBarLabel} from '../navigators/constants/label';
 import Home from '../screens/Home';
 import Category from '../screens/Category/CategoryScreen';
-import MoreSettingScreen from '../screens/MoreSettings/MoreSetteingScreen';
+import MoreSettingScreen from '../screens/MoreSetting/MoreSetteingScreen';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
 import {IcCategory, IcEtc, IcHome} from '../assets/icon';
 import {StyleProp, ViewStyle} from 'react-native';

@@ -4,7 +4,7 @@ import {theme} from '../../styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 80,
+    paddingTop: 100,
     backgroundColor: theme.palette.white,
   },
   title: {
