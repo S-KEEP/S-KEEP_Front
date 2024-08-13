@@ -1,13 +1,5 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import {BottomSheetFlatList, BottomSheetModal} from '@gorhom/bottom-sheet';
-import CategorySelector from './CategorySelector';
+import React, {forwardRef, useImperativeHandle, useRef, useState} from 'react';
+import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {
   cardEntityToCategoryMapper,
   Category,
@@ -15,8 +7,11 @@ import {
 import {useGetCategoryListQuery} from '../../../../hooks/queries/category/useGetCategoryList';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {CardEntity} from '../../../../types/dtos/category';
-import CategoryList from '../CategoryList/CategoryList';
 import {Text, View} from 'react-native';
+import Button from '../../Button/Button';
+import BottomSheet, {BottomSheetModalRef} from '../BottomSheet';
+import styles from './CategoryBottomSheet.styles';
+import CategoryItem from '../../Category/CategoryItem/CategoryItem';
 
 export interface CategoryBottomSheetProps {
   onModify: (category: Category) => void;
@@ -31,11 +26,11 @@ const CategoryBottomSheet = forwardRef<
   CategoryBottomSheetRef,
   CategoryBottomSheetProps
 >(({onModify}, ref) => {
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const bottomSheetRef = useRef<BottomSheetModalRef>(null);
 
   useImperativeHandle(ref, () => ({
-    open: () => bottomSheetModalRef.current?.present(),
-    close: () => bottomSheetModalRef.current?.close(),
+    open: () => bottomSheetRef.current?.open(),
+    close: () => bottomSheetRef.current?.close(),
   }));
 
   const cardListData = useGetCategoryListQuery();
@@ -52,7 +47,7 @@ const CategoryBottomSheet = forwardRef<
         selected === item.id && styles.selectedCategoryItem,
       ]}
       onPress={() => handleCategorySelect(item.id)}>
-      <CategoryList category={cardEntityToCategoryMapper(item)} />
+      <CategoryItem category={cardEntityToCategoryMapper(item)} />
     </TouchableOpacity>
   );
 
@@ -61,11 +56,7 @@ const CategoryBottomSheet = forwardRef<
   };
 
   return (
-    <BottomSheetModal
-      ref={bottomSheetModalRef}
-      index={1}
-      snapPoints={['25%', '50%']}
-      containerStyle={{backgroundColor: '#000000C4'}}>
+    <BottomSheet ref={bottomSheetRef}>
       <View style={styles.container}>
         <Text style={styles.title}>변경할 카테고리를 선택해 주세요!</Text>
 
@@ -79,45 +70,8 @@ const CategoryBottomSheet = forwardRef<
           <Button text="변경하기" onPress={handleNothingYet} />
         </TouchableOpacity>
       </View>
-    </BottomSheetModal>
+    </BottomSheet>
   );
 });
 
 export default CategoryBottomSheet;
-
-import {StyleSheet} from 'react-native';
-import {theme} from '../../../../styles';
-import Button from '../../Button/Button';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    marginBottom: 20,
-  },
-  title: {
-    ...theme.typography.body_sb_17,
-    marginBottom: 20,
-  },
-  list: {
-    paddingBottom: 20,
-  },
-  categoryItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  selectedCategoryItem: {
-    backgroundColor: theme.palette.gray1,
-  },
-  icon: {
-    width: 40,
-    height: 40,
-    marginRight: 20,
-  },
-  categoryText: {
-    ...theme.typography.body_m_16,
-  },
-});

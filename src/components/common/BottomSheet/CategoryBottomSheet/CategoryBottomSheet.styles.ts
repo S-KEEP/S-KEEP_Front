@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   list: {
-    marginBottom: 20,
+    paddingBottom: 20,
   },
   categoryItem: {
     flexDirection: 'row',

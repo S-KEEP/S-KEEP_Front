@@ -10,8 +10,8 @@ import ModifyButton from '../../components/common/Button/ModifyButton';
 import CategoryBottomSheet, {
   CategoryBottomSheetRef,
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
-import CategoryList from '../../components/common/BottomSheet/CategoryList/CategoryList';
 import {useRef} from 'react';
+import CategoryItem from '../../components/common/Category/CategoryItem/CategoryItem';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -53,11 +53,11 @@ export default function Detail({navigation, route}: DetailProps) {
       </View>
 
       <View style={styles.box}>
-        <CategoryList category={location.userCategory} />
+        <CategoryItem category={location.userCategory} />
         <ModifyButton onPress={handleOnModify} />
       </View>
 
-      <CategoryBottomSheet ref={bottomSheetRef} />
+      {/* <CategoryBottomSheet ref={bottomSheetRef} /> */}
     </SafeAreaView>
   );
 }
