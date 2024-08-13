@@ -1,6 +1,6 @@
 import {MutationCache, QueryCache, QueryClient} from '@tanstack/react-query';
 import {AxiosError} from 'axios';
-import {BaseResponse} from './axiosInstance';
+import {BaseResponse} from './client';
 
 // [TODO] 체크 필요
 const queryClient = new QueryClient({

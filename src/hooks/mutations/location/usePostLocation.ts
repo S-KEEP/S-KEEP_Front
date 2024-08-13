@@ -1,5 +1,5 @@
 import {useMutation} from '@tanstack/react-query';
-import {BaseResponse, POST} from '../../../apis/axiosInstance';
+import {BaseResponse, POST} from '../../../apis/client';
 import {UserLocation} from '../../../types/dtos/location';
 
 /**

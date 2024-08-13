@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import {GET} from '../../../apis/axiosInstance';
+import {GET} from '../../../apis/client';
 import {LOCATION_KEYS} from '../QueryKeys';
 import {UserLocation} from '../../../types/dtos/location';
 

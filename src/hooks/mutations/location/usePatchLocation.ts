@@ -1,5 +1,5 @@
 import {useMutation} from '@tanstack/react-query';
-import {BaseResponse, PATCH} from '../../../apis/axiosInstance';
+import {BaseResponse, PATCH} from '../../../apis/client';
 
 interface ModifyLocationReqeust {
   userLocationId: number;
