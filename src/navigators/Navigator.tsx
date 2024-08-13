@@ -42,9 +42,7 @@ const Navigator = () => {
             console.error('refreshToken 로그아웃 실패 ---- ✈️', e);
           }
         }
-      } catch (error) {
-        console.error('storage에 토근 저장 실패 ---- ✈️', error);
-      }
+      } catch (error) {}
     };
 
     checkAuth();
