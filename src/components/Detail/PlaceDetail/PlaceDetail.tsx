@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {IcDown} from '../../assets/icon';
+import {IcDown} from '../../../assets/icon';
 import styles from './PlaceDetail.style';
 
 interface RegionProps {
@@ -21,13 +21,19 @@ export default function PlaceDetail({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, expanded && styles.expanded]}>
       <Image source={{uri: imageSrc}} style={styles.image} />
 
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.addressBox}>
           <Text numberOfLines={expanded ? undefined : 1} style={styles.address}>
+            {description}
+            {description}
+            {description}
+            {description}
+            {description}
+            {description}
             {description}
           </Text>
           <TouchableOpacity onPress={handleToggle}>

@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import {theme} from '../../styles';
+import {theme} from '../../../styles';
 
 interface MapProps {
   x?: string;
@@ -27,7 +27,7 @@ export default function Map({x, y}: MapProps) {
         }}>
         <Marker coordinate={{...location}} pinColor={theme.palette.primary}>
           <Image
-            source={require('../../assets/icon/ic_pin.png')}
+            source={require('../../../assets/icon/ic_pin.png')}
             style={{height: 35, width: 35, resizeMode: 'contain'}}
           />
         </Marker>
