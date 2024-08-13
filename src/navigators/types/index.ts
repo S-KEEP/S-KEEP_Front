@@ -7,7 +7,7 @@ export type StackParamList = {
   TabNavigator: undefined;
   Analyze: {formData: FormData};
   AnalyzeResult: {userLocationList: UserLocation[]};
-  Detail: undefined;
+  Detail: {id: number};
   Login: undefined;
 };
 

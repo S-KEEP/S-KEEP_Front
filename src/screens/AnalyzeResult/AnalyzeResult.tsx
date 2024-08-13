@@ -6,11 +6,13 @@ import {IcCancel, IcRotate} from '../../assets/icon';
 import Button from '../../components/common/Button/Button';
 import ResultSwiper from '../../components/ResultSwiper/ResultSwiper/ResultSwiper';
 import styles from './AnalyzeResult.styles';
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 
 type AnalyzeResultProps = StackScreenProps<'AnalyzeResult'>;
 export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
   const {userLocationList} = route.params;
+
+  const indexRef = useRef(0);
 
   useEffect(() => {
     console.log('userLocationList', userLocationList);
@@ -20,8 +22,12 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
     navigation.goBack();
   }
 
+  function handleIndexChanged(index: number) {
+    indexRef.current = index;
+  }
+
   function handleGoDetail() {
-    navigation.navigate('Detail');
+    navigation.navigate('Detail', {id: userLocationList[indexRef.current].id});
   }
 
   function handleRetry() {}
@@ -42,7 +48,10 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
         이제 스킵에서 인천대공원과 관련된 더 많은 정보를 받아볼 수 있어요
       </Text>
 
-      <ResultSwiper items={userLocationList} />
+      <ResultSwiper
+        items={userLocationList}
+        onIndexChanged={handleIndexChanged}
+      />
 
       <Button text="확인하러 가기" onPress={handleGoDetail} />
 
