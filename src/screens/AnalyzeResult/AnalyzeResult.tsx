@@ -7,6 +7,7 @@ import Button from '../../components/common/Button/Button';
 import ResultSwiper from '../../components/ResultSwiper/ResultSwiper/ResultSwiper';
 import styles from './AnalyzeResult.styles';
 import {useEffect, useRef} from 'react';
+import CategoryBottomSheet from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
 
 type AnalyzeResultProps = StackScreenProps<'AnalyzeResult'>;
 export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
@@ -51,6 +52,7 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
       <ResultSwiper
         items={userLocationList}
         onIndexChanged={handleIndexChanged}
+        onModify={() => {}}
       />
 
       <Button text="확인하러 가기" onPress={handleGoDetail} />
@@ -59,6 +61,9 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
         <Text style={styles.retryText}>다시 분석하기</Text>
         <IcRotate />
       </TouchableOpacity>
+
+      {/* 카테고리 수정 바텀시트 */}
+      <CategoryBottomSheet />
     </SafeAreaView>
   );
 }

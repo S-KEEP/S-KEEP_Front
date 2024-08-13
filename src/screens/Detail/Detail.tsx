@@ -6,6 +6,9 @@ import {IcCancel, IcDown} from '../../assets/icon';
 import {StackScreenProps} from '../../navigators/types';
 import Map from '../../components/Detail/Map';
 import {useGetLocation} from '../../hooks/queries/location/useGetLocation';
+import ModifyButton from '../../components/common/Button/ModifyButton';
+import CategoryBottomSheet from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
+import CategoryList from '../../components/common/BottomSheet/CategoryList/CategoryList';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -13,11 +16,8 @@ export default function Detail({navigation, route}: DetailProps) {
 
   const {data: location, isLoading, isError} = useGetLocation(id);
 
-  if (isLoading) {
-    return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
-  }
-
-  if (isError) {
+  // [TODO] 처리
+  if (isLoading || isError || !location) {
     return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
   }
 
@@ -25,7 +25,7 @@ export default function Detail({navigation, route}: DetailProps) {
     <SafeAreaView style={{...wrapperFull}}>
       <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
 
-      <Map x={location?.location.x} y={location?.location.y} />
+      <Map x={location?.location.x} y={location.location.y} />
 
       <View style={styles.box}>
         <Image style={styles.image} source={{uri: location?.photoUrl}} />
@@ -40,7 +40,16 @@ export default function Detail({navigation, route}: DetailProps) {
             <IcDown />
           </View>
         </View>
+
+        <View style={styles.addressBox}></View>
       </View>
+
+      <View style={styles.box}>
+        <CategoryList category={location.userCategory} />
+        <ModifyButton onPress={() => {}} />
+      </View>
+
+      <CategoryBottomSheet />
     </SafeAreaView>
   );
 }

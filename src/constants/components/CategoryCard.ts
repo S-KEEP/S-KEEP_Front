@@ -1,5 +1,6 @@
-import { Dimensions } from 'react-native';
+import {Dimensions} from 'react-native';
 import {
+  IcActivity,
   IcCardActivity,
   IcCardFestival,
   IcCardFood,
@@ -7,6 +8,9 @@ import {
   IcCardNature,
   IcCardRest,
   IcCardShopping,
+  IcFood,
+  IcNature,
+  IcVacation,
 } from '../../assets/icon';
 
 export const ICON_MAPS: Record<string, React.ComponentType<{}>> = {
@@ -17,6 +21,16 @@ export const ICON_MAPS: Record<string, React.ComponentType<{}>> = {
   '공연/자연': IcCardNature,
   휴식: IcCardRest,
   '쇼핑/도심': IcCardShopping,
+};
+
+export const IC_MAPS: Record<string, React.ComponentType<{}>> = {
+  익사이팅: IcActivity,
+  '문화/축제': IcActivity, //
+  맛집: IcFood,
+  '역사/유적지': IcCardHistory, //
+  '공연/자연': IcNature,
+  휴식: IcVacation,
+  '쇼핑/도심': IcCardShopping, ///
 };
 
 export const COLOR_MAP: Record<string, string> = {

@@ -11,7 +11,11 @@ export const typographyStyles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Pretendard-Medium',
   },
-
+  /**  Pretendard SemiBold 13 */
+  sb_13: {
+    fontSize: 13,
+    fontFamily: 'Pretendard-SemiBold',
+  },
   /** Body - Pretendard SemiBold 17 */
   body_sb_17: {
     fontSize: 17,

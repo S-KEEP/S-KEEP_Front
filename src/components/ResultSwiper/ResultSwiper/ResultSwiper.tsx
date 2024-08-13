@@ -7,10 +7,12 @@ import {UserLocation} from '../../../types/dtos/location';
 interface ResultSwiperProps {
   items: UserLocation[];
   onIndexChanged: (index: number) => void;
+  onModify: (id: number) => void;
 }
 export default function ResultSwiper({
   items,
   onIndexChanged,
+  onModify,
 }: ResultSwiperProps) {
   const handleIndexChanged = (index: number) => {
     onIndexChanged(index);
@@ -38,7 +40,7 @@ export default function ResultSwiper({
       }
       onIndexChanged={handleIndexChanged}>
       {items.map((it, idx) => (
-        <ResultItem item={it} key={idx} />
+        <ResultItem item={it} key={idx} onModify={onModify} />
       ))}
     </Swiper>
   );
