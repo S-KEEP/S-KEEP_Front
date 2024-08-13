@@ -23,12 +23,17 @@ export const categories: Category[] = [
   {id: '4', name: '맛집', icon: <IcFood />},
 ];
 
-function CategorySelector() {
+interface CategorySelectorProps {
+  // onModify: (category: Category) => void;
+}
+function CategorySelector({onModify}: CategorySelectorProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const handleCategorySelect = (id: string) => {
     setSelectedCategory(id);
   };
-  const handleNothingYet = () => {};
+  const handleNothingYet = () => {
+    // onModify(selectedCategory)
+  };
 
   const renderItem = ({item}: {item: Category}) => (
     <TouchableOpacity

@@ -2,10 +2,7 @@ import React, {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
 import {theme} from '../../../../styles';
 import {View, Text} from 'react-native';
-import {
-  COLOR_MAP,
-  IC_MAPS,
-} from '../../../../constants/components/CategoryCard';
+import {IC_MAPS} from '../../../../constants/components/CategoryCard';
 import {Category} from '../../../../types/dtos/location';
 import {flexBox} from '../../../../styles/common';
 
@@ -13,23 +10,26 @@ interface CategoryListProps {
   category: Category;
 }
 export default function CategoryList({category}: CategoryListProps) {
-  const Icon = useMemo(() => {
-    return {
-      component: IC_MAPS[category.title],
-      backgroundColor: COLOR_MAP[category.title] || theme.palette.white,
-    };
+  const IconComponent = useMemo(() => {
+    return IC_MAPS[category.title] || DefaultIcon;
   }, [category]);
 
   return (
     <View style={styles.container}>
       <View style={styles.icon}>
-        <Icon.component />
+        <IconComponent />
       </View>
 
       <Text style={styles.categoryText}>{category.title}</Text>
     </View>
   );
 }
+
+const DefaultIcon = () => (
+  <View style={styles.defaultIcon}>
+    <Text>?</Text>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -44,5 +44,13 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     ...theme.typography.body_m_16,
+  },
+  defaultIcon: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.palette.G01,
+    borderRadius: 20,
   },
 });

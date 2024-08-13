@@ -7,18 +7,26 @@ import {StackScreenProps} from '../../navigators/types';
 import Map from '../../components/Detail/Map';
 import {useGetLocation} from '../../hooks/queries/location/useGetLocation';
 import ModifyButton from '../../components/common/Button/ModifyButton';
-import CategoryBottomSheet from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
+import CategoryBottomSheet, {
+  CategoryBottomSheetRef,
+} from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
 import CategoryList from '../../components/common/BottomSheet/CategoryList/CategoryList';
+import {useRef} from 'react';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
   const {id} = route.params;
 
   const {data: location, isLoading, isError} = useGetLocation(id);
+  const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
 
   // [TODO] 처리
   if (isLoading || isError || !location) {
     return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
+  }
+
+  function handleOnModify() {
+    if (bottomSheetRef.current) bottomSheetRef.current.open();
   }
 
   return (
@@ -46,10 +54,10 @@ export default function Detail({navigation, route}: DetailProps) {
 
       <View style={styles.box}>
         <CategoryList category={location.userCategory} />
-        <ModifyButton onPress={() => {}} />
+        <ModifyButton onPress={handleOnModify} />
       </View>
 
-      <CategoryBottomSheet />
+      <CategoryBottomSheet ref={bottomSheetRef} />
     </SafeAreaView>
   );
 }
