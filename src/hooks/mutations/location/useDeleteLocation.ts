@@ -12,7 +12,6 @@ export const deleteLocation = async ({
   userLocationId,
 }: DeleteLocationRequest) => {
   const res = await DELETE<boolean>(`/user-location/${userLocationId}`);
-  console.log('>> ', res);
   return res.data;
 };
 

@@ -16,7 +16,6 @@ export const modifyLocation = async ({
   const res = await PATCH<boolean>(`/user-location/${userLocationId}`, {
     userCategoryId: userCategoryId,
   });
-  console.log('>> ', res);
   return res.data;
 };
 
