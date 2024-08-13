@@ -9,7 +9,7 @@ import {TabMenu} from '../navigators/constants/menu';
 import {TabBarLabel} from '../navigators/constants/label';
 import Home from '../screens/Home';
 import Category from '../screens/Category/CategoryScreen';
-import Etc from '../screens/EtcTab';
+import MoreSettingScreen from '../screens/MoreSettings/MoreSetteingScreen';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
 import {IcCategory, IcEtc, IcHome} from '../assets/icon';
 import {StyleProp, ViewStyle} from 'react-native';
@@ -36,7 +36,7 @@ export default function TabNavigator() {
 
       <Tab.Screen
         name={TabMenu.Etc}
-        component={Etc}
+        component={MoreSettingScreen}
         options={{tabBarLabel: TabBarLabel.Etc}}
       />
     </Tab.Navigator>
