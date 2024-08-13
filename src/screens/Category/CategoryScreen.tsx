@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styles from './CategoryScreen.style';
 import {View, Text, FlatList, Dimensions, StyleSheet} from 'react-native';
 import Card from '../../components/common/CategoryCard/CategoryCard';
 import {theme} from '../../styles';
 import {IcCardRest} from '../../assets/icon';
 import {useGetCategoryListQuery} from '../../hooks/queries/category/useGetCategoryList';
-import {COLOR_MAP, ICON_MAPS} from '../../constants/components/CategoryCard';
+import {
+  COLOR_MAP,
+  ICON_MAPS,
+  OFFSET,
+} from '../../constants/components/CategoryCard';
 import {CardData} from '../../types/components/category/category';
 
 export default function Category() {
@@ -18,6 +22,12 @@ export default function Category() {
     IconComponent: ICON_MAPS[item.name] || IcCardRest,
     backgroundColor: COLOR_MAP[item.name] || theme.palette.white,
   }));
+
+  const snapToOffsets = useMemo(
+    () =>
+      Array.from(Array(mappedData.length)).map((_, index) => index * OFFSET),
+    [mappedData],
+  );
 
   const renderItem = ({item}: {item: CardData}) => (
     <View style={styles.cardWrapper}>
@@ -39,12 +49,11 @@ export default function Category() {
       <FlatList
         data={mappedData}
         renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
         snapToAlignment="center"
         decelerationRate="fast"
-        snapToInterval={Dimensions.get('window').width - 60}
+        snapToOffsets={snapToOffsets}
         contentContainerStyle={styles.cardContainer}
       />
     </View>

@@ -1,3 +1,4 @@
+import { Dimensions } from 'react-native';
 import {
   IcCardActivity,
   IcCardFestival,
@@ -27,3 +28,7 @@ export const COLOR_MAP: Record<string, string> = {
   맛집: '#FFCFA2',
   익사이팅: '#BEFBF0',
 };
+
+export const CARD_SIZE = Dimensions.get('window').width - 150;
+export const MARGIN = 20;
+export const OFFSET = CARD_SIZE - MARGIN;

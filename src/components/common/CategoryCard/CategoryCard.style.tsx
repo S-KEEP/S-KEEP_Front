@@ -4,39 +4,27 @@ import {theme} from '../../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#E0F7FA',
     borderRadius: 10,
     padding: 20,
-    alignItems: 'center',
-
+    ...flexBox('column', 'flex-start', 'center'),
+    gap: 10,
     width: 210,
     height: 235,
   },
   iconContainer: {
+    alignItems: 'center',
     marginBottom: 10,
-  },
-  image: {
-    width: 80,
-    height: 80,
-    backgroundColor: '#D9D9D9',
-    borderRadius: 10,
-  },
-  addressBox: {
-    ...flexBox('row', 'flex-start', 'center'),
-  },
-  address: {
-    ...theme.typography.body_m_16,
-    marginTop: 10,
-    width: '70%',
   },
   textContainer: {
     flex: 1,
   },
   title: {
-    ...theme.typography.body_sb_17,
+    textAlign: 'left', // 타이틀만 왼쪽 정렬
+    alignSelf: 'flex-start', // 타이틀만 왼쪽 정렬
+    ...theme.typography.Title2Bold,
   },
   description: {
-    fontSize: 14,
+    ...theme.typography.body_m_16,
     color: '#555',
   },
 });

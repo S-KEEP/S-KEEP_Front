@@ -3,6 +3,7 @@ export interface CardProps {
   description: string;
   IconComponent: React.ComponentType;
   backgroundColor: string;
+  onPress?: () => void;
 }
 
 export interface CardData {

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     paddingLeft: 28,
-    marginTop: 100,
+    marginTop: 60,
   },
   cardWrapper: {
     width: Dimensions.get('window').width - 150,
