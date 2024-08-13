@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.palette.G01,
-    borderRadius: 20,
+    borderRadius: 6.72,
   },
 });
