@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
 import {theme} from '../../styles';
-import {flexBox} from '../../styles/common';
 
 const styles = StyleSheet.create({
   container: {
