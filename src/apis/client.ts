@@ -45,7 +45,7 @@ const onRejected = async (error: AxiosError) => {
     TokenKeys.RefreshToken,
   )) as string;
 
-  const statusArray = [4100, 4101, 4102, 4103, 4104];
+  const statusArray = [401, 4002];
 
   if (originalConfig && statusArray.includes(error.response?.status || 0)) {
     try {
