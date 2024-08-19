@@ -11,10 +11,14 @@ export {default as IcTarget} from './ic_target.svg';
 export {default as IcDown} from './ic_down.svg';
 export {default as IcPaginationLeft} from './ic_pagination_left.svg';
 export {default as IcPaginationRight} from './ic_pagination_right.svg';
+
 export {default as IcActivity} from './ic_exciting.svg';
 export {default as IcNature} from './ic_nature.svg';
 export {default as IcVacation} from './ic_vacation.svg';
 export {default as IcFood} from './ic_food.svg';
+export {default as IcShopping} from './ic_shopping.svg';
+export {default as IcHistory} from './ic_history.svg';
+export {default as IcFestival} from './ic_festival.svg';
 
 export {default as IcCardActivity} from './ic_card_activity.svg';
 export {default as IcCardFestival} from './ic_card_festival.svg';

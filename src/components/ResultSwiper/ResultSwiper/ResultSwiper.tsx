@@ -2,17 +2,22 @@ import Swiper from 'react-native-swiper';
 import {IcPaginationLeft, IcPaginationRight} from '../../../assets/icon';
 import {TouchableOpacity, View} from 'react-native';
 import ResultItem from '../ResultItem/ResultItem';
-import {theme} from '../../../styles';
+import {UserLocation} from '../../../types/dtos/location';
 
-export interface Result {
-  title: string;
-  address: string;
-  category: string;
-}
 interface ResultSwiperProps {
-  items: Result[];
+  items: UserLocation[];
+  onIndexChanged: (index: number) => void;
+  onModify: (id: number) => void;
 }
-export default function ResultSwiper({items}: ResultSwiperProps) {
+export default function ResultSwiper({
+  items,
+  onIndexChanged,
+  onModify,
+}: ResultSwiperProps) {
+  const handleIndexChanged = (index: number) => {
+    onIndexChanged(index);
+  };
+
   return (
     <Swiper
       showsButtons={true}
@@ -32,9 +37,10 @@ export default function ResultSwiper({items}: ResultSwiperProps) {
         <TouchableOpacity style={{marginBottom: 250}}>
           <IcPaginationRight />
         </TouchableOpacity>
-      }>
+      }
+      onIndexChanged={handleIndexChanged}>
       {items.map((it, idx) => (
-        <ResultItem item={it} key={idx} />
+        <ResultItem item={it} key={idx} onModify={onModify} />
       ))}
     </Swiper>
   );

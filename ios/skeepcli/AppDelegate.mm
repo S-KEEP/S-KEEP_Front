@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
+#import <RNShareMenu/ShareMenuManager.h>
 
 @implementation AppDelegate
 
@@ -26,6 +27,12 @@
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+// ShareMenu 관련 메서드
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [ShareMenuManager application:app openURL:url options:options];
 }
 
 @end

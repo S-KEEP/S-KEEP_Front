@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {theme} from '../../../styles';
+import {theme} from '../../../../styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   list: {
-    marginBottom: 20,
+    paddingBottom: 20,
   },
   categoryItem: {
     flexDirection: 'row',

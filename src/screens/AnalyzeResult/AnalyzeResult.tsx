@@ -5,41 +5,65 @@ import {StackScreenProps} from '../../navigators/types';
 import {IcCancel, IcRotate} from '../../assets/icon';
 import Button from '../../components/common/Button/Button';
 import ResultSwiper from '../../components/ResultSwiper/ResultSwiper/ResultSwiper';
-import dummies from './dummies.json';
 import styles from './AnalyzeResult.styles';
-import {useState} from 'react';
+import {useEffect, useRef} from 'react';
+import CategoryBottomSheet, {
+  CategoryBottomSheetRef,
+} from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
+import {Category} from '../../types/dtos/location';
 
-export default function AnalyzeResult({navigation}: StackScreenProps) {
-  const [result, setResult] = useState(dummies.results[0]);
+type AnalyzeResultProps = StackScreenProps<'AnalyzeResult'>;
+export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
+  const {userLocationList} = route.params;
+
+  const indexRef = useRef(0);
+  const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
+
+  useEffect(() => {
+    console.log('userLocationList', userLocationList);
+  }, [userLocationList]);
 
   function handleGoBack() {
-    navigation.pop();
+    navigation.goBack();
   }
+
+  function handleIndexChanged(index: number) {
+    indexRef.current = index;
+  }
+
   function handleGoDetail() {
-    navigation.navigate('Detail');
+    navigation.navigate('Detail', {id: userLocationList[indexRef.current].id});
   }
-  function handleRetry() {
-    if (result.length > 1) setResult(dummies.results[1]);
-    else setResult(dummies.results[0]);
+
+  function handleOnModify(category: Category) {
+    console.log('New Category!', category);
+
+    // validataion - 기존과 같은지 비교
   }
+
+  function handleRetry() {}
 
   return (
     <SafeAreaView style={{...wrapper}}>
       <IcCancel onPress={handleGoBack} />
 
-      {result.length > 1 ? (
+      {userLocationList.length > 1 ? (
         <Text style={styles.title}>
-          {result.length}개의 명소 분석이 완료되었어요!
+          {userLocationList.length}개의 명소 분석이 완료되었어요!
         </Text>
       ) : (
         <Text style={styles.title}>분석이 완료되었어요!</Text>
       )}
 
       <Text style={styles.subtitle}>
-        이제 스킵에서 {result[0].title}과 관련된 더 많은 정보를 받아볼 수 있어요
+        이제 스킵에서 인천대공원과 관련된 더 많은 정보를 받아볼 수 있어요
       </Text>
 
-      <ResultSwiper items={result} />
+      <ResultSwiper
+        items={userLocationList}
+        onIndexChanged={handleIndexChanged}
+        onModify={() => bottomSheetRef.current?.open()}
+      />
 
       <Button text="확인하러 가기" onPress={handleGoDetail} />
 
@@ -47,6 +71,9 @@ export default function AnalyzeResult({navigation}: StackScreenProps) {
         <Text style={styles.retryText}>다시 분석하기</Text>
         <IcRotate />
       </TouchableOpacity>
+
+      {/* 카테고리 수정 바텀시트 */}
+      <CategoryBottomSheet ref={bottomSheetRef} onModify={handleOnModify} />
     </SafeAreaView>
   );
 }

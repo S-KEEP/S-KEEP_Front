@@ -20,6 +20,8 @@ export type TypeOfPalette = Readonly<{
   gray6: string;
   white: string;
   black: string;
+  G01: string;
+  G06: string;
 }>;
 
 /** keyof styles */

@@ -24,7 +24,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 30,
   },
-  boxItem: {...flexBox(), gap: 7},
+  boxItem: {
+    ...flexBox(),
+    gap: 7,
+  },
+  boxItemWSpace: {...flexBox('row', 'space-between'), width: '100%'},
   text: {
     ...theme.typography.body_m_16,
   },
