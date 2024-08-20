@@ -43,7 +43,7 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
   const subtitle = useMemo(() => {
     if (analyzeState === AnalyzeState.SUCCESS)
       return `이제 스킵에서 ${userLocationList[0].location.placeName}과 관련된 더 많은 
-    정보를 받아볼 수 있어요`;
+정보를 받아볼 수 있어요`;
     else if (analyzeState === AnalyzeState.PARTIAL)
       return `남은 ${result.failedCount}개는 주소를 확인하기 어려웠어요`;
   }, [analyzeState]);
