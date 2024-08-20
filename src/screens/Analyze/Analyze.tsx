@@ -6,6 +6,7 @@ import {StackScreenProps} from '../../navigators/types';
 import {usePostLocation} from '../../hooks/mutations/location/usePostLocation';
 import {useEffect} from 'react';
 import {
+  AnalyzeState,
   getAnalyzeCount,
   getAnalyzeState,
 } from '../../constants/states/AnalyzeState';
@@ -25,11 +26,18 @@ export default function Analyze({navigation, route}: AnalyzeProps) {
       }
 
       console.log('[Analyze] ', res.result);
+      const state = getAnalyzeState(result.failedCount, result.successCount);
+      const type = getAnalyzeCount(result.failedCount, result.successCount);
+
+      if (state === AnalyzeState.FAILED) {
+        navigation.replace('AnalyzeError');
+        return;
+      }
 
       navigation.replace('AnalyzeResult', {
         result: result,
-        analyzeState: getAnalyzeState(result.failedCount, result.successCount),
-        type: getAnalyzeCount(result.failedCount, result.successCount),
+        analyzeState: state,
+        type: type,
       });
     },
     onError: e => {
