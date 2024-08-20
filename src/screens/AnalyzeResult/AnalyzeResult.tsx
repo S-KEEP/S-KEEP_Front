@@ -12,6 +12,10 @@ import CategoryBottomSheet, {
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
 import {Category} from '../../types/dtos/location';
 import {AnalyzeCount, AnalyzeState} from '../../constants/states/AnalyzeState';
+import {
+  ReanalyzeRequest,
+  usePatchLocationReAnalyze,
+} from '../../hooks/mutations/location/usePatchLocationReAnalyze';
 
 type AnalyzeResultProps = StackScreenProps<'AnalyzeResult'>;
 export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
@@ -62,7 +66,29 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
     // validataion - 기존과 같은지 비교
   }
 
-  function handleRetry() {}
+  const {mutate: retry} = usePatchLocationReAnalyze({
+    onSuccess: res => {
+      console.log('[RE] ', res);
+    },
+    onError: e => {
+      console.error('[RE] ', e);
+    },
+  });
+
+  function handleRetry() {
+    const idx = indexRef.current;
+    const request: ReanalyzeRequest = {
+      userLocationList: {
+        id: userLocationList[idx].id,
+        url: userLocationList[idx].photoUrl,
+      },
+    };
+
+    console.log(request);
+
+    retry(request);
+  }
+  ``;
 
   return (
     <SafeAreaView style={{...wrapper}}>
