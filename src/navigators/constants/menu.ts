@@ -3,6 +3,7 @@ export const enum StackMenu {
   TabNavigator = 'TabNavigator',
   Analyze = 'Analyze',
   AnalyzeResult = 'AnalyzeResult',
+  ReAnalyze = 'ReAnalyze',
   Detail = 'Detail',
 }
 

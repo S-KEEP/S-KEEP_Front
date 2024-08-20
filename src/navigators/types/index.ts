@@ -5,6 +5,7 @@ import {
   AnalyzeStateType,
 } from '../../constants/states/AnalyzeState';
 import {AnalyzeLocationResponse} from '../../hooks/mutations/location/usePostLocation';
+import {ReanalyzeRequest} from '../../hooks/mutations/location/usePatchLocationReAnalyze';
 
 export type StackParamList = {
   Home: undefined;
@@ -15,6 +16,7 @@ export type StackParamList = {
     analyzeState: AnalyzeStateType;
     type: AnalyzeCountType;
   };
+  ReAnalyze: {history: AnalyzeLocationResponse; request: ReanalyzeRequest};
   Detail: {id: number};
   Login: undefined;
 };

@@ -3,7 +3,7 @@ import {BaseResponse, PATCH} from '../../../apis/client';
 import {AnalyzeLocationResponse} from './usePostLocation';
 
 export interface ReanalyzeRequest {
-  userLocationList: {id: number; url: string};
+  userLocationList: {id: number; url: string}[];
 }
 
 /**
