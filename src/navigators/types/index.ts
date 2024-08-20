@@ -8,7 +8,8 @@ export type StackParamList = {
   Analyze: {formData: FormData};
   AnalyzeResult: {userLocationList: UserLocation[]};
   Detail: {id: number};
-  Login: undefined;
+  LoginScreen: undefined;
+  SettingScreen: undefined;
 };
 
 export type TabParamList = {
@@ -27,4 +28,8 @@ export type TabRouteProps = {
 export type StackScreenProps<Screen extends keyof StackParamList> = {
   navigation: NativeStackNavigationProp<StackParamList, Screen>;
   route: RouteProp<StackParamList, Screen>;
+};
+
+export type StackScreenPropsLogin = {
+  navigation: NativeStackNavigationProp<StackParamList>;
 };
