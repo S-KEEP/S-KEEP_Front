@@ -14,7 +14,6 @@ import {CardData} from '../../types/components/category/category';
 
 export default function Category() {
   const cardListData = useGetCategoryListQuery();
-  console.log('cardListData:', cardListData);
 
   const mappedData = cardListData.map(item => ({
     title: item.name,

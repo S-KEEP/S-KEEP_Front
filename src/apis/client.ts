@@ -18,7 +18,7 @@ export const axiosApi = axios.create({
 axiosApi.interceptors.request.use(
   async config => {
     const accessToken: string = await localStorage.get(TokenKeys.AccessToken);
-    console.log(accessToken);
+    console.log('어쎄스 토큰 : ', accessToken);
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -38,30 +38,73 @@ const onFulfilled = (res: AxiosResponse) => {
   return res;
 };
 
+let isRefreshing = false;
+let failedQueue: any[] = [];
+
+const processQueue = (error: any, token: string | null = null) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+
+  failedQueue = [];
+};
+
+
+
 const onRejected = async (error: AxiosError) => {
   const originalConfig = error.config;
+  if (error.response?.status === 500) {
+    return Promise.reject(error);
+  }
 
-  const refreshToken = (await localStorage.get(
-    TokenKeys.RefreshToken,
-  )) as string;
+  if (originalConfig && error.response?.status === 401) {
+    if (!isRefreshing) {
+      isRefreshing = true;
 
-  const statusArray = [4100, 4101, 4102, 4103, 4104];
+      try {
+        const refreshToken = await localStorage.get(TokenKeys.RefreshToken);
+        console.log('만료됐슴당~~ 내가 보내는 리프레쉬 토큰', refreshToken);
 
-  if (originalConfig && statusArray.includes(error.response?.status || 0)) {
-    try {
-      const response = await axiosApi.post('/api/auth/jwt/reissue', {
-        refreshToken,
-      });
-      const {result} = response.data.result;
+        const response = await axiosApi.post('/api/auth/jwt/reissue', {
+          refreshToken,
+        });
 
-      localStorage.set(TokenKeys.AccessToken, result.accessToken);
-      localStorage.set(TokenKeys.RefreshToken, result.refreshToken);
+        const result = response.data.result;
+        console.log('이건 새로운 어쎄스 토큰', result.accessToken);
 
-      originalConfig.headers.Authorization = `Bearer ${result.accessToken}`;
+        await localStorage.set(TokenKeys.AccessToken, result.accessToken);
+        const acc: string = await localStorage.get(TokenKeys.AccessToken);
+        console.log('이건 새롭게 저장된 어쎼스 토큰', acc);
 
-      return axiosApi(originalConfig);
-    } catch (e) {
-      return Promise.reject(e);
+        //리프레쉬 토큰조차 만료되면 로그인 화면으로 ->
+
+        axiosApi.defaults.headers.common['Authorization'] = `Bearer ${acc}`;
+        originalConfig.headers.Authorization = `Bearer ${acc}`;
+
+        processQueue(null, result.accessToken);
+
+        return axiosApi(originalConfig);
+      } catch (err) {
+        processQueue(err, null);
+        return Promise.reject(err);
+      } finally {
+        isRefreshing = false;
+      }
+    } else {
+      return new Promise(function (resolve, reject) {
+        failedQueue.push({resolve, reject});
+      })
+        .then(token => {
+          originalConfig.headers.Authorization = 'Bearer ' + token;
+          return axiosApi(originalConfig);
+        })
+        .catch(err => {
+          return Promise.reject(err);
+        });
     }
   }
 

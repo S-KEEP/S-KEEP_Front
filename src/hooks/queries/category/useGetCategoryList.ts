@@ -6,7 +6,7 @@ import {axiosApi} from '../../../apis/client';
 export const categoryApi = {
   getCategoryList: async (): Promise<CategoryCardResponseDto> => {
     const {data} = await axiosApi.get('/api/userCategory/list');
-    console.log(data.result.userCategoryDtoList);
+    // console.log(data.result.userCategoryDtoList);
     return data.result.userCategoryDtoList;
   },
 };

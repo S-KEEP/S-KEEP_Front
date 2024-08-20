@@ -12,7 +12,7 @@ export const authApi = {
     };
   }): Promise<AuthResponseDto> => {
     const response = await axiosApi.post(`/api/auth/apple/login`, body);
-    console.log(response.data.result);
+
     return response.data.result;
   },
 
