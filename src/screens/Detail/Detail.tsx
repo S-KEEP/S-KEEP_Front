@@ -25,12 +25,6 @@ export default function Detail({navigation, route}: DetailProps) {
   const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
 
   const queryClient = useQueryClient();
-
-  // [TODO] 처리
-  if (isLoading || isError || !location) {
-    return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
-  }
-
   const {mutate: modify} = usePatchLocation({
     onSuccess: (res, variables) => {
       const {errorCode, message, result} = res;
@@ -51,13 +45,16 @@ export default function Detail({navigation, route}: DetailProps) {
       console.error('[Modify] ', e);
     },
   });
+
+  // [TODO] 처리
+  if (isLoading || isError || !location) {
+    return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
+  }
+
   function handleOnModify(category: Category) {
     const currentCategory = location?.userCategory;
     console.log('기존 - ', currentCategory);
     console.log('New Category!', category);
-
-    // validataion - 기존과 같은지 비교
-    // bottomSheetRef.current?.close();
 
     if (!currentCategory) return;
     if (currentCategory.id === category.id) {
