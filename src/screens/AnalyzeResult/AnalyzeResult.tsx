@@ -13,6 +13,7 @@ import CategoryBottomSheet, {
 import {Category} from '../../types/dtos/location';
 import {AnalyzeCount, AnalyzeState} from '../../constants/states/AnalyzeState';
 import {ReanalyzeRequest} from '../../hooks/mutations/location/usePatchLocationReAnalyze';
+import {usePatchLocation} from '../../hooks/mutations/location/usePatchLocation';
 
 type AnalyzeResultProps = StackScreenProps<'AnalyzeResult'>;
 export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
@@ -57,10 +58,48 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
     navigation.navigate('Detail', {id: userLocationList[indexRef.current].id});
   }
 
+  const {mutate: modify} = usePatchLocation({
+    onSuccess: (res, variables) => {
+      const {errorCode, message, result} = res;
+
+      if (errorCode) {
+        console.error(`${errorCode} - ${message}`);
+        navigation.pop();
+        return;
+      }
+
+      const index = userLocationList.findIndex(
+        item => item.id === variables.userLocationId,
+      );
+      if (index !== -1) {
+        userLocationList[index].userCategory = variables.userCategory;
+      }
+      bottomSheetRef.current?.close();
+      console.log('[Analyze] ', res.result, variables);
+    },
+    onError: e => {
+      console.error('[Analyze] ', e);
+    },
+  });
+
   function handleOnModify(category: Category) {
+    const {userCategory: currentCategory, id} =
+      userLocationList[indexRef.current];
+    console.log('기존 - ', currentCategory);
     console.log('New Category!', category);
 
     // validataion - 기존과 같은지 비교
+
+    if (currentCategory.id === category.id) {
+      console.log('동일한 카테고리');
+      bottomSheetRef.current?.close();
+    }
+
+    modify({
+      userLocationId: id,
+      userCategoryId: category.id,
+      userCategory: category,
+    });
   }
 
   function handleRetry() {

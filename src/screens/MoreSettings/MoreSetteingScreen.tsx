@@ -4,7 +4,7 @@ import useNavigator from '../../navigators/hooks/useNavigator';
 export default function MoreSettingScreen() {
   const {stackNavigation} = useNavigator();
   function handle() {
-    stackNavigation.navigate('Detail', {id: 79});
+    stackNavigation.navigate('Detail', {id: 470});
   }
   return (
     <SafeAreaView>
