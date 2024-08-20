@@ -16,6 +16,7 @@ export type StackParamList = {
     analyzeState: AnalyzeStateType;
     type: AnalyzeCountType;
   };
+  AnalyzeError: undefined;
   ReAnalyze: {history: AnalyzeLocationResponse; request: ReanalyzeRequest};
   Detail: {id: number};
   Login: undefined;

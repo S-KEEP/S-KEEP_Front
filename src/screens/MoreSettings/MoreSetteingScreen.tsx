@@ -9,6 +9,10 @@ export default function MoreSettingScreen() {
   return (
     <SafeAreaView>
       <Button title="GO" onPress={handle} />
+      <Button
+        title="ERRRO"
+        onPress={() => stackNavigation.navigate('AnalyzeError')}
+      />
     </SafeAreaView>
   );
 }

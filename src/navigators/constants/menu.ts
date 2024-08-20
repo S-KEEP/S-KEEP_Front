@@ -4,6 +4,7 @@ export const enum StackMenu {
   Analyze = 'Analyze',
   AnalyzeResult = 'AnalyzeResult',
   ReAnalyze = 'ReAnalyze',
+  AnalyzeError = 'AnalyzeError',
   Detail = 'Detail',
 }
 
