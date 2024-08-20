@@ -6,7 +6,7 @@ import {IcCancel, IcRotate} from '../../assets/icon';
 import Button from '../../components/common/Button/Button';
 import ResultSwiper from '../../components/ResultSwiper/ResultSwiper/ResultSwiper';
 import styles from './AnalyzeResult.styles';
-import {useEffect, useMemo, useRef, useState} from 'react';
+import {useMemo, useRef} from 'react';
 import CategoryBottomSheet, {
   CategoryBottomSheetRef,
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
@@ -113,7 +113,7 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
       ],
     };
 
-    navigation.navigate('ReAnalyze', {history: result, request: request});
+    navigation.replace('ReAnalyze', {history: result, request: request});
     console.log(request);
   }
   ``;

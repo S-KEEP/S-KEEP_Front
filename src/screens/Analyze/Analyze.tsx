@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {theme} from '../../styles';
 import {flexBox, wrapper} from '../../styles/common';
@@ -45,7 +45,10 @@ export default function Analyze({navigation, route}: AnalyzeProps) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.image} />
+      <Image
+        source={require('../../assets/icon/ic_loading.gif')}
+        style={styles.image}
+      />
       <Text style={styles.title}>스크린샷을 분석 중이에요!</Text>
       <Text style={styles.subtitle}>조금만 기다려주세요</Text>
     </SafeAreaView>
@@ -58,10 +61,11 @@ const styles = StyleSheet.create({
     ...flexBox('column'),
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     backgroundColor: '#D9D9D9',
-    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
     ...theme.typography.title_sb_21,
