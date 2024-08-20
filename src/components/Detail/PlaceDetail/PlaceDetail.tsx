@@ -29,12 +29,6 @@ export default function PlaceDetail({
         <View style={styles.addressBox}>
           <Text numberOfLines={expanded ? undefined : 1} style={styles.address}>
             {description}
-            {description}
-            {description}
-            {description}
-            {description}
-            {description}
-            {description}
           </Text>
           <TouchableOpacity onPress={handleToggle}>
             <IcDown />

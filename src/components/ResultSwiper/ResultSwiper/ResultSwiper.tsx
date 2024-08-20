@@ -20,6 +20,7 @@ export default function ResultSwiper({
 
   return (
     <Swiper
+      onIndexChanged={handleIndexChanged}
       showsButtons={true}
       showsPagination={false}
       loop={false}

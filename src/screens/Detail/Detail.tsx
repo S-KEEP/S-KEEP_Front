@@ -40,8 +40,8 @@ export default function Detail({navigation, route}: DetailProps) {
 
       <PlaceDetail
         imageSrc={location?.photoUrl}
-        title={String(location.id)}
-        description={String(location.location.kakaoMapId)}
+        title={String(location.location.placeName)}
+        description={String(location.location.roadAddress)}
       />
 
       <View style={styles.categoryBox}>
