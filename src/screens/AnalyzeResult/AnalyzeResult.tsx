@@ -6,22 +6,43 @@ import {IcCancel, IcRotate} from '../../assets/icon';
 import Button from '../../components/common/Button/Button';
 import ResultSwiper from '../../components/ResultSwiper/ResultSwiper/ResultSwiper';
 import styles from './AnalyzeResult.styles';
-import {useEffect, useRef} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import CategoryBottomSheet, {
   CategoryBottomSheetRef,
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
 import {Category} from '../../types/dtos/location';
+import {AnalyzeCount, AnalyzeState} from '../../constants/states/AnalyzeState';
 
 type AnalyzeResultProps = StackScreenProps<'AnalyzeResult'>;
 export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
-  const {userLocationList} = route.params;
+  const {result, analyzeState, type} = route.params;
 
   const indexRef = useRef(0);
   const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
 
-  useEffect(() => {
-    console.log('userLocationList', userLocationList);
-  }, [userLocationList]);
+  const userLocationList = useMemo(() => {
+    return result.userLocationList || [];
+  }, [result]);
+
+  const title = useMemo(() => {
+    if (analyzeState === AnalyzeState.SUCCESS && type === AnalyzeCount.SINGLE)
+      return `분석이 완료되었어요!`;
+    else if (
+      analyzeState === AnalyzeState.SUCCESS &&
+      type === AnalyzeCount.MULTIPLE
+    )
+      return `${result.successCount}개의 명소 분석이 완료되었어요!`;
+    else if (analyzeState === AnalyzeState.PARTIAL)
+      return `${result.successCount}개의 명소를 캐치했어요!`;
+  }, [analyzeState]);
+
+  const subtitle = useMemo(() => {
+    if (analyzeState === AnalyzeState.SUCCESS)
+      return `이제 스킵에서 ${userLocationList[0].location.placeName}과 관련된 더 많은 
+    정보를 받아볼 수 있어요`;
+    else if (analyzeState === AnalyzeState.PARTIAL)
+      return `남은 ${result.failedCount}개는 주소를 확인하기 어려웠어요`;
+  }, [analyzeState]);
 
   function handleGoBack() {
     navigation.goBack();
@@ -48,16 +69,12 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
       <IcCancel onPress={handleGoBack} />
 
       {userLocationList.length > 1 ? (
-        <Text style={styles.title}>
-          {userLocationList.length}개의 명소 분석이 완료되었어요!
-        </Text>
+        <Text style={styles.title}>{title}</Text>
       ) : (
         <Text style={styles.title}>분석이 완료되었어요!</Text>
       )}
 
-      <Text style={styles.subtitle}>
-        이제 스킵에서 인천대공원과 관련된 더 많은 정보를 받아볼 수 있어요
-      </Text>
+      <Text style={styles.subtitle}>{subtitle}</Text>
 
       <ResultSwiper
         items={userLocationList}

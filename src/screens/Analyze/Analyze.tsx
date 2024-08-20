@@ -5,6 +5,10 @@ import {flexBox, wrapper} from '../../styles/common';
 import {StackScreenProps} from '../../navigators/types';
 import {usePostLocation} from '../../hooks/mutations/location/usePostLocation';
 import {useEffect} from 'react';
+import {
+  getAnalyzeCount,
+  getAnalyzeState,
+} from '../../constants/states/AnalyzeState';
 
 type AnalyzeProps = StackScreenProps<'Analyze'>;
 export default function Analyze({navigation, route}: AnalyzeProps) {
@@ -20,9 +24,12 @@ export default function Analyze({navigation, route}: AnalyzeProps) {
         return;
       }
 
-      console.log('[Analyze] ', res.result.userLocationList);
+      console.log('[Analyze] ', res.result);
+
       navigation.replace('AnalyzeResult', {
-        userLocationList: result.userLocationList,
+        result: result,
+        analyzeState: getAnalyzeState(result.failedCount, result.successCount),
+        type: getAnalyzeCount(result.failedCount, result.successCount),
       });
     },
     onError: e => {

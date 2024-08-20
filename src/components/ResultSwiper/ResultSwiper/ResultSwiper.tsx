@@ -37,8 +37,7 @@ export default function ResultSwiper({
         <TouchableOpacity style={{marginBottom: 250}}>
           <IcPaginationRight />
         </TouchableOpacity>
-      }
-      onIndexChanged={handleIndexChanged}>
+      }>
       {items.map((it, idx) => (
         <ResultItem item={it} key={idx} onModify={onModify} />
       ))}

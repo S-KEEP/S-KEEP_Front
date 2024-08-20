@@ -1,12 +1,20 @@
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {UserLocation} from '../../types/dtos/location';
+import {
+  AnalyzeCountType,
+  AnalyzeStateType,
+} from '../../constants/states/AnalyzeState';
+import {AnalyzeLocationResponse} from '../../hooks/mutations/location/usePostLocation';
 
 export type StackParamList = {
   Home: undefined;
   TabNavigator: undefined;
   Analyze: {formData: FormData};
-  AnalyzeResult: {userLocationList: UserLocation[]};
+  AnalyzeResult: {
+    result: AnalyzeLocationResponse;
+    analyzeState: AnalyzeStateType;
+    type: AnalyzeCountType;
+  };
   Detail: {id: number};
   Login: undefined;
 };
