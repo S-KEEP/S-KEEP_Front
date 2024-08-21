@@ -42,7 +42,3 @@ export type StackScreenProps<Screen extends keyof StackParamList> = {
   navigation: NativeStackNavigationProp<StackParamList, Screen>;
   route: RouteProp<StackParamList, Screen>;
 };
-
-export type StackScreenPropsLogin = {
-  navigation: NativeStackNavigationProp<StackParamList>;
-};
