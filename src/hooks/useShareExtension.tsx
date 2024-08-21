@@ -2,13 +2,13 @@ import {useEffect, useCallback, useRef, useState} from 'react';
 import ShareMenu from 'react-native-share-menu';
 import {ShareData} from 'react-native-share-menu';
 import useNavigator from '../navigators/hooks/useNavigator';
+import useAnalyze from './useAnalyze';
 
 /**
  * Share Extension
  */
 export default function useShareExtension() {
-  const {stackNavigation} = useNavigator();
-
+  const {handleShareExtension} = useAnalyze();
   const [isForegroundProcessed, setIsForegroundProcessed] = useState(false);
 
   const handleShare = useCallback(
@@ -18,23 +18,7 @@ export default function useShareExtension() {
         return;
       }
 
-      const formData = new FormData();
-      if (item?.data?.length === 1) {
-        const imagePath = item.data[0].data;
-        const fileName = imagePath.split('/').pop();
-
-        const photo = {
-          uri: imagePath,
-          type: 'multipart/form-data',
-          name: `${fileName}`,
-        };
-
-        formData.append(`file`, photo);
-
-        console.log(`[${type}] `, item);
-        console.log('[TabNavigator] FormData ', formData);
-        stackNavigation.navigate('Analyze', {formData});
-      }
+      handleShareExtension(item);
     },
     [],
   );
