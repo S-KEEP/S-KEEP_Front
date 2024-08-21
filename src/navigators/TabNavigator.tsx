@@ -15,10 +15,13 @@ import {StyleProp, TouchableOpacity, ViewStyle} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import useNavigator from './hooks/useNavigator';
 import SettingScreen from '../screens/Settings/SettingScreen';
+import useShareExtension from '../hooks/useShareExtension';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
+  useShareExtension();
+
   const {bottom: bottomSize} = useSafeAreaInsets();
   const {stackNavigation} = useNavigator();
 
