@@ -9,4 +9,5 @@ export const enum RecoilStateKeys {
 
   /** UserInfo */
   UserInfo = 'userInfo',
+  UserAppleInfo = 'userAppleInfo'
 }

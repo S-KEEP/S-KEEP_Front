@@ -10,12 +10,14 @@ import {userInfoState} from '../../libs/recoil/states/userInfo';
 import {authState} from '../../libs/recoil/states/auth';
 import styles from './AppleLogin.style';
 import {View} from 'react-native';
+import {userAppleInfoState} from '../../libs/recoil/states/userAppleInfo';
 
 function AppleLogin() {
   const {setAuthData} = useAuthStorage();
   const setUserInfo = useSetRecoilState(userInfoState);
   const setAuth = useSetRecoilState(authState);
   const {authMutation} = useSocialLoginMutation();
+  const setUserAppleInfo = useSetRecoilState(userAppleInfoState);
 
   const handlePressAppleLoginButton = async () => {
     try {
@@ -51,8 +53,19 @@ function AppleLogin() {
             onSuccess: async ({accessToken, refreshToken}) => {
               setAuthData({accessToken, refreshToken});
               setUserInfo({username});
-
               setAuth({isAuthenticated: true});
+
+              setUserAppleInfo({
+                email: email || '',
+                user: user || '',
+                fullName: {
+                  firstName: fullName?.givenName || '',
+                  lastName: fullName?.familyName || '',
+                },
+                identityToken: idToken,
+                authorizationCode: code || '',
+              });
+              console.log(idToken);
             },
           },
         );

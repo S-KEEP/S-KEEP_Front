@@ -19,7 +19,10 @@ export type StackParamList = {
   AnalyzeError: undefined;
   ReAnalyze: {history: AnalyzeLocationResponse; request: ReanalyzeRequest};
   Detail: {id: number};
-  Login: undefined;
+  LoginScreen: undefined;
+  SettingScreen: undefined;
+  DeleteAccountScreen: undefined;
+  CategoryListScreen: {title: string; description: string};
 };
 
 export type TabParamList = {

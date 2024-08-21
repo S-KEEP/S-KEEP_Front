@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
-import {useSetRecoilState} from 'recoil';
 import StackNavigator from '../navigators/StackNavigator';
 import {lightPalette} from '../styles';
 import LoginScreen from '../screens/Login/LoginScreen';
@@ -19,7 +18,9 @@ const Navigator = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
+        //await AsyncStorage.clear();
         const accessToken = await localStorage.get(TokenKeys.AccessToken);
+
         if (accessToken) {
           setAuthData({isAuthenticated: true});
         } else {
