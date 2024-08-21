@@ -4,41 +4,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {StackScreenProps} from '../../navigators/types';
 import Button from '../../components/common/Button/Button';
-import {launchImageLibrary} from 'react-native-image-picker';
+import useAnalyze from '../../hooks/useAnalyze';
 
 type AnalyzeErrorProps = StackScreenProps<'AnalyzeError'>;
 export default function AnalyzeError({navigation, route}: AnalyzeErrorProps) {
-  async function handleReSelect() {
-    const {didCancel, errorCode, errorMessage, assets} =
-      await launchImageLibrary({
-        mediaType: 'photo',
-        selectionLimit: 10,
-      });
-
-    if (didCancel || errorCode) {
-      console.log(
-        `didCancel: ${didCancel} errorCode: ${errorCode} errorMessage: ${errorMessage}`,
-      );
-    }
-
-    const formData = new FormData();
-    if (assets) {
-      for (let i = 0; i < assets.length; i++) {
-        const asset = assets[i];
-
-        const photo = {
-          uri: asset.uri,
-          type: 'multipart/form-data',
-          name: `${asset.fileName}`,
-        };
-
-        formData.append(`file`, photo);
-      }
-
-      console.log('[TabNavigator] FormData ', formData);
-      navigation.replace('Analyze', {formData});
-    }
-  }
+  const {handleReSelect} = useAnalyze();
 
   function handleGoMain() {
     navigation.pop();
@@ -56,7 +26,10 @@ export default function AnalyzeError({navigation, route}: AnalyzeErrorProps) {
       </View>
 
       <View style={styles.bottom}>
-        <Button text="사진 다시 선택하기" onPress={handleReSelect} />
+        <Button
+          text="사진 다시 선택하기"
+          onPress={() => handleReSelect(navigation)}
+        />
 
         <Button text="스킵으로 돌아가기" onPress={handleGoMain} />
       </View>

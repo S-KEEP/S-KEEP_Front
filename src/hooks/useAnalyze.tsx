@@ -56,5 +56,37 @@ export default function useAnalyze() {
     }
   };
 
-  return {handleGoToGallery, handleShareExtension};
+  const handleReSelect = async navigation => {
+    const {didCancel, errorCode, errorMessage, assets} =
+      await launchImageLibrary({
+        mediaType: 'photo',
+        selectionLimit: 10,
+      });
+
+    if (didCancel || errorCode) {
+      console.log(
+        `didCancel: ${didCancel} errorCode: ${errorCode} errorMessage: ${errorMessage}`,
+      );
+    }
+
+    const formData = new FormData();
+    if (assets) {
+      for (let i = 0; i < assets.length; i++) {
+        const asset = assets[i];
+
+        const photo = {
+          uri: asset.uri,
+          type: 'multipart/form-data',
+          name: `${asset.fileName}`,
+        };
+
+        formData.append(`file`, photo);
+      }
+
+      console.log('[TabNavigator] FormData ', formData);
+      navigation.replace('Analyze', {formData});
+    }
+  };
+
+  return {handleGoToGallery, handleShareExtension, handleReSelect};
 }
