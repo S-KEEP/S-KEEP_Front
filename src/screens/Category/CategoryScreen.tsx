@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import styles from './CategoryScreen.style';
 import {View, Text, FlatList, Dimensions, StyleSheet} from 'react-native';
-import Card from '../../components/common/CategoryCard/CategoryCard';
+import Card from '../../components/common/Category/CategoryCard/CategoryCard';
 import {theme} from '../../styles';
 import {IcCardRest} from '../../assets/icon';
 import {useGetCategoryListQuery} from '../../hooks/queries/category/useGetCategoryList';

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {flexBox, padding} from '../../../styles/common';
-import {theme} from '../../../styles';
+import {flexBox, padding} from '../../../../styles/common';
+import {theme} from '../../../../styles';
 
 const styles = StyleSheet.create({
   container: {

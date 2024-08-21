@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import styles from './CategoryCard.style';
-import {CardProps} from '../../../types/components/category/category';
+import {CardProps} from '../../../../types/components/category/category';
 
 export default function Card({
   title,

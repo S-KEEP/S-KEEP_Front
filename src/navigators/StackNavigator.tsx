@@ -8,6 +8,7 @@ import Detail from '../screens/Detail/Detail';
 import Analyze from '../screens/Analyze/Analyze';
 import LoginScreen from '../screens/Login/LoginScreen';
 import SettingScreen from '../screens/Settings/SettingScreen';
+import DeleteAccountScreen from '../screens/DeleteAccount/DeleteAccountScreen';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -23,6 +24,10 @@ export default function StackNavigator() {
       <Stack.Screen name={StackMenu.Home} component={Home} />
       <Stack.Screen name={StackMenu.LoginScreen} component={LoginScreen} />
       <Stack.Screen name={StackMenu.SettingScreen} component={SettingScreen} />
+      <Stack.Screen
+        name={StackMenu.DeleteAccountScreen}
+        component={DeleteAccountScreen}
+      />
 
       <Stack.Screen name={StackMenu.Analyze} component={Analyze} />
       <Stack.Screen name={StackMenu.AnalyzeResult} component={AnalyzeResult} />
