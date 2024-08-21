@@ -7,6 +7,8 @@ import {UserLocation} from '../../../types/dtos/location';
  */
 export interface AnalyzeLocationResponse {
   userLocationList: UserLocation[];
+  successCount: number;
+  failedCount: number;
 }
 
 /**

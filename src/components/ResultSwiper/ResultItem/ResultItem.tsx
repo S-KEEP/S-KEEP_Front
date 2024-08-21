@@ -17,18 +17,18 @@ export default function ResultItem({item, onModify}: ResultItemProps) {
         <View style={styles.box}>
           <View style={styles.boxItem}>
             <IcMarker />
-            <Text style={styles.text}>{item.id}</Text>
+            <Text style={styles.text}>{item.location.placeName}</Text>
           </View>
 
           <View style={styles.boxItem}>
             <IcTarget />
-            <Text style={styles.text}>{item.location.kakaoMapId}</Text>
+            <Text style={styles.text}>{item.location.roadAddress}</Text>
           </View>
 
           <View style={styles.boxItemWSpace}>
             <View style={styles.boxItem}>
               <IcFolder />
-              <Text style={styles.text}>{item.userCategory.title}</Text>
+              <Text style={styles.text}>{item.userCategory.name}</Text>
             </View>
 
             <ModifyButton onPress={() => onModify(item.id)} />

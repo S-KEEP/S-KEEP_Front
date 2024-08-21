@@ -1,9 +1,11 @@
 import {useMutation} from '@tanstack/react-query';
 import {BaseResponse, PATCH} from '../../../apis/client';
+import {Category} from '../../../types/dtos/location';
 
-interface ModifyLocationReqeust {
+interface ModifyLocationRequest {
   userLocationId: number;
   userCategoryId: number;
+  userCategory: Category;
 }
 
 /**
@@ -12,15 +14,18 @@ interface ModifyLocationReqeust {
 export const modifyLocation = async ({
   userLocationId,
   userCategoryId,
-}: ModifyLocationReqeust) => {
-  const res = await PATCH<boolean>(`/user-location/${userLocationId}`, {
-    userCategoryId: userCategoryId,
-  });
+}: ModifyLocationRequest) => {
+  const res = await PATCH<boolean>(
+    `/api/user-location/${userLocationId}/category`,
+    {
+      userCategoryId: userCategoryId,
+    },
+  );
   return res.data;
 };
 
 interface PostLocationMutationProps {
-  onSuccess: (res: BaseResponse<boolean>) => void;
+  onSuccess: (res: BaseResponse<boolean>, req: ModifyLocationRequest) => void;
   onError: (e: Error) => void;
 }
 
@@ -29,8 +34,10 @@ export const usePatchLocation = ({
   onError,
 }: PostLocationMutationProps) => {
   return useMutation({
-    mutationFn: (req: ModifyLocationReqeust) => modifyLocation(req),
-    onSuccess: onSuccess,
+    mutationFn: (req: ModifyLocationRequest) => modifyLocation(req),
+    onSuccess: (res, variables) => {
+      onSuccess(res, variables);
+    },
     onError: onError,
   });
 };
