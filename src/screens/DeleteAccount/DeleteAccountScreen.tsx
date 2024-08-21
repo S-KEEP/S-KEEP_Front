@@ -4,16 +4,26 @@ import CheckBox from '@react-native-community/checkbox';
 import {IcWarning} from '../../assets/icon';
 import styles from './DeleteAccountScreen.style';
 import {useDeleteAppleIdMutation} from '../../hooks/mutations/deleteAccount/useDeleteAppleId';
-import { useDeleteAccountMutation } from '../../hooks/mutations/deleteAccount/usePostDeleteAccount';
+import {useDeleteAccountMutation} from '../../hooks/mutations/deleteAccount/usePostDeleteAccount';
+import {useRecoilValue} from 'recoil';
+import {userAppleInfoState} from '../../libs/recoil/states/userAppleInfo';
 
-export default function DeleteAccountScreen({}) {
+export default function DeleteAccountScreen() {
   const [isChecked, setIsChecked] = useState(false);
 
-  const idToken = 'your-id-token';
-  const code = 'your-code';
-  const email = 'user@example.com';
-  const firstName = 'FirstName';
-  const lastName = 'LastName';
+  // Recoil 상태에서 사용자 정보 가져오기
+  const userAppleInfo = useRecoilValue(userAppleInfoState);
+
+  if (!userAppleInfo) {
+    return (
+      <View style={styles.container}>
+        <Text>유저 정보를 불러오지 못했습니다.</Text>
+      </View>
+    );
+  }
+
+  const {email, identityToken, authorizationCode, fullName} = userAppleInfo;
+  const {firstName, lastName} = fullName || {firstName: '', lastName: ''};
 
   const {DeleteAppleIdMutation} = useDeleteAppleIdMutation();
   const {deleteAccountMutation} = useDeleteAccountMutation();
@@ -22,42 +32,43 @@ export default function DeleteAccountScreen({}) {
     if (isChecked) {
       const body = {
         state: null,
-        code: code,
-        id_token: idToken,
+        code: authorizationCode,
+        id_token: identityToken,
         user: {
-          email: email,
+          email,
           name: {
-            firstName: firstName,
-            lastName: lastName,
+            firstName,
+            lastName,
           },
         },
       };
+      console.log('바디는', body);
 
-      // First, delete the Apple ID
+      // Apple ID 삭제 Mutation 호출
       DeleteAppleIdMutation.mutate(body, {
         onSuccess: data => {
-          console.log('Apple ID deletion successful:', data);
+          console.log('Apple ID 삭제 성공:', data);
 
-          // Now, call the second mutation to delete the account
+          // 계정 삭제 Mutation 호출
           deleteAccountMutation.mutate(undefined, {
             onSuccess: () => {
-              console.log('Account deletion successful.');
-              Alert.alert('Success', 'Your account has been deleted.');
+              console.log('계정 삭제 성공.');
+              Alert.alert('성공', '계정이 성공적으로 삭제되었습니다.');
             },
             onError: error => {
-              console.error('Account deletion error:', error);
+              console.error('계정 삭제 오류:', error);
               Alert.alert(
-                'Error',
-                'An error occurred while deleting your account. Please try again.',
+                '오류',
+                '계정 삭제 중 오류가 발생했습니다. 다시 시도해주세요.',
               );
             },
           });
         },
         onError: error => {
-          console.error('Apple ID deletion error:', error);
+          console.error('Apple ID 삭제 오류:', error);
           Alert.alert(
-            'Error',
-            'An error occurred while deleting your Apple ID. Please try again.',
+            '오류',
+            'Apple ID 삭제 중 오류가 발생했습니다. 다시 시도해주세요.',
           );
         },
       });
