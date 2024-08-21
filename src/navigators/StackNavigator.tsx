@@ -6,6 +6,8 @@ import Home from '../screens/Home';
 import AnalyzeResult from '../screens/AnalyzeResult/AnalyzeResult';
 import Detail from '../screens/Detail/Detail';
 import Analyze from '../screens/Analyze/Analyze';
+import ReAnalyze from '../screens/ReAnalyze/ReAnalyze';
+import AnalyzeError from '../screens/AnalyzeError/AnalyzeError';
 import LoginScreen from '../screens/Login/LoginScreen';
 import SettingScreen from '../screens/Settings/SettingScreen';
 import DeleteAccountScreen from '../screens/DeleteAccount/DeleteAccountScreen';
@@ -35,7 +37,11 @@ export default function StackNavigator() {
       />
 
       <Stack.Screen name={StackMenu.Analyze} component={Analyze} />
+      <Stack.Screen name={StackMenu.ReAnalyze} component={ReAnalyze} />
+
       <Stack.Screen name={StackMenu.AnalyzeResult} component={AnalyzeResult} />
+      <Stack.Screen name={StackMenu.AnalyzeError} component={AnalyzeError} />
+
       <Stack.Screen name={StackMenu.Detail} component={Detail} />
     </Stack.Navigator>
   );

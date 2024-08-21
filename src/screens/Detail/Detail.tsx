@@ -13,6 +13,9 @@ import {useRef} from 'react';
 import CategoryItem from '../../components/common/Category/CategoryItem/CategoryItem';
 import {Category} from '../../types/dtos/location';
 import PlaceDetail from '../../components/Detail/PlaceDetail/PlaceDetail';
+import {usePatchLocation} from '../../hooks/mutations/location/usePatchLocation';
+import {useQueryClient} from '@tanstack/react-query';
+import {LOCATION_KEYS} from '../../hooks/queries/QueryKeys';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -21,15 +24,49 @@ export default function Detail({navigation, route}: DetailProps) {
   const {data: location, isLoading, isError} = useGetLocation(id);
   const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
 
+  const queryClient = useQueryClient();
+  const {mutate: modify} = usePatchLocation({
+    onSuccess: (res, variables) => {
+      const {errorCode, message, result} = res;
+
+      if (errorCode) {
+        console.error(`${errorCode} - ${message}`);
+        navigation.pop();
+        return;
+      }
+
+      console.log('[Modify] ', res.result, variables);
+      queryClient.invalidateQueries({
+        queryKey: LOCATION_KEYS.detail(String(id)),
+      });
+      bottomSheetRef.current?.close();
+    },
+    onError: e => {
+      console.error('[Modify] ', e);
+    },
+  });
+
   // [TODO] 처리
   if (isLoading || isError || !location) {
     return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
   }
 
   function handleOnModify(category: Category) {
+    const currentCategory = location?.userCategory;
+    console.log('기존 - ', currentCategory);
     console.log('New Category!', category);
 
-    // validataion - 기존과 같은지 비교
+    if (!currentCategory) return;
+    if (currentCategory.id === category.id) {
+      console.log('동일한 카테고리');
+      bottomSheetRef.current?.close();
+    }
+
+    modify({
+      userLocationId: location.id,
+      userCategoryId: category.id,
+      userCategory: category,
+    });
   }
 
   return (
@@ -40,8 +77,8 @@ export default function Detail({navigation, route}: DetailProps) {
 
       <PlaceDetail
         imageSrc={location?.photoUrl}
-        title={String(location.id)}
-        description={String(location.location.kakaoMapId)}
+        title={String(location.location.placeName)}
+        description={String(location.location.roadAddress)}
       />
 
       <View style={styles.categoryBox}>

@@ -11,7 +11,7 @@ interface CategoryListProps {
 }
 export default function CategoryItem({category}: CategoryListProps) {
   const IconComponent = useMemo(() => {
-    return IC_MAPS[category.title] || DefaultIcon;
+    return IC_MAPS[category.name] || DefaultIcon;
   }, [category]);
 
   return (
@@ -20,7 +20,7 @@ export default function CategoryItem({category}: CategoryListProps) {
         <IconComponent />
       </View>
 
-      <Text style={styles.categoryText}>{category.title}</Text>
+      <Text style={styles.categoryText}>{category.name}</Text>
     </View>
   );
 }

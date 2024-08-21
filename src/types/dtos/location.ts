@@ -12,19 +12,20 @@ export interface Location {
   kakaoMapId: string;
   x: string;
   y: string;
-  fixedCategory: string;
+  placeName: string;
+  roadAddress: string;
 }
 
 export interface Category {
   id: number;
-  title: string;
+  name: string;
   description: string;
 }
 
 export function cardEntityToCategoryMapper(cardEntity: CardEntity) {
   return {
     id: cardEntity.id,
-    title: cardEntity.name,
+    name: cardEntity.name,
     description: cardEntity.description,
   } as Category;
 }

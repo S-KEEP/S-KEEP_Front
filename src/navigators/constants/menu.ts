@@ -3,6 +3,8 @@ export const enum StackMenu {
   TabNavigator = 'TabNavigator',
   Analyze = 'Analyze',
   AnalyzeResult = 'AnalyzeResult',
+  ReAnalyze = 'ReAnalyze',
+  AnalyzeError = 'AnalyzeError',
   Detail = 'Detail',
   LoginScreen = 'LoginScreen',
   SettingScreen = 'SettingScreen',
