@@ -1,7 +1,7 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import styles from './AnalyzeError.styles';
+import {Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {theme} from '../../styles';
-import {flexBox, wrapper} from '../../styles/common';
+
 import {StackScreenProps} from '../../navigators/types';
 import Button from '../../components/common/Button/Button';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -63,41 +63,3 @@ export default function AnalyzeError({navigation, route}: AnalyzeErrorProps) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    ...wrapper,
-    ...flexBox('column', 'space-between'),
-
-    paddingTop: 120,
-    paddingBottom: 100,
-  },
-  top: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    gap: 10,
-  },
-  bottom: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignSelf: 'stretch',
-    gap: 10,
-  },
-  image: {
-    width: 100,
-    height: 100,
-    backgroundColor: '#D9D9D9',
-    borderRadius: 300,
-  },
-  title: {
-    ...theme.typography.title_sb_21,
-    color: theme.palette.black,
-    marginTop: 30,
-  },
-  subtitle: {
-    ...theme.typography.title_m_16,
-    color: theme.palette.gray5,
-  },
-});
