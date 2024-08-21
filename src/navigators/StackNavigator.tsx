@@ -9,6 +9,7 @@ import Analyze from '../screens/Analyze/Analyze';
 import LoginScreen from '../screens/Login/LoginScreen';
 import SettingScreen from '../screens/Settings/SettingScreen';
 import DeleteAccountScreen from '../screens/DeleteAccount/DeleteAccountScreen';
+import CategoryListScreen from '../screens/CategoryList/CategoryListScreen';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -27,6 +28,10 @@ export default function StackNavigator() {
       <Stack.Screen
         name={StackMenu.DeleteAccountScreen}
         component={DeleteAccountScreen}
+      />
+      <Stack.Screen
+        name={StackMenu.CategoryListScreen}
+        component={CategoryListScreen}
       />
 
       <Stack.Screen name={StackMenu.Analyze} component={Analyze} />

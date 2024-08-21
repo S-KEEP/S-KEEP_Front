@@ -7,6 +7,7 @@ export const enum StackMenu {
   LoginScreen = 'LoginScreen',
   SettingScreen = 'SettingScreen',
   DeleteAccountScreen = 'DeleteAccountScreen',
+  CategoryListScreen = 'CategoryListScreen',
 }
 
 export const enum TabMenu {

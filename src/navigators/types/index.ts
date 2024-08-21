@@ -10,7 +10,8 @@ export type StackParamList = {
   Detail: {id: number};
   LoginScreen: undefined;
   SettingScreen: undefined;
-  DeleteAccountScreen : undefined;
+  DeleteAccountScreen: undefined;
+  CategoryListScreen: {title: string; description: string};
 };
 
 export type TabParamList = {

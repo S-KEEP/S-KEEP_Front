@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    textAlign: 'left', // 타이틀만 왼쪽 정렬
-    alignSelf: 'flex-start', // 타이틀만 왼쪽 정렬
+    textAlign: 'left',
+    alignSelf: 'flex-start',
     ...theme.typography.Title2Bold,
   },
   description: {
