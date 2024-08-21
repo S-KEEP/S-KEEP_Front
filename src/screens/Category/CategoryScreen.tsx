@@ -2,7 +2,6 @@ import React, {useMemo} from 'react';
 import styles from './CategoryScreen.style';
 import {View, Text, FlatList} from 'react-native';
 import Card from '../../components/common/Category/CategoryCard/CategoryCard';
-import {NavigationProp, useNavigation} from '@react-navigation/native'; // Import useNavigation hook
 import {theme} from '../../styles';
 import {IcCardRest} from '../../assets/icon';
 import {useGetCategoryListQuery} from '../../hooks/queries/category/useGetCategoryList';
@@ -12,11 +11,11 @@ import {
   OFFSET,
 } from '../../constants/components/CategoryCard';
 import {CardData} from '../../types/components/category/category';
-import {StackParamList} from '../../navigators/types';
+import {StackScreenProps} from '../../navigators/types';
 
-export default function Category() {
-  const navigation = useNavigation<NavigationProp<StackParamList>>();
+type CategoryScreenProps = StackScreenProps<'TabNavigator'>;
 
+export default function Category({navigation}: CategoryScreenProps) {
   const cardListData = useGetCategoryListQuery();
 
   const mappedData = cardListData.map(item => ({
