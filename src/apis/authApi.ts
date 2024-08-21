@@ -1,5 +1,5 @@
 import {axiosApi} from './client';
-import {AuthResponseDto} from '../types/dtos/auth';
+import {AuthResponseDto, DeleteAccountResponseDto} from '../types/dtos/auth';
 
 export const authApi = {
   postLoginUser: async (body: {
@@ -16,10 +16,22 @@ export const authApi = {
     return response.data.result;
   },
 
-  postLogoutUser: async (body: {refreshToken: string}) => {
-    const response = await axiosApi.post('/api/auth/logoutt', {
-      refreshToken: body.refreshToken,
-    });
+  deleteAccount: async () => {
+    const response = await axiosApi.post('/api/user/withdrawal');
+    return response.data.result;
+  },
+
+  deleteAppleId: async (body: {
+    state: null;
+    code: string | null;
+    id_token: string;
+    user: {
+      email: string | null;
+      name: {firstName: string | null; lastName: string | null};
+    };
+  }): Promise<DeleteAccountResponseDto> => {
+    const response = await axiosApi.post(`/api/auth/apple/revoke`, body);
+
     return response.data.result;
   },
 };

@@ -1,15 +1,66 @@
 import React, {useState} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, Alert} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {IcWarning} from '../../assets/icon';
 import styles from './DeleteAccountScreen.style';
+import {useDeleteAppleIdMutation} from '../../hooks/mutations/deleteAccount/useDeleteAppleId';
+import { useDeleteAccountMutation } from '../../hooks/mutations/deleteAccount/usePostDeleteAccount';
 
 export default function DeleteAccountScreen({}) {
   const [isChecked, setIsChecked] = useState(false);
 
+  const idToken = 'your-id-token';
+  const code = 'your-code';
+  const email = 'user@example.com';
+  const firstName = 'FirstName';
+  const lastName = 'LastName';
+
+  const {DeleteAppleIdMutation} = useDeleteAppleIdMutation();
+  const {deleteAccountMutation} = useDeleteAccountMutation();
+
   const handleDelete = () => {
     if (isChecked) {
-      console.log('Account deletion confirmed.');
+      const body = {
+        state: null,
+        code: code,
+        id_token: idToken,
+        user: {
+          email: email,
+          name: {
+            firstName: firstName,
+            lastName: lastName,
+          },
+        },
+      };
+
+      // First, delete the Apple ID
+      DeleteAppleIdMutation.mutate(body, {
+        onSuccess: data => {
+          console.log('Apple ID deletion successful:', data);
+
+          // Now, call the second mutation to delete the account
+          deleteAccountMutation.mutate(undefined, {
+            onSuccess: () => {
+              console.log('Account deletion successful.');
+              Alert.alert('Success', 'Your account has been deleted.');
+            },
+            onError: error => {
+              console.error('Account deletion error:', error);
+              Alert.alert(
+                'Error',
+                'An error occurred while deleting your account. Please try again.',
+              );
+            },
+          });
+        },
+        onError: error => {
+          console.error('Apple ID deletion error:', error);
+          Alert.alert(
+            'Error',
+            'An error occurred while deleting your Apple ID. Please try again.',
+          );
+        },
+      });
     }
   };
 
