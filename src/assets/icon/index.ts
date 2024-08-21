@@ -32,3 +32,5 @@ export {default as IcRight} from './ic_right.svg';
 export {default as IcProfile} from './ic_profile.svg';
 export {default as IcApple} from './ic_apple.svg';
 export {default as IcWarning} from './ic_warning.svg';
+
+export {default as IcCategoryRest} from './ic_category_rest2.svg';
