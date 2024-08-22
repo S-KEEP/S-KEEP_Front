@@ -1,13 +1,15 @@
 export const enum StackMenu {
-  Home = 'Home',
   TabNavigator = 'TabNavigator',
-  Analyze = 'Analyze',
-  AnalyzeResult = 'AnalyzeResult',
-  ReAnalyze = 'ReAnalyze',
-  AnalyzeError = 'AnalyzeError',
-  Detail = 'Detail',
   LoginScreen = 'LoginScreen',
-  SettingScreen = 'SettingScreen',
+
+  Analyze = 'Analyze',
+  ReAnalyze = 'ReAnalyze',
+
+  AnalyzeResult = 'AnalyzeResult',
+  AnalyzeError = 'AnalyzeError',
+
+  Detail = 'Detail',
+
   DeleteAccountScreen = 'DeleteAccountScreen',
   CategoryListScreen = 'CategoryListScreen',
 }

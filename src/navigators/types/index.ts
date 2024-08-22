@@ -10,7 +10,6 @@ import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import type {CompositeScreenProps} from '@react-navigation/native';
 
 export type StackParamList = {
-  Home: undefined;
   TabNavigator: undefined;
   Analyze: {formData: FormData};
   AnalyzeResult: {
@@ -21,6 +20,7 @@ export type StackParamList = {
   AnalyzeError: undefined;
   ReAnalyze: {history: AnalyzeLocationResponse; request: ReanalyzeRequest};
   Detail: {id: number};
+
   LoginScreen: undefined;
   SettingScreen: undefined;
   DeleteAccountScreen: undefined;
