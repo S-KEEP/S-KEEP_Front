@@ -30,7 +30,7 @@ export type StackParamList = {
 
 export type TabParamList = {
   Home: undefined;
-  Category: undefined;
+  CategoryTab: undefined;
   Etc: undefined;
   Setting: undefined;
 };

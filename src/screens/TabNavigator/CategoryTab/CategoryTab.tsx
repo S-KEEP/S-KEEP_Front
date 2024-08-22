@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import styles from './Category.style';
+import styles from './CategoryTab.style';
 import {View, Text, FlatList} from 'react-native';
 import Card from '../../../components/common/Category/CategoryCard/CategoryCard';
 import {theme} from '../../../styles';
@@ -13,8 +13,8 @@ import {
 import {CardData} from '../../../types/components/category/category';
 import {TabOfStackScreenProps} from '../../../navigators/types';
 
-type CategoryProps = TabOfStackScreenProps<'TabNavigator', 'Category'>;
-export default function Category({navigation}: CategoryProps) {
+type CategoryTabProps = TabOfStackScreenProps<'TabNavigator', 'CategoryTab'>;
+export default function CategoryTab({navigation}: CategoryTabProps) {
   const cardListData = useGetCategoryListQuery();
 
   const mappedData = cardListData.map(item => ({

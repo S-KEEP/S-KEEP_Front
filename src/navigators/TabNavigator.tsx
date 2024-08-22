@@ -8,13 +8,13 @@ import {theme} from '../styles/theme';
 import {TabMenu} from '../navigators/constants/menu';
 import {TabBarLabel} from '../navigators/constants/label';
 import Home from '../screens/Home';
-import Category from '../screens/TabNavigator/Category/Category';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
 import {IcCategory, IcEtc, IcHome} from '../assets/icon';
 import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';
 import SettingScreen from '../screens/Settings/SettingScreen';
 import useShareExtension from '../hooks/useShareExtension';
 import useAnalyze from '../hooks/useAnalyze';
+import CategoryTab from '../screens/TabNavigator/CategoryTab/CategoryTab';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -28,8 +28,8 @@ export default function TabNavigator() {
     <Tab.Navigator
       screenOptions={({route}) => screenOptions({route, bottomSize})}>
       <Tab.Screen
-        name={TabMenu.Category}
-        component={Category}
+        name={TabMenu.CategoryTab}
+        component={CategoryTab}
         options={{tabBarLabel: TabBarLabel.Category}}
       />
 
