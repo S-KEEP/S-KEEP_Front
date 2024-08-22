@@ -1,15 +1,20 @@
 import {RouteProp} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
   AnalyzeCountType,
   AnalyzeStateType,
 } from '../../constants/states/AnalyzeState';
 import {AnalyzeLocationResponse} from '../../hooks/mutations/location/usePostLocation';
 import {ReanalyzeRequest} from '../../hooks/mutations/location/usePatchLocationReAnalyze';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import type {CompositeScreenProps} from '@react-navigation/native';
 
 export type StackParamList = {
-  Home: undefined;
   TabNavigator: undefined;
+
+  Login: undefined;
+  Withdraw: undefined;
+
   Analyze: {formData: FormData};
   AnalyzeResult: {
     result: AnalyzeLocationResponse;
@@ -19,16 +24,14 @@ export type StackParamList = {
   AnalyzeError: undefined;
   ReAnalyze: {history: AnalyzeLocationResponse; request: ReanalyzeRequest};
   Detail: {id: number};
-  LoginScreen: undefined;
-  SettingScreen: undefined;
-  DeleteAccountScreen: undefined;
-  CategoryListScreen: {title: string; description: string};
+
+  CategoryList: {title: string; description: string};
 };
 
 export type TabParamList = {
-  Home: undefined;
-  Category: undefined;
-  Etc: undefined;
+  HomeTab: undefined;
+  CategoryTab: undefined;
+  SettingTab: undefined;
 };
 
 export type StackScreenName = keyof StackParamList;
@@ -38,7 +41,20 @@ export type TabRouteProps = {
   route: RouteProp<TabParamList, TabScreenName>;
 };
 
-export type StackScreenProps<Screen extends keyof StackParamList> = {
-  navigation: NativeStackNavigationProp<StackParamList, Screen>;
-  route: RouteProp<StackParamList, Screen>;
-};
+/**
+ * Screen Props
+ * */
+export type StackScreenProps<Screen extends keyof StackParamList> =
+  NativeStackScreenProps<StackParamList, Screen>;
+
+export type TabScreenProps<Screen extends keyof TabParamList> =
+  BottomTabScreenProps<TabParamList, Screen>;
+
+// Stack 中 Bottom Tab 중첩된 화면에서 사용
+export type TabOfStackScreenProps<
+  StackScreen extends keyof StackParamList,
+  TabScreen extends keyof TabParamList,
+> = CompositeScreenProps<
+  BottomTabScreenProps<TabParamList, TabScreen>,
+  NativeStackScreenProps<StackParamList, StackScreen>
+>;

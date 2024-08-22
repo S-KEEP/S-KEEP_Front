@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import StackNavigator from '../navigators/StackNavigator';
 import {lightPalette} from '../styles';
-import LoginScreen from '../screens/Login/LoginScreen';
+import Login from '../screens/Login/Login';
 import localStorage from '../libs/async-storage';
 import {TokenKeys} from '../libs/async-storage/constants/keys';
 import useInitialData from '../hooks/auth/useInitialData';
@@ -37,7 +37,7 @@ const Navigator = () => {
 
   return (
     <NavigationContainer theme={theme}>
-      {authData.isAuthenticated ? <StackNavigator /> : <LoginScreen />}
+      {authData.isAuthenticated ? <StackNavigator /> : <Login />}
     </NavigationContainer>
   );
 };

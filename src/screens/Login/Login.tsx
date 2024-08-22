@@ -1,9 +1,9 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
-import styles from './LoginScreen.style';
+import styles from './Login.style';
 import AppleLogin from '../../components/Login/AppleLogin';
 
-export default function LoginScreen() {
+export default function Login() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>

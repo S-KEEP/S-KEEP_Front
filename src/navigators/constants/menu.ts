@@ -1,19 +1,22 @@
 export const enum StackMenu {
-  Home = 'Home',
   TabNavigator = 'TabNavigator',
+
+  Login = 'Login',
+  Withdraw = 'Withdraw',
+
   Analyze = 'Analyze',
-  AnalyzeResult = 'AnalyzeResult',
   ReAnalyze = 'ReAnalyze',
+
+  AnalyzeResult = 'AnalyzeResult',
   AnalyzeError = 'AnalyzeError',
+
   Detail = 'Detail',
-  LoginScreen = 'LoginScreen',
-  SettingScreen = 'SettingScreen',
-  DeleteAccountScreen = 'DeleteAccountScreen',
-  CategoryListScreen = 'CategoryListScreen',
+
+  CategoryList = 'CategoryList',
 }
 
 export const enum TabMenu {
-  Home = 'Home',
-  Category = 'Category',
-  Etc = 'Etc',
+  CategoryTab = 'CategoryTab',
+  HomeTab = 'HomeTab',
+  SettingTab = 'SettingTab',
 }

@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import {Text, View, TouchableOpacity, Alert} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {IcWarning} from '../../assets/icon';
-import styles from './DeleteAccountScreen.style';
+import styles from './Withdraw.style';
 import {useDeleteAppleIdMutation} from '../../hooks/mutations/deleteAccount/useDeleteAppleId';
 import {useDeleteAccountMutation} from '../../hooks/mutations/deleteAccount/usePostDeleteAccount';
 import {useRecoilValue} from 'recoil';
 import {userAppleInfoState} from '../../libs/recoil/states/userAppleInfo';
 
-export default function DeleteAccountScreen() {
+export default function Withdraw() {
   const [isChecked, setIsChecked] = useState(false);
 
   // Recoil 상태에서 사용자 정보 가져오기

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import {StackScreenProps} from '../../navigators/types';
-import {styles} from './CategoryListScreen.style';
+import {styles} from './CategoryList.style';
 import {IcCategoryRest} from '../../assets/icon';
 import {COLOR_MAP, ICON_MAPS} from '../../constants/components/CategoryCard';
 import {theme} from '../../styles';
@@ -10,9 +10,9 @@ import useGetCategoryList, {
 } from '../../hooks/queries/category/useGetCategoryDetail';
 import PlaceDetail from '../../components/Detail/PlaceDetail/PlaceDetail';
 
-type CategoryListProps = StackScreenProps<'CategoryListScreen'>;
+type CategoryListProps = StackScreenProps<'CategoryList'>;
 
-export default function CategoryListScreen({route}: CategoryListProps) {
+export default function CategoryList({route}: CategoryListProps) {
   const {title, description} = route.params;
 
   const backgroundColor = COLOR_MAP[title] || theme.palette.gray1;

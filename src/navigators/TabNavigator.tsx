@@ -7,16 +7,14 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {theme} from '../styles/theme';
 import {TabMenu} from '../navigators/constants/menu';
 import {TabBarLabel} from '../navigators/constants/label';
-import Home from '../screens/Home';
-import Category from '../screens/Category/CategoryScreen';
+import HomeTab from '../screens/TabNavigator/HomeTab/HomeTab';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
 import {IcCategory, IcEtc, IcHome} from '../assets/icon';
-import {StyleProp, TouchableOpacity, ViewStyle} from 'react-native';
-import {launchImageLibrary} from 'react-native-image-picker';
-import useNavigator from './hooks/useNavigator';
-import SettingScreen from '../screens/Settings/SettingScreen';
+import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';
 import useShareExtension from '../hooks/useShareExtension';
 import useAnalyze from '../hooks/useAnalyze';
+import CategoryTab from '../screens/TabNavigator/CategoryTab/CategoryTab';
+import SettingTab from '../screens/TabNavigator/SettingTab/SettingScreen';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -30,30 +28,30 @@ export default function TabNavigator() {
     <Tab.Navigator
       screenOptions={({route}) => screenOptions({route, bottomSize})}>
       <Tab.Screen
-        name={TabMenu.Category}
-        component={Category}
+        name={TabMenu.CategoryTab}
+        component={CategoryTab}
         options={{tabBarLabel: TabBarLabel.Category}}
       />
 
       <Tab.Screen
-        name={TabMenu.Home}
-        component={Home}
+        name={TabMenu.HomeTab}
+        component={HomeTab}
         options={{
-          tabBarLabel: TabBarLabel.Home,
+          tabBarLabel: TabBarLabel.HomeTab,
           tabBarButton: props => (
             <TouchableOpacity
               {...props}
               style={[props.style, {marginBottom: 17}]}
               onPress={handleGoToGallery}>
-              {getTabBarIcon(TabMenu.Home, false)}
+              {getTabBarIcon(TabMenu.HomeTab, false)}
             </TouchableOpacity>
           ),
         }}
       />
 
       <Tab.Screen
-        name={TabMenu.Etc}
-        component={SettingScreen}
+        name={TabMenu.SettingTab}
+        component={SettingTab}
         options={{tabBarLabel: TabBarLabel.Etc}}
       />
     </Tab.Navigator>
@@ -69,7 +67,7 @@ const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
   const iconColor = focused ? theme.palette.primary : theme.palette.gray4;
 
   switch (routeName) {
-    case TabMenu.Home:
+    case TabMenu.HomeTab:
       return (
         <IcHome
           width={60}
@@ -78,9 +76,9 @@ const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
           style={iconStyle}
         />
       );
-    case TabMenu.Category:
+    case TabMenu.CategoryTab:
       return <IcCategory width={24} height={24} fill={iconColor} />;
-    case TabMenu.Etc:
+    case TabMenu.SettingTab:
       return <IcEtc width={24} height={24} fill={iconColor} />;
     default:
       return null;
