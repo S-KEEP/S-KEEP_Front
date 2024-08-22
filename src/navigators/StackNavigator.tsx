@@ -10,7 +10,7 @@ import AnalyzeError from '../screens/AnalyzeError/AnalyzeError';
 import Login from '../screens/Login/Login';
 
 import Withdraw from '../screens/Withdraw/Withdraw';
-import CategoryListScreen from '../screens/CategoryList/CategoryListScreen';
+import CategoryList from '../screens/CategoryList/CategoryList';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -38,10 +38,7 @@ export default function StackNavigator() {
       <Stack.Screen name={StackMenu.AnalyzeError} component={AnalyzeError} />
 
       {/* 카테고리 리스트 */}
-      <Stack.Screen
-        name={StackMenu.CategoryListScreen}
-        component={CategoryListScreen}
-      />
+      <Stack.Screen name={StackMenu.CategoryList} component={CategoryList} />
 
       {/* 장소 상세 */}
       <Stack.Screen name={StackMenu.Detail} component={Detail} />

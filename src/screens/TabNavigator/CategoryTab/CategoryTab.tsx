@@ -31,7 +31,7 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
   );
 
   const handleCardPress = (item: CardData) => {
-    navigation.navigate('CategoryListScreen', {
+    navigation.navigate('CategoryList', {
       title: item.title,
       description: item.description,
     });

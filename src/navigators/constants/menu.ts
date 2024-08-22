@@ -1,6 +1,8 @@
 export const enum StackMenu {
   TabNavigator = 'TabNavigator',
+
   Login = 'Login',
+  Withdraw = 'Withdraw',
 
   Analyze = 'Analyze',
   ReAnalyze = 'ReAnalyze',
@@ -10,8 +12,7 @@ export const enum StackMenu {
 
   Detail = 'Detail',
 
-  Withdraw = 'Withdraw',
-  CategoryListScreen = 'CategoryListScreen',
+  CategoryList = 'CategoryList',
 }
 
 export const enum TabMenu {
