@@ -17,5 +17,5 @@ export const enum StackMenu {
 export const enum TabMenu {
   CategoryTab = 'CategoryTab',
   Home = 'Home',
-  Etc = 'Etc',
+  SettingTab = 'SettingTab',
 }
