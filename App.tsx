@@ -8,8 +8,6 @@ import AppSetupWrapper from './src/container/AppSetupContainer';
 import useShareExtension from './src/hooks/useShareExtension';
 
 const App = () => {
-  useShareExtension();
-
   return (
     <AppSetupWrapper>
       <SafeAreaProvider>

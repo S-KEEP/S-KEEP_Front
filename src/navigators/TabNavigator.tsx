@@ -15,44 +15,16 @@ import {StyleProp, TouchableOpacity, ViewStyle} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import useNavigator from './hooks/useNavigator';
 import SettingScreen from '../screens/Settings/SettingScreen';
+import useShareExtension from '../hooks/useShareExtension';
+import useAnalyze from '../hooks/useAnalyze';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
+  useShareExtension();
+  const {handleGoToGallery} = useAnalyze();
+
   const {bottom: bottomSize} = useSafeAreaInsets();
-  const {stackNavigation} = useNavigator();
-
-  async function handleGoToGallery() {
-    const {didCancel, errorCode, errorMessage, assets} =
-      await launchImageLibrary({
-        mediaType: 'photo',
-        selectionLimit: 10,
-      });
-
-    if (didCancel || errorCode) {
-      console.log(
-        `didCancel: ${didCancel} errorCode: ${errorCode} errorMessage: ${errorMessage}`,
-      );
-    }
-
-    const formData = new FormData();
-    if (assets) {
-      for (let i = 0; i < assets.length; i++) {
-        const asset = assets[i];
-
-        const photo = {
-          uri: asset.uri,
-          type: 'multipart/form-data',
-          name: `${asset.fileName}`,
-        };
-
-        formData.append(`file`, photo);
-      }
-
-      console.log('[TabNavigator] FormData ', formData);
-      stackNavigation.navigate('Analyze', {formData});
-    }
-  }
 
   return (
     <Tab.Navigator
