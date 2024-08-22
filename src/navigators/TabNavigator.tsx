@@ -8,7 +8,7 @@ import {theme} from '../styles/theme';
 import {TabMenu} from '../navigators/constants/menu';
 import {TabBarLabel} from '../navigators/constants/label';
 import Home from '../screens/Home';
-import Category from '../screens/Category/CategoryScreen';
+import Category from '../screens/TabNavigator/Category/Category';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
 import {IcCategory, IcEtc, IcHome} from '../assets/icon';
 import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';

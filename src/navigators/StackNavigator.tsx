@@ -9,8 +9,8 @@ import ReAnalyze from '../screens/ReAnalyze/ReAnalyze';
 import AnalyzeError from '../screens/AnalyzeError/AnalyzeError';
 import Login from '../screens/Login/Login';
 
-import CategoryListScreen from '../screens/CategoryList/CategoryListScreen';
 import Withdraw from '../screens/Withdraw/Withdraw';
+import CategoryListScreen from '../screens/CategoryList/CategoryListScreen';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -29,12 +29,6 @@ export default function StackNavigator() {
       <Stack.Screen name={StackMenu.Login} component={Login} />
       <Stack.Screen name={StackMenu.Withdraw} component={Withdraw} />
 
-      {/* 카테고리 상세 */}
-      <Stack.Screen
-        name={StackMenu.CategoryListScreen}
-        component={CategoryListScreen}
-      />
-
       {/* 분석, 재분석 */}
       <Stack.Screen name={StackMenu.Analyze} component={Analyze} />
       <Stack.Screen name={StackMenu.ReAnalyze} component={ReAnalyze} />
@@ -42,6 +36,12 @@ export default function StackNavigator() {
       {/* 분석 결과, 실패 */}
       <Stack.Screen name={StackMenu.AnalyzeResult} component={AnalyzeResult} />
       <Stack.Screen name={StackMenu.AnalyzeError} component={AnalyzeError} />
+
+      {/* 카테고리 리스트 */}
+      <Stack.Screen
+        name={StackMenu.CategoryListScreen}
+        component={CategoryListScreen}
+      />
 
       {/* 장소 상세 */}
       <Stack.Screen name={StackMenu.Detail} component={Detail} />

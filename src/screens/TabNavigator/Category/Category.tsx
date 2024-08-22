@@ -1,17 +1,17 @@
 import React, {useMemo} from 'react';
-import styles from './CategoryScreen.style';
+import styles from './Category.style';
 import {View, Text, FlatList} from 'react-native';
-import Card from '../../components/common/Category/CategoryCard/CategoryCard';
-import {theme} from '../../styles';
-import {IcCardRest} from '../../assets/icon';
-import {useGetCategoryListQuery} from '../../hooks/queries/category/useGetCategoryList';
+import Card from '../../../components/common/Category/CategoryCard/CategoryCard';
+import {theme} from '../../../styles';
+import {IcCardRest} from '../../../assets/icon';
+import {useGetCategoryListQuery} from '../../../hooks/queries/category/useGetCategoryList';
 import {
   COLOR_MAP,
   ICON_MAPS,
   OFFSET,
-} from '../../constants/components/CategoryCard';
-import {CardData} from '../../types/components/category/category';
-import {TabOfStackScreenProps} from '../../navigators/types';
+} from '../../../constants/components/CategoryCard';
+import {CardData} from '../../../types/components/category/category';
+import {TabOfStackScreenProps} from '../../../navigators/types';
 
 type CategoryProps = TabOfStackScreenProps<'TabNavigator', 'Category'>;
 export default function Category({navigation}: CategoryProps) {
