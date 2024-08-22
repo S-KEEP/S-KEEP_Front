@@ -25,10 +25,8 @@ export default function StackNavigator() {
       {/* 탭 */}
       <Stack.Screen name={StackMenu.TabNavigator} component={TabNavigator} />
 
-      {/* 로그인 */}
+      {/* 로그인, 탈퇴 */}
       <Stack.Screen name={StackMenu.Login} component={Login} />
-
-      {/* 탈퇴 */}
       <Stack.Screen name={StackMenu.Withdraw} component={Withdraw} />
 
       {/* 카테고리 상세 */}
