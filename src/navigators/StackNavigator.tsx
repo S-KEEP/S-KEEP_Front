@@ -8,8 +8,9 @@ import Analyze from '../screens/Analyze/Analyze';
 import ReAnalyze from '../screens/ReAnalyze/ReAnalyze';
 import AnalyzeError from '../screens/AnalyzeError/AnalyzeError';
 import Login from '../screens/Login/Login';
-import DeleteAccountScreen from '../screens/DeleteAccount/DeleteAccountScreen';
+
 import CategoryListScreen from '../screens/CategoryList/CategoryListScreen';
+import Withdraw from '../screens/Withdraw/Withdraw';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -28,10 +29,7 @@ export default function StackNavigator() {
       <Stack.Screen name={StackMenu.Login} component={Login} />
 
       {/* 탈퇴 */}
-      <Stack.Screen
-        name={StackMenu.DeleteAccountScreen}
-        component={DeleteAccountScreen}
-      />
+      <Stack.Screen name={StackMenu.Withdraw} component={Withdraw} />
 
       {/* 카테고리 상세 */}
       <Stack.Screen

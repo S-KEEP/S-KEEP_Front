@@ -11,6 +11,10 @@ import type {CompositeScreenProps} from '@react-navigation/native';
 
 export type StackParamList = {
   TabNavigator: undefined;
+
+  Login: undefined;
+  Withdraw: undefined;
+
   Analyze: {formData: FormData};
   AnalyzeResult: {
     result: AnalyzeLocationResponse;
@@ -21,9 +25,6 @@ export type StackParamList = {
   ReAnalyze: {history: AnalyzeLocationResponse; request: ReanalyzeRequest};
   Detail: {id: number};
 
-  Login: undefined;
-  SettingScreen: undefined;
-  DeleteAccountScreen: undefined;
   CategoryListScreen: {title: string; description: string};
 };
 

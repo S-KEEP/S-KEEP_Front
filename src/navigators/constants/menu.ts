@@ -10,7 +10,7 @@ export const enum StackMenu {
 
   Detail = 'Detail',
 
-  DeleteAccountScreen = 'DeleteAccountScreen',
+  Withdraw = 'Withdraw',
   CategoryListScreen = 'CategoryListScreen',
 }
 
