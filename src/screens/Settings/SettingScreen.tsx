@@ -7,10 +7,9 @@ import {useGetUserInfoQuery} from '../../hooks/queries/settings/useGetUserInfo';
 import styles from './SettingScreen.style';
 import Profile from '../../components/Settings/Profile';
 import SettingsList from '../../components/Settings/SettingList';
-import {StackScreenProps} from '../../navigators/types';
+import {TabOfStackScreenProps} from '../../navigators/types';
 
-type SettingScreenProps = StackScreenProps<'SettingScreen'>;
-
+type SettingScreenProps = TabOfStackScreenProps<'TabNavigator', 'Setting'>;
 export default function SettingScreen({navigation}: SettingScreenProps) {
   const userInfoData = useGetUserInfoQuery();
   const setAuth = useSetRecoilState(authState);

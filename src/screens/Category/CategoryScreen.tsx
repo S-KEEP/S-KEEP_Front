@@ -11,11 +11,10 @@ import {
   OFFSET,
 } from '../../constants/components/CategoryCard';
 import {CardData} from '../../types/components/category/category';
-import {StackScreenProps} from '../../navigators/types';
+import {TabOfStackScreenProps} from '../../navigators/types';
 
-type CategoryScreenProps = StackScreenProps<'TabNavigator'>;
-
-export default function Category({navigation}: CategoryScreenProps) {
+type CategoryProps = TabOfStackScreenProps<'TabNavigator', 'Category'>;
+export default function Category({navigation}: CategoryProps) {
   const cardListData = useGetCategoryListQuery();
 
   const mappedData = cardListData.map(item => ({
