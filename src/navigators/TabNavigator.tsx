@@ -14,7 +14,7 @@ import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';
 import useShareExtension from '../hooks/useShareExtension';
 import useAnalyze from '../hooks/useAnalyze';
 import CategoryTab from '../screens/TabNavigator/CategoryTab/CategoryTab';
-import SettingTab from '../screens/TabNavigator/SettingTab/SettingScreen';
+import SettingTab from '../screens/TabNavigator/SettingTab/SettingTab';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -30,7 +30,7 @@ export default function TabNavigator() {
       <Tab.Screen
         name={TabMenu.CategoryTab}
         component={CategoryTab}
-        options={{tabBarLabel: TabBarLabel.Category}}
+        options={{tabBarLabel: TabBarLabel.CategoryTab}}
       />
 
       <Tab.Screen
@@ -52,7 +52,7 @@ export default function TabNavigator() {
       <Tab.Screen
         name={TabMenu.SettingTab}
         component={SettingTab}
-        options={{tabBarLabel: TabBarLabel.Etc}}
+        options={{tabBarLabel: TabBarLabel.SettingTab}}
       />
     </Tab.Navigator>
   );

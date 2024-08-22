@@ -2,14 +2,16 @@ import React from 'react';
 import {View} from 'react-native';
 import SettingItem from './SettingItem';
 import styles from './Setting.style';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {StackParamList} from '../../navigators/types';
+import VersionCheck from 'react-native-version-check';
+import useNavigator from '../../navigators/hooks/useNavigator';
+
 type SettingsListProps = {
   onLogout: () => void;
 };
 
+const version = VersionCheck.getCurrentVersion();
 export default function SettingsList({onLogout}: SettingsListProps) {
-  const navigation = useNavigation<NavigationProp<StackParamList>>(); // Hook to use navigation
+  const {stackNavigation} = useNavigator();
 
   return (
     <View style={styles.settingsContainer}>
@@ -18,9 +20,9 @@ export default function SettingsList({onLogout}: SettingsListProps) {
       <SettingItem text="로그아웃" onPress={onLogout} />
       <SettingItem
         text="회원탈퇴"
-        onPress={() => navigation.navigate('Withdraw')}
+        onPress={() => stackNavigation.navigate('Withdraw')}
       />
-      <SettingItem text="버전 정보" extraInfo="1.0.0" />
+      <SettingItem text="버전 정보" extraInfo={version} />
     </View>
   );
 }
