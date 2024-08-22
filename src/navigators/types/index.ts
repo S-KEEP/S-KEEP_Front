@@ -21,7 +21,7 @@ export type StackParamList = {
   ReAnalyze: {history: AnalyzeLocationResponse; request: ReanalyzeRequest};
   Detail: {id: number};
 
-  LoginScreen: undefined;
+  Login: undefined;
   SettingScreen: undefined;
   DeleteAccountScreen: undefined;
   CategoryListScreen: {title: string; description: string};

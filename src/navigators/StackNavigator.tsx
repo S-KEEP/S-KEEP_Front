@@ -7,7 +7,7 @@ import Detail from '../screens/Detail/Detail';
 import Analyze from '../screens/Analyze/Analyze';
 import ReAnalyze from '../screens/ReAnalyze/ReAnalyze';
 import AnalyzeError from '../screens/AnalyzeError/AnalyzeError';
-import LoginScreen from '../screens/Login/LoginScreen';
+import Login from '../screens/Login/Login';
 import DeleteAccountScreen from '../screens/DeleteAccount/DeleteAccountScreen';
 import CategoryListScreen from '../screens/CategoryList/CategoryListScreen';
 
@@ -25,7 +25,7 @@ export default function StackNavigator() {
       <Stack.Screen name={StackMenu.TabNavigator} component={TabNavigator} />
 
       {/* 로그인 */}
-      <Stack.Screen name={StackMenu.LoginScreen} component={LoginScreen} />
+      <Stack.Screen name={StackMenu.Login} component={Login} />
 
       {/* 탈퇴 */}
       <Stack.Screen

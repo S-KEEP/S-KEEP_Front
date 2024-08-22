@@ -17,7 +17,7 @@ export default function SettingScreen({navigation}: SettingScreenProps) {
   const handleLogout = async () => {
     try {
       await AsyncStorage.clear();
-      navigation.replace('LoginScreen');
+      navigation.replace('Login');
       setAuth({isAuthenticated: false});
       Alert.alert('로그아웃', '성공적으로 로그아웃되었습니다.');
     } catch (error) {
