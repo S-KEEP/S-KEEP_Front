@@ -7,7 +7,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {theme} from '../styles/theme';
 import {TabMenu} from '../navigators/constants/menu';
 import {TabBarLabel} from '../navigators/constants/label';
-import Home from '../screens/Home';
+import HomeTab from '../screens/TabNavigator/HomeTab/HomeTab';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
 import {IcCategory, IcEtc, IcHome} from '../assets/icon';
 import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';
@@ -34,16 +34,16 @@ export default function TabNavigator() {
       />
 
       <Tab.Screen
-        name={TabMenu.Home}
-        component={Home}
+        name={TabMenu.HomeTab}
+        component={HomeTab}
         options={{
-          tabBarLabel: TabBarLabel.Home,
+          tabBarLabel: TabBarLabel.HomeTab,
           tabBarButton: props => (
             <TouchableOpacity
               {...props}
               style={[props.style, {marginBottom: 17}]}
               onPress={handleGoToGallery}>
-              {getTabBarIcon(TabMenu.Home, false)}
+              {getTabBarIcon(TabMenu.HomeTab, false)}
             </TouchableOpacity>
           ),
         }}
@@ -67,7 +67,7 @@ const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
   const iconColor = focused ? theme.palette.primary : theme.palette.gray4;
 
   switch (routeName) {
-    case TabMenu.Home:
+    case TabMenu.HomeTab:
       return (
         <IcHome
           width={60}
@@ -76,9 +76,9 @@ const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
           style={iconStyle}
         />
       );
-    case TabMenu.Category:
+    case TabMenu.CategoryTab:
       return <IcCategory width={24} height={24} fill={iconColor} />;
-    case TabMenu.Etc:
+    case TabMenu.SettingTab:
       return <IcEtc width={24} height={24} fill={iconColor} />;
     default:
       return null;
