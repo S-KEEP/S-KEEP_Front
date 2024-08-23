@@ -67,6 +67,7 @@
 		00E356F21AD99517003FC87E /* skeepcliTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = skeepcliTests.m; sourceTree = "<group>"; };
 		03D43B87C5634D7F93F1145C /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.ttf"; path = "../src/assets/fonts/Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		0F51D3705C0D6E4250C71628 /* libPods-share.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-share.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		122334E02C77710D002D80B6 /* share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = share.entitlements; sourceTree = "<group>"; };
 		12DB3F342C55164E006AEB5B /* share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12DB3F392C55164E006AEB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		12DB3F3B2C55164E006AEB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -166,6 +167,7 @@
 		12DB3F352C55164E006AEB5B /* share */ = {
 			isa = PBXGroup;
 			children = (
+				122334E02C77710D002D80B6 /* share.entitlements */,
 				12DB3F472C551847006AEB5B /* shareDebug.entitlements */,
 				12DB3F442C551745006AEB5B /* ShareViewController.swift */,
 				12DB3F382C55164E006AEB5B /* MainInterface.storyboard */,
@@ -749,6 +751,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = share/share.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;

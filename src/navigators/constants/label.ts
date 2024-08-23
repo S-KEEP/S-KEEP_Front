@@ -1,5 +1,5 @@
 export const enum TabBarLabel {
   HomeTab = '',
-  Category = '카테고리',
-  Etc = '더보기',
+  CategoryTab = '카테고리',
+  SettingTab = '더보기',
 }
