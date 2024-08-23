@@ -1,7 +1,6 @@
 import React from 'react';
-import appleAuth, {
-  AppleButton,
-} from '@invertase/react-native-apple-authentication';
+import {TouchableOpacity, Text, View} from 'react-native';
+import appleAuth from '@invertase/react-native-apple-authentication';
 import {appleClient} from '../../apis/appleClients';
 import useSocialLoginMutation from '../../hooks/auth/useSocialLoginMutation';
 import useAuthStorage from '../../hooks/auth/useAuthStorage';
@@ -9,8 +8,8 @@ import {useSetRecoilState} from 'recoil';
 import {userInfoState} from '../../libs/recoil/states/userInfo';
 import {authState} from '../../libs/recoil/states/auth';
 import styles from './AppleLogin.style';
-import {View} from 'react-native';
 import {userAppleInfoState} from '../../libs/recoil/states/userAppleInfo';
+import { IcAppleLogo } from '../../assets/icon';
 
 function AppleLogin() {
   const {setAuthData} = useAuthStorage();
@@ -77,11 +76,12 @@ function AppleLogin() {
 
   return (
     <View style={styles.container}>
-      <AppleButton
-        buttonType={AppleButton.Type.SIGN_IN}
-        style={styles.appleButtonStyle}
-        onPress={handlePressAppleLoginButton}
-      />
+      <TouchableOpacity
+        style={styles.appleButtonStyle} 
+        onPress={handlePressAppleLoginButton}>
+       <IcAppleLogo />
+        <Text style={styles.buttonText}>Apple로 로그인</Text>
+      </TouchableOpacity>
     </View>
   );
 }
