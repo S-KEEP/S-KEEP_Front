@@ -6,6 +6,7 @@ import Login from '../screens/Login/Login';
 import localStorage from '../libs/async-storage';
 import {TokenKeys} from '../libs/async-storage/constants/keys';
 import useInitialData from '../hooks/auth/useInitialData';
+import SplashScreen from 'react-native-splash-screen';
 
 const theme = {
   ...DefaultTheme,
@@ -30,6 +31,8 @@ const Navigator = () => {
         setAuthData({isAuthenticated: false});
         console.error('Error checking authentication: --- ✈️', error);
       }
+
+      SplashScreen.hide();
     };
 
     checkAuth();

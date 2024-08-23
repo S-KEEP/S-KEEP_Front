@@ -5,12 +5,15 @@ import {flexBox} from '../../../styles/common';
 
 interface ButtonProps {
   text: string;
+  gray?: boolean;
   onPress: () => void;
 }
-export default function Button({text, onPress}: ButtonProps) {
+export default function Button({text, onPress, gray}: ButtonProps) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Text style={styles.text}>{text}</Text>
+    <TouchableOpacity
+      style={[styles.container, gray && styles.gray]}
+      onPress={onPress}>
+      <Text style={[styles.text, gray && styles.gray]}>{text}</Text>
     </TouchableOpacity>
   );
 }
@@ -21,6 +24,10 @@ const styles = StyleSheet.create({
     backgroundColor: theme.palette.primary,
     borderRadius: 10,
     paddingVertical: '5%',
+  },
+  gray: {
+    backgroundColor: theme.palette.gray2,
+    color: theme.palette.gray5,
   },
   text: {
     ...theme.typography.button_sb_15,
