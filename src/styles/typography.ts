@@ -39,6 +39,12 @@ export const typographyStyles = StyleSheet.create({
     fontSize: 11,
     fontFamily: 'Pretendard-Medium',
   },
+  text_m_13: {
+    fontFamily: 'Pretendard',
+    fontSize: 13,
+    fontWeight: 500,
+    lineHeight: 21,
+  },
 
   /** Button - Pretendard SemiBold 15 */
   button_sb_15: {

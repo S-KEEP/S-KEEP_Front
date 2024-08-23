@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, ScrollView, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSetRecoilState} from 'recoil';
@@ -8,11 +8,19 @@ import styles from './SettingTab.style';
 import Profile from '../../../components/Settings/Profile';
 import SettingsList from '../../../components/Settings/SettingList';
 import {TabOfStackScreenProps} from '../../../navigators/types';
+import {userInfoState} from '../../../libs/recoil/states/userInfo';
 
 type SettingTabProps = TabOfStackScreenProps<'TabNavigator', 'SettingTab'>;
 export default function SettingTab({navigation}: SettingTabProps) {
   const userInfoData = useGetUserInfoQuery();
   const setAuth = useSetRecoilState(authState);
+  const setUserInfo = useSetRecoilState(userInfoState);
+
+  useEffect(() => {
+    if (userInfoData) {
+      setUserInfo({username: userInfoData.user.name});
+    }
+  }, [userInfoData, setUserInfo]);
 
   const handleLogout = async () => {
     try {

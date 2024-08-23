@@ -40,6 +40,11 @@ const styles = StyleSheet.create({
     color: theme.palette.gray5,
     marginTop: 5,
   },
+  infoTextTitle: {
+    ...theme.typography.title_m_16,
+    color: theme.palette.black,
+    marginTop: 5,
+  },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -72,6 +77,57 @@ const styles = StyleSheet.create({
     color: theme.palette.white,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+  },
+  modalIcon: {
+    marginBottom: 10,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  modalSubtitle: {
+    fontSize: 14,
+    color: '#777',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  modalButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  modalButtonCancel: {
+    backgroundColor: '#e0e0e0',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  modalButtonCancelText: {
+    color: '#555',
+  },
+  modalButtonConfirm: {
+    backgroundColor: '#4A90E2',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  modalButtonConfirmText: {
+    color: 'white',
   },
 });
 
