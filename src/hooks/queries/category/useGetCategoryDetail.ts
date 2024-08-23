@@ -3,7 +3,7 @@ import {GET} from '../../../apis/client';
 import {useCallback} from 'react';
 import {CATEGORY_KEYS} from '../QueryKeys';
 import {UserLocation} from '../../../types/dtos/location';
-import {Page} from '../../../types/dtos/category';
+import {IPage} from '../../../types/dtos/category';
 
 export interface GetPostHistoryRequest {
   userCategory: string;
@@ -13,7 +13,7 @@ export interface GetPostHistoryRequest {
 const getCategoryList = async ({userCategory, page}: GetPostHistoryRequest) => {
   const {
     data: {result},
-  } = await GET<Page<UserLocation>>('/api/user-location', {
+  } = await GET<IPage<UserLocation>>('/api/user-location', {
     params: {
       page,
       userCategory,
@@ -24,6 +24,7 @@ const getCategoryList = async ({userCategory, page}: GetPostHistoryRequest) => {
     items: result.userLocationList,
     nextPage: result.totalPage > page ? page + 1 : undefined,
     totalPage: result.totalPage,
+    totalElement: result.totalElement, 
   };
 };
 
@@ -35,6 +36,7 @@ const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
     getNextPageParam: lastPage => lastPage.nextPage,
     select: data => ({
       pages: data.pages.flatMap(page => page.items),
+      totalElement: data.pages?.[0]?.totalElement ?? 0, 
     }),
     initialPageParam: requestParams.page,
   });
@@ -50,6 +52,7 @@ const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
     loadMore,
     isFetching,
     hasNextPage,
+    totalElement: data?.totalElement, 
   };
 };
 

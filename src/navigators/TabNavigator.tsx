@@ -9,8 +9,8 @@ import {TabMenu} from '../navigators/constants/menu';
 import {TabBarLabel} from '../navigators/constants/label';
 import HomeTab from '../screens/TabNavigator/HomeTab/HomeTab';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
-import {IcCategory, IcEtc, IcHome} from '../assets/icon';
-import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {IcCategory, IcEtc, IcHome, IcAnalyze} from '../assets/icon';
+import {StyleProp, TouchableOpacity, ViewStyle} from 'react-native';
 import useShareExtension from '../hooks/useShareExtension';
 import useAnalyze from '../hooks/useAnalyze';
 import CategoryTab from '../screens/TabNavigator/CategoryTab/CategoryTab';
@@ -69,7 +69,7 @@ const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
   switch (routeName) {
     case TabMenu.HomeTab:
       return (
-        <IcHome
+        <IcAnalyze
           width={60}
           height={60}
           fill={focused ? theme.palette.primary : theme.palette.gray4}

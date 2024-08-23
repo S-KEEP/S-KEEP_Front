@@ -28,11 +28,11 @@ export interface UserLocation {
   userCategory: UserCategory;
 }
 
-export interface Page<T> {
+export interface IPage<T> {
+  totalElement: number;
   totalPage: number;
   userLocationList: any;
   result: {
     userLocationList: T[];
-    totalPage: number;
   };
 }
