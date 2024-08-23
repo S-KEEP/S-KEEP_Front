@@ -1,11 +1,11 @@
-<svg width="60" height="52" viewBox="0 0 60 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="59" height="52" viewBox="0 0 59 52" fill="none" xmlns="http://www.w3.org/2000/svg">
 <mask id="path-1-inside-1_809_6974" fill="white">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 31H60C60 13.8792 46.5685 0 30 0C13.4315 0 0 13.8792 0 31Z"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M57.8098 21C53.7839 8.78588 42.5873 0 29.4049 0C16.2225 0 5.02591 8.78588 1.00001 21H57.8098Z"/>
 </mask>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 31H60C60 13.8792 46.5685 0 30 0C13.4315 0 0 13.8792 0 31Z" fill="white"/>
-<path d="M0 31H-1V32H0V31ZM60 31V32H61V31H60ZM0 32H60V30H0V32ZM30 1C45.9856 1 59 14.4003 59 31H61C61 13.358 47.1515 -1 30 -1V1ZM1 31C1 14.4003 14.0144 1 30 1V-1C12.8485 -1 -1 13.358 -1 31H1Z" fill="#EDEDED" mask="url(#path-1-inside-1_809_6974)"/>
-<path d="M1 30.5H8" stroke="white"/>
-<path d="M51 30H59" stroke="white" stroke-width="2"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M57.8098 21C53.7839 8.78588 42.5873 0 29.4049 0C16.2225 0 5.02591 8.78588 1.00001 21H57.8098Z" fill="white"/>
+<path d="M57.8098 21V22H59.1923L58.7595 20.687L57.8098 21ZM1.00001 21L0.0502714 20.687L-0.382522 22H1.00001V21ZM58.7595 20.687C54.6082 8.09242 43.0493 -1 29.4049 -1V1C42.1253 1 52.9595 9.47934 56.86 21.313L58.7595 20.687ZM29.4049 -1C15.7605 -1 4.20156 8.09242 0.0502714 20.687L1.94975 21.313C5.85026 9.47934 16.6845 1 29.4049 1V-1ZM1.00001 22H57.8098V20H1.00001V22Z" fill="#EDEDED" mask="url(#path-1-inside-1_809_6974)"/>
+<path d="M0 21L11 21" stroke="white" stroke-width="2"/>
+<path d="M47 21L59 21" stroke="white" stroke-width="2"/>
 <circle cx="29.5" cy="30.5" r="21.5" fill="#43C7FF"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M41 30.5003C41 30.9708 40.6186 31.3521 40.1481 31.3521H18.8519C18.3814 31.3521 18 30.9708 18 30.5003V30.5003C18 30.0298 18.3814 29.6484 18.8519 29.6484H40.1481C40.6186 29.6484 41 30.0298 41 30.5003V30.5003Z" fill="white"/>
 <path d="M19.3711 19.7616V23.3146C19.3711 23.6931 19.0642 24 18.6857 24C18.3071 24 18.0002 23.6931 18.0002 23.3146V19.6093C18.0002 19.2728 18.273 19 18.6095 19C19.0301 19 19.3711 19.341 19.3711 19.7616Z" fill="white"/>

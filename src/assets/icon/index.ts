@@ -37,5 +37,3 @@ export {default as IcCategoryRest} from './ic_category_rest2.svg';
 export {default as IcSad} from './ic_sad_face.svg';
 export {default as IcAppleLogo} from './ic_apple_logo.svg';
 export {default as IcAnalyze} from './ic_analyze.svg';
-
-
