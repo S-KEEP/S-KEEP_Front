@@ -3,11 +3,11 @@ import {StyleSheet} from 'react-native';
 import {theme} from '../../../../styles';
 import {View, Text} from 'react-native';
 import {IC_MAPS} from '../../../../constants/components/CategoryCard';
-import {Category} from '../../../../types/dtos/location';
+import {ICategory} from '../../../../types/dtos/location';
 import {flexBox} from '../../../../styles/common';
 
 interface CategoryListProps {
-  category: Category;
+  category: ICategory;
 }
 export default function CategoryItem({category}: CategoryListProps) {
   const IconComponent = useMemo(() => {

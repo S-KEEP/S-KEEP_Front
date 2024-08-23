@@ -28,11 +28,11 @@ export interface UserLocation {
   userCategory: UserCategory;
 }
 
-export interface CategoryResponseDto {
-  errorCode: string | null; // null 이므로 string | null 로 지정
-  message: string; // 항상 존재하는 message
+export interface Page<T> {
+  totalPage: number;
+  userLocationList: any;
   result: {
-    userLocationList: UserLocation[];
-    totalPage: number; // 총 페이지 수
+    userLocationList: T[];
+    totalPage: number;
   };
 }

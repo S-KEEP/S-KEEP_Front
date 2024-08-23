@@ -4,15 +4,17 @@ import {theme} from '../../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
-    ...flexBox('row', 'flex-start'),
+    marginVertical: 25,
+    ...flexBox('row', 'flex-start', 'center'),
     gap: 20,
     ...padding,
-    top: 50,
+  },
+  expanded: {
+    ...flexBox('row', 'flex-start', 'flex-start'),
   },
   image: {
-    width: 80,
-    height: 80,
+    width: 90,
+    height: 90,
     backgroundColor: '#D9D9D9',
     borderRadius: 10,
   },

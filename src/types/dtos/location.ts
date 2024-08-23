@@ -3,11 +3,11 @@ import {CardEntity} from './category';
 export interface UserLocation {
   id: number;
   photoUrl: string;
-  location: Location;
-  userCategory: Category;
+  location: ILocation;
+  userCategory: ICategory;
 }
 
-export interface Location {
+export interface ILocation {
   id: number;
   kakaoMapId: string;
   x: string;
@@ -16,7 +16,7 @@ export interface Location {
   roadAddress: string;
 }
 
-export interface Category {
+export interface ICategory {
   id: number;
   name: string;
   description: string;
@@ -27,5 +27,5 @@ export function cardEntityToCategoryMapper(cardEntity: CardEntity) {
     id: cardEntity.id,
     name: cardEntity.name,
     description: cardEntity.description,
-  } as Category;
+  } as ICategory;
 }

@@ -10,4 +10,11 @@ const LOCATION_KEYS = {
   detail: (id: string) => [...LOCATION_KEYS.details(), id] as const, // ["locations", "detail", "id"]
 };
 
-export {LOCATION_KEYS};
+const CATEGORY_KEYS = {
+  all: ['categories'] as const,
+
+  lists: () => [...CATEGORY_KEYS.all, 'list'] as const, // ["categories", "list"]
+  list: (filters: object) => [...CATEGORY_KEYS.lists(), {filters}] as const, // ["categories", "list", {filters}]
+};
+
+export {LOCATION_KEYS, CATEGORY_KEYS};

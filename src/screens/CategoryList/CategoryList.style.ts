@@ -2,61 +2,35 @@ import {StyleSheet} from 'react-native';
 import {theme} from '../../styles';
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.palette.white,
-  },
-
   headerContainer: {
-    paddingTop: 100,
+    paddingTop: 80,
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingVertical: 30,
     backgroundColor: theme.palette.secondary,
   },
   icon: {
     marginBottom: 16,
   },
+  backIcon: {
+    position: 'absolute',
+    zIndex: 9,
+    top: 70,
+    paddingLeft: 28,
+  },
   headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    ...theme.typography.Title1Bold,
   },
   headerDescription: {
-    fontSize: 16,
+    ...theme.typography.title_m_16,
     paddingTop: 15,
   },
   itemCount: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  list: {
-    paddingHorizontal: 16,
+    padding: 15,
+    paddingLeft: 28,
+    ...theme.typography.title_m_16,
   },
   itemContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-  },
-  itemIcon: {
-    width: 40,
-    height: 40,
-    backgroundColor: '#D0D0D0', // Placeholder color for the icon
-    borderRadius: 20,
-    marginRight: 12,
-  },
-  itemTextContainer: {
-    flex: 1,
-  },
-  itemTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  itemDescription: {
-    fontSize: 14,
-    color: '#666',
+    paddingVertical: 10,
   },
 });

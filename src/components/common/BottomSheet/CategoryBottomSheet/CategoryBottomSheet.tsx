@@ -2,7 +2,7 @@ import React, {forwardRef, useImperativeHandle, useRef, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {
   cardEntityToCategoryMapper,
-  Category,
+  ICategory,
 } from '../../../../types/dtos/location';
 import {useGetCategoryListQuery} from '../../../../hooks/queries/category/useGetCategoryList';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -14,7 +14,7 @@ import styles from './CategoryBottomSheet.styles';
 import CategoryItem from '../../Category/CategoryItem/CategoryItem';
 
 export interface CategoryBottomSheetProps {
-  onModify: (category: Category) => void;
+  onModify: (category: ICategory) => void;
 }
 
 export interface CategoryBottomSheetRef {

@@ -11,7 +11,7 @@ import CategoryBottomSheet, {
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
 import {useRef} from 'react';
 import CategoryItem from '../../components/common/Category/CategoryItem/CategoryItem';
-import {Category} from '../../types/dtos/location';
+import {ICategory} from '../../types/dtos/location';
 import PlaceDetail from '../../components/Detail/PlaceDetail/PlaceDetail';
 import {usePatchLocation} from '../../hooks/mutations/location/usePatchLocation';
 import {useQueryClient} from '@tanstack/react-query';
@@ -51,7 +51,7 @@ export default function Detail({navigation, route}: DetailProps) {
     return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
   }
 
-  function handleOnModify(category: Category) {
+  function handleOnModify(category: ICategory) {
     const currentCategory = location?.userCategory;
     console.log('기존 - ', currentCategory);
     console.log('New Category!', category);

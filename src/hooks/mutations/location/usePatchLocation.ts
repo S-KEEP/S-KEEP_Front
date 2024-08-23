@@ -1,11 +1,11 @@
 import {useMutation} from '@tanstack/react-query';
 import {BaseResponse, PATCH} from '../../../apis/client';
-import {Category} from '../../../types/dtos/location';
+import {ICategory} from '../../../types/dtos/location';
 
 interface ModifyLocationRequest {
   userLocationId: number;
   userCategoryId: number;
-  userCategory: Category;
+  userCategory: ICategory;
 }
 
 /**

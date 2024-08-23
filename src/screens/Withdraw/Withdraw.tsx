@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
 import {Text, View, TouchableOpacity, Alert} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import {IcWarning} from '../../assets/icon';
+import {IcWarning, IcSad} from '../../assets/icon';
 import styles from './Withdraw.style';
 import {useDeleteAppleIdMutation} from '../../hooks/mutations/deleteAccount/useDeleteAppleId';
 import {useDeleteAccountMutation} from '../../hooks/mutations/deleteAccount/usePostDeleteAccount';
 import {useRecoilValue} from 'recoil';
 import {userAppleInfoState} from '../../libs/recoil/states/userAppleInfo';
+import Modal from '../../components/common/Modal/Modal';
+import {userInfoState} from '../../libs/recoil/states/userInfo';
 
 export default function Withdraw() {
   const [isChecked, setIsChecked] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  // Recoil 상태에서 사용자 정보 가져오기
   const userAppleInfo = useRecoilValue(userAppleInfoState);
+  const userInfo = useRecoilValue(userInfoState);
 
   if (!userAppleInfo) {
     return (
@@ -21,7 +24,6 @@ export default function Withdraw() {
       </View>
     );
   }
-
   const {email, identityToken, authorizationCode, fullName} = userAppleInfo;
   const {firstName, lastName} = fullName || {firstName: '', lastName: ''};
 
@@ -42,8 +44,8 @@ export default function Withdraw() {
           },
         },
       };
-      console.log('바디는', body);
 
+      console.log(body.user);
       // Apple ID 삭제 Mutation 호출
       DeleteAppleIdMutation.mutate(body, {
         onSuccess: data => {
@@ -53,6 +55,7 @@ export default function Withdraw() {
           deleteAccountMutation.mutate(undefined, {
             onSuccess: () => {
               console.log('계정 삭제 성공.');
+              setModalVisible(false); // 모달 닫기
               Alert.alert('성공', '계정이 성공적으로 삭제되었습니다.');
             },
             onError: error => {
@@ -85,8 +88,8 @@ export default function Withdraw() {
       </View>
 
       <View style={styles.textBox}>
-        <Text style={styles.infoText}>
-          탈퇴 즉시, 님의 모든 이용 내역은 삭제돼요.
+        <Text style={styles.infoTextTitle}>
+          탈퇴 즉시, {userInfo.username}님의 모든 이용 내역은 삭제돼요.
         </Text>
         <Text style={styles.infoText}>
           계정 정보, 등록된 명소, 친구 등 스킵에서 활동했던 모든 내용들은
@@ -106,10 +109,21 @@ export default function Withdraw() {
           styles.deleteButton,
           isChecked ? styles.deleteButtonEnabled : styles.deleteButtonDisabled,
         ]}
-        onPress={handleDelete}
+        onPress={() => setModalVisible(true)}
         disabled={!isChecked}>
         <Text style={styles.deleteButtonText}>탈퇴하기</Text>
       </TouchableOpacity>
+
+      <Modal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onConfirm={handleDelete}
+        IconComponent={<IcSad style={styles.modalIcon} />}
+        modalTitle="정말로 탈퇴하시겠어요?"
+        modalSubtitle={`스킵은 ${userInfo.username}님의 피드백으로 더 발전할 수 있어요.`}
+        modalButtonCancelText="더 써볼래요"
+        modalButtonConfirmText="탈퇴할래요"
+      />
     </View>
   );
 }

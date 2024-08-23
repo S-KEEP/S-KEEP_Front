@@ -1,6 +1,4 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {IcDown} from '../../../assets/icon';
+import {View, Text, Image} from 'react-native';
 import styles from './PlaceDetail.style';
 
 interface RegionProps {
@@ -14,12 +12,6 @@ export default function PlaceDetail({
   description,
   imageSrc,
 }: RegionProps) {
-  const [expanded, setExpanded] = useState(false);
-
-  const handleToggle = () => {
-    setExpanded(!expanded);
-  };
-
   return (
     <View style={styles.container}>
       <Image source={{uri: imageSrc}} style={styles.image} />
@@ -27,12 +19,7 @@ export default function PlaceDetail({
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.addressBox}>
-          <Text numberOfLines={expanded ? undefined : 1} style={styles.address}>
-            {description}
-          </Text>
-          <TouchableOpacity onPress={handleToggle}>
-            <IcDown />
-          </TouchableOpacity>
+          <Text style={styles.address}>{description}</Text>
         </View>
       </View>
     </View>
