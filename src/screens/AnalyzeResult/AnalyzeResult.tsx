@@ -39,7 +39,8 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
   }, [analyzeState]);
 
   const subtitle = useMemo(() => {
-    if (analyzeState === AnalyzeState.SUCCESS) return ``;
+    if (analyzeState === AnalyzeState.SUCCESS)
+      return `모든 주소를 정확하게 확인했어요`;
     else if (analyzeState === AnalyzeState.PARTIAL)
       return `남은 ${result.failedCount}개는 주소를 확인하기 어려웠어요`;
   }, [analyzeState]);
