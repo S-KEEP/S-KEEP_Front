@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {flexBox} from '../../styles/common';
+import {theme} from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,17 +9,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   appleButtonStyle: {
-    ...flexBox('column'),
-    width: '80%',
-    height: 45,
-
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    ...flexBox('row', 'center', 'center'),
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#000',
+    borderRadius: 12,
+    gap: 10,
+    padding: 10,
+    width: 335,
+    height: 56,
+  },
+  buttonText: {
+    ...theme.typography.Body1Regular,
+    color: theme.palette.white,
   },
 });
 export default styles;
