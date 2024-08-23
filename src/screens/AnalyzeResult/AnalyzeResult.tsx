@@ -10,7 +10,7 @@ import {useMemo, useRef} from 'react';
 import CategoryBottomSheet, {
   CategoryBottomSheetRef,
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
-import {Category} from '../../types/dtos/location';
+import {ICategory} from '../../types/dtos/location';
 import {AnalyzeCount, AnalyzeState} from '../../constants/states/AnalyzeState';
 import {ReanalyzeRequest} from '../../hooks/mutations/location/usePatchLocationReAnalyze';
 import {usePatchLocation} from '../../hooks/mutations/location/usePatchLocation';
@@ -82,7 +82,7 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
     },
   });
 
-  function handleOnModify(category: Category) {
+  function handleOnModify(category: ICategory) {
     const {userCategory: currentCategory, id} =
       userLocationList[indexRef.current];
     console.log('기존 - ', currentCategory);
