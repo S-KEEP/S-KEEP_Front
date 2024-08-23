@@ -25,10 +25,11 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
   const backgroundColor = COLOR_MAP[title] || theme.palette.gray1;
   const IconComponent = ICON_MAPS[title] || IcCategoryRest;
 
-  const {data, loadMore, isFetching, hasNextPage} = useGetCategoryList({
-    userCategory: title,
-    page: 1,
-  });
+  const {data, loadMore, isFetching, hasNextPage, totalElement} =
+    useGetCategoryList({
+      userCategory: title,
+      page: 1,
+    });
 
   const renderItem = ({item}: {item: UserLocation}) => (
     <TouchableOpacity
@@ -60,7 +61,7 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
         <Text style={styles.headerDescription}>{description}</Text>
       </View>
 
-      <Text style={styles.itemCount}>총 개</Text>
+      <Text style={styles.itemCount}>총 {totalElement}개</Text>
 
       <FlatList
         data={data}
