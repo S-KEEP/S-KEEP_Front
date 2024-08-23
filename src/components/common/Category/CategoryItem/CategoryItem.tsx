@@ -50,7 +50,10 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.palette.G01,
+    backgroundColor: '#E3E3E3',
     borderRadius: 6.72,
+  },
+  defaultIconText: {
+    color: theme.palette.white,
   },
 });

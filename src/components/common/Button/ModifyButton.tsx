@@ -17,13 +17,13 @@ export default function ModifyButton({onPress}: ModifyButtonProps) {
 const styles = StyleSheet.create({
   container: {
     ...flexBox(),
-    backgroundColor: theme.palette.G01,
+    backgroundColor: theme.palette.gray1,
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
   text: {
     ...theme.typography.sb_13,
-    color: theme.palette.G06,
+    color: theme.palette.gray6,
   },
 });
