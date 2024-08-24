@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   textBox: {
     padding: 20,
-    backgroundColor: theme.palette.G01,
+    backgroundColor: theme.palette.gray1,
     width: '85%',
     borderRadius: 10,
     marginTop: 40,
@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
     ...theme.typography.title_m_16,
     color: theme.palette.gray5,
     marginTop: 5,
+  },
+  checkbox: {
+    transform: [{scale: 0.8}],
   },
   infoTextTitle: {
     ...theme.typography.title_m_16,
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
   checkboxText: {
     ...theme.typography.title_m_16,
     color: theme.palette.gray6,
-    marginLeft: 10,
+    marginLeft: 4,
   },
 
   deleteButton: {
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     bottom: 50,
     position: 'absolute',
     marginTop: 20,
-    paddingVertical: 15,
+    paddingVertical: 20,
     paddingHorizontal: 100,
     borderRadius: 10,
     alignItems: 'center',
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.palette.primary,
   },
   deleteButtonDisabled: {
-    backgroundColor: theme.palette.gray3,
+    backgroundColor: theme.palette.gray4,
   },
   deleteButtonText: {
     color: theme.palette.white,

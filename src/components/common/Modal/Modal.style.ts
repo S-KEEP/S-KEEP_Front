@@ -9,9 +9,11 @@ export default StyleSheet.create({
     ...flexBox(),
   },
   modalContainer: {
-    width: '80%',
+    width: '85%',
     backgroundColor: theme.palette.white,
     borderRadius: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
     padding: 25,
     alignItems: 'center',
   },
@@ -23,6 +25,7 @@ export default StyleSheet.create({
     ...theme.typography.body_m_15,
     color: theme.palette.gray5,
     textAlign: 'center',
+    paddingLeft: 15,
     marginBottom: 20,
   },
   modalButtonContainer: {
@@ -33,10 +36,11 @@ export default StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 9,
-    marginRight: 10,
+    marginRight: 13,
   },
   modalButtonCancelText: {
     color: theme.palette.white,
+    ...theme.typography.button_sb_15,
   },
   modalButtonConfirm: {
     backgroundColor: theme.palette.gray3,
@@ -45,6 +49,7 @@ export default StyleSheet.create({
     borderRadius: 9,
   },
   modalButtonConfirmText: {
-    color: theme.palette.gray5,
+    color: theme.palette.gray6,
+    ...theme.typography.button_sb_15,
   },
 });
