@@ -9,13 +9,28 @@ import {useRecoilValue} from 'recoil';
 import {userAppleInfoState} from '../../libs/recoil/states/userAppleInfo';
 import Modal from '../../components/common/Modal/Modal';
 import {userInfoState} from '../../libs/recoil/states/userInfo';
+import {useAppleLogin} from '../../hooks/useAppleLogin';
+import {theme} from '../../styles';
+
+interface AppleInfo {
+  email: string;
+  identityToken: string;
+  authorizationCode: string;
+  fullName?: {
+    firstName: string;
+    lastName: string;
+  };
+}
 
 export default function Withdraw() {
-  const [isChecked, setIsChecked] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-  const userAppleInfo = useRecoilValue(userAppleInfoState);
-  const userInfo = useRecoilValue(userInfoState);
+  const userAppleInfo = useRecoilValue<AppleInfo | null>(userAppleInfoState);
+  const userInfo = useRecoilValue<{username: string}>(userInfoState);
+  const signInWithApple = useAppleLogin();
+  const {DeleteAppleIdMutation} = useDeleteAppleIdMutation();
+  const {deleteAccountMutation} = useDeleteAccountMutation();
 
   if (!userAppleInfo) {
     return (
@@ -24,42 +39,40 @@ export default function Withdraw() {
       </View>
     );
   }
-  const {email, identityToken, authorizationCode, fullName} = userAppleInfo;
-  const {firstName, lastName} = fullName || {firstName: '', lastName: ''};
 
-  const {DeleteAppleIdMutation} = useDeleteAppleIdMutation();
-  const {deleteAccountMutation} = useDeleteAccountMutation();
+  console.log('이건 재로그인 전 : ', userAppleInfo.authorizationCode);
+  const handleDelete = async () => {
+    try {
+      const updatedAppleInfo = await signInWithApple();
 
-  const handleDelete = () => {
-    if (isChecked) {
+      if (!updatedAppleInfo) {
+        throw new Error('Re-authentication 실패, 업데이트 불가 Apple info.');
+      }
+
       const body = {
         state: null,
-        code: authorizationCode,
-        id_token: identityToken,
+        code: updatedAppleInfo.authorizationCode,
+        id_token: updatedAppleInfo.identityToken,
         user: {
-          email,
+          email: updatedAppleInfo.email,
           name: {
-            firstName,
-            lastName,
+            firstName: updatedAppleInfo.fullName?.firstName || '',
+            lastName: updatedAppleInfo.fullName?.lastName || '',
           },
         },
       };
 
-      console.log(body.user);
-      // Apple ID 삭제 Mutation 호출
+      console.log('울라울라', body);
+
       DeleteAppleIdMutation.mutate(body, {
         onSuccess: data => {
           console.log('Apple ID 삭제 성공:', data);
-
-          // 계정 삭제 Mutation 호출
           deleteAccountMutation.mutate(undefined, {
             onSuccess: () => {
-              console.log('계정 삭제 성공.');
-              setModalVisible(false); // 모달 닫기
               Alert.alert('성공', '계정이 성공적으로 삭제되었습니다.');
             },
-            onError: error => {
-              console.error('계정 삭제 오류:', error);
+            onError: (error: any) => {
+              console.error('계정 삭제 오류:', body);
               Alert.alert(
                 '오류',
                 '계정 삭제 중 오류가 발생했습니다. 다시 시도해주세요.',
@@ -67,14 +80,16 @@ export default function Withdraw() {
             },
           });
         },
-        onError: error => {
-          console.error('Apple ID 삭제 오류:', error);
+        onError: (error: any) => {
+          console.error('Apple ID 삭제 오류:', body);
           Alert.alert(
             '오류',
             'Apple ID 삭제 중 오류가 발생했습니다. 다시 시도해주세요.',
           );
         },
       });
+    } catch (error) {
+      console.error('Apple Sign In Error ---- ✈️', error);
     }
   };
 
@@ -98,7 +113,19 @@ export default function Withdraw() {
       </View>
 
       <View style={styles.checkboxContainer}>
-        <CheckBox value={isChecked} onValueChange={setIsChecked} />
+        <CheckBox
+          value={isChecked}
+          onValueChange={setIsChecked}
+          boxType="square"
+          tintColors={{
+            true: theme.palette.primary,
+            false: theme.palette.primary,
+          }}
+          onCheckColor="#FFFFFF"
+          onFillColor={theme.palette.primary}
+          onTintColor={theme.palette.primary}
+          style={styles.checkbox}
+        />
         <Text style={styles.checkboxText}>
           해당 내용을 모두 확인했고, 탈퇴에 동의합니다.
         </Text>
@@ -117,10 +144,10 @@ export default function Withdraw() {
       <Modal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        onConfirm={handleDelete}
+        onConfirm={handleDelete} // Pass the updated handleDelete function
         IconComponent={<IcSad style={styles.modalIcon} />}
         modalTitle="정말로 탈퇴하시겠어요?"
-        modalSubtitle={`스킵은 ${userInfo.username}님의 피드백으로 더 발전할 수 있어요.`}
+        modalSubtitle={`스킵은 ${userInfo.username}님의 피드백으로 더 발전할 수 있어요. \n 탈퇴하려면 재로그인으로 인증이 필요해요!`}
         modalButtonCancelText="더 써볼래요"
         modalButtonConfirmText="탈퇴할래요"
       />
