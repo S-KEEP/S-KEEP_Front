@@ -7,7 +7,6 @@ import {userInfoQueryKeys} from '../../../constants/queryKeys/userInfto';
 export const userInfoApi = {
   getUserInfoList: async (): Promise<UserInfoResponseDto> => {
     const {data} = await axiosApi.get('/api/user');
-    console.log('API response:', data);
 
     return {
       user: {
