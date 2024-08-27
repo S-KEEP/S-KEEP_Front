@@ -2,6 +2,10 @@ import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
 import localStorage from '../libs/async-storage';
 import {TokenKeys} from '../libs/async-storage/constants/keys';
 import useNavigator from '../navigators/hooks/useNavigator';
+import {useSetRecoilState} from 'recoil';
+import {authState} from '../libs/recoil/states/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {InterceptorProps} from '../types/token';
 
 export const baseURL = 'https://api.s-keep.site';
 
@@ -13,9 +17,9 @@ export const axiosApi = axios.create({
   },
 });
 
-export const Interceptor = ({children}) => {
+export const Interceptor = ({children}: InterceptorProps) => {
   const {stackNavigation} = useNavigator();
-
+  const setAuth = useSetRecoilState(authState);
   /**
    *  Response Interceptor (응답 인터셉터)
    *  1. onFulfilled
@@ -23,21 +27,6 @@ export const Interceptor = ({children}) => {
    */
   const onFulfilled = (res: AxiosResponse) => {
     return res;
-  };
-
-  let isRefreshing = false;
-  let failedQueue: any[] = [];
-
-  const processQueue = (error: any, token: string | null = null) => {
-    failedQueue.forEach(prom => {
-      if (error) {
-        prom.reject(error);
-      } else {
-        prom.resolve(token);
-      }
-    });
-
-    failedQueue = [];
   };
 
   interface FailedRequests {
@@ -52,12 +41,13 @@ export const Interceptor = ({children}) => {
 
   // [Reference] https://blog.stackademic.com/refresh-access-token-with-axios-interceptors-in-react-js-with-typescript-bd7a2d035562
   const onRejected = async (error: AxiosError) => {
-    console.log('🕷️ Axios Response(onRejected)', error);
+    //console.log('🕷️ Axios Response(onRejected)', error);
 
     const originalConfig = error.config;
 
-    // 401 Unauthorized 가 아닌 경우, 일반 오류로 처리
-    if (error.response?.status !== 401) return Promise.reject(error);
+    if (error.response?.status !== 401) {
+      return Promise.reject(error);
+    }
 
     if (originalConfig) {
       const errorCode = (error.response.data as BaseResponse<string>).errorCode;
@@ -66,8 +56,9 @@ export const Interceptor = ({children}) => {
       console.log('🕷️ Axios Error Code', errorCode, errorMessage);
 
       if (errorCode !== 'REQUEST_14') {
-        // 나머지 401 - 스토리지 초기화 및 로그인 화면으로 이동
         console.log('🕷️ 나머지 401 - 스토리지 초기화 및 로그인 화면으로 이동');
+        setAuth({isAuthenticated: false});
+        await AsyncStorage.clear();
         stackNavigation.reset({
           index: 0,
           routes: [{name: 'Login'}],
@@ -76,7 +67,6 @@ export const Interceptor = ({children}) => {
         return Promise.reject(error);
       }
 
-      // REQUEST_14 - 만료된 토큰입니다
       console.log('🕷️ REQUEST_14 만료된 토큰입니다');
 
       if (isTokenRefreshing) {
@@ -93,41 +83,42 @@ export const Interceptor = ({children}) => {
 
       try {
         isTokenRefreshing = true;
-
         console.log('================== REFRESH START ==================');
-
         const refreshToken = await localStorage.get(TokenKeys.RefreshToken);
-        console.log('만료됐슴당~~ 내가 보내는 리프레쉬 토큰', refreshToken);
+        console.log('만료 : 내가 보내는 리프레쉬 토큰', refreshToken);
+
         const response = await axiosApi.post('/api/auth/jwt/reissue', {
           refreshToken,
         });
+
         const result = response.data.result;
-        console.log('이건 새로운 어쎄스 토큰', result.accessToken);
+        console.log('new acceess Token : ', result.accessToken);
 
         await localStorage.set(TokenKeys.AccessToken, result.accessToken);
         const acc: string = await localStorage.get(TokenKeys.AccessToken);
-        console.log('이건 새롭게 저장된 어쎼스 토큰', acc);
 
         axiosApi.defaults.headers.common['Authorization'] = `Bearer ${acc}`;
         originalConfig.headers.Authorization = `Bearer ${acc}`;
 
-        // 실패한 요청들 재요청
+        // 새 토큰으로 실패한 모든 요청 해결
         failedRequests.forEach(({resolve, reject, config}) => {
           axiosApi(config)
             .then(response => resolve(response))
-            .catch(error => reject(error));
+            .catch(err => reject(err));
         });
+
+        // 큐 클리어
+        failedRequests = [];
+        // 처음 리퀘스트 재시도
+        return axiosApi(originalConfig);
       } catch (err) {
         console.log('이것마저 실패');
-        failedRequests.forEach(({reject, error}) => reject(error));
-        return Promise.reject(error);
+        failedRequests.forEach(({reject}) => reject(err as AxiosError));
+        return Promise.reject(err);
       } finally {
-        failedRequests = [];
         isTokenRefreshing = false;
         console.log('================== REFRESH END ==================');
       }
-
-      return Promise.reject(error);
     }
 
     return Promise.reject(error);
@@ -143,7 +134,6 @@ export const Interceptor = ({children}) => {
 axiosApi.interceptors.request.use(
   async config => {
     const accessToken: string = await localStorage.get(TokenKeys.AccessToken);
-    console.log('🕷️ Axios Request Intecepter - Access Token', accessToken);
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;

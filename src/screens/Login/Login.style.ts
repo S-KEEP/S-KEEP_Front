@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     paddingTop: 63,
+    backgroundColor: theme.palette.white,
   },
   title: {
     ...theme.typography.title_sb_21,
