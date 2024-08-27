@@ -624,6 +624,7 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-skeepcli-skeepcliTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = JK74DYRX7M;
@@ -646,7 +647,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "site.s-keep.skeep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SkeepDevProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SkeepDevProfile_0827;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -681,7 +682,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "site.s-keep.skeep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SkeepProdProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SkeepProdProfile_0827;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -818,7 +819,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "site.s-keep.skeep";
 				PRODUCT_NAME = skeepcli;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SkeepDevProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SkeepDevProfile_0827;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -859,7 +860,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "site.s-keep.skeep";
 				PRODUCT_NAME = skeepcli;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SkeepProdProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SkeepProdProfile_0827;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -943,10 +944,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -1018,10 +1016,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

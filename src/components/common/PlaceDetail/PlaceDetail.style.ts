@@ -36,6 +36,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
   },
+  skeletonTitle: {
+    width: 70,
+    height: 25,
+  },
+  skeletonDescription: {
+    height: 25,
+    marginTop: 10,
+    width: '70%',
+  },
 });
 
 export default styles;
