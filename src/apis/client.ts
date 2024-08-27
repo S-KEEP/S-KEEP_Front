@@ -2,6 +2,8 @@ import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
 import localStorage from '../libs/async-storage';
 import {TokenKeys} from '../libs/async-storage/constants/keys';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export const baseURL = 'https://api.s-keep.site';
 
 export const axiosApi = axios.create({
@@ -12,14 +14,23 @@ export const axiosApi = axios.create({
   },
 });
 
+export const logoutUser = async () => {
+  try {
+    await AsyncStorage.clear();
+    // .navigate('Login');
+    console.log('로그아웃 성공 이제 이동을 시켜주세요');
+  } catch (error) {
+    console.log('로그아웃 실패', error);
+  }
+};
 /**
  *  헤더 토큰 추가
  */
 axiosApi.interceptors.request.use(
   async config => {
     const accessToken: string = await localStorage.get(TokenKeys.AccessToken);
-    console.log('어쎄스 토큰 : ', accessToken);
 
+    console.log('어쎄스 토큰 : ', accessToken);
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -38,20 +49,11 @@ const onFulfilled = (res: AxiosResponse) => {
   return res;
 };
 
-export const handleApiError = async (
-  error: AxiosError,
-  onLogout: () => void,
-) => {
-  console.error('리프레시 요청이 실패했습니다:', error);
-
-  if (error.response?.status === 401) {
-    // 호출된 콜백 함수를 통해 로그아웃 처리해줘야되는데 일단 보류 시켜보겠습니다.. ㅠ
-  }
-};
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
 const processQueue = (error: any, token: string | null = null) => {
+  console.log('shit6');
   failedQueue.forEach(prom => {
     if (error) {
       prom.reject(error);
@@ -67,6 +69,8 @@ const onRejected = async (error: AxiosError) => {
   const originalConfig = error.config;
 
   if (error.response?.status === 500) {
+    console.log('shit33');
+    logoutUser();
     return Promise.reject(error);
   }
 
@@ -77,9 +81,6 @@ const onRejected = async (error: AxiosError) => {
       try {
         const refreshToken = await localStorage.get(TokenKeys.RefreshToken);
         console.log('만료됐슴당~~ 내가 보내는 리프레쉬 토큰', refreshToken);
-
-        // 리프레시 토큰을 이용한 요청 전 디버깅 로그 추가
-        console.log('리프레시 요청을 보냅니다');
 
         const response = await axiosApi.post('/api/auth/jwt/reissue', {
           refreshToken,
@@ -107,14 +108,14 @@ const onRejected = async (error: AxiosError) => {
         return axiosApi(originalConfig);
       } catch (err: unknown) {
         if (err instanceof AxiosError) {
-          // handleApiError에 handleLogout 콜백을 전달
-          //  await handleApiError(err, handleLogout);
+          console.log('현재 발생한 오류는 ', err);
         } else {
           console.error('예상치 못한 오류 발생:', err);
         }
       } finally {
         console.log('리프레시 요청 후, finally 블록 실행');
         isRefreshing = false;
+        //logoutUser();
       }
     } else {
       console.log(
@@ -123,14 +124,16 @@ const onRejected = async (error: AxiosError) => {
       );
 
       return new Promise(function (resolve, reject) {
-        console.log('리프레쉬 토큰 만료라면 마지막 호출');
+        console.log('shit1');
         failedQueue.push({resolve, reject});
       })
         .then(token => {
+          console.log('shit2');
           originalConfig.headers.Authorization = 'Bearer ' + token;
           return axiosApi(originalConfig);
         })
         .catch(err => {
+          console.log('shit3 에러는 : ', err);
           return Promise.reject(err);
         });
     }
