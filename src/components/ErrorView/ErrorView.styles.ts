@@ -6,9 +6,6 @@ const styles = StyleSheet.create({
   container: {
     ...wrapper,
     ...flexBox('column', 'space-between'),
-
-    paddingTop: 120,
-    paddingBottom: 100,
   },
   top: {
     flexDirection: 'column',

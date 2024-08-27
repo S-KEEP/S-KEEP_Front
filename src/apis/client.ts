@@ -2,6 +2,8 @@ import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
 import localStorage from '../libs/async-storage';
 import {TokenKeys} from '../libs/async-storage/constants/keys';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export const baseURL = 'https://api.s-keep.site';
 
 export const axiosApi = axios.create({
@@ -12,14 +14,23 @@ export const axiosApi = axios.create({
   },
 });
 
+export const logoutUser = async () => {
+  try {
+    await AsyncStorage.clear();
+    // .navigate('Login');
+    console.log('로그아웃 성공 이제 이동을 시켜주세요');
+  } catch (error) {
+    console.log('로그아웃 실패', error);
+  }
+};
 /**
  *  헤더 토큰 추가
  */
 axiosApi.interceptors.request.use(
   async config => {
     const accessToken: string = await localStorage.get(TokenKeys.AccessToken);
-    console.log('어쎄스 토큰 : ', accessToken);
 
+    console.log('어쎄스 토큰 : ', accessToken);
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -42,6 +53,7 @@ let isRefreshing = false;
 let failedQueue: any[] = [];
 
 const processQueue = (error: any, token: string | null = null) => {
+  console.log('shit6');
   failedQueue.forEach(prom => {
     if (error) {
       prom.reject(error);
@@ -53,11 +65,12 @@ const processQueue = (error: any, token: string | null = null) => {
   failedQueue = [];
 };
 
-
-
 const onRejected = async (error: AxiosError) => {
   const originalConfig = error.config;
+
   if (error.response?.status === 500) {
+    console.log('shit33');
+    logoutUser();
     return Promise.reject(error);
   }
 
@@ -72,6 +85,13 @@ const onRejected = async (error: AxiosError) => {
         const response = await axiosApi.post('/api/auth/jwt/reissue', {
           refreshToken,
         });
+        console.log('리프레시 요청 성공! 상태 코드:', response.status);
+
+        if (response.status !== 200) {
+          throw new Error(`Unexpected status code: ${response.status}`);
+        }
+
+        console.log('Response Data:', response.data);
 
         const result = response.data.result;
         console.log('이건 새로운 어쎄스 토큰', result.accessToken);
@@ -80,29 +100,40 @@ const onRejected = async (error: AxiosError) => {
         const acc: string = await localStorage.get(TokenKeys.AccessToken);
         console.log('이건 새롭게 저장된 어쎼스 토큰', acc);
 
-        //리프레쉬 토큰조차 만료되면 로그인 화면으로 ->
-
         axiosApi.defaults.headers.common['Authorization'] = `Bearer ${acc}`;
         originalConfig.headers.Authorization = `Bearer ${acc}`;
 
         processQueue(null, result.accessToken);
 
         return axiosApi(originalConfig);
-      } catch (err) {
-        processQueue(err, null);
-        return Promise.reject(err);
+      } catch (err: unknown) {
+        if (err instanceof AxiosError) {
+          console.log('현재 발생한 오류는 ', err);
+        } else {
+          console.error('예상치 못한 오류 발생:', err);
+        }
       } finally {
+        console.log('리프레시 요청 후, finally 블록 실행');
         isRefreshing = false;
+        //logoutUser();
       }
     } else {
+      console.log(
+        '401 에러 발생: 요청이 실패했습니다. 리프레시 토큰이 이미 갱신 중입니다.',
+        error,
+      );
+
       return new Promise(function (resolve, reject) {
+        console.log('shit1');
         failedQueue.push({resolve, reject});
       })
         .then(token => {
+          console.log('shit2');
           originalConfig.headers.Authorization = 'Bearer ' + token;
           return axiosApi(originalConfig);
         })
         .catch(err => {
+          console.log('shit3 에러는 : ', err);
           return Promise.reject(err);
         });
     }
