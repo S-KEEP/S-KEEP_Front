@@ -7,6 +7,7 @@ import localStorage from '../libs/async-storage';
 import {TokenKeys} from '../libs/async-storage/constants/keys';
 import useInitialData from '../hooks/auth/useInitialData';
 import SplashScreen from 'react-native-splash-screen';
+import {Interceptor} from '../apis/client';
 
 const theme = {
   ...DefaultTheme,
@@ -40,7 +41,9 @@ const Navigator = () => {
 
   return (
     <NavigationContainer theme={theme}>
-      {authData.isAuthenticated ? <StackNavigator /> : <Login />}
+      <Interceptor>
+        {authData.isAuthenticated ? <StackNavigator /> : <Login />}
+      </Interceptor>
     </NavigationContainer>
   );
 };
