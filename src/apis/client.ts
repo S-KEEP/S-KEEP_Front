@@ -38,6 +38,16 @@ const onFulfilled = (res: AxiosResponse) => {
   return res;
 };
 
+export const handleApiError = async (
+  error: AxiosError,
+  onLogout: () => void,
+) => {
+  console.error('리프레시 요청이 실패했습니다:', error);
+
+  if (error.response?.status === 401) {
+    // 호출된 콜백 함수를 통해 로그아웃 처리해줘야되는데 일단 보류 시켜보겠습니다.. ㅠ
+  }
+};
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
@@ -53,10 +63,9 @@ const processQueue = (error: any, token: string | null = null) => {
   failedQueue = [];
 };
 
-
-
 const onRejected = async (error: AxiosError) => {
   const originalConfig = error.config;
+
   if (error.response?.status === 500) {
     return Promise.reject(error);
   }
@@ -69,9 +78,19 @@ const onRejected = async (error: AxiosError) => {
         const refreshToken = await localStorage.get(TokenKeys.RefreshToken);
         console.log('만료됐슴당~~ 내가 보내는 리프레쉬 토큰', refreshToken);
 
+        // 리프레시 토큰을 이용한 요청 전 디버깅 로그 추가
+        console.log('리프레시 요청을 보냅니다');
+
         const response = await axiosApi.post('/api/auth/jwt/reissue', {
           refreshToken,
         });
+        console.log('리프레시 요청 성공! 상태 코드:', response.status);
+
+        if (response.status !== 200) {
+          throw new Error(`Unexpected status code: ${response.status}`);
+        }
+
+        console.log('Response Data:', response.data);
 
         const result = response.data.result;
         console.log('이건 새로운 어쎄스 토큰', result.accessToken);
@@ -80,22 +99,31 @@ const onRejected = async (error: AxiosError) => {
         const acc: string = await localStorage.get(TokenKeys.AccessToken);
         console.log('이건 새롭게 저장된 어쎼스 토큰', acc);
 
-        //리프레쉬 토큰조차 만료되면 로그인 화면으로 ->
-
         axiosApi.defaults.headers.common['Authorization'] = `Bearer ${acc}`;
         originalConfig.headers.Authorization = `Bearer ${acc}`;
 
         processQueue(null, result.accessToken);
 
         return axiosApi(originalConfig);
-      } catch (err) {
-        processQueue(err, null);
-        return Promise.reject(err);
+      } catch (err: unknown) {
+        if (err instanceof AxiosError) {
+          // handleApiError에 handleLogout 콜백을 전달
+          //  await handleApiError(err, handleLogout);
+        } else {
+          console.error('예상치 못한 오류 발생:', err);
+        }
       } finally {
+        console.log('리프레시 요청 후, finally 블록 실행');
         isRefreshing = false;
       }
     } else {
+      console.log(
+        '401 에러 발생: 요청이 실패했습니다. 리프레시 토큰이 이미 갱신 중입니다.',
+        error,
+      );
+
       return new Promise(function (resolve, reject) {
+        console.log('리프레쉬 토큰 만료라면 마지막 호출');
         failedQueue.push({resolve, reject});
       })
         .then(token => {
