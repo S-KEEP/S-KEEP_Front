@@ -8,10 +8,17 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     backgroundColor: theme.palette.white,
   },
+  backIcon: {
+    position: 'absolute',
+    zIndex: 9,
+    top: 70,
+    left: 0,
+    paddingLeft: 24,
+  },
   title: {
     ...theme.typography.title_sb_21,
     textAlign: 'center',
-    marginTop: 30,
+    marginTop: 20,
     alignSelf: 'flex-start',
     paddingLeft: 24,
   },
@@ -28,6 +35,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textBox: {
+    alignItems: 'center',
+
     padding: 20,
     backgroundColor: theme.palette.gray1,
     width: '85%',

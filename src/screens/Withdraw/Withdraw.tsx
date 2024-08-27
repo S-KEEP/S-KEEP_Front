@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {Text, View, TouchableOpacity, Alert} from 'react-native';
+import {Text, View, TouchableOpacity, Alert, SafeAreaView} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import {IcWarning, IcSad} from '../../assets/icon';
+import {IcWarning, IcSad, IcLeft} from '../../assets/icon';
 import styles from './Withdraw.style';
 import {useDeleteAppleIdMutation} from '../../hooks/mutations/deleteAccount/useDeleteAppleId';
 import {useDeleteAccountMutation} from '../../hooks/mutations/deleteAccount/usePostDeleteAccount';
@@ -11,6 +11,8 @@ import Modal from '../../components/common/Modal/Modal';
 import {userInfoState} from '../../libs/recoil/states/userInfo';
 import {useAppleLogin} from '../../hooks/useAppleLogin';
 import {theme} from '../../styles';
+import {StackScreenProps} from '../../navigators/types';
+import {wrapper} from '../../styles/common';
 
 interface AppleInfo {
   email: string;
@@ -22,7 +24,9 @@ interface AppleInfo {
   };
 }
 
-export default function Withdraw() {
+type WithdrawProps = StackScreenProps<'Withdraw'>;
+
+export default function Withdraw({navigation}: WithdrawProps) {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
@@ -61,9 +65,6 @@ export default function Withdraw() {
           },
         },
       };
-
-      console.log('울라울라', body);
-
       DeleteAppleIdMutation.mutate(body, {
         onSuccess: data => {
           console.log('Apple ID 삭제 성공:', data);
@@ -93,8 +94,15 @@ export default function Withdraw() {
     }
   };
 
+  function handleGoBack() {
+    navigation.navigate('TabNavigator');
+  }
+
   return (
     <View style={styles.container}>
+      <View style={styles.backIcon}>
+        <IcLeft onPress={handleGoBack} />
+      </View>
       <Text style={styles.title}>정말로 스킵을 탈퇴하실 건가요?</Text>
       <Text style={styles.subtitle}>탈퇴 전, 확인해야 될 정보가 있어요.</Text>
 
