@@ -40,72 +40,94 @@ export const Interceptor = ({children}) => {
     failedQueue = [];
   };
 
-  const onRejected = async (error: AxiosError) => {
-    console.log('AxiosError', error);
-    const originalConfig = error.config;
-    if (error.response?.status === 500) {
-      return Promise.reject(error);
-    }
+  interface FailedRequests {
+    resolve: (value: AxiosResponse) => void;
+    reject: (value: AxiosError) => void;
+    config: AxiosRequestConfig;
+    error: AxiosError;
+  }
 
-    if (originalConfig && error.response?.status === 401) {
+  let failedRequests: FailedRequests[] = [];
+  let isTokenRefreshing = false;
+
+  // [Reference] https://blog.stackademic.com/refresh-access-token-with-axios-interceptors-in-react-js-with-typescript-bd7a2d035562
+  const onRejected = async (error: AxiosError) => {
+    console.log('🕷️ Axios Response(onRejected)', error);
+
+    const originalConfig = error.config;
+
+    // 401 Unauthorized 가 아닌 경우, 일반 오류로 처리
+    if (error.response?.status !== 401) return Promise.reject(error);
+
+    if (originalConfig) {
       const errorCode = (error.response.data as BaseResponse<string>).errorCode;
       const errorMessage = (error.response.data as BaseResponse<string>)
         .message;
-      console.log('errorCode', errorCode, errorMessage);
+      console.log('🕷️ Axios Error Code', errorCode, errorMessage);
 
-      if (errorCode === 'REQUEST_003' || errorCode === 'REQUEST_14') {
-        // REQUEST_003 - 유효하지 않은 JWT입니다.
-        // 리프레시 로직 수행
+      if (errorCode !== 'REQUEST_14') {
+        // 나머지 401 - 스토리지 초기화 및 로그인 화면으로 이동
+        console.log('🕷️ 나머지 401 - 스토리지 초기화 및 로그인 화면으로 이동');
+        stackNavigation.reset({
+          index: 0,
+          routes: [{name: 'Login'}],
+        });
 
-        if (!isRefreshing) {
-          isRefreshing = true;
-
-          try {
-            const refreshToken = await localStorage.get(TokenKeys.RefreshToken);
-            console.log('만료됐슴당~~ 내가 보내는 리프레쉬 토큰', refreshToken);
-
-            const response = await axiosApi.post('/api/auth/jwt/reissue', {
-              refreshToken,
-            });
-
-            const result = response.data.result;
-            console.log('이건 새로운 어쎄스 토큰', result.accessToken);
-
-            await localStorage.set(TokenKeys.AccessToken, result.accessToken);
-            const acc: string = await localStorage.get(TokenKeys.AccessToken);
-            console.log('이건 새롭게 저장된 어쎼스 토큰', acc);
-
-            //리프레쉬 토큰조차 만료되면 로그인 화면으로 ->
-
-            axiosApi.defaults.headers.common['Authorization'] = `Bearer ${acc}`;
-            originalConfig.headers.Authorization = `Bearer ${acc}`;
-
-            processQueue(null, result.accessToken);
-
-            return axiosApi(originalConfig);
-          } catch (err) {
-            processQueue(err, null);
-            return Promise.reject(err);
-          } finally {
-            isRefreshing = false;
-          }
-        } else {
-          return new Promise(function (resolve, reject) {
-            failedQueue.push({resolve, reject});
-          })
-            .then(token => {
-              originalConfig.headers.Authorization = 'Bearer ' + token;
-              return axiosApi(originalConfig);
-            })
-            .catch(err => {
-              return Promise.reject(err);
-            });
-        }
-      } else {
-        // 나머지 401 - 로그인 화면으로 이동
-        // console.log('로그인 화면으로 이동');
-        stackNavigation.navigate('Login');
+        return Promise.reject(error);
       }
+
+      // REQUEST_14 - 만료된 토큰입니다
+      console.log('🕷️ REQUEST_14 만료된 토큰입니다');
+
+      if (isTokenRefreshing) {
+        console.log('Already Refreshing! (fail request에 추가)');
+        return new Promise((resolve, reject) => {
+          failedRequests.push({
+            resolve,
+            reject,
+            config: originalConfig,
+            error: error,
+          });
+        });
+      }
+
+      try {
+        isTokenRefreshing = true;
+
+        console.log('================== REFRESH START ==================');
+
+        const refreshToken = await localStorage.get(TokenKeys.RefreshToken);
+        console.log('만료됐슴당~~ 내가 보내는 리프레쉬 토큰', refreshToken);
+        const response = await axiosApi.post('/api/auth/jwt/reissue', {
+          refreshToken,
+        });
+        const result = response.data.result;
+        console.log('이건 새로운 어쎄스 토큰', result.accessToken);
+
+        await localStorage.set(TokenKeys.AccessToken, result.accessToken);
+        const acc: string = await localStorage.get(TokenKeys.AccessToken);
+        console.log('이건 새롭게 저장된 어쎼스 토큰', acc);
+
+        axiosApi.defaults.headers.common['Authorization'] = `Bearer ${acc}`;
+        originalConfig.headers.Authorization = `Bearer ${acc}`;
+
+        // 실패한 요청들 재요청
+        failedRequests.forEach(({resolve, reject, config}) => {
+          axiosApi(config)
+            .then(response => resolve(response))
+            .catch(error => reject(error));
+        });
+      } catch (err) {
+        console.log('이것마저 실패');
+        failedRequests.forEach(({reject, error}) => reject(error));
+        return Promise.reject(error);
+      } finally {
+        failedRequests = [];
+        isTokenRefreshing = false;
+        console.log('================== REFRESH END ==================');
+      }
+
+      return Promise.reject(error);
     }
 
     return Promise.reject(error);
@@ -121,7 +143,7 @@ export const Interceptor = ({children}) => {
 axiosApi.interceptors.request.use(
   async config => {
     const accessToken: string = await localStorage.get(TokenKeys.AccessToken);
-    console.log('어쎄스 토큰 : ', accessToken);
+    console.log('🕷️ Axios Request Intecepter - Access Token', accessToken);
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
