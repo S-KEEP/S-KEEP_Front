@@ -9,8 +9,6 @@ import Profile from '../../../components/Settings/Profile';
 import SettingsList from '../../../components/Settings/SettingList';
 import {TabOfStackScreenProps} from '../../../navigators/types';
 import {userInfoState} from '../../../libs/recoil/states/userInfo';
-import localStorage from '../../../libs/async-storage';
-import {TokenKeys} from '../../../libs/async-storage/constants/keys';
 
 type SettingTabProps = TabOfStackScreenProps<'TabNavigator', 'SettingTab'>;
 export default function SettingTab({navigation}: SettingTabProps) {
@@ -19,9 +17,6 @@ export default function SettingTab({navigation}: SettingTabProps) {
   const setUserInfo = useSetRecoilState(userInfoState);
 
   useEffect(() => {
-    const testok =
-      'eyJKV1QiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1dWlkIjoxNCwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjQ2NTk1MDgsImV4cCI6MTcyNDc0NTkwOH0.FbawZrer3JuvHr5PK1o22zjeroMSnhpv0jhHSx2mi3Cmq9Ekmo-o5cJgMHdEEJqymguuy10ZL6zwmNC0wGSKfA';
-    localStorage.set(TokenKeys.AccessToken, testok);
     if (userInfoData) {
       setUserInfo({username: userInfoData.user.name});
     }
