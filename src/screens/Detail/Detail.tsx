@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {flexBox, padding, wrapper, wrapperFull} from '../../styles/common';
+import {flexBox, padding, wrapperFull} from '../../styles/common';
 import {IcCancel} from '../../assets/icon';
 import {StackScreenProps} from '../../navigators/types';
 import Map from '../../components/Detail/Map/Map';
@@ -18,6 +18,8 @@ import {useQueryClient} from '@tanstack/react-query';
 import {LOCATION_KEYS} from '../../hooks/queries/QueryKeys';
 import SkeletonCategoryItem from '../../components/common/Category/CategoryItem/SkeletonCategoryItem';
 import SkeletonPlaceDetail from '../../components/common/PlaceDetail/SkeletonPlaceDetail';
+import Button from '../../components/common/Button/Button';
+import ErrorView from '../../components/ErrorView/ErrorView';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -65,7 +67,23 @@ export default function Detail({navigation, route}: DetailProps) {
   }
 
   if (isError || !location) {
-    return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
+    return (
+      <SafeAreaView
+        style={{
+          ...wrapperFull,
+          paddingTop: 120,
+          paddingBottom: 80,
+          paddingHorizontal: 30,
+        }}>
+        <ErrorView
+          title="오류가 발생했습니다"
+          description="정보를 불러오는 데 실패했어요"
+          buttons={
+            <Button gray text="돌아가기" onPress={() => navigation.goBack()} />
+          }
+        />
+      </SafeAreaView>
+    );
   }
 
   function handleOnModify(category: ICategory) {
