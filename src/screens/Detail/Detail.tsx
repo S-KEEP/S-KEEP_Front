@@ -16,6 +16,8 @@ import PlaceDetail from '../../components/Detail/PlaceDetail/PlaceDetail';
 import {usePatchLocation} from '../../hooks/mutations/location/usePatchLocation';
 import {useQueryClient} from '@tanstack/react-query';
 import {LOCATION_KEYS} from '../../hooks/queries/QueryKeys';
+import SkeletonCategoryItem from '../../components/common/Category/CategoryItem/SkeletonCategoryItem';
+import SkeletonPlaceDetail from '../../components/common/PlaceDetail/SkeletonPlaceDetail';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -46,8 +48,23 @@ export default function Detail({navigation, route}: DetailProps) {
     },
   });
 
-  // [TODO] 처리
-  if (isLoading || isError || !location) {
+  if (isLoading) {
+    return (
+      <SafeAreaView style={{...wrapperFull}}>
+        <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
+        <Map x={'127.0016985'} y={'37.413294'} />
+
+        <SkeletonPlaceDetail />
+
+        <View style={styles.categoryBox}>
+          <SkeletonCategoryItem />
+          <ModifyButton onPress={() => {}} />
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (isError || !location) {
     return <SafeAreaView style={{...wrapperFull}}></SafeAreaView>;
   }
 
