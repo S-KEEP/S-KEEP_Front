@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   item: {
     width: 90,
     ...flexBox('column'),
+    gap: 5,
     backgroundColor: theme.palette.gray2,
     borderRadius: 10,
     paddingVertical: 14,
