@@ -8,6 +8,8 @@ import {WeatherDTO} from '../../../types/dtos/weather';
 import WeatherCard from './WeatherCard/WeatherCard';
 
 export default function Weather() {
+  const {avoidDays, idealDays} = classifyWeatherDays(dummyWeatherList);
+
   return (
     <View>
       <View style={styles.container}>
@@ -17,7 +19,7 @@ export default function Weather() {
         </View>
 
         <FlatList
-          data={dummyWeatherList}
+          data={idealDays}
           renderItem={renderItem}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -34,7 +36,7 @@ export default function Weather() {
         </View>
 
         <FlatList
-          data={dummyWeatherList}
+          data={avoidDays}
           renderItem={renderItem}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -46,6 +48,31 @@ export default function Weather() {
     </View>
   );
 }
+
+const classifyWeatherDays = (weatherList: WeatherDTO[]) => {
+  const avoidDays: WeatherDTO[] = [];
+  const idealDays: WeatherDTO[] = [];
+
+  weatherList.forEach(weather => {
+    const temperature = Number(weather.temperature);
+    const {eWeatherCondition} = weather;
+
+    const isExtremeHeat = temperature >= 35;
+    const isExtremeCold = temperature <= -12;
+    const isBadWeather =
+      eWeatherCondition === 'RAIN' ||
+      eWeatherCondition === 'SNOW' ||
+      eWeatherCondition === 'RAIN_AND_SNOW';
+
+    if (isExtremeHeat || isExtremeCold || isBadWeather) {
+      avoidDays.push(weather);
+    } else {
+      idealDays.push(weather);
+    }
+  });
+
+  return {avoidDays, idealDays};
+};
 
 const dummyWeatherList: WeatherDTO[] = [
   {
