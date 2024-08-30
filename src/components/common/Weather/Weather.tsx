@@ -7,7 +7,10 @@ import {FlatList} from 'react-native-gesture-handler';
 import {WeatherDTO} from '../../../types/dtos/weather';
 import WeatherCard from './WeatherCard/WeatherCard';
 
-export default function Weather() {
+interface WeatherProps {
+  location: {x: string; y: string};
+}
+export default function Weather({location}: WeatherProps) {
   const {avoidDays, idealDays} = classifyWeatherDays(dummyWeatherList);
 
   return (

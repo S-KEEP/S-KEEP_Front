@@ -44,7 +44,12 @@ const dummyTourLocationList = [
       'http://tong.visitkorea.or.kr/cms/resource/21/2654721_image2_1.jpg',
   },
 ];
-export default function Tourism() {
+
+interface TourismProps {
+  name: string;
+  location: {x: string; y: string};
+}
+export default function Tourism({name, location}: TourismProps) {
   const {stackNavigation} = useNavigator();
 
   const renderItem = ({item}: {item: TourLocationDTO}) => {
@@ -67,7 +72,7 @@ export default function Tourism() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>인천대공원 주변에 이런 곳은 어때요?</Text>
+      <Text style={styles.title}>{name} 주변에 이런 곳은 어때요?</Text>
 
       <FlatList
         data={dummyTourLocationList}

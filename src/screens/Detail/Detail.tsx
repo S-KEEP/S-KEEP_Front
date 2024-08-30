@@ -125,9 +125,12 @@ export default function Detail({navigation, route}: DetailProps) {
           <ModifyButton onPress={() => bottomSheetRef.current?.open()} />
         </View>
 
-        <Tourism />
+        <Tourism
+          name={location.location.placeName}
+          location={{x: location.location.x, y: location.location.y}}
+        />
 
-        <Weather />
+        <Weather location={{x: location.location.x, y: location.location.y}} />
       </ScrollView>
 
       <CategoryBottomSheet ref={bottomSheetRef} onModify={handleOnModify} />
