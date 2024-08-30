@@ -1,8 +1,16 @@
 import React from 'react';
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {flexBox, padding} from '../../../styles/common';
 import {theme} from '../../../styles';
 import {TourLocationDTO} from '../../../types/dtos/tourLocation';
+import useNavigator from '../../../navigators/hooks/useNavigator';
 
 const dummyTourLocationList = [
   {
@@ -37,6 +45,26 @@ const dummyTourLocationList = [
   },
 ];
 export default function Tourism() {
+  const {stackNavigation} = useNavigator();
+
+  const renderItem = ({item}: {item: TourLocationDTO}) => {
+    function handleOnPress() {
+      stackNavigation.navigate('DetailTour', {location: item});
+    }
+
+    return (
+      <TouchableOpacity onPress={handleOnPress}>
+        <View style={styles.item}>
+          <Image style={styles.itemImage} source={{uri: item.imageUrl}} />
+          <Text style={styles.itemTitle}>{item.title}</Text>
+          <Text style={styles.itemDistance}>
+            {Number(item.dist).toFixed(0)}km
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>인천대공원 주변에 이런 곳은 어때요?</Text>
@@ -53,14 +81,6 @@ export default function Tourism() {
     </View>
   );
 }
-
-const renderItem = ({item}: {item: TourLocationDTO}) => (
-  <View style={styles.item}>
-    <Image style={styles.itemImage} source={{uri: item.imageUrl}} />
-    <Text style={styles.itemTitle}>{item.title}</Text>
-    <Text style={styles.itemDistance}>{Number(item.dist).toFixed(0)}km</Text>
-  </View>
-);
 
 const styles = StyleSheet.create({
   container: {

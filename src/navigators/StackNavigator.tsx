@@ -11,6 +11,7 @@ import Login from '../screens/Login/Login';
 
 import Withdraw from '../screens/Withdraw/Withdraw';
 import CategoryList from '../screens/CategoryList/CategoryList';
+import DetailTour from '../screens/DetailTour/DetailTour';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -42,6 +43,7 @@ export default function StackNavigator() {
 
       {/* 장소 상세 */}
       <Stack.Screen name={StackMenu.Detail} component={Detail} />
+      <Stack.Screen name={StackMenu.DetailTour} component={DetailTour} />
     </Stack.Navigator>
   );
 }
