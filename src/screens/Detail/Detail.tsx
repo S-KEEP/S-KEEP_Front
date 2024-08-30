@@ -107,8 +107,6 @@ export default function Detail({navigation, route}: DetailProps) {
     });
   }
 
-  const {bottom} = useSafeAreaInsets();
-
   return (
     <SafeAreaView style={{...wrapperFull, paddingBottom: 0}}>
       <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
