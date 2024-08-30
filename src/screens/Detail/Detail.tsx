@@ -1,4 +1,10 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {flexBox, padding, wrapperFull} from '../../styles/common';
 import {IcCancel} from '../../assets/icon';
@@ -107,9 +113,17 @@ export default function Detail({navigation, route}: DetailProps) {
     });
   }
 
+  function handleOnDelete() {}
+
   return (
     <SafeAreaView style={{...wrapperFull, paddingBottom: 0}}>
-      <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
+      <View style={styles.header}>
+        <IcCancel onPress={() => navigation.pop()} />
+
+        <TouchableOpacity onPress={handleOnDelete}>
+          <Text>삭제</Text>
+        </TouchableOpacity>
+      </View>
 
       <Map x={location?.location.x} y={location.location.y} />
 
@@ -147,5 +161,12 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#EDEDED',
   },
-  scrollViewWrapper: {},
+  header: {
+    ...flexBox('row', 'space-between'),
+    ...padding,
+  },
+  deleteText: {
+    ...theme.typography.body_m_15,
+    color: '#797979',
+  },
 });
