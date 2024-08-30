@@ -2,9 +2,10 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {flexBox, padding} from '../../../styles/common';
 import {theme} from '../../../styles';
-import {IcAirplane, IcCloudy, IcWarn} from '../../../assets/icon';
+import {IcAirplane, IcWarn} from '../../../assets/icon';
 import {FlatList} from 'react-native-gesture-handler';
 import {WeatherDTO} from '../../../types/dtos/weather';
+import WeatherCard from './WeatherCard/WeatherCard';
 
 export default function Weather() {
   return (
@@ -46,7 +47,7 @@ export default function Weather() {
   );
 }
 
-const dummyWeatherList = [
+const dummyWeatherList: WeatherDTO[] = [
   {
     date: '2024-08-29',
     eWeatherCondition: 'PARTLY_CLOUDY',
@@ -104,13 +105,7 @@ const dummyWeatherList = [
   },
 ];
 const renderItem = ({item}: {item: WeatherDTO}) => (
-  <View style={styles.item}>
-    <Text style={styles.itemDate}>{item.date}</Text>
-    <IcCloudy />
-    <Text style={styles.itemTemperature}>
-      {Number(item.temperature).toFixed(0)}°
-    </Text>
-  </View>
+  <WeatherCard weather={item} />
 );
 
 const styles = StyleSheet.create({
@@ -129,20 +124,4 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   itemContainer: {marginTop: 17, gap: 20},
-  item: {
-    width: 90,
-    ...flexBox('column'),
-    gap: 5,
-    backgroundColor: theme.palette.gray2,
-    borderRadius: 10,
-    paddingVertical: 14,
-    paddingHorizontal: 12,
-  },
-  itemDate: {
-    ...theme.typography.text_m_11,
-    color: theme.palette.gray6,
-  },
-  itemTemperature: {
-    ...theme.typography.title_m_16,
-  },
 });

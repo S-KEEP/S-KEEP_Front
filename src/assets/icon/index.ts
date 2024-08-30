@@ -42,4 +42,10 @@ export {default as IcAirplane} from './ic_airplane.svg';
 export {default as IcWarn} from './ic_warn.svg';
 
 // 날씨 Icon
+export {default as IcClear} from './ic_clear.svg';
+export {default as IcPartlyCloudy} from './ic_partly_cloudy.svg';
 export {default as IcCloudy} from './ic_cloudy.svg';
+export {default as IcRain} from './ic_rain.svg';
+export {default as IcRainAndSnow} from './ic_rain_and_snow.svg';
+export {default as IcShower} from './ic_shower.svg';
+export {default as IcSnow} from './ic_snow.svg';
