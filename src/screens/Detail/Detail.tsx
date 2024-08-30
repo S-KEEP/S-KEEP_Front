@@ -1,5 +1,5 @@
-import {StyleSheet, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {flexBox, padding, wrapperFull} from '../../styles/common';
 import {IcCancel} from '../../assets/icon';
 import {StackScreenProps} from '../../navigators/types';
@@ -22,6 +22,7 @@ import Button from '../../components/common/Button/Button';
 import ErrorView from '../../components/ErrorView/ErrorView';
 import Tourism from '../../components/common/Tourism/Tourism';
 import {theme} from '../../styles';
+import Weather from '../../components/common/Weather/Weather';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -106,24 +107,30 @@ export default function Detail({navigation, route}: DetailProps) {
     });
   }
 
+  const {bottom} = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={{...wrapperFull}}>
+    <SafeAreaView style={{...wrapperFull, paddingBottom: 0}}>
       <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
 
       <Map x={location?.location.x} y={location.location.y} />
 
-      <PlaceDetail
-        imageSrc={location?.photoUrl}
-        title={String(location.location.placeName)}
-        description={String(location.location.roadAddress)}
-      />
+      <ScrollView>
+        <PlaceDetail
+          imageSrc={location?.photoUrl}
+          title={String(location.location.placeName)}
+          description={String(location.location.roadAddress)}
+        />
 
-      <View style={styles.categoryBox}>
-        <CategoryItem category={location.userCategory} />
-        <ModifyButton onPress={() => bottomSheetRef.current?.open()} />
-      </View>
+        <View style={styles.categoryBox}>
+          <CategoryItem category={location.userCategory} />
+          <ModifyButton onPress={() => bottomSheetRef.current?.open()} />
+        </View>
 
-      <Tourism />
+        <Tourism />
+
+        <Weather />
+      </ScrollView>
 
       <CategoryBottomSheet ref={bottomSheetRef} onModify={handleOnModify} />
     </SafeAreaView>
@@ -139,4 +146,5 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#EDEDED',
   },
+  scrollViewWrapper: {},
 });
