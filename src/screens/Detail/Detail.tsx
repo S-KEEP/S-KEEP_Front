@@ -20,6 +20,8 @@ import SkeletonCategoryItem from '../../components/common/Category/CategoryItem/
 import SkeletonPlaceDetail from '../../components/common/PlaceDetail/SkeletonPlaceDetail';
 import Button from '../../components/common/Button/Button';
 import ErrorView from '../../components/ErrorView/ErrorView';
+import Tourism from '../../components/common/Tourism/Tourism';
+import {theme} from '../../styles';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -120,6 +122,8 @@ export default function Detail({navigation, route}: DetailProps) {
         <CategoryItem category={location.userCategory} />
         <ModifyButton onPress={() => bottomSheetRef.current?.open()} />
       </View>
+
+      <Tourism />
 
       <CategoryBottomSheet ref={bottomSheetRef} onModify={handleOnModify} />
     </SafeAreaView>
