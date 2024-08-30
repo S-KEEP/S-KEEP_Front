@@ -18,15 +18,21 @@ export default function Weather() {
           <IcAirplane />
         </View>
 
-        <FlatList
-          data={idealDays}
-          renderItem={renderItem}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          snapToAlignment="center"
-          decelerationRate="fast"
-          contentContainerStyle={styles.itemContainer}
-        />
+        {idealDays.length <= 0 ? (
+          <Text style={styles.emptyText}>
+            앞으로 10일간은 여행하기에 적절한 날이 없어요!
+          </Text>
+        ) : (
+          <FlatList
+            data={idealDays}
+            renderItem={renderItem}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            snapToAlignment="center"
+            decelerationRate="fast"
+            contentContainerStyle={styles.itemContainer}
+          />
+        )}
       </View>
 
       <View style={styles.container}>
@@ -35,15 +41,21 @@ export default function Weather() {
           <IcWarn />
         </View>
 
-        <FlatList
-          data={avoidDays}
-          renderItem={renderItem}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          snapToAlignment="center"
-          decelerationRate="fast"
-          contentContainerStyle={styles.itemContainer}
-        />
+        {avoidDays.length <= 0 ? (
+          <Text style={styles.emptyText}>
+            피해야 하는 날은 없어요. 언제든 출발하세요!
+          </Text>
+        ) : (
+          <FlatList
+            data={avoidDays}
+            renderItem={renderItem}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            snapToAlignment="center"
+            decelerationRate="fast"
+            contentContainerStyle={styles.itemContainer}
+          />
+        )}
       </View>
     </View>
   );
@@ -78,12 +90,12 @@ const dummyWeatherList: WeatherDTO[] = [
   {
     date: '2024-08-29',
     eWeatherCondition: 'PARTLY_CLOUDY',
-    temperature: '34.0',
+    temperature: '-10.0',
   },
   {
     date: '2024-08-30',
     eWeatherCondition: 'PARTLY_CLOUDY',
-    temperature: '35.0',
+    temperature: '32.0',
   },
   {
     date: '2024-08-31',
@@ -97,7 +109,7 @@ const dummyWeatherList: WeatherDTO[] = [
   },
   {
     date: '2024-09-02',
-    eWeatherCondition: 'PARTLY_CLOUDY',
+    eWeatherCondition: 'CLEAR',
     temperature: '28.2',
   },
   {
@@ -117,7 +129,7 @@ const dummyWeatherList: WeatherDTO[] = [
   },
   {
     date: '2024-09-06',
-    eWeatherCondition: 'PARTLY_CLOUDY',
+    eWeatherCondition: 'CLEAR',
     temperature: '29.599999999999998',
   },
   {
@@ -151,4 +163,9 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   itemContainer: {marginTop: 17, gap: 20},
+  emptyText: {
+    ...theme.typography.body_m_15,
+    paddingVertical: 60,
+    textAlign: 'center',
+  },
 });
