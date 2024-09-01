@@ -16,8 +16,9 @@ export interface GetWeatherResponse {
  *  날씨 조회
  */
 export const getWeather = async ({x, y}: GetWeatherRequest) => {
-  const {data} = await GET<GetWeatherResponse>(`/api/weather`);
-  console.log(`/api/weather -- ✈ `, data);
+  const {data} = await GET<GetWeatherResponse>(`/api/weather?x=${x}&y=${y}`);
+  console.log(`/api/weather?x=${x}&y=${y} -- ✈ `, data);
+
   if (data.errorCode) throw new Error(`${data.errorCode}: ${data.message}`);
   return data.result;
 };
