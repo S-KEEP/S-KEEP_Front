@@ -147,7 +147,12 @@ export default function Detail({navigation, route}: DetailProps) {
         <Weather location={{x: location.location.x, y: location.location.y}} />
       </ScrollView>
 
-      <CategoryBottomSheet ref={bottomSheetRef} onModify={handleOnModify} />
+      <CategoryBottomSheet
+        ref={bottomSheetRef}
+        title="수정할 카테고리를 선택해 주세요!"
+        action="수정하기"
+        onModify={handleOnModify}
+      />
     </SafeAreaView>
   );
 }

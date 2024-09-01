@@ -9,31 +9,6 @@ interface WeatherProps {
   location: {x: string; y: string};
 }
 
-const classifyWeatherDays = (weatherList: WeatherDTO[]) => {
-  const avoidDays: WeatherDTO[] = [];
-  const idealDays: WeatherDTO[] = [];
-
-  weatherList.forEach(weather => {
-    const temperature = Number(weather.temperature);
-    const {eWeatherCondition} = weather;
-
-    const isExtremeHeat = temperature >= 35;
-    const isExtremeCold = temperature <= -12;
-    const isBadWeather =
-      eWeatherCondition === 'RAIN' ||
-      eWeatherCondition === 'SNOW' ||
-      eWeatherCondition === 'RAIN_AND_SNOW';
-
-    if (isExtremeHeat || isExtremeCold || isBadWeather) {
-      avoidDays.push(weather);
-    } else {
-      idealDays.push(weather);
-    }
-  });
-
-  return {avoidDays, idealDays};
-};
-
 export default function Weather({location}: WeatherProps) {
   const {data, isLoading, isError, error} = useGetWeather(location);
 
@@ -61,3 +36,28 @@ export default function Weather({location}: WeatherProps) {
     </View>
   );
 }
+
+const classifyWeatherDays = (weatherList: WeatherDTO[]) => {
+  const avoidDays: WeatherDTO[] = [];
+  const idealDays: WeatherDTO[] = [];
+
+  weatherList.forEach(weather => {
+    const temperature = Number(weather.temperature);
+    const {eWeatherCondition} = weather;
+
+    const isExtremeHeat = temperature >= 35;
+    const isExtremeCold = temperature <= -12;
+    const isBadWeather =
+      eWeatherCondition === 'RAIN' ||
+      eWeatherCondition === 'SNOW' ||
+      eWeatherCondition === 'RAIN_AND_SNOW';
+
+    if (isExtremeHeat || isExtremeCold || isBadWeather) {
+      avoidDays.push(weather);
+    } else {
+      idealDays.push(weather);
+    }
+  });
+
+  return {avoidDays, idealDays};
+};

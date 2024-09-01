@@ -1,6 +1,5 @@
 import {useMutation} from '@tanstack/react-query';
 import {BaseResponse, POST} from '../../../apis/client';
-import {UserLocation} from '../../../types/dtos/location';
 import {TourLocationDTO} from '../../../types/dtos/tourLocation';
 
 interface AddTourLocationReqeust {
@@ -12,7 +11,11 @@ interface AddTourLocationReqeust {
 export const addTourLocation = async ({
   tourLocation,
 }: AddTourLocationReqeust) => {
-  const res = await POST<string>(`/api/user-location`, tourLocation);
+  console.group(tourLocation);
+  const res = await POST<string>(
+    `/api/user-location/tourisom-org`,
+    tourLocation,
+  );
   return res.data;
 };
 
@@ -26,7 +29,8 @@ export const usePostTourLocation = ({
   onError,
 }: PostLocationMutationProps) => {
   return useMutation({
-    mutationFn: (tourLocation: AddTourLocationReqeust) => addTourLocation(req),
+    mutationFn: (tourLocation: AddTourLocationReqeust) =>
+      addTourLocation(tourLocation),
     onSuccess: onSuccess,
     onError: onError,
   });
