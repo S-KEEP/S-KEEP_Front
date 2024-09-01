@@ -17,4 +17,20 @@ const CATEGORY_KEYS = {
   list: (filters: object) => [...CATEGORY_KEYS.lists(), {filters}] as const, // ["categories", "list", {filters}]
 };
 
-export {LOCATION_KEYS, CATEGORY_KEYS};
+const WEATHER_KEYS = {
+  all: ['weathers'] as const,
+
+  details: () => [...WEATHER_KEYS.all, 'detail'] as const, // ["weathers", "detail"]
+  detail: (location: {x: string; y: string}) =>
+    [...WEATHER_KEYS.details(), {x: location.x, y: location.y}] as const, // ["weathers", "detail", {x: "x", y: "y"}]
+};
+
+const TOUR_KEYS = {
+  all: ['tours'] as const,
+
+  details: () => [...TOUR_KEYS.all, 'detail'] as const, // ["tours", "detail"]
+  detail: (location: {x: string; y: string}) =>
+    [...TOUR_KEYS.details(), {x: location.x, y: location.y}] as const, // ["tours", "detail", {x: "x", y: "y"}]
+};
+
+export {LOCATION_KEYS, CATEGORY_KEYS, WEATHER_KEYS, TOUR_KEYS};

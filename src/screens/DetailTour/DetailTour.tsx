@@ -28,9 +28,12 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
           description={String(location.address)}
         />
 
-        <Tourism />
+        <Tourism
+          name={location.title}
+          location={{x: location.mapX, y: location.mapY}}
+        />
 
-        <Weather />
+        <Weather location={{x: location.mapX, y: location.mapY}} />
 
         <View style={styles.buttonWrapper}>
           <Button text="카테고리에 추가" onPress={handleAddCategory} />
