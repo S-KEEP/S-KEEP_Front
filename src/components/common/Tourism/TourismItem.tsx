@@ -20,7 +20,9 @@ export default function TourismItem({item}: TourismItemProps) {
     <TouchableOpacity onPress={handleOnPress}>
       <View style={styles.item}>
         <Image style={styles.itemImage} source={{uri: item.imageUrl}} />
-        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemTitle} numberOfLines={1} ellipsizeMode="tail">
+          {item.title}
+        </Text>
         <Text style={styles.itemDistance}>
           {Number(item.dist).toFixed(0)}km
         </Text>
@@ -42,6 +44,7 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     ...theme.typography.text_m_11,
+    maxWidth: 90,
   },
   itemDistance: {
     ...theme.typography.text_m_11,
