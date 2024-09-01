@@ -14,9 +14,11 @@ import CategoryBottomSheet, {
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
 import {useRef} from 'react';
 import {ICategory} from '../../types/dtos/location';
+import useNavigator from '../../navigators/hooks/useNavigator';
 
 type DetailTourProps = StackScreenProps<'DetailTour'>;
 export default function DetailTour({navigation, route}: DetailTourProps) {
+  const {tabNavigation} = useNavigator();
   const {location} = route.params;
 
   const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
@@ -28,6 +30,7 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
       // 카테고리 추가 성공 후, 바텀시트 닫고
       // 토스트 노출
       // 카테고리 메인으로 이동
+      // navigation.replace('CategoryList', {title: , description: });
     },
     onError(e) {
       console.error(e);

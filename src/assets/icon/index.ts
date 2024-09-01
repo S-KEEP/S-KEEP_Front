@@ -40,6 +40,7 @@ export {default as IcAnalyze} from './ic_analyze.svg';
 
 export {default as IcAirplane} from './ic_airplane.svg';
 export {default as IcWarn} from './ic_warn.svg';
+export {default as IcTrash} from './ic_trash.svg';
 
 // 날씨 Icon
 export {default as IcClear} from './ic_clear.svg';
