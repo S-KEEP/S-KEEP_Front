@@ -3,18 +3,21 @@ import {WeatherDTO} from '../../../../types/dtos/weather';
 import WeatherCard from '../WeatherCard/WeatherCard';
 import {flexBox, padding} from '../../../../styles/common';
 import {theme} from '../../../../styles';
+import SkeletonWeatherCard from '../WeatherCard/SkeletonWeatherCard';
 
 interface WeatherSectionProps {
   title: string;
   icon: React.ReactNode;
   days: WeatherDTO[];
   emptyMessage: string;
+  isLoading: boolean;
 }
 export default function WeatherSection({
   title,
   icon,
   days,
   emptyMessage,
+  isLoading,
 }: WeatherSectionProps) {
   return (
     <View style={styles.container}>
@@ -22,7 +25,18 @@ export default function WeatherSection({
         <Text style={styles.title}>{title}</Text>
         {icon}
       </View>
-      {days.length === 0 ? (
+
+      {isLoading ? (
+        <FlatList
+          data={Array.from({length: 3})}
+          renderItem={() => <SkeletonWeatherCard />}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          snapToAlignment="center"
+          decelerationRate="fast"
+          contentContainerStyle={styles.itemContainer}
+        />
+      ) : days.length === 0 ? (
         <Text style={styles.emptyText}>{emptyMessage}</Text>
       ) : (
         <FlatList

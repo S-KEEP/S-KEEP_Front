@@ -26,10 +26,10 @@ export const getWeather = async ({x, y}: GetWeatherRequest) => {
 export const useGetWeather = (req: GetWeatherRequest) => {
   const QUERY_KEY = WEATHER_KEYS.detail(req);
 
-  const {data, isLoading, isError, refetch} = useQuery({
+  const {data, isLoading, isError, error, refetch} = useQuery({
     queryKey: QUERY_KEY,
     queryFn: () => getWeather(req).then(res => res),
   });
 
-  return {data, isLoading, isError, refetch};
+  return {data, isLoading, isError, error, refetch};
 };
