@@ -26,6 +26,7 @@ export type StackParamList = {
   Detail: {id: number};
 
   CategoryList: {title: string; description: string};
+  CategoryPlus: undefined;
 };
 
 export type TabParamList = {

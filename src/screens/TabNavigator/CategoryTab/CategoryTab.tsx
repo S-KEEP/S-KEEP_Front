@@ -1,9 +1,9 @@
 import React, {useMemo} from 'react';
 import styles from './CategoryTab.style';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import Card from '../../../components/common/Category/CategoryCard/CategoryCard';
 import {theme} from '../../../styles';
-import {IcCardRest} from '../../../assets/icon';
+import {IcCardRest, IcPlus} from '../../../assets/icon';
 import {useGetCategoryListQuery} from '../../../hooks/queries/category/useGetCategoryList';
 import {
   COLOR_MAP,
@@ -30,6 +30,8 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
     [mappedData],
   );
 
+  const handleGoDetail = () => {};
+
   const handleCardPress = (item: CardData) => {
     navigation.navigate('CategoryList', {
       title: item.title,
@@ -53,7 +55,7 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
     <View style={styles.container}>
       <Text style={styles.title}>
         나만의 카테고리로 {'\n'}
-        명소를 기록해봐요
+        여행지를 기록해봐요
       </Text>
       <FlatList
         data={mappedData}
@@ -65,6 +67,15 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
         snapToOffsets={snapToOffsets}
         contentContainerStyle={styles.cardContainer}
       />
+      <Text style={styles.subTitle}>
+        카테고리별로 다양한 여행지를 만나봐요!
+      </Text>
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => navigation.navigate('CategoryPlus')}>
+        <IcPlus />
+        <Text style={styles.addButtonText}>카테고리 추가</Text>
+      </TouchableOpacity>
     </View>
   );
 }
