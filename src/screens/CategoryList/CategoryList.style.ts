@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {theme} from '../../styles';
+import {flexBox} from '../../styles/common';
 
 export const styles = StyleSheet.create({
   headerContainer: {
@@ -11,6 +12,8 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
   backIcon: {
+    width: '95%',
+    ...flexBox('row', 'space-between'),
     position: 'absolute',
     zIndex: 9,
     top: 70,
