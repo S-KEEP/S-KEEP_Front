@@ -70,7 +70,7 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
       </Text>
       <TouchableOpacity
         style={styles.addButton}
-        onPress={() => navigation.navigate('CategoryPlus')}>
+        onPress={() => navigation.navigate('CategoryAdd')}>
         <IcPlus />
         <Text style={styles.addButtonText}>카테고리 추가</Text>
       </TouchableOpacity>

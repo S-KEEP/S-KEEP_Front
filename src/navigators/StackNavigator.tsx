@@ -11,7 +11,7 @@ import Login from '../screens/Login/Login';
 
 import Withdraw from '../screens/Withdraw/Withdraw';
 import CategoryList from '../screens/CategoryList/CategoryList';
-import CategoryPlus from '../screens/CategoryPlus/CategoryPlus';
+import CategoryAdd from '../screens/CategoryAdd/CategoryAdd';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -40,7 +40,7 @@ export default function StackNavigator() {
 
       {/* 카테고리 리스트 */}
       <Stack.Screen name={StackMenu.CategoryList} component={CategoryList} />
-      <Stack.Screen name={StackMenu.CategoryPlus} component={CategoryPlus} />
+      <Stack.Screen name={StackMenu.CategoryAdd} component={CategoryAdd} />
       {/* 장소 상세 */}
       <Stack.Screen name={StackMenu.Detail} component={Detail} />
     </Stack.Navigator>

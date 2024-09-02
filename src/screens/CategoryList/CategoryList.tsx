@@ -9,8 +9,11 @@ import {
 } from 'react-native';
 import {StackScreenProps} from '../../navigators/types';
 import {styles} from './CategoryList.style';
-import {IcLeft, IcCategoryRest} from '../../assets/icon';
-import {COLOR_MAP, ICON_MAPS} from '../../constants/components/CategoryCard';
+import {IcLeft, IcRoundEtc} from '../../assets/icon';
+import {
+  COLOR_DETAIL_MAP,
+  ICON_DETAIL_MAPS,
+} from '../../constants/components/CategoryCard';
 import {theme} from '../../styles';
 import {wrapper} from '../../styles/common';
 import PlaceDetail from '../../components/common/PlaceDetail/PlaceDetail';
@@ -22,8 +25,8 @@ type CategoryListProps = StackScreenProps<'CategoryList'>;
 export default function CategoryList({navigation, route}: CategoryListProps) {
   const {title, description} = route.params;
 
-  const backgroundColor = COLOR_MAP[title] || theme.palette.gray1;
-  const IconComponent = ICON_MAPS[title] || IcCategoryRest;
+  const backgroundColor = COLOR_DETAIL_MAP[title] || theme.palette.gray1;
+  const IconComponent = ICON_DETAIL_MAPS[title] || IcRoundEtc;
 
   const {data, loadMore, isFetching, hasNextPage, totalElement} =
     useGetCategoryList({

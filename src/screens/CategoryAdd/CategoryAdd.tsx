@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Keyboard,
 } from 'react-native';
-import styles from './CategoryPlus.style';
+import styles from './CategoryAdd.style';
 import {theme} from '../../styles';
 import {IcNoti, IcNotiColor} from '../../assets/icon';
 import {usePostAddCategory} from '../../hooks/mutations/category/usePostCategoryAdd';
@@ -16,8 +16,8 @@ import {StackScreenProps} from '../../navigators/types';
 import {useQueryClient} from '@tanstack/react-query';
 import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
 
-type CategoryPlusProps = StackScreenProps<'CategoryPlus'>;
-export default function CategoryPlus({navigation}: CategoryPlusProps) {
+type CategoryAddProps = StackScreenProps<'CategoryAdd'>;
+export default function CategoryAdd({navigation}: CategoryAddProps) {
   const nameInputRef = useRef<TextInput>(null);
   const memoInputRef = useRef<TextInput>(null);
 
