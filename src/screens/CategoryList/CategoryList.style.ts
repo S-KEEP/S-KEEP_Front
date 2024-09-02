@@ -3,7 +3,6 @@ import {theme} from '../../styles';
 
 export const styles = StyleSheet.create({
   headerContainer: {
-    paddingTop: 80,
     alignItems: 'center',
     paddingVertical: 30,
     backgroundColor: theme.palette.secondary,

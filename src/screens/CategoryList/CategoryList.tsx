@@ -19,6 +19,9 @@ import {wrapper} from '../../styles/common';
 import PlaceDetail from '../../components/common/PlaceDetail/PlaceDetail';
 import useGetCategoryList from '../../hooks/queries/category/useGetCategoryDetail';
 import {UserLocation} from '../../types/dtos/location';
+import {useDeleteCategory} from '../../hooks/mutations/category/useDeleteCategory';
+import {useQueryClient} from '@tanstack/react-query';
+import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
 
 type CategoryListProps = StackScreenProps<'CategoryList'>;
 
@@ -49,10 +52,37 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
     navigation.navigate('TabNavigator');
   }
 
+  const {mutate: deleteCategory} = useDeleteCategory();
+  const queryClient = useQueryClient();
+
+  function handleDeleteCategory() {
+    if (data && data.length > 0) {
+      const userCategoryId = data[0].userCategory.id;
+
+      deleteCategory(
+        {userCategoryId},
+        {
+          onSuccess: () => {
+            navigation.navigate('TabNavigator');
+            queryClient.invalidateQueries({
+              queryKey: CATEGORY_KEYS.all,
+            });
+          },
+          onError: error => {
+            console.error('Failed to delete category:', error);
+          },
+        },
+      );
+    }
+  }
+
   return (
     <SafeAreaView style={{...wrapper}}>
       <View style={styles.backIcon}>
         <IcLeft onPress={handleGoBack} />
+        <TouchableOpacity onPress={handleDeleteCategory}>
+          <Text>삭제</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={[styles.headerContainer, {backgroundColor}]}>

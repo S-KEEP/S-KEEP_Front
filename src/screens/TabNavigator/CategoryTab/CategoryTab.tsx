@@ -3,7 +3,7 @@ import styles from './CategoryTab.style';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import Card from '../../../components/common/Category/CategoryCard/CategoryCard';
 import {theme} from '../../../styles';
-import {IcCardRest, IcPlus} from '../../../assets/icon';
+import {IcCardEtc, IcCardRest, IcPlus} from '../../../assets/icon';
 import {useGetCategoryListQuery} from '../../../hooks/queries/category/useGetCategoryList';
 import {
   COLOR_MAP,
@@ -20,8 +20,8 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
   const mappedData = cardListData.map(item => ({
     title: item.name,
     description: item.description,
-    IconComponent: ICON_MAPS[item.name] || IcCardRest,
-    backgroundColor: COLOR_MAP[item.name] || theme.palette.white,
+    IconComponent: ICON_MAPS[item.name] || IcCardEtc,
+    backgroundColor: COLOR_MAP[item.name] || theme.palette.primary,
   }));
 
   const snapToOffsets = useMemo(

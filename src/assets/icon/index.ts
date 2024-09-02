@@ -26,6 +26,7 @@ export {default as IcCardFood} from './ic_card_food.svg';
 export {default as IcCardHistory} from './ic_card_history.svg';
 export {default as IcCardNature} from './ic_card_nature.svg';
 export {default as IcCardRest} from './ic_card_rest.svg';
+export {default as IcCardEtc} from './ic_card_etc.svg';
 export {default as IcCardShopping} from './ic_card_shopping.svg';
 
 export {default as IcRight} from './ic_right.svg';
