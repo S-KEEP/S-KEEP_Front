@@ -139,6 +139,7 @@ axiosApi.interceptors.request.use(
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
+    console.log(config.url);
     return config;
   },
   error => Promise.reject(error),

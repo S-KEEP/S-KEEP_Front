@@ -24,8 +24,8 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
   const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
 
   const {mutate: addCategory} = usePostTourLocation({
-    onSuccess(res) {
-      console.log(res);
+    onSuccess(res, variables) {
+      console.log(res, variables);
 
       // 카테고리 추가 성공 후, 바텀시트 닫고
       // 토스트 노출
@@ -39,7 +39,7 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
 
   function handleAddCategory(category: ICategory) {
     console.log(category);
-    addCategory({tourLocation: location});
+    addCategory({tourLocation: location, category: category});
   }
 
   return (
@@ -60,7 +60,13 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
           location={{x: location.mapX, y: location.mapY}}
         />
 
-        <Weather location={{x: location.mapX, y: location.mapY}} />
+        <Weather
+          location={{
+            x: location.mapX,
+            y: location.mapY,
+            address: location.address,
+          }}
+        />
 
         <View style={styles.buttonWrapper}>
           <Button

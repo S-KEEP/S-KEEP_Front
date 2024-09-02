@@ -172,7 +172,13 @@ export default function Detail({navigation, route}: DetailProps) {
           location={{x: location.location.x, y: location.location.y}}
         />
 
-        <Weather location={{x: location.location.x, y: location.location.y}} />
+        <Weather
+          location={{
+            x: location.location.x,
+            y: location.location.y,
+            address: location.location.roadAddress,
+          }}
+        />
       </ScrollView>
 
       <CategoryBottomSheet

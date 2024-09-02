@@ -6,6 +6,7 @@ import {WeatherDTO} from '../../../types/dtos/weather';
 export interface GetWeatherRequest {
   x: string;
   y: string;
+  address: string;
 }
 
 export interface GetWeatherResponse {
@@ -15,8 +16,10 @@ export interface GetWeatherResponse {
 /**
  *  날씨 조회
  */
-export const getWeather = async ({x, y}: GetWeatherRequest) => {
-  const {data} = await GET<GetWeatherResponse>(`/api/weather?x=${x}&y=${y}`);
+export const getWeather = async ({x, y, address}: GetWeatherRequest) => {
+  const {data} = await GET<GetWeatherResponse>(
+    `/api/weather?x=${x}&y=${y}&address=${address}`,
+  );
   console.log(`/api/weather?x=${x}&y=${y} -- ✈ `, data);
 
   if (data.errorCode) throw new Error(`${data.errorCode}: ${data.message}`);

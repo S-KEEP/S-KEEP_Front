@@ -6,7 +6,7 @@ import {useGetWeather} from '../../../hooks/queries/weather/useGetWeather';
 import WeatherSection from './WeatherSection/WeatherSection';
 
 interface WeatherProps {
-  location: {x: string; y: string};
+  location: {x: string; y: string; address: string};
 }
 
 export default function Weather({location}: WeatherProps) {
