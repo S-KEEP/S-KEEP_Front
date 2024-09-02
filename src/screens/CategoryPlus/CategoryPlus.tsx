@@ -12,18 +12,23 @@ import styles from './CategoryPlus.style';
 import {theme} from '../../styles';
 import {IcNoti, IcNotiColor} from '../../assets/icon';
 import {usePostAddCategory} from '../../hooks/mutations/category/usePostCategoryAdd';
+import {StackScreenProps} from '../../navigators/types';
+import {useQueryClient} from '@tanstack/react-query';
+import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
 
-export default function CategoryPlus() {
+type CategoryPlusProps = StackScreenProps<'CategoryPlus'>;
+export default function CategoryPlus({navigation}: CategoryPlusProps) {
   const nameInputRef = useRef<TextInput>(null);
   const memoInputRef = useRef<TextInput>(null);
 
-  const [nameValue, setNameValue] = useState(''); // State for name input value
-  const [memoValue, setMemoValue] = useState(''); // State for memo input value
-
-  const {addCategoryMutation} = usePostAddCategory();
-
   const [currentFocus, setCurrentFocus] = useState<'name' | 'memo'>('name');
   const [buttonBottomPosition, setButtonBottomPosition] = useState(0);
+
+  const [nameValue, setNameValue] = useState('');
+  const [memoValue, setMemoValue] = useState('');
+
+  const {addCategoryMutation} = usePostAddCategory();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (currentFocus === 'name' && nameInputRef.current) {
@@ -33,6 +38,9 @@ export default function CategoryPlus() {
     }
   }, [currentFocus]);
 
+  /**
+   * 진입 시 키보드 항상 활성화 & 키보드 위치 위에 버튼 생성
+   */
   useEffect(() => {
     const keyboardWillShowListener = Keyboard.addListener(
       'keyboardWillShow',
@@ -53,20 +61,15 @@ export default function CategoryPlus() {
       keyboardWillHideListener.remove();
     };
   }, []);
+
   const handleNameInputFocus = () => {
     setCurrentFocus('name');
   };
-
   const handleMemoInputFocus = () => {
     setCurrentFocus('memo');
   };
 
   const handleCreateButtonPress = () => {
-    console.log('내가 바디에 담은 값들', {
-      name: nameValue,
-      description: memoValue || ' ',
-    });
-
     addCategoryMutation.mutate(
       {
         name: nameValue,
@@ -75,7 +78,13 @@ export default function CategoryPlus() {
       {
         onSuccess: () => {
           console.log('Category added successfully!');
-          // navigation.navigate('SomeScreen');
+          navigation.replace('CategoryList', {
+            title: nameValue,
+            description: memoValue,
+          });
+          queryClient.invalidateQueries({
+            queryKey: CATEGORY_KEYS.all,
+          });
         },
         onError: error => {
           console.error('Error adding category:', error);

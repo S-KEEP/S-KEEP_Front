@@ -30,8 +30,6 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
     [mappedData],
   );
 
-  const handleGoDetail = () => {};
-
   const handleCardPress = (item: CardData) => {
     navigation.navigate('CategoryList', {
       title: item.title,
