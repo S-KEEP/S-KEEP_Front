@@ -46,6 +46,7 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
             </Text>
           </View>
         ),
+        duration: 3000,
       });
 
       navigation.replace('CategoryList', {
