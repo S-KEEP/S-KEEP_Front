@@ -3,9 +3,7 @@ import {
   DeviceEventEmitter,
   Dimensions,
   StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import {theme} from '../../../../styles';
 import {flexBox} from '../../../../styles/common';
