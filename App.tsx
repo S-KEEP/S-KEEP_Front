@@ -6,6 +6,7 @@ import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {RecoilRoot} from 'recoil';
 import AppSetupWrapper from './src/container/AppSetupContainer';
 import Snackbar from './src/components/common/Global/Snackbar/Snackbar';
+import Toast from './src/components/common/Global/Toast/Toast';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
             <BottomSheetModalProvider>
               <Navigator />
               <Snackbar />
+              <Toast />
             </BottomSheetModalProvider>
           </GestureHandlerRootView>
         </RecoilRoot>

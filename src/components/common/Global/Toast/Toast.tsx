@@ -5,37 +5,27 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {theme} from '../../../../styles';
 import {flexBox} from '../../../../styles/common';
 
-export interface SnackbarProps {
-  message?: string;
-  actionText?: string;
-  duration?: number | null;
-  onActionPress?: () => void;
+interface ToastProps {
+  content?: React.ReactNode;
+  duration?: number;
 }
 
-export default function Snackbar() {
+export default function Toast() {
   const [isVisible, setIsVisible] = useState(false);
-  const [message, setMessage] = useState('');
-  const [actionText, setActionText] = useState('');
-  const [duration, setDuration] = useState<number | null>(null);
-  const [actionCallback, setActionCallback] = useState<() => void>(() => {});
+  const [duration, setDuration] = useState<number>(3000);
+  const [content, setContent] = useState<React.ReactNode | null>(null);
 
   useEffect(() => {
     const subscription = DeviceEventEmitter.addListener(
-      'openSnackbar',
-      ({
-        message = '',
-        actionText = '',
-        duration = null,
-        onActionPress = () => {},
-      }: SnackbarProps) => {
-        setMessage(message);
-        setActionText(actionText);
+      'openToast',
+      ({content = null, duration = 3000}: ToastProps) => {
         setDuration(duration);
-        setActionCallback(() => onActionPress);
+        setContent(content || null);
 
         setIsVisible(true);
       },
@@ -65,18 +55,7 @@ export default function Snackbar() {
       activeOpacity={1}
       onPress={handleClose}
       style={[styles.container, styles.bottomContainer]}>
-      <>
-        <Text style={[styles.messageText]}>{message}</Text>
-        {actionText && (
-          <TouchableOpacity
-            onPress={() => {
-              handleClose();
-              actionCallback();
-            }}>
-            <Text style={[styles.actionText]}>{actionText}</Text>
-          </TouchableOpacity>
-        )}
-      </>
+      {content}
     </TouchableOpacity>
   );
 }
