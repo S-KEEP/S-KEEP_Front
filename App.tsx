@@ -5,6 +5,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {RecoilRoot} from 'recoil';
 import AppSetupWrapper from './src/container/AppSetupContainer';
+import Snackbar from './src/components/common/Global/Snackbar/Snackbar';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <GestureHandlerRootView style={{flex: 1}}>
             <BottomSheetModalProvider>
               <Navigator />
+              <Snackbar />
             </BottomSheetModalProvider>
           </GestureHandlerRootView>
         </RecoilRoot>

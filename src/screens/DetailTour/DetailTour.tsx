@@ -1,4 +1,10 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  DeviceEventEmitter,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {flexBox, padding, wrapperFull} from '../../styles/common';
 import {IcCancel, IcCheck} from '../../assets/icon';
@@ -14,13 +20,10 @@ import CategoryBottomSheet, {
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
 import {useRef} from 'react';
 import {ICategory} from '../../types/dtos/location';
-import useNavigator from '../../navigators/hooks/useNavigator';
-import Snackbar from '../../components/common/Snackbar/Snackbar';
 import {theme} from '../../styles';
 
 type DetailTourProps = StackScreenProps<'DetailTour'>;
 export default function DetailTour({navigation, route}: DetailTourProps) {
-  const {tabNavigation} = useNavigator();
   const {location} = route.params;
 
   const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
@@ -29,11 +32,22 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
     onSuccess(res, variables) {
       console.log(res, variables);
 
-      // 카테고리 추가 성공 후, 바텀시트 닫고
-      // 토스트 노출
-      // 카테고리 메인으로 이동
+      // 카테고리 추가 성공 후,
+      // 바텀시트 닫고 & 토스트 노출 & 카테고리 메인으로 이동
       bottomSheetRef.current?.close();
-      const {category} = variables;
+
+      const {tourLocation, category} = variables;
+      DeviceEventEmitter.emit('openSnackBar', {
+        content: (
+          <View style={styles.snackbar}>
+            <IcCheck />
+            <Text style={styles.snackbarText}>
+              {tourLocation.title}을 {category.name}에 저장했어요.
+            </Text>
+          </View>
+        ),
+      });
+
       navigation.replace('CategoryList', {
         title: category.name,
         description: category.description,
@@ -88,18 +102,6 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
         title="저장할 카테고리를 선택해 주세요!"
         action="저장하기"
         onModify={handleAddCategory}
-      />
-
-      <Snackbar
-        content={
-          <View style={styles.snackbar}>
-            <IcCheck />
-            <Text style={styles.snackbarText}>
-              을왕리 해수욕장을 휴양에 저장했어요.
-            </Text>
-          </View>
-        }
-        onActionPress={() => {}}
       />
     </SafeAreaView>
   );
