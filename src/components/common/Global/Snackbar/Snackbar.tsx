@@ -19,6 +19,7 @@ import {flexBox} from '../../../../styles/common';
                 duration: 5000,
               })
  */
+
 export interface SnackbarProps {
   message?: string;
   actionText?: string;
@@ -26,43 +27,38 @@ export interface SnackbarProps {
   onActionPress?: () => void;
 }
 
+const defaultProps: SnackbarProps = {
+  message: '',
+  actionText: '',
+  duration: null,
+  onActionPress: () => {},
+};
+
 export default function Snackbar() {
   const [isVisible, setIsVisible] = useState(false);
-  const [message, setMessage] = useState('');
-  const [actionText, setActionText] = useState('');
-  const [duration, setDuration] = useState<number | null>(null);
-  const [actionCallback, setActionCallback] = useState<() => void>(() => {});
+  const [snackbarState, setSnackbarState] =
+    useState<SnackbarProps>(defaultProps);
 
   useEffect(() => {
     const subscription = DeviceEventEmitter.addListener(
       'openSnackbar',
-      ({
-        message = '',
-        actionText = '',
-        duration = null,
-        onActionPress = () => {},
-      }: SnackbarProps) => {
-        setMessage(message);
-        setActionText(actionText);
-        setDuration(duration);
-        setActionCallback(() => onActionPress);
-
+      (props: SnackbarProps) => {
+        setSnackbarState({...defaultProps, ...props});
         setIsVisible(true);
       },
     );
-    return () => {
-      subscription.remove();
-    };
+
+    return () => subscription.remove();
   }, []);
 
   useEffect(() => {
-    if (isVisible && duration !== null) {
+    if (isVisible && snackbarState.duration !== null) {
       const timeout = setTimeout(() => {
         setIsVisible(false);
-      }, duration);
+      }, snackbarState.duration);
       return () => clearTimeout(timeout);
     }
-  }, [isVisible, duration]);
+  }, [isVisible, snackbarState.duration]);
 
   if (!isVisible) return null;
 
@@ -76,14 +72,14 @@ export default function Snackbar() {
       onPress={handleClose}
       style={[styles.container, styles.bottomContainer]}>
       <>
-        <Text style={[styles.messageText]}>{message}</Text>
-        {actionText && (
+        <Text style={styles.messageText}>{snackbarState.message}</Text>
+        {snackbarState.actionText && (
           <TouchableOpacity
             onPress={() => {
               handleClose();
-              actionCallback();
+              snackbarState.onActionPress?.();
             }}>
-            <Text style={[styles.actionText]}>{actionText}</Text>
+            <Text style={styles.actionText}>{snackbarState.actionText}</Text>
           </TouchableOpacity>
         )}
       </>
