@@ -21,7 +21,6 @@ export const getTourList = async ({x, y}: GetTourListRequest) => {
   const {data} = await GET<GetTourListResponse>(
     `/api/tourism-org?x=${x}&y=${y}`,
   );
-  console.log(`/api/tourism-org?x=${x}&y=${y} -- ✈ `, data);
 
   if (data.errorCode) throw new Error(`${data.errorCode}: ${data.message}`);
   return data.result;

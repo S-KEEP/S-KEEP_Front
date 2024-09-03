@@ -20,7 +20,6 @@ export const getWeather = async ({x, y, address}: GetWeatherRequest) => {
   const {data} = await GET<GetWeatherResponse>(
     `/api/weather?x=${x}&y=${y}&address=${address}`,
   );
-  console.log(`/api/weather?x=${x}&y=${y} -- ✈ `, data);
 
   if (data.errorCode) throw new Error(`${data.errorCode}: ${data.message}`);
   return data.result;
