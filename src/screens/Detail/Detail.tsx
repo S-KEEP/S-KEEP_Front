@@ -5,9 +5,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {flexBox, padding, wrapperFull} from '../../styles/common';
-import {IcCancel, IcSad, IcTrash} from '../../assets/icon';
+import {IcCancel, IcSad} from '../../assets/icon';
 import {StackScreenProps} from '../../navigators/types';
 import Map from '../../components/Detail/Map/Map';
 import {useGetLocation} from '../../hooks/queries/location/useGetLocation';

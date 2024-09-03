@@ -2,12 +2,11 @@ import {
   ActivityIndicator,
   DeviceEventEmitter,
   ScrollView,
-  StyleSheet,
   Text,
   View,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {flexBox, padding, wrapperFull} from '../../styles/common';
+import {padding, wrapperFull} from '../../styles/common';
 import {IcCancel, IcCheck} from '../../assets/icon';
 import {StackScreenProps} from '../../navigators/types';
 import Map from '../../components/Detail/Map/Map';
@@ -22,6 +21,7 @@ import CategoryBottomSheet, {
 import {useRef, useState} from 'react';
 import {ICategory} from '../../types/dtos/location';
 import {theme} from '../../styles';
+import {styles} from './DetailTour.styles';
 
 type DetailTourProps = StackScreenProps<'DetailTour'>;
 export default function DetailTour({navigation, route}: DetailTourProps) {
@@ -121,29 +121,3 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  buttonWrapper: {
-    width: '80%',
-    margin: 'auto',
-  },
-  snackbar: {
-    ...flexBox(),
-    gap: 10,
-    width: '100%',
-  },
-  snackbarText: {
-    ...theme.typography.text_m_13,
-    color: theme.palette.white,
-  },
-  loadingContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    ...flexBox(),
-    backgroundColor: theme.palette.black,
-    opacity: 0.5,
-  },
-});

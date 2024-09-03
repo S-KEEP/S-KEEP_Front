@@ -75,7 +75,8 @@ export default function Toast() {
 const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingHorizontal: 30,
+    paddingVertical: 16,
     width: '90%',
     borderRadius: 10,
     ...flexBox('row', 'space-between'),
