@@ -9,7 +9,7 @@ export default function useAnalyze() {
     const {didCancel, errorCode, errorMessage, assets} =
       await launchImageLibrary({
         mediaType: 'photo',
-        selectionLimit: 10,
+        selectionLimit: 5,
       });
 
     if (didCancel || errorCode) {
