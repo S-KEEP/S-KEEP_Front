@@ -6,10 +6,11 @@ import {
   ActivityIndicator,
   SafeAreaView,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import {StackScreenProps} from '../../navigators/types';
 import {styles} from './CategoryList.style';
-import {IcLeft, IcRoundEtc} from '../../assets/icon';
+import {IcEmpty, IcLeft, IcRoundEtc} from '../../assets/icon';
 import {
   COLOR_DETAIL_MAP,
   ICON_DETAIL_MAPS,
@@ -22,11 +23,14 @@ import {UserLocation} from '../../types/dtos/location';
 import {useDeleteCategory} from '../../hooks/mutations/category/useDeleteCategory';
 import {useQueryClient} from '@tanstack/react-query';
 import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
+import useAnalyze from '../../hooks/useAnalyze';
+import EmptyCategoryList from '../../components/Category/EmptyCategoryList';
 
 type CategoryListProps = StackScreenProps<'CategoryList'>;
 
 export default function CategoryList({navigation, route}: CategoryListProps) {
   const {title, description} = route.params;
+  const {handleGoToGallery} = useAnalyze();
 
   const backgroundColor = COLOR_DETAIL_MAP[title] || theme.palette.gray1;
   const IconComponent = ICON_DETAIL_MAPS[title] || IcRoundEtc;
@@ -107,6 +111,7 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
             <ActivityIndicator size="large" color={theme.palette.primary} />
           ) : null
         }
+        ListEmptyComponent={EmptyCategoryList}
       />
     </SafeAreaView>
   );
