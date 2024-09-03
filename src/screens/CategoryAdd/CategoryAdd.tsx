@@ -118,7 +118,13 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
             value={nameValue}
             onChangeText={setNameValue}
           />
-          <Text style={styles.charCount}>0/12</Text>
+          <Text
+            style={[
+              styles.charCount,
+              {opacity: currentFocus === 'name' ? 1 : 0},
+            ]}>
+            {`${nameValue.length}/12`}
+          </Text>
         </View>
 
         <View style={styles.inputWrapper}>
@@ -136,9 +142,19 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
             placeholderTextColor={theme.palette.gray5}
             onFocus={handleMemoInputFocus}
             value={memoValue}
+            maxLength={22}
             onChangeText={setMemoValue}
           />
-          {currentFocus === 'memo' ? <IcNotiColor /> : <IcNoti />}
+          <View style={styles.countContainer}>
+            {currentFocus === 'memo' ? <IcNotiColor /> : <IcNoti />}
+            <Text
+              style={[
+                styles.charCount,
+                {opacity: currentFocus === 'memo' ? 1 : 0},
+              ]}>
+              {`${memoValue.length}/22`}
+            </Text>
+          </View>
         </View>
       </ScrollView>
 

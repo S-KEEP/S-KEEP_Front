@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {theme} from '../../styles';
+import {flexBox} from '../../styles/common';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 100,
+    paddingTop: 20,
     flex: 1,
     backgroundColor: theme.palette.white,
     alignItems: 'center',
@@ -35,6 +36,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     fontSize: 16,
     color: theme.palette.black,
+  },
+  countContainer: {
+    ...flexBox('row', 'space-between'),
   },
   charCount: {
     fontSize: 12,
