@@ -13,18 +13,15 @@ export interface GetPostHistoryRequest {
 const getCategoryList = async ({userCategory, page}: GetPostHistoryRequest) => {
   const {
     data: {result},
-  } = await GET<IPage<UserLocation>>('/api/user-location', {
-    params: {
-      page,
-      userCategory,
-    },
-  });
+  } = await GET<IPage<UserLocation>>(
+    `/api/user-location?page=${page}&userCategory=${userCategory}`,
+  );
 
   return {
     items: result.userLocationList,
     nextPage: result.totalPage > page ? page + 1 : undefined,
     totalPage: result.totalPage,
-    totalElement: result.totalElement, 
+    totalElement: result.totalElement,
   };
 };
 
@@ -36,7 +33,7 @@ const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
     getNextPageParam: lastPage => lastPage.nextPage,
     select: data => ({
       pages: data.pages.flatMap(page => page.items),
-      totalElement: data.pages?.[0]?.totalElement ?? 0, 
+      totalElement: data.pages?.[0]?.totalElement ?? 0,
     }),
     initialPageParam: requestParams.page,
   });
@@ -52,7 +49,7 @@ const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
     loadMore,
     isFetching,
     hasNextPage,
-    totalElement: data?.totalElement, 
+    totalElement: data?.totalElement,
   };
 };
 
