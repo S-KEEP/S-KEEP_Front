@@ -10,6 +10,20 @@ import {
 import {theme} from '../../../../styles';
 import {flexBox} from '../../../../styles/common';
 
+/**
+ * 공통 컴포넌트 - 토스트
+ * (사용 예시)
+ *    DeviceEventEmitter.emit('openToast', {
+        content: (
+          <View style={styles.snackbar}>
+            <IcCheck />
+            <Text style={styles.snackbarText}>
+              {tourLocation.title}을 {category.name}에 저장했어요.
+            </Text>
+          </View>
+        ),
+      });
+ */
 interface ToastProps {
   content?: React.ReactNode;
   duration?: number;

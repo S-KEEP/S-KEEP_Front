@@ -9,6 +9,16 @@ import {
 import {theme} from '../../../../styles';
 import {flexBox} from '../../../../styles/common';
 
+/**
+ * 공통 컴포넌트 - 스낵바
+ * (사용 예시)
+ * DeviceEventEmitter.emit('openSnackbar', {
+                message: '카테고리를 먼저 만들어주세요!',
+                actionText: '만들기',
+                onActionPress: () => console.log('hi'),
+                duration: 5000,
+              })
+ */
 export interface SnackbarProps {
   message?: string;
   actionText?: string;
