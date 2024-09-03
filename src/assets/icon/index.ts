@@ -50,3 +50,5 @@ export {default as IcRain} from './ic_rain.svg';
 export {default as IcRainAndSnow} from './ic_rain_and_snow.svg';
 export {default as IcShower} from './ic_shower.svg';
 export {default as IcSnow} from './ic_snow.svg';
+
+export {default as IcCheck} from './ic_check.svg';

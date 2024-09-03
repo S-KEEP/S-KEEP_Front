@@ -1,7 +1,7 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {padding, wrapperFull} from '../../styles/common';
-import {IcCancel} from '../../assets/icon';
+import {flexBox, padding, wrapperFull} from '../../styles/common';
+import {IcCancel, IcCheck} from '../../assets/icon';
 import {StackScreenProps} from '../../navigators/types';
 import Map from '../../components/Detail/Map/Map';
 import PlaceDetail from '../../components/Detail/PlaceDetail/PlaceDetail';
@@ -15,6 +15,8 @@ import CategoryBottomSheet, {
 import {useRef} from 'react';
 import {ICategory} from '../../types/dtos/location';
 import useNavigator from '../../navigators/hooks/useNavigator';
+import Snackbar from '../../components/common/Snackbar/Snackbar';
+import {theme} from '../../styles';
 
 type DetailTourProps = StackScreenProps<'DetailTour'>;
 export default function DetailTour({navigation, route}: DetailTourProps) {
@@ -30,7 +32,12 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
       // 카테고리 추가 성공 후, 바텀시트 닫고
       // 토스트 노출
       // 카테고리 메인으로 이동
-      // navigation.replace('CategoryList', {title: , description: });
+      bottomSheetRef.current?.close();
+      const {category} = variables;
+      navigation.replace('CategoryList', {
+        title: category.name,
+        description: category.description,
+      });
     },
     onError(e) {
       console.error(e);
@@ -82,6 +89,18 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
         action="저장하기"
         onModify={handleAddCategory}
       />
+
+      <Snackbar
+        content={
+          <View style={styles.snackbar}>
+            <IcCheck />
+            <Text style={styles.snackbarText}>
+              을왕리 해수욕장을 휴양에 저장했어요.
+            </Text>
+          </View>
+        }
+        onActionPress={() => {}}
+      />
     </SafeAreaView>
   );
 }
@@ -90,5 +109,14 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     width: '80%',
     margin: 'auto',
+  },
+  snackbar: {
+    ...flexBox(),
+    gap: 10,
+    width: '100%',
+  },
+  snackbarText: {
+    ...theme.typography.text_m_13,
+    color: theme.palette.white,
   },
 });
