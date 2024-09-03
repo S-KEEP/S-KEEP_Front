@@ -14,11 +14,13 @@ interface SnackbarProps {
   message?: string;
   actionText?: string;
   content?: React.ReactNode;
+  duration?: number | null; // duration을 null로 설정하면 사라지지 않음
   onActionPress?: () => void;
 }
+
 export default function Snackbar() {
-  const duration = 3000;
   const [isVisible, setIsVisible] = useState(false);
+  const [duration, setDuration] = useState<number | null>(null);
   const [message, setMessage] = useState('');
   const [actionText, setActionText] = useState('');
   const [content, setContent] = useState<React.ReactNode | null>(null);
@@ -27,11 +29,17 @@ export default function Snackbar() {
   useEffect(() => {
     const subscription = DeviceEventEmitter.addListener(
       'openSnackBar',
-      ({message, actionText, content, onActionPress}: SnackbarProps) => {
-        console.log('listern!');
-        setMessage(message || '');
-        setActionText(actionText || '');
-        setActionCallback(() => onActionPress || (() => {}));
+      ({
+        message = '',
+        actionText = '',
+        content = null,
+        duration = null,
+        onActionPress = () => {},
+      }: SnackbarProps) => {
+        setMessage(message);
+        setActionText(actionText);
+        setDuration(duration);
+        setActionCallback(() => onActionPress);
         setContent(content || null);
 
         setIsVisible(true);
@@ -43,7 +51,7 @@ export default function Snackbar() {
   }, []);
 
   useEffect(() => {
-    if (isVisible) {
+    if (isVisible && duration !== null) {
       const timeout = setTimeout(() => {
         setIsVisible(false);
       }, duration);
@@ -53,21 +61,32 @@ export default function Snackbar() {
 
   if (!isVisible) return null;
 
-  if (content) {
-    return (
-      <View style={[styles.container, styles.bottomContainer]}>{content}</View>
-    );
-  }
+  const handleClose = () => {
+    setIsVisible(false);
+  };
 
   return (
-    <View style={[styles.container, styles.bottomContainer]}>
-      <Text style={[styles.messageText]}>{message}</Text>
-      {actionText && (
-        <TouchableOpacity onPress={actionCallback}>
-          <Text style={[styles.actionText]}>{actionText}</Text>
-        </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={handleClose}
+      style={[styles.container, styles.bottomContainer]}>
+      {content ? (
+        content
+      ) : (
+        <>
+          <Text style={[styles.messageText]}>{message}</Text>
+          {actionText && (
+            <TouchableOpacity
+              onPress={() => {
+                handleClose();
+                actionCallback();
+              }}>
+              <Text style={[styles.actionText]}>{actionText}</Text>
+            </TouchableOpacity>
+          )}
+        </>
       )}
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -78,10 +97,8 @@ const styles = StyleSheet.create({
     width: '90%',
     borderRadius: 10,
     ...flexBox('row', 'space-between'),
-
     position: 'absolute',
     left: width / 2 - (width * 0.9) / 2,
-
     backgroundColor: '#696969',
     opacity: 0.9,
     zIndex: 1000,
