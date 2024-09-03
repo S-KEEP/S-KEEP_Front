@@ -112,8 +112,17 @@ export const Interceptor = ({children}: InterceptorProps) => {
         // 처음 리퀘스트 재시도
         return axiosApi(originalConfig);
       } catch (err) {
-        console.log('이것마저 실패');
+        console.log(
+          '🕷️ 리프레시 실패 - 스토리지 초기화 및 로그인 화면으로 이동',
+        );
+
         failedRequests.forEach(({reject}) => reject(err as AxiosError));
+        setAuth({isAuthenticated: false});
+        await AsyncStorage.clear();
+        stackNavigation.reset({
+          index: 0,
+          routes: [{name: 'Login'}],
+        });
         return Promise.reject(err);
       } finally {
         isTokenRefreshing = false;
@@ -134,7 +143,7 @@ export const Interceptor = ({children}: InterceptorProps) => {
 axiosApi.interceptors.request.use(
   async config => {
     const accessToken: string = await localStorage.get(TokenKeys.AccessToken);
-
+    console.log(accessToken);
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
