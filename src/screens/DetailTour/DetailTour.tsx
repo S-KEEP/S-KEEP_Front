@@ -37,7 +37,7 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
       bottomSheetRef.current?.close();
 
       const {tourLocation, category} = variables;
-      DeviceEventEmitter.emit('openSnackBar', {
+      DeviceEventEmitter.emit('openToast', {
         content: (
           <View style={styles.snackbar}>
             <IcCheck />
@@ -46,7 +46,6 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
             </Text>
           </View>
         ),
-        duration: 3000,
       });
 
       navigation.replace('CategoryList', {
