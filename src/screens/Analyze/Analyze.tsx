@@ -1,5 +1,5 @@
 import styles from './Analyze.styles';
-import {Image, Text} from 'react-native';
+import {Alert, Image, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StackScreenProps} from '../../navigators/types';
 import {usePostLocation} from '../../hooks/mutations/location/usePostLocation';
@@ -40,7 +40,9 @@ export default function Analyze({navigation, route}: AnalyzeProps) {
       });
     },
     onError: e => {
-      console.error('[Analyze] ', e);
+      console.error('[Analyze] ', e.message);
+      navigation.pop();
+      Alert.alert('분석에 실패하였습니다.', e.message);
     },
   });
 
