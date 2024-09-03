@@ -3,7 +3,7 @@ import styles from './CategoryTab.style';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import Card from '../../../components/common/Category/CategoryCard/CategoryCard';
 import {theme} from '../../../styles';
-import {IcCardEtc, IcCardRest, IcPlus} from '../../../assets/icon';
+import {IcCardEtc, IcPlus} from '../../../assets/icon';
 import {useGetCategoryListQuery} from '../../../hooks/queries/category/useGetCategoryList';
 import {
   COLOR_MAP,
@@ -20,6 +20,7 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
   const mappedData = cardListData.map(item => ({
     title: item.name,
     description: item.description,
+    id: item.id,
     IconComponent: ICON_MAPS[item.name] || IcCardEtc,
     backgroundColor: COLOR_MAP[item.name] || theme.palette.primary,
   }));
@@ -34,6 +35,7 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
     navigation.navigate('CategoryList', {
       title: item.title,
       description: item.description,
+      id: item.id,
     });
   };
 

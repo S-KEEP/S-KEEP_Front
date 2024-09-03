@@ -42,6 +42,7 @@ export {default as IcPlus} from './ic_plus.svg';
 export {default as IcNoti} from './ic_noti.svg';
 export {default as IcNotiColor} from './ic_noti_color.svg';
 export {default as IcEmpty} from './ic_empty.svg';
+export {default as IcDelete} from './ic_delete.svg';
 
 export {default as IcRoundActivity} from './ic_round_activity.svg';
 export {default as IcRoundFestival} from './ic_round_festival.svg';

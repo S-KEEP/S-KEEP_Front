@@ -10,5 +10,6 @@ export interface CardData {
   backgroundColor: string;
   title: string;
   description: string;
+  id: number;
   IconComponent: React.ComponentType<{}>;
 }

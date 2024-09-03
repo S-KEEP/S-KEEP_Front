@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,11 +6,10 @@ import {
   ActivityIndicator,
   SafeAreaView,
   TouchableOpacity,
-  StyleSheet,
 } from 'react-native';
 import {StackScreenProps} from '../../navigators/types';
 import {styles} from './CategoryList.style';
-import {IcEmpty, IcLeft, IcRoundEtc} from '../../assets/icon';
+import {IcDelete, IcLeft, IcRoundEtc} from '../../assets/icon';
 import {
   COLOR_DETAIL_MAP,
   ICON_DETAIL_MAPS,
@@ -23,18 +22,19 @@ import {UserLocation} from '../../types/dtos/location';
 import {useDeleteCategory} from '../../hooks/mutations/category/useDeleteCategory';
 import {useQueryClient} from '@tanstack/react-query';
 import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
-import useAnalyze from '../../hooks/useAnalyze';
 import EmptyCategoryList from '../../components/Category/EmptyCategoryList';
+import Modal from '../../components/common/Modal/Modal';
 
 type CategoryListProps = StackScreenProps<'CategoryList'>;
 
 export default function CategoryList({navigation, route}: CategoryListProps) {
-  const {title, description} = route.params;
-  const {handleGoToGallery} = useAnalyze();
-
+  const {title, description, id} = route.params;
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const queryClient = useQueryClient();
   const backgroundColor = COLOR_DETAIL_MAP[title] || theme.palette.gray1;
   const IconComponent = ICON_DETAIL_MAPS[title] || IcRoundEtc;
 
+  const {mutate: deleteCategory} = useDeleteCategory();
   const {data, loadMore, isFetching, hasNextPage, totalElement} =
     useGetCategoryList({
       userCategory: title,
@@ -53,38 +53,31 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
   );
 
   function handleGoBack() {
-    navigation.navigate('TabNavigator');
+    navigation.goBack();
   }
-
-  const {mutate: deleteCategory} = useDeleteCategory();
-  const queryClient = useQueryClient();
-
   function handleDeleteCategory() {
-    if (data && data.length > 0) {
-      const userCategoryId = data[0].userCategory.id;
-
-      deleteCategory(
-        {userCategoryId},
-        {
-          onSuccess: () => {
-            navigation.navigate('TabNavigator');
-            queryClient.invalidateQueries({
-              queryKey: CATEGORY_KEYS.all,
-            });
-          },
-          onError: error => {
-            console.error('Failed to delete category:', error);
-          },
+    const userCategoryId = id;
+    deleteCategory(
+      {userCategoryId},
+      {
+        onSuccess: () => {
+          navigation.navigate('TabNavigator');
+          queryClient.invalidateQueries({
+            queryKey: CATEGORY_KEYS.all,
+          });
         },
-      );
-    }
+        onError: error => {
+          console.error('카테고리 삭제 실패 :', error);
+        },
+      },
+    );
   }
 
   return (
     <SafeAreaView style={{...wrapper}}>
       <View style={styles.backIcon}>
         <IcLeft onPress={handleGoBack} />
-        <TouchableOpacity onPress={handleDeleteCategory}>
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
           <Text>삭제</Text>
         </TouchableOpacity>
       </View>
@@ -112,6 +105,17 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
           ) : null
         }
         ListEmptyComponent={EmptyCategoryList}
+      />
+
+      <Modal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onConfirm={handleDeleteCategory}
+        IconComponent={<IcDelete style={styles.modalIcon} />}
+        modalTitle="카테고리를 삭제하시겠어요?"
+        modalSubtitle={`삭제하면 다시 복구할 수 없어요!`}
+        modalButtonCancelText="놔둘래요"
+        modalButtonConfirmText="삭제할래요"
       />
     </SafeAreaView>
   );

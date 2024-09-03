@@ -8,6 +8,9 @@ export const styles = StyleSheet.create({
     paddingVertical: 30,
     backgroundColor: theme.palette.secondary,
   },
+  modalIcon: {
+    marginBottom: 10,
+  },
   icon: {
     marginBottom: 16,
   },
