@@ -12,7 +12,7 @@ export interface AnalyzeLocationResponse {
 }
 
 /**
- *  명소 추가 (스크린샷 분석, 카테고리 분류)
+ *  여행지 추가 (스크린샷 분석, 카테고리 분류)
  */
 export const addLocation = async (formdata: FormData) => {
   const res = await POST<AnalyzeLocationResponse>(

@@ -4,7 +4,7 @@ import {LOCATION_KEYS} from '../QueryKeys';
 import {UserLocation} from '../../../types/dtos/location';
 
 /**
- *  명소 상세 조회
+ *  여행지 상세 조회
  */
 export const getLocation = async (userLocationId: number) => {
   const {data} = await GET<UserLocation>(
