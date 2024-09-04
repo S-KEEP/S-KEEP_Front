@@ -115,7 +115,7 @@ export default function Withdraw({navigation}: WithdrawProps) {
           탈퇴 즉시, {userInfo.username}님의 모든 이용 내역은 삭제돼요.
         </Text>
         <Text style={styles.infoText}>
-          계정 정보, 등록된 명소, 친구 등 스킵에서 활동했던 모든 내용들은
+          계정 정보, 등록된 여행지, 친구 등 스킵에서 활동했던 모든 내용들은
           삭제되며, 다시 가입해도 복구되지 않아요!
         </Text>
       </View>
