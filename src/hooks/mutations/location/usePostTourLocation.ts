@@ -8,7 +8,7 @@ interface AddTourLocationReqeust {
   category: ICategory;
 }
 /**
- *  관광 명소 추가
+ *  관광명소 여행지로 추가
  */
 export const addTourLocation = async ({
   tourLocation,

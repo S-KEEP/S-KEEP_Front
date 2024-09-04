@@ -17,6 +17,32 @@ export const axiosApi = axios.create({
   },
 });
 
+/**
+ * resetToLoginIfNeeded
+ * 토큰 관련 로직 실패 시, 전부 지우고 로그인 화면으로 이동
+ * @param stackNavigation
+ * @param setAuth
+ */
+async function resetToLoginIfNeeded(
+  stackNavigation: any,
+  setAuth: (value: {isAuthenticated: boolean}) => void,
+) {
+  setAuth({isAuthenticated: false});
+  await AsyncStorage.clear();
+
+  if (stackNavigation && stackNavigation.isReady()) {
+    const currentRouteName = stackNavigation.getCurrentRoute()?.name;
+    if (currentRouteName !== 'Login') {
+      stackNavigation.reset({
+        index: 0,
+        routes: [{name: 'Login'}],
+      });
+    }
+  } else {
+    console.log("The 'navigation' object hasn't been initialized yet. ");
+  }
+}
+
 export const Interceptor = ({children}: InterceptorProps) => {
   const {stackNavigation} = useNavigator();
   const setAuth = useSetRecoilState(authState);
@@ -57,12 +83,7 @@ export const Interceptor = ({children}: InterceptorProps) => {
 
       if (errorCode !== 'REQUEST_14') {
         console.log('🕷️ 나머지 401 - 스토리지 초기화 및 로그인 화면으로 이동');
-        setAuth({isAuthenticated: false});
-        await AsyncStorage.clear();
-        stackNavigation.reset({
-          index: 0,
-          routes: [{name: 'Login'}],
-        });
+        await resetToLoginIfNeeded(stackNavigation, setAuth);
 
         return Promise.reject(error);
       }
@@ -109,6 +130,7 @@ export const Interceptor = ({children}: InterceptorProps) => {
 
         // 큐 클리어
         failedRequests = [];
+
         // 처음 리퀘스트 재시도
         return axiosApi(originalConfig);
       } catch (err) {
@@ -117,12 +139,10 @@ export const Interceptor = ({children}: InterceptorProps) => {
         );
 
         failedRequests.forEach(({reject}) => reject(err as AxiosError));
-        setAuth({isAuthenticated: false});
-        await AsyncStorage.clear();
-        stackNavigation.reset({
-          index: 0,
-          routes: [{name: 'Login'}],
-        });
+        failedRequests = [];
+
+        await resetToLoginIfNeeded(stackNavigation, setAuth);
+
         return Promise.reject(err);
       } finally {
         isTokenRefreshing = false;

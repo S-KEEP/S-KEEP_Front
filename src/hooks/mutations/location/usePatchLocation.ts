@@ -9,7 +9,7 @@ interface ModifyLocationRequest {
 }
 
 /**
- *  명소 정보 수정 (카테고리)
+ *  여행지 정보 수정 (카테고리)
  */
 export const modifyLocation = async ({
   userLocationId,

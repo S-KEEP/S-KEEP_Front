@@ -61,7 +61,7 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
       setIsLoading(false);
       DeviceEventEmitter.emit('openToast', {
         content: (
-          <Text style={styles.snackbarText}>명소 저장에 실패했습니다</Text>
+          <Text style={styles.snackbarText}>여행지 저장에 실패했습니다</Text>
         ),
       });
     },

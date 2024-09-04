@@ -6,7 +6,7 @@ interface DeleteLocationRequest {
 }
 
 /**
- *  명소 삭제
+ *  여행지 삭제
  */
 export const deleteLocation = async ({
   userLocationId,

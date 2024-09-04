@@ -6,7 +6,7 @@ interface DeleteCategoryRequest {
 }
 
 /**
- *  명소 삭제
+ *  카테고리 삭제
  */
 export const deleteCategory = async ({
   userCategoryId,

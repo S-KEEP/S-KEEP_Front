@@ -7,7 +7,7 @@ export interface ReanalyzeRequest {
 }
 
 /**
- *  명소 재분석
+ *  여행지 재분석
  */
 export const reanlyzeLocation = async ({
   userLocationList,
