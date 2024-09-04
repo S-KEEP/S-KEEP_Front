@@ -14,6 +14,7 @@ export const enum StackMenu {
   DetailTour = 'DetailTour',
 
   CategoryList = 'CategoryList',
+  CategoryAdd = 'CategoryAdd',
 }
 
 export const enum TabMenu {

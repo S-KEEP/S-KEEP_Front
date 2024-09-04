@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   description: {
     ...theme.typography.body_m_16,
-    color: '#555',
+    color: theme.palette.gray6,
   },
 });
 

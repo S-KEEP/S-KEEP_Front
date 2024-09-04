@@ -2,6 +2,7 @@ import {useQuery} from '@tanstack/react-query';
 import {categoryQueryKeys} from '../../../constants/queryKeys/category';
 import {CategoryCardResponseDto} from '../../../types/dtos/category';
 import {axiosApi} from '../../../apis/client';
+import {CATEGORY_KEYS} from '../QueryKeys';
 
 export const categoryApi = {
   getCategoryList: async (): Promise<CategoryCardResponseDto> => {
@@ -11,8 +12,10 @@ export const categoryApi = {
 };
 
 export const useGetCategoryListQuery = () => {
+  const QUERY_KEY = CATEGORY_KEYS.all;
+
   const {data: cardListData = []} = useQuery({
-    queryKey: [categoryQueryKeys.cardList],
+    queryKey: QUERY_KEY,
     queryFn: categoryApi.getCategoryList,
   });
 

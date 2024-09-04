@@ -26,6 +26,7 @@ export {default as IcCardFood} from './ic_card_food.svg';
 export {default as IcCardHistory} from './ic_card_history.svg';
 export {default as IcCardNature} from './ic_card_nature.svg';
 export {default as IcCardRest} from './ic_card_rest.svg';
+export {default as IcCardEtc} from './ic_card_etc.svg';
 export {default as IcCardShopping} from './ic_card_shopping.svg';
 
 export {default as IcRight} from './ic_right.svg';
@@ -52,3 +53,17 @@ export {default as IcShower} from './ic_shower.svg';
 export {default as IcSnow} from './ic_snow.svg';
 
 export {default as IcCheck} from './ic_check.svg';
+export {default as IcPlus} from './ic_plus.svg';
+export {default as IcNoti} from './ic_noti.svg';
+export {default as IcNotiColor} from './ic_noti_color.svg';
+export {default as IcEmpty} from './ic_empty.svg';
+export {default as IcDelete} from './ic_delete.svg';
+
+export {default as IcRoundActivity} from './ic_round_activity.svg';
+export {default as IcRoundFestival} from './ic_round_festival.svg';
+export {default as IcRoundFood} from './ic_round_food.svg';
+export {default as IcRoundHistory} from './ic_round_history.svg';
+export {default as IcRoundNature} from './ic_round_nature.svg';
+export {default as IcRoundShopping} from './ic_round_shopping.svg';
+export {default as IcRoundRest} from './ic_round_rest.svg';
+export {default as IcRoundEtc} from './ic_round_etc.svg';

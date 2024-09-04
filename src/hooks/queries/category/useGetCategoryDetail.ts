@@ -6,17 +6,21 @@ import {UserLocation} from '../../../types/dtos/location';
 import {IPage} from '../../../types/dtos/category';
 
 export interface GetPostHistoryRequest {
-  userCategory: string;
+  userCategoryId: number;
   page: number;
 }
 
-const getCategoryList = async ({userCategory, page}: GetPostHistoryRequest) => {
+const getCategoryList = async ({
+  userCategoryId,
+  page,
+}: GetPostHistoryRequest) => {
   const {
     data: {result},
   } = await GET<IPage<UserLocation>>(
-    `/api/user-location?page=${page}&userCategory=${userCategory}`,
+    `/api/user-location?page=${page}&userCategory=${userCategoryId}`,
   );
 
+  console.log(userCategoryId);
   return {
     items: result.userLocationList,
     nextPage: result.totalPage > page ? page + 1 : undefined,
