@@ -11,6 +11,9 @@ import Login from '../screens/Login/Login';
 
 import Withdraw from '../screens/Withdraw/Withdraw';
 import CategoryList from '../screens/CategoryList/CategoryList';
+import CategoryAdd from '../screens/CategoryAdd/CategoryAdd';
+import {TouchableOpacity} from 'react-native';
+import {IcLeft} from '../assets/icon';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -39,7 +42,20 @@ export default function StackNavigator() {
 
       {/* 카테고리 리스트 */}
       <Stack.Screen name={StackMenu.CategoryList} component={CategoryList} />
-
+      <Stack.Screen
+        name={StackMenu.CategoryAdd}
+        component={CategoryAdd}
+        options={({navigation}) => ({
+          headerShown: true,
+          title: '',
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <IcLeft />
+            </TouchableOpacity>
+          ),
+        })}
+      />
+      
       {/* 장소 상세 */}
       <Stack.Screen name={StackMenu.Detail} component={Detail} />
     </Stack.Navigator>

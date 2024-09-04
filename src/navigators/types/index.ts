@@ -25,7 +25,8 @@ export type StackParamList = {
   ReAnalyze: {history: AnalyzeLocationResponse; request: ReanalyzeRequest};
   Detail: {id: number};
 
-  CategoryList: {title: string; description: string};
+  CategoryList: {title: string; description: string; id: number};
+  CategoryAdd: undefined;
 };
 
 export type TabParamList = {

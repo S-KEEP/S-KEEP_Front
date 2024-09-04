@@ -1,17 +1,22 @@
 import {StyleSheet} from 'react-native';
 import {theme} from '../../styles';
+import {flexBox} from '../../styles/common';
 
 export const styles = StyleSheet.create({
   headerContainer: {
-    paddingTop: 80,
     alignItems: 'center',
     paddingVertical: 30,
     backgroundColor: theme.palette.secondary,
+  },
+  modalIcon: {
+    marginBottom: 10,
   },
   icon: {
     marginBottom: 16,
   },
   backIcon: {
+    width: '95%',
+    ...flexBox('row', 'space-between'),
     position: 'absolute',
     zIndex: 9,
     top: 70,

@@ -13,6 +13,7 @@ export const enum StackMenu {
   Detail = 'Detail',
 
   CategoryList = 'CategoryList',
+  CategoryAdd = 'CategoryAdd',
 }
 
 export const enum TabMenu {
