@@ -38,6 +38,21 @@ export {default as IcCategoryRest} from './ic_category_rest2.svg';
 export {default as IcSad} from './ic_sad_face.svg';
 export {default as IcAppleLogo} from './ic_apple_logo.svg';
 export {default as IcAnalyze} from './ic_analyze.svg';
+
+export {default as IcAirplane} from './ic_airplane.svg';
+export {default as IcWarn} from './ic_warn.svg';
+export {default as IcTrash} from './ic_trash.svg';
+
+// 날씨 Icon
+export {default as IcClear} from './ic_clear.svg';
+export {default as IcPartlyCloudy} from './ic_partly_cloudy.svg';
+export {default as IcCloudy} from './ic_cloudy.svg';
+export {default as IcRain} from './ic_rain.svg';
+export {default as IcRainAndSnow} from './ic_rain_and_snow.svg';
+export {default as IcShower} from './ic_shower.svg';
+export {default as IcSnow} from './ic_snow.svg';
+
+export {default as IcCheck} from './ic_check.svg';
 export {default as IcPlus} from './ic_plus.svg';
 export {default as IcNoti} from './ic_noti.svg';
 export {default as IcNotiColor} from './ic_noti_color.svg';

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     ...flexBox(),
     backgroundColor: theme.palette.primary,
     borderRadius: 10,
-    paddingVertical: '5%',
+    paddingVertical: 20,
   },
   gray: {
     backgroundColor: theme.palette.gray2,

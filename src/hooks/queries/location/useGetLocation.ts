@@ -10,7 +10,6 @@ export const getLocation = async (userLocationId: number) => {
   const {data} = await GET<UserLocation>(
     `/api/user-location/${userLocationId}`,
   );
-  console.log(`/api/user-location/${userLocationId} -- ✈ `, data);
   if (data.errorCode) throw new Error(`${data.errorCode}: ${data.message}`);
   return data.result;
 };

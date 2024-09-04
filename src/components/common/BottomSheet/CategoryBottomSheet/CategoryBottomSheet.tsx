@@ -14,6 +14,8 @@ import styles from './CategoryBottomSheet.styles';
 import CategoryItem from '../../Category/CategoryItem/CategoryItem';
 
 export interface CategoryBottomSheetProps {
+  title: string;
+  action: string;
   onModify: (category: ICategory) => void;
 }
 
@@ -25,7 +27,7 @@ export interface CategoryBottomSheetRef {
 const CategoryBottomSheet = forwardRef<
   CategoryBottomSheetRef,
   CategoryBottomSheetProps
->(({onModify}, ref) => {
+>(({title, action, onModify}, ref) => {
   const bottomSheetRef = useRef<BottomSheetModalRef>(null);
 
   useImperativeHandle(ref, () => ({
@@ -61,7 +63,7 @@ const CategoryBottomSheet = forwardRef<
   return (
     <BottomSheet ref={bottomSheetRef}>
       <View style={styles.container}>
-        <Text style={styles.title}>변경할 카테고리를 선택해 주세요!</Text>
+        <Text style={styles.title}>{title}</Text>
 
         <BottomSheetFlatList
           data={cardListData}
@@ -70,7 +72,7 @@ const CategoryBottomSheet = forwardRef<
           style={styles.list}
         />
 
-        <Button text="변경하기" onPress={handleModify} />
+        <Button text={action} onPress={handleModify} />
       </View>
     </BottomSheet>
   );

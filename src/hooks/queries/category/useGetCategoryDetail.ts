@@ -16,12 +16,9 @@ const getCategoryList = async ({
 }: GetPostHistoryRequest) => {
   const {
     data: {result},
-  } = await GET<IPage<UserLocation>>('/api/user-location', {
-    params: {
-      page,
-      userCategoryId,
-    },
-  });
+  } = await GET<IPage<UserLocation>>(
+    `/api/user-location?page=${page}&userCategoryId=${userCategoryId}`,
+  );
 
   console.log(userCategoryId);
   return {

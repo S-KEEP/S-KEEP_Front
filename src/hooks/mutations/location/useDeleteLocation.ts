@@ -11,7 +11,8 @@ interface DeleteLocationRequest {
 export const deleteLocation = async ({
   userLocationId,
 }: DeleteLocationRequest) => {
-  const res = await DELETE<boolean>(`/user-location/${userLocationId}`);
+  console.log(userLocationId);
+  const res = await DELETE<boolean>(`/api/user-location/${userLocationId}`);
   return res.data;
 };
 

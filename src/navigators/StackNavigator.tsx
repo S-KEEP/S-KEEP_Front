@@ -11,6 +11,7 @@ import Login from '../screens/Login/Login';
 
 import Withdraw from '../screens/Withdraw/Withdraw';
 import CategoryList from '../screens/CategoryList/CategoryList';
+import DetailTour from '../screens/DetailTour/DetailTour';
 import CategoryAdd from '../screens/CategoryAdd/CategoryAdd';
 import {TouchableOpacity} from 'react-native';
 import {IcLeft} from '../assets/icon';
@@ -42,6 +43,8 @@ export default function StackNavigator() {
 
       {/* 카테고리 리스트 */}
       <Stack.Screen name={StackMenu.CategoryList} component={CategoryList} />
+
+      {/* 카테고리 추가 */}
       <Stack.Screen
         name={StackMenu.CategoryAdd}
         component={CategoryAdd}
@@ -55,9 +58,10 @@ export default function StackNavigator() {
           ),
         })}
       />
-      
+
       {/* 장소 상세 */}
       <Stack.Screen name={StackMenu.Detail} component={Detail} />
+      <Stack.Screen name={StackMenu.DetailTour} component={DetailTour} />
     </Stack.Navigator>
   );
 }

@@ -11,6 +11,7 @@ export const enum StackMenu {
   AnalyzeError = 'AnalyzeError',
 
   Detail = 'Detail',
+  DetailTour = 'DetailTour',
 
   CategoryList = 'CategoryList',
   CategoryAdd = 'CategoryAdd',

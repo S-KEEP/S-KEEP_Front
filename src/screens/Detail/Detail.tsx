@@ -1,7 +1,13 @@
-import {StyleSheet, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {flexBox, padding, wrapperFull} from '../../styles/common';
-import {IcCancel} from '../../assets/icon';
+import {IcCancel, IcSad} from '../../assets/icon';
 import {StackScreenProps} from '../../navigators/types';
 import Map from '../../components/Detail/Map/Map';
 import {useGetLocation} from '../../hooks/queries/location/useGetLocation';
@@ -9,17 +15,22 @@ import ModifyButton from '../../components/common/Button/ModifyButton';
 import CategoryBottomSheet, {
   CategoryBottomSheetRef,
 } from '../../components/common/BottomSheet/CategoryBottomSheet/CategoryBottomSheet';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import CategoryItem from '../../components/common/Category/CategoryItem/CategoryItem';
 import {ICategory} from '../../types/dtos/location';
 import PlaceDetail from '../../components/Detail/PlaceDetail/PlaceDetail';
 import {usePatchLocation} from '../../hooks/mutations/location/usePatchLocation';
 import {useQueryClient} from '@tanstack/react-query';
-import {LOCATION_KEYS} from '../../hooks/queries/QueryKeys';
+import {CATEGORY_KEYS, LOCATION_KEYS} from '../../hooks/queries/QueryKeys';
 import SkeletonCategoryItem from '../../components/common/Category/CategoryItem/SkeletonCategoryItem';
 import SkeletonPlaceDetail from '../../components/common/PlaceDetail/SkeletonPlaceDetail';
 import Button from '../../components/common/Button/Button';
 import ErrorView from '../../components/ErrorView/ErrorView';
+import Tourism from '../../components/common/Tourism/Tourism';
+import {theme} from '../../styles';
+import Weather from '../../components/common/Weather/Weather';
+import {useDeleteLocation} from '../../hooks/mutations/location/useDeleteLocation';
+import Modal from '../../components/common/Modal/Modal';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -27,6 +38,8 @@ export default function Detail({navigation, route}: DetailProps) {
 
   const {data: location, isLoading, isError} = useGetLocation(id);
   const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const queryClient = useQueryClient();
   const {mutate: modify} = usePatchLocation({
@@ -43,10 +56,32 @@ export default function Detail({navigation, route}: DetailProps) {
       queryClient.invalidateQueries({
         queryKey: LOCATION_KEYS.detail(String(id)),
       });
+
       bottomSheetRef.current?.close();
     },
     onError: e => {
       console.error('[Modify] ', e);
+    },
+  });
+
+  const {mutate: remove} = useDeleteLocation({
+    onSuccess: res => {
+      const {errorCode, message, result} = res;
+
+      if (errorCode) {
+        console.error(`${errorCode} - ${message}`);
+        navigation.pop();
+        return;
+      }
+
+      console.log('[Remove] ', res.result);
+      queryClient.invalidateQueries({
+        queryKey: CATEGORY_KEYS.lists(),
+      });
+      navigation.pop();
+    },
+    onError: e => {
+      console.error('[Remove] ', e);
     },
   });
 
@@ -104,24 +139,65 @@ export default function Detail({navigation, route}: DetailProps) {
     });
   }
 
+  function handleDelete() {
+    remove({userLocationId: id});
+  }
+
   return (
-    <SafeAreaView style={{...wrapperFull}}>
-      <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
+    <SafeAreaView style={{...wrapperFull, paddingBottom: 0}}>
+      <View style={styles.header}>
+        <IcCancel onPress={() => navigation.pop()} />
+
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <Text>삭제</Text>
+        </TouchableOpacity>
+      </View>
 
       <Map x={location?.location.x} y={location.location.y} />
 
-      <PlaceDetail
-        imageSrc={location?.photoUrl}
-        title={String(location.location.placeName)}
-        description={String(location.location.roadAddress)}
+      <ScrollView>
+        <PlaceDetail
+          imageSrc={location?.photoUrl}
+          title={String(location.location.placeName)}
+          description={String(location.location.roadAddress)}
+        />
+
+        <View style={styles.categoryBox}>
+          <CategoryItem category={location.userCategory} />
+          <ModifyButton onPress={() => bottomSheetRef.current?.open()} />
+        </View>
+
+        <Tourism
+          name={location.location.placeName}
+          location={{x: location.location.x, y: location.location.y}}
+        />
+
+        <Weather
+          location={{
+            x: location.location.x,
+            y: location.location.y,
+            address: location.location.roadAddress,
+          }}
+        />
+      </ScrollView>
+
+      <CategoryBottomSheet
+        ref={bottomSheetRef}
+        title="수정할 카테고리를 선택해 주세요!"
+        action="수정하기"
+        onModify={handleOnModify}
       />
 
-      <View style={styles.categoryBox}>
-        <CategoryItem category={location.userCategory} />
-        <ModifyButton onPress={() => bottomSheetRef.current?.open()} />
-      </View>
-
-      <CategoryBottomSheet ref={bottomSheetRef} onModify={handleOnModify} />
+      <Modal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onConfirm={handleDelete}
+        IconComponent={<IcSad style={styles.modalIcon} />}
+        modalTitle="정말로 삭제하시겠어요?"
+        modalSubtitle={`삭제하면 다시 복구할 수 없어요!`}
+        modalButtonCancelText="놔둘래요"
+        modalButtonConfirmText="삭제할래요"
+      />
     </SafeAreaView>
   );
 }
@@ -134,5 +210,16 @@ const styles = StyleSheet.create({
 
     borderTopWidth: 1,
     borderTopColor: '#EDEDED',
+  },
+  header: {
+    ...flexBox('row', 'space-between'),
+    ...padding,
+  },
+  deleteText: {
+    ...theme.typography.body_m_15,
+    color: '#797979',
+  },
+  modalIcon: {
+    marginBottom: 10,
   },
 });
