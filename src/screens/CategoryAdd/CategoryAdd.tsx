@@ -17,6 +17,7 @@ import {useQueryClient} from '@tanstack/react-query';
 import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
 
 type CategoryAddProps = StackScreenProps<'CategoryAdd'>;
+
 export default function CategoryAdd({navigation}: CategoryAddProps) {
   const nameInputRef = useRef<TextInput>(null);
   const memoInputRef = useRef<TextInput>(null);
@@ -31,29 +32,34 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    if (currentFocus === 'name' && nameInputRef.current) {
-      nameInputRef.current.focus();
-    } else if (currentFocus === 'memo' && memoInputRef.current) {
-      memoInputRef.current.focus();
-    }
+    const focusTimeout = setTimeout(() => {
+      if (currentFocus === 'name' && nameInputRef.current) {
+        nameInputRef.current.focus();
+      } else if (currentFocus === 'memo' && memoInputRef.current) {
+        memoInputRef.current.focus();
+      }
+    }, 100);
+
+    return () => clearTimeout(focusTimeout);
   }, [currentFocus]);
 
-  /**
-   * 진입 시 키보드 항상 활성화 & 키보드 위치 위에 버튼 생성
-   */
   useEffect(() => {
+    const handleKeyboardShow = (event: any) => {
+      setButtonBottomPosition(event.endCoordinates.height);
+    };
+
+    const handleKeyboardHide = () => {
+      setButtonBottomPosition(0);
+    };
+
     const keyboardWillShowListener = Keyboard.addListener(
       'keyboardWillShow',
-      event => {
-        setButtonBottomPosition(event.endCoordinates.height);
-      },
+      handleKeyboardShow,
     );
 
     const keyboardWillHideListener = Keyboard.addListener(
       'keyboardWillHide',
-      () => {
-        setButtonBottomPosition(0);
-      },
+      handleKeyboardHide,
     );
 
     return () => {
@@ -65,6 +71,7 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
   const handleNameInputFocus = () => {
     setCurrentFocus('name');
   };
+
   const handleMemoInputFocus = () => {
     setCurrentFocus('memo');
   };
@@ -106,7 +113,7 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
       },
     );
   };
-  
+
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.title}>원하는 카테고리를 만들어주세요</Text>
@@ -124,7 +131,12 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
           </Text>
           <TextInput
             ref={nameInputRef}
-            style={styles.input}
+            style={[
+              styles.input,
+              currentFocus === 'name' && {
+                borderBottomColor: theme.palette.primary,
+              },
+            ]}
             placeholder="어떤 여행지들을 저장하고 싶나요?"
             placeholderTextColor={theme.palette.gray5}
             maxLength={12}
@@ -151,7 +163,12 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
           </Text>
           <TextInput
             ref={memoInputRef}
-            style={styles.input}
+            style={[
+              styles.input,
+              currentFocus === 'memo' && {
+                borderBottomColor: theme.palette.primary,
+              },
+            ]}
             placeholder="어떤 카테고리인가요?"
             placeholderTextColor={theme.palette.gray5}
             onFocus={handleMemoInputFocus}
