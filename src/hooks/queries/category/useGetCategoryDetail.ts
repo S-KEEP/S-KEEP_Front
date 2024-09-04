@@ -17,7 +17,7 @@ const getCategoryList = async ({
   const {
     data: {result},
   } = await GET<IPage<UserLocation>>(
-    `/api/user-location?page=${page}&userCategory=${userCategoryId}`,
+    `/api/user-location?page=${page}&userCategoryId=${userCategoryId}`,
   );
 
   console.log(userCategoryId);

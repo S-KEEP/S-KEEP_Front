@@ -52,6 +52,7 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
       navigation.replace('CategoryList', {
         title: category.name,
         description: category.description,
+        id: category.id,
       });
     },
     onError(e) {
