@@ -76,23 +76,37 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
         description: memoValue || ' ',
       },
       {
-        onSuccess: () => {
-          console.log('Category added successfully!');
-          navigation.replace('CategoryList', {
-            title: nameValue,
-            description: memoValue,
-          });
+        onSuccess: response => {
+          console.log('=====카테고리 추가 성공=====');
+          const locationHeader = response.locationHeader;
+
+          const userCategoryIdMatch =
+            locationHeader.match(/userCategoryId=(\d+)/);
+          const userCategoryId = userCategoryIdMatch
+            ? userCategoryIdMatch[1]
+            : null;
+
+          if (userCategoryId) {
+            navigation.replace('CategoryList', {
+              title: nameValue,
+              description: memoValue,
+              id: userCategoryId,
+            });
+          } else {
+            console.error('카테고리ID 추출 실패');
+          }
+
           queryClient.invalidateQueries({
             queryKey: CATEGORY_KEYS.all,
           });
         },
         onError: error => {
-          console.error('Error adding category:', error);
+          console.error('카테고리 추가 실패 :', error);
         },
       },
     );
   };
-
+  
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.title}>원하는 카테고리를 만들어주세요</Text>

@@ -11,7 +11,12 @@ export interface ICategoryData {
  */
 export const addCategory = async (data: ICategoryData) => {
   const res = await POST(`/api/user-category`, data);
-  return res.data;
+  const locationHeader = res.headers['location'];
+  console.log('headers', locationHeader);
+  return {
+    data: res.data,
+    locationHeader,
+  };
 };
 
 export const usePostAddCategory = () => {

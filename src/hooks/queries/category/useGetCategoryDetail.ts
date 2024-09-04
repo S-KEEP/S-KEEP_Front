@@ -6,25 +6,29 @@ import {UserLocation} from '../../../types/dtos/location';
 import {IPage} from '../../../types/dtos/category';
 
 export interface GetPostHistoryRequest {
-  userCategory: string;
+  userCategoryId: number;
   page: number;
 }
 
-const getCategoryList = async ({userCategory, page}: GetPostHistoryRequest) => {
+const getCategoryList = async ({
+  userCategoryId,
+  page,
+}: GetPostHistoryRequest) => {
   const {
     data: {result},
   } = await GET<IPage<UserLocation>>('/api/user-location', {
     params: {
       page,
-      userCategory,
+      userCategoryId,
     },
   });
 
+  console.log(userCategoryId);
   return {
     items: result.userLocationList,
     nextPage: result.totalPage > page ? page + 1 : undefined,
     totalPage: result.totalPage,
-    totalElement: result.totalElement, 
+    totalElement: result.totalElement,
   };
 };
 
@@ -36,7 +40,7 @@ const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
     getNextPageParam: lastPage => lastPage.nextPage,
     select: data => ({
       pages: data.pages.flatMap(page => page.items),
-      totalElement: data.pages?.[0]?.totalElement ?? 0, 
+      totalElement: data.pages?.[0]?.totalElement ?? 0,
     }),
     initialPageParam: requestParams.page,
   });
@@ -52,7 +56,7 @@ const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
     loadMore,
     isFetching,
     hasNextPage,
-    totalElement: data?.totalElement, 
+    totalElement: data?.totalElement,
   };
 };
 

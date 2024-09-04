@@ -37,7 +37,7 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
   const {mutate: deleteCategory} = useDeleteCategory();
   const {data, loadMore, isFetching, hasNextPage, totalElement} =
     useGetCategoryList({
-      userCategory: title,
+      userCategoryId: id,
       page: 1,
     });
 
