@@ -33,9 +33,9 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
       analyzeState === AnalyzeState.SUCCESS &&
       type === AnalyzeCount.MULTIPLE
     )
-      return `${result.successCount}개의 명소를 캐치했어요!`;
+      return `${result.successCount}개의 여행지를 캐치했어요!`;
     else if (analyzeState === AnalyzeState.PARTIAL)
-      return `${result.successCount}개의 명소를 캐치했어요!`;
+      return `${result.successCount}개의 여행지를 캐치했어요!`;
   }, [analyzeState]);
 
   const subtitle = useMemo(() => {
