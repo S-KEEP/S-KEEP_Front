@@ -202,17 +202,7 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
           ]}
           onPress={handleCreateButtonPress}
           disabled={isButtonDisabled}>
-          <Text
-            style={[
-              styles.createButtonText,
-              {
-                color: isButtonDisabled
-                  ? theme.palette.gray2
-                  : theme.palette.white,
-              },
-            ]}>
-            만들기
-          </Text>
+          <Text style={[styles.createButtonText]}>만들기</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
