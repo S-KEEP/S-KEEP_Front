@@ -114,6 +114,8 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
     );
   };
 
+  const isButtonDisabled = nameValue.trim() === '';
+
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.title}>원하는 카테고리를 만들어주세요</Text>
@@ -192,9 +194,25 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
       <View
         style={[styles.createButtonWrapper, {bottom: buttonBottomPosition}]}>
         <TouchableOpacity
-          style={styles.createButton}
-          onPress={handleCreateButtonPress}>
-          <Text style={styles.createButtonText}>만들기</Text>
+          style={[
+            styles.createButton,
+            isButtonDisabled
+              ? {backgroundColor: theme.palette.gray5}
+              : {backgroundColor: theme.palette.primary},
+          ]}
+          onPress={handleCreateButtonPress}
+          disabled={isButtonDisabled}>
+          <Text
+            style={[
+              styles.createButtonText,
+              {
+                color: isButtonDisabled
+                  ? theme.palette.gray2
+                  : theme.palette.white,
+              },
+            ]}>
+            만들기
+          </Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
