@@ -76,10 +76,12 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
   }
 
   return (
-    <SafeAreaView style={{...wrapperFull, paddingBottom: 0}}>
+    <SafeAreaView
+      style={{...wrapperFull, paddingBottom: 30, position: 'relative'}}>
       <>
         <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
         <Map x={location.mapX} y={location.mapY} />
+
         <ScrollView>
           <PlaceDetail
             imageSrc={location.imageUrl}
@@ -99,14 +101,15 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
               address: location.address,
             }}
           />
-
-          <View style={styles.buttonWrapper}>
-            <Button
-              text="카테고리에 추가"
-              onPress={() => bottomSheetRef.current?.open()}
-            />
-          </View>
         </ScrollView>
+
+        <View style={styles.buttonWrapper}>
+          <Button
+            text="카테고리에 추가"
+            onPress={() => bottomSheetRef.current?.open()}
+          />
+        </View>
+
         <CategoryBottomSheet
           ref={bottomSheetRef}
           title="저장할 카테고리를 선택해 주세요!"
@@ -114,6 +117,7 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
           onModify={handleAddCategory}
         />
       </>
+
       {isLoading && (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={theme.palette.primary} />

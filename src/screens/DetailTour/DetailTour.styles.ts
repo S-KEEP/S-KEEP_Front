@@ -1,11 +1,14 @@
 import {StyleSheet} from 'react-native';
 import {theme} from '../../styles';
-import {flexBox} from '../../styles/common';
+import {flexBox, padding} from '../../styles/common';
 
 export const styles = StyleSheet.create({
   buttonWrapper: {
-    width: '80%',
-    margin: 'auto',
+    width: '100%',
+    ...padding,
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 30,
   },
   snackbar: {
     ...flexBox(),
