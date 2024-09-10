@@ -24,6 +24,7 @@ import {useQueryClient} from '@tanstack/react-query';
 import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
 import EmptyCategoryList from '../../components/Category/EmptyCategoryList';
 import Modal from '../../components/common/Modal/Modal';
+import Icon from '../../components/common/Icon/Icon';
 
 type CategoryListProps = StackScreenProps<'CategoryList'>;
 
@@ -76,10 +77,16 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
   return (
     <SafeAreaView style={{...wrapper}}>
       <View style={styles.backIcon}>
-        <IcLeft onPress={handleGoBack} />
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text>삭제</Text>
-        </TouchableOpacity>
+        <Icon
+          onPress={handleGoBack}
+          children={<IcLeft />}
+          style={{paddingVertical: 5}}
+        />
+
+        <Icon
+          onPress={() => setModalVisible(true)}
+          children={<Text>삭제</Text>}
+        />
       </View>
 
       <View style={[styles.headerContainer, {backgroundColor}]}>

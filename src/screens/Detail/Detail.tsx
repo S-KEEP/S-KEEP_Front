@@ -154,9 +154,11 @@ export default function Detail({navigation, route}: DetailProps) {
       <View style={styles.header}>
         <Icon onPress={() => navigation.pop()} children={<IcCancel />} />
 
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text>삭제</Text>
-        </TouchableOpacity>
+        <Icon
+          onPress={() => setModalVisible(true)}
+          children={<Text>삭제</Text>}
+          style={{paddingVertical: 5}}
+        />
       </View>
 
       <Map x={location?.location.x} y={location.location.y} />
