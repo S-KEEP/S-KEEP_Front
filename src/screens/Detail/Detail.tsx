@@ -31,6 +31,7 @@ import {theme} from '../../styles';
 import Weather from '../../components/common/Weather/Weather';
 import {useDeleteLocation} from '../../hooks/mutations/location/useDeleteLocation';
 import Modal from '../../components/common/Modal/Modal';
+import Icon from '../../components/common/Icon/Icon';
 
 type DetailProps = StackScreenProps<'Detail'>;
 export default function Detail({navigation, route}: DetailProps) {
@@ -88,7 +89,12 @@ export default function Detail({navigation, route}: DetailProps) {
   if (isLoading) {
     return (
       <SafeAreaView style={{...wrapperFull}}>
-        <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
+        <Icon
+          onPress={() => navigation.pop()}
+          children={<IcCancel />}
+          style={{...padding}}
+        />
+
         <Map x={'127.0016985'} y={'37.413294'} />
 
         <SkeletonPlaceDetail />
@@ -146,11 +152,13 @@ export default function Detail({navigation, route}: DetailProps) {
   return (
     <SafeAreaView style={{...wrapperFull, paddingBottom: 0}}>
       <View style={styles.header}>
-        <IcCancel onPress={() => navigation.pop()} />
+        <Icon onPress={() => navigation.pop()} children={<IcCancel />} />
 
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text>삭제</Text>
-        </TouchableOpacity>
+        <Icon
+          onPress={() => setModalVisible(true)}
+          children={<Text>삭제</Text>}
+          style={{paddingVertical: 5}}
+        />
       </View>
 
       <Map x={location?.location.x} y={location.location.y} />

@@ -15,6 +15,7 @@ import DetailTour from '../screens/DetailTour/DetailTour';
 import CategoryAdd from '../screens/CategoryAdd/CategoryAdd';
 import {TouchableOpacity} from 'react-native';
 import {IcLeft} from '../assets/icon';
+import Icon from '../components/common/Icon/Icon';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -52,9 +53,7 @@ export default function StackNavigator() {
           headerShown: true,
           title: '',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <IcLeft />
-            </TouchableOpacity>
+            <Icon onPress={() => navigation.goBack()} children={<IcLeft />} />
           ),
         })}
       />

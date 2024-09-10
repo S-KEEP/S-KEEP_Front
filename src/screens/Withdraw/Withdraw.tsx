@@ -13,6 +13,7 @@ import {useAppleLogin} from '../../hooks/useAppleLogin';
 import {theme} from '../../styles';
 import {StackScreenProps} from '../../navigators/types';
 import {wrapper} from '../../styles/common';
+import Icon from '../../components/common/Icon/Icon';
 
 interface AppleInfo {
   email: string;
@@ -101,7 +102,7 @@ export default function Withdraw({navigation}: WithdrawProps) {
   return (
     <View style={styles.container}>
       <View style={styles.backIcon}>
-        <IcLeft onPress={handleGoBack} />
+        <Icon onPress={handleGoBack} children={<IcLeft />} />
       </View>
       <Text style={styles.title}>정말로 스킵을 탈퇴하실 건가요?</Text>
       <Text style={styles.subtitle}>탈퇴 전, 확인해야 될 정보가 있어요.</Text>
