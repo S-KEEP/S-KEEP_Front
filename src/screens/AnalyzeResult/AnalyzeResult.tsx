@@ -14,6 +14,7 @@ import {ICategory} from '../../types/dtos/location';
 import {AnalyzeCount, AnalyzeState} from '../../constants/states/AnalyzeState';
 import {ReanalyzeRequest} from '../../hooks/mutations/location/usePatchLocationReAnalyze';
 import {usePatchLocation} from '../../hooks/mutations/location/usePatchLocation';
+import Icon from '../../components/common/Icon/Icon';
 
 type AnalyzeResultProps = StackScreenProps<'AnalyzeResult'>;
 export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
@@ -119,7 +120,7 @@ export default function AnalyzeResult({navigation, route}: AnalyzeResultProps) {
 
   return (
     <SafeAreaView style={{...wrapper}}>
-      <IcCancel onPress={handleGoBack} />
+      <Icon onPress={handleGoBack} children={<IcCancel />} />
 
       {userLocationList.length > 1 ? (
         <Text style={styles.title}>{title}</Text>

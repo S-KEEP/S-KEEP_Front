@@ -22,6 +22,7 @@ import {useRef, useState} from 'react';
 import {ICategory} from '../../types/dtos/location';
 import {theme} from '../../styles';
 import {styles} from './DetailTour.styles';
+import Icon from '../../components/common/Icon/Icon';
 
 type DetailTourProps = StackScreenProps<'DetailTour'>;
 export default function DetailTour({navigation, route}: DetailTourProps) {
@@ -79,7 +80,12 @@ export default function DetailTour({navigation, route}: DetailTourProps) {
     <SafeAreaView
       style={{...wrapperFull, paddingBottom: 30, position: 'relative'}}>
       <>
-        <IcCancel onPress={() => navigation.pop()} style={{...padding}} />
+        <Icon
+          onPress={() => navigation.pop()}
+          children={<IcCancel />}
+          style={{...padding}}
+        />
+
         <Map x={location.mapX} y={location.mapY} />
 
         <ScrollView>
