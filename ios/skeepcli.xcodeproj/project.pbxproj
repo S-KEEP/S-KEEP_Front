@@ -68,6 +68,7 @@
 		00E356F21AD99517003FC87E /* skeepcliTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = skeepcliTests.m; sourceTree = "<group>"; };
 		03D43B87C5634D7F93F1145C /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.ttf"; path = "../src/assets/fonts/Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		122334E02C77710D002D80B6 /* share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = share.entitlements; sourceTree = "<group>"; };
+		1242C0412C959D09002C8CEE /* skeepcliDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = skeepcliDebug.entitlements; path = skeepcli/skeepcliDebug.entitlements; sourceTree = "<group>"; };
 		126DA8D92C9595E90068B060 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12DB3F342C55164E006AEB5B /* share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12DB3F392C55164E006AEB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 		13B07FAE1A68108700A75B9A /* skeepcli */ = {
 			isa = PBXGroup;
 			children = (
+				1242C0412C959D09002C8CEE /* skeepcliDebug.entitlements */,
 				126DA8D92C9595E90068B060 /* GoogleService-Info.plist */,
 				400402812C53923900AFF0E5 /* skeepcli.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -827,7 +829,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = skeepcli/skeepcli.entitlements;
+				CODE_SIGN_ENTITLEMENTS = skeepcli/skeepcliDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -987,10 +989,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -1073,10 +1072,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
