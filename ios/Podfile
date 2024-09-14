@@ -14,9 +14,18 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+
 target 'skeepcli' do
   config = use_native_modules!
 
+  # Firebase 관련 static으로 설치
+  pod 'GoogleUtilities/Environment', :modular_headers => true
+  pod 'GoogleUtilities/Logger', :modular_headers => true
+  pod 'GoogleUtilities/NSData+zlib', :modular_headers => true
+  pod 'GoogleUtilities/Privacy', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+  pod 'FirebaseCoreInternal', :modular_headers => true
+  
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
