@@ -3085,6 +3085,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-firebase/messaging@npm:^20.5.0":
+  version: 20.5.0
+  resolution: "@react-native-firebase/messaging@npm:20.5.0"
+  peerDependencies:
+    "@react-native-firebase/app": 20.5.0
+    expo: ">=47.0.0"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: 67235c7c5aaaac4986687760003829d74a88001fb9f1ff35f15e31b3933c8a1f6bc442e388a7f4f95ee5a8855cb1f1fc08946b3983eab77a04b7678f360f853e
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.74.85":
   version: 0.74.85
   resolution: "@react-native/assets-registry@npm:0.74.85"
@@ -10633,6 +10646,7 @@ __metadata:
     "@react-native-async-storage/async-storage": ^1.24.0
     "@react-native-community/checkbox": ^0.5.17
     "@react-native-firebase/app": ^20.5.0
+    "@react-native-firebase/messaging": ^20.5.0
     "@react-native/babel-preset": 0.74.85
     "@react-native/eslint-config": 0.74.85
     "@react-native/metro-config": 0.74.85
