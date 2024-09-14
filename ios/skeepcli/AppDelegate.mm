@@ -3,6 +3,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import "RNSplashScreen.h"
 #import <RNShareMenu/ShareMenuManager.h>
+#import <Firebase.h>
 
 @implementation AppDelegate
 
@@ -15,6 +16,9 @@
 
   bool didFinish = [super application:application didFinishLaunchingWithOptions:launchOptions];
   [RNSplashScreen show];
+  
+  if ([FIRApp defaultApp] == nil)
+    [FIRApp configure];
   
   return didFinish;
 }

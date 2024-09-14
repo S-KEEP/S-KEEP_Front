@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* skeepcliTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* skeepcliTests.m */; };
+		126DA8DA2C9595EA0068B060 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 126DA8D92C9595E90068B060 /* GoogleService-Info.plist */; };
 		12DB3F3A2C55164E006AEB5B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 12DB3F392C55164E006AEB5B /* Base */; };
 		12DB3F3E2C55164E006AEB5B /* share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 12DB3F342C55164E006AEB5B /* share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		12DB3F452C551745006AEB5B /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DB3F442C551745006AEB5B /* ShareViewController.swift */; };
@@ -67,6 +68,7 @@
 		00E356F21AD99517003FC87E /* skeepcliTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = skeepcliTests.m; sourceTree = "<group>"; };
 		03D43B87C5634D7F93F1145C /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.ttf"; path = "../src/assets/fonts/Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		122334E02C77710D002D80B6 /* share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = share.entitlements; sourceTree = "<group>"; };
+		126DA8D92C9595E90068B060 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12DB3F342C55164E006AEB5B /* share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12DB3F392C55164E006AEB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		12DB3F3B2C55164E006AEB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 		13B07FAE1A68108700A75B9A /* skeepcli */ = {
 			isa = PBXGroup;
 			children = (
+				126DA8D92C9595E90068B060 /* GoogleService-Info.plist */,
 				400402812C53923900AFF0E5 /* skeepcli.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -381,6 +384,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				126DA8DA2C9595EA0068B060 /* GoogleService-Info.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				C4FD4810E15C3CA42474993D /* PrivacyInfo.xcprivacy in Resources */,
@@ -983,10 +987,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -1069,10 +1070,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
