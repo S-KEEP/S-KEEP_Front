@@ -13,13 +13,35 @@ import {
 import {CardData} from '../../../types/components/category/category';
 import {TabOfStackScreenProps} from '../../../navigators/types';
 import usePushNotification from '../../../hooks/usePushNotification';
+import {usePatchFCMToken} from '../../../hooks/mutations/user/usePatchFCMToken';
 
 type CategoryTabProps = TabOfStackScreenProps<'TabNavigator', 'CategoryTab'>;
 export default function CategoryTab({navigation}: CategoryTabProps) {
   const {checkPermission} = usePushNotification();
+
+  const {mutate: registerToken} = usePatchFCMToken({
+    onSuccess(res) {
+      console.log(res);
+    },
+    onError(e) {
+      console.error(e);
+    },
+  });
+
   useEffect(() => {
-    checkPermission();
+    checkFCMToken();
   }, []);
+
+  async function checkFCMToken() {
+    checkPermission()
+      .then(token => {
+        console.log('Token is', token);
+        registerToken(token);
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  }
 
   const cardListData = useGetCategoryListQuery();
 
