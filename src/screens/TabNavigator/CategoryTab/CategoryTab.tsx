@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import styles from './CategoryTab.style';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import Card from '../../../components/common/Category/CategoryCard/CategoryCard';
@@ -12,9 +12,15 @@ import {
 } from '../../../constants/components/CategoryCard';
 import {CardData} from '../../../types/components/category/category';
 import {TabOfStackScreenProps} from '../../../navigators/types';
+import usePushNotification from '../../../hooks/usePushNotification';
 
 type CategoryTabProps = TabOfStackScreenProps<'TabNavigator', 'CategoryTab'>;
 export default function CategoryTab({navigation}: CategoryTabProps) {
+  const {checkPermission} = usePushNotification();
+  useEffect(() => {
+    checkPermission();
+  }, []);
+
   const cardListData = useGetCategoryListQuery();
 
   const mappedData = cardListData.map(item => ({

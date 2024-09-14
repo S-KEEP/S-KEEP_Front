@@ -1,7 +1,17 @@
 import {firebase} from '@react-native-firebase/messaging';
+import {usePatchFCMToken} from './mutations/user/usePatchFCMToken';
 
 const messaging = firebase.messaging();
 export default function usePushNotification() {
+  const {mutate: registerToken} = usePatchFCMToken({
+    onSuccess(res) {
+      console.log(res);
+    },
+    onError(e) {
+      console.error(e);
+    },
+  });
+
   /**
    * checkPermission
    * 알림 권한 확인 후, FCM token 요청
@@ -34,6 +44,7 @@ export default function usePushNotification() {
   async function getToken() {
     const fcmToken = await messaging.getToken();
     console.log('Device FCM Token:', fcmToken);
+    registerToken(fcmToken);
   }
 
   return {checkPermission};
