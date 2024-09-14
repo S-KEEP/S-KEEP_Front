@@ -7,8 +7,14 @@ import {RecoilRoot} from 'recoil';
 import AppSetupWrapper from './src/container/AppSetupContainer';
 import Snackbar from './src/components/common/Global/Snackbar/Snackbar';
 import Toast from './src/components/common/Global/Toast/Toast';
+import usePushNotification from './src/hooks/usePushNotification';
 
 const App = () => {
+  const {checkPermission} = usePushNotification();
+  useEffect(() => {
+    checkPermission();
+  }, []);
+
   return (
     <AppSetupWrapper>
       <SafeAreaProvider>
