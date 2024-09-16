@@ -1,14 +1,12 @@
-import {firebase} from '@react-native-firebase/messaging';
-import {Alert} from 'react-native';
 import {useEffect} from 'react';
-
-export const messaging = firebase.messaging();
+import {displayNotification} from '../utils/pushUtils';
+import {messaging} from '../../App';
 
 export default function usePushNotification() {
   useEffect(() => {
     const unsubscribe = messaging.onMessage(async remoteMessage => {
       console.log('Foreground Message: ', remoteMessage);
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      displayNotification(remoteMessage);
     });
 
     return unsubscribe;

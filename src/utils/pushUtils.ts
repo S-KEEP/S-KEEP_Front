@@ -1,7 +1,11 @@
 // src/utils/pushUtils.ts
 
-import {firebase} from '@react-native-firebase/messaging';
-import {messaging} from '../hooks/usePushNotification';
+import {
+  firebase,
+  FirebaseMessagingTypes,
+} from '@react-native-firebase/messaging';
+import notifee from '@notifee/react-native';
+import {messaging} from '../../App';
 
 /**
  * checkPermission
@@ -39,4 +43,29 @@ async function getToken() {
   console.log('Device FCM Token:', fcmToken);
 
   return fcmToken;
+}
+
+/**
+ * displayNotification
+ * 네이티브 푸시 전송
+ */
+export async function displayNotification(
+  message: FirebaseMessagingTypes.RemoteMessage,
+) {
+  const channelId = await notifee.createChannel({
+    id: 'default',
+    name: 'SKEEP',
+  });
+
+  const {notification} = message;
+  await notifee.displayNotification({
+    title: notification?.title,
+    body: notification?.body,
+    android: {
+      channelId,
+      pressAction: {
+        id: 'default',
+      },
+    },
+  });
 }

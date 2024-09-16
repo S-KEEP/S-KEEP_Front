@@ -8,7 +8,9 @@ import AppSetupWrapper from './src/container/AppSetupContainer';
 import Snackbar from './src/components/common/Global/Snackbar/Snackbar';
 import Toast from './src/components/common/Global/Toast/Toast';
 import usePushNotification from './src/hooks/usePushNotification';
+import {firebase} from '@react-native-firebase/messaging';
 
+export const messaging = firebase.messaging();
 const App = () => {
   usePushNotification();
 
