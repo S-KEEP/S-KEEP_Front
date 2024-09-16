@@ -1,7 +1,8 @@
+// src/utils/pushUtils.ts
+
 import {firebase} from '@react-native-firebase/messaging';
 import {messaging} from '../hooks/usePushNotification';
 
-// Push 관련 유틸 파일
 /**
  * checkPermission
  * 알림 권한 확인 후, FCM token 요청
