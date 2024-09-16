@@ -12,10 +12,9 @@ import {
 } from '../../../constants/components/CategoryCard';
 import {CardData} from '../../../types/components/category/category';
 import {TabOfStackScreenProps} from '../../../navigators/types';
-import usePushNotification, {
-  checkPermission,
-} from '../../../hooks/usePushNotification';
+
 import {usePatchFCMToken} from '../../../hooks/mutations/user/usePatchFCMToken';
+import {checkPermission} from '../../../utils/pushUtils';
 
 type CategoryTabProps = TabOfStackScreenProps<'TabNavigator', 'CategoryTab'>;
 export default function CategoryTab({navigation}: CategoryTabProps) {
