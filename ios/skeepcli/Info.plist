@@ -28,6 +28,15 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+  <key>KAKAO_APP_KEY</key>
+  <string>{378c5d01c3e4b03529594678b0a76911}</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+      <!-- 카카오톡으로 로그인 -->
+      <string>kakaokompassauth</string>
+      <!-- 카카오링크 -->
+      <string>kakaolink</string>
+  </array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -74,7 +83,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>skeepcustomscheme</string>
+				<string>kakao{378c5d01c3e4b03529594678b0a76911}</string>
 				<!-- This url scheme doesn't contain :// at the end - E.G. "mycustomscheme"-->
 			</array>
 		</dict>
