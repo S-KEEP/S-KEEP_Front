@@ -1,6 +1,5 @@
 import {useEffect} from 'react';
-import {displayNotification} from '../utils/pushUtils';
-import {messaging} from '../../App';
+import {displayNotification, messaging} from '../utils/pushUtils';
 
 export default function usePushNotification() {
   useEffect(() => {

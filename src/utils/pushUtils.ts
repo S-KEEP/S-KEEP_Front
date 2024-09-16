@@ -5,7 +5,8 @@ import {
   FirebaseMessagingTypes,
 } from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
-import {messaging} from '../../App';
+
+export const messaging = firebase.messaging();
 
 /**
  * checkPermission
