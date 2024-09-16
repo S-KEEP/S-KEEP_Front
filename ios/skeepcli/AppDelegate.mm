@@ -43,4 +43,10 @@
   return [ShareMenuManager application:app openURL:url options:options];
 }
 
+// Firebase Token 
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [FIRMessaging messaging].APNSToken = deviceToken;
+}
+
 @end
