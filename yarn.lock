@@ -2753,6 +2753,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@notifee/react-native@npm:^9.0.2":
+  version: 9.0.2
+  resolution: "@notifee/react-native@npm:9.0.2"
+  peerDependencies:
+    react-native: "*"
+  checksum: 2b46e360096dffea51803ff28a5e106d0bdea09651a72487728ee925f1748b2a374377c4db9e85f62fda8d7e16b0e0a2d7dcd4078c0342bac522bec364ccf21a
+  languageName: node
+  linkType: hard
+
 "@npmcli/agent@npm:^2.0.0":
   version: 2.2.2
   resolution: "@npmcli/agent@npm:2.2.2"
@@ -10643,6 +10652,7 @@ __metadata:
     "@babel/runtime": ^7.20.0
     "@gorhom/bottom-sheet": ^4
     "@invertase/react-native-apple-authentication": ^2.3.0
+    "@notifee/react-native": ^9.0.2
     "@react-native-async-storage/async-storage": ^1.24.0
     "@react-native-community/checkbox": ^0.5.17
     "@react-native-firebase/app": ^20.5.0
