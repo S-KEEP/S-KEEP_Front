@@ -20,6 +20,7 @@
 		339CD38B2BE544679FE21F0C /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03D43B87C5634D7F93F1145C /* Pretendard-Thin.ttf */; };
 		3C3183188BD54E52AF6C407F /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5A02525D0CB433BB01DDFF4 /* Pretendard-ExtraBold.ttf */; };
 		3F68F7E0F96E41BFB28F93AE /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98F7C6D54912408EBD99193F /* Pretendard-Regular.ttf */; };
+		40D345582C992E3100847403 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D345572C992E3100847403 /* File.swift */; };
 		4F9FB9465E9B4C60AF919AB8 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88B0A82EB9674D9F9A5B1BEE /* Pretendard-SemiBold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-skeepcli-skeepcliTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-skeepcli-skeepcliTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -87,6 +88,8 @@
 		3B4392A12AC88292D35C810B /* Pods-skeepcli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skeepcli.debug.xcconfig"; path = "Target Support Files/Pods-skeepcli/Pods-skeepcli.debug.xcconfig"; sourceTree = "<group>"; };
 		3D86950070B14546B29790B6 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Medium.ttf"; path = "../src/assets/fonts/Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		400402812C53923900AFF0E5 /* skeepcli.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = skeepcli.entitlements; path = skeepcli/skeepcli.entitlements; sourceTree = "<group>"; };
+		40D345562C992E3100847403 /* skeepcli-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "skeepcli-Bridging-Header.h"; sourceTree = "<group>"; };
+		40D345572C992E3100847403 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-skeepcli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skeepcli.release.xcconfig"; path = "Target Support Files/Pods-skeepcli/Pods-skeepcli.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-skeepcli-skeepcliTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skeepcli-skeepcliTests.debug.xcconfig"; path = "Target Support Files/Pods-skeepcli-skeepcliTests/Pods-skeepcli-skeepcliTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-skeepcli.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-skeepcli.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +217,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				40D345572C992E3100847403 /* File.swift */,
 				13B07FAE1A68108700A75B9A /* skeepcli */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* skeepcliTests */,
@@ -222,6 +226,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
 				082A102EA18B4D7C8C2F5D78 /* Resources */,
+				40D345562C992E3100847403 /* skeepcli-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -335,7 +340,7 @@
 						LastSwiftMigration = 1540;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1540;
 					};
 				};
 			};
@@ -588,6 +593,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				40D345582C992E3100847403 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,6 +629,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-skeepcli-skeepcliTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -661,6 +668,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-skeepcli-skeepcliTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -824,6 +832,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "skeepcli-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -865,6 +874,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "skeepcli-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -944,10 +954,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -1019,10 +1026,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
