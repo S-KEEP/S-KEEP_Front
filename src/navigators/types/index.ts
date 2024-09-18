@@ -30,6 +30,8 @@ export type StackParamList = {
 
   CategoryList: {title: string; description: string; id: number};
   CategoryAdd: undefined;
+
+  Notification: undefined;
 };
 
 export type TabParamList = {

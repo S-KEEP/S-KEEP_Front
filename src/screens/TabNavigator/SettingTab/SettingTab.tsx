@@ -9,6 +9,8 @@ import Profile from '../../../components/Settings/Profile';
 import SettingsList from '../../../components/Settings/SettingList';
 import {TabOfStackScreenProps} from '../../../navigators/types';
 import {userInfoState} from '../../../libs/recoil/states/userInfo';
+import Icon from '../../../components/common/Icon/Icon';
+import {IcBell} from '../../../assets/icon';
 
 type SettingTabProps = TabOfStackScreenProps<'TabNavigator', 'SettingTab'>;
 export default function SettingTab({navigation}: SettingTabProps) {
@@ -44,6 +46,14 @@ export default function SettingTab({navigation}: SettingTabProps) {
 
   return (
     <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Icon
+          style={{alignSelf: 'flex-end'}}
+          onPress={() => navigation.push('Notification')}
+          children={<IcBell />}
+        />
+      </View>
+
       <Profile userInfo={userInfoData.user} />
       <View style={styles.divider} />
       <SettingsList onLogout={handleLogout} />
