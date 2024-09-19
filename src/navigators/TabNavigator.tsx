@@ -9,7 +9,7 @@ import {TabMenu} from '../navigators/constants/menu';
 import {TabBarLabel} from '../navigators/constants/label';
 import HomeTab from '../screens/TabNavigator/HomeTab/HomeTab';
 import {TabRouteProps, TabParamList, TabScreenName} from '../navigators/types';
-import {IcCategory, IcEtc, IcHome, IcAnalyze} from '../assets/icon';
+import {IcCategory, IcEtc, IcAnalyze} from '../assets/icon';
 import {StyleProp, TouchableOpacity, ViewStyle} from 'react-native';
 import useShareExtension from '../hooks/useShareExtension';
 import useAnalyze from '../hooks/useAnalyze';
@@ -53,6 +53,7 @@ export default function TabNavigator() {
         name={TabMenu.SettingTab}
         component={SettingTab}
         options={{tabBarLabel: TabBarLabel.SettingTab}}
+        initialParams={{test: 'default value'}} // test 파라미터를 설정
       />
     </Tab.Navigator>
   );

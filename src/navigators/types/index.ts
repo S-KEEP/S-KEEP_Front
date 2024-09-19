@@ -35,7 +35,9 @@ export type StackParamList = {
 export type TabParamList = {
   HomeTab: undefined;
   CategoryTab: undefined;
-  SettingTab: undefined;
+  SettingTab: {
+    test: string;
+  };
 };
 
 export type StackScreenName = keyof StackParamList;
