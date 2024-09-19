@@ -1,39 +1,45 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import {flexBox} from '../../styles/common';
 import {theme} from '../../styles';
 import {IcPlus} from '../../assets/icon';
 import KakaoShareLink from 'react-native-kakao-share-link';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import {TabParamList} from '../../navigators/types';
 
+type Screen2Route = RouteProp<TabParamList, 'SettingTab'>;
 
 export default function Friend() {
+  const route = useRoute<Screen2Route>();
+  const {test} = route.params;
+
+  useEffect(() => {
+    Alert.alert(test);
+  }, [test]);
+
   const handleKakaoInvite = async () => {
     try {
       const response = await KakaoShareLink.sendFeed({
         content: {
-          title: 'title',
+          title: '님의 친구가 되어주세요!',
           imageUrl:
             'http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg',
           link: {
             webUrl: 'https://developers.kakao.com/',
             mobileWebUrl: 'https://developers.kakao.com/',
-            androidExecutionParams: [{key: 'key1', value: 'value1'}],
-            iosExecutionParams: [{key: 'key1', value: 'value1'}],
+            androidExecutionParams: [{key: 'test', value: 'from Kakao App'}],
+            iosExecutionParams: [{key: 'test', value: 'from Kakao App'}],
           },
-          description: 'description',
-        },
-        social: {
-          commentCount: 10,
-          likeCount: 5,
+          description: '초대수락 버튼을 누르면 스킵으로 이동해요!',
         },
         buttons: [
           {
-            title: '앱에서 보기',
+            title: '친구 수락하기',
             link: {
-              androidExecutionParams: [{key: 'key1', value: 'value1'}],
+              androidExecutionParams: [{key: 'test', value: 'from Kakao App'}],
               iosExecutionParams: [
-                {key: 'key1', value: 'value1'},
-                {key: 'key2', value: 'value2'},
+                {key: 'test', value: 'from Kakao App'},
+                {key: 'test', value: 'from Kakao App'},
               ],
             },
           },
@@ -41,11 +47,13 @@ export default function Friend() {
       });
       console.log(response);
       Alert.alert('공유 성공', '카카오톡으로 성공적으로 공유되었습니다.');
+      console.log('✅', route);
     } catch (e) {
       console.error(e);
       Alert.alert('공유 실패');
     }
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>친구</Text>
