@@ -14,7 +14,7 @@ export default function Friend() {
   const route = useRoute<Screen2Route>();
   const {test} = route.params;
   console.log('✅이거는 route : ', route);
-  
+
   const {mutate: getFriendToken} = usePostInvitationToken({
     onSuccess(res) {
       const friendToken = res.result; // Extract the friendToken
@@ -53,6 +53,10 @@ export default function Friend() {
           {
             title: '친구 수락하기',
             link: {
+              webUrl:
+                'https://apps.apple.com/kr/app/%EC%8A%A4%ED%82%B5-%EC%97%AC%ED%96%89-%EB%AA%85%EC%86%8C-%EB%B6%84%EC%84%9D/id6547865892', // iOS fallback URL
+              mobileWebUrl:
+                'https://apps.apple.com/kr/app/%EC%8A%A4%ED%82%B5-%EC%97%AC%ED%96%89-%EB%AA%85%EC%86%8C-%EB%B6%84%EC%84%9D/id6547865892', // iOS fallback URL
               androidExecutionParams: [
                 {key: 'friendToken', value: `${friendToken}`},
               ],
