@@ -3,6 +3,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import "RNSplashScreen.h"
 #import <RNShareMenu/ShareMenuManager.h>
+#import <Firebase.h>
 
 @implementation AppDelegate
 
@@ -12,9 +13,12 @@
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
+  
+  [FIRApp configure];
 
   bool didFinish = [super application:application didFinishLaunchingWithOptions:launchOptions];
   [RNSplashScreen show];
+ 
   
   return didFinish;
 }
@@ -37,6 +41,12 @@
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
   return [ShareMenuManager application:app openURL:url options:options];
+}
+
+// Firebase Token 
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [FIRMessaging messaging].APNSToken = deviceToken;
 }
 
 @end
