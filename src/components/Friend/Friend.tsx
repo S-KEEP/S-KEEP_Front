@@ -6,6 +6,8 @@ import {IcPlus} from '../../assets/icon';
 import KakaoShareLink from 'react-native-kakao-share-link';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {TabParamList} from '../../navigators/types';
+import { usePostAddCategory } from '../../hooks/mutations/category/usePostCategoryAdd';
+import { usePostInvitationToken } from '../../hooks/mutations/friend/usePostInvitationToken';
 
 type Screen2Route = RouteProp<TabParamList, 'SettingTab'>;
 
@@ -13,9 +15,11 @@ export default function Friend() {
   const route = useRoute<Screen2Route>();
   const {test} = route.params;
 
+
   useEffect(() => {
     Alert.alert(test);
   }, [test]);
+
 
   const handleKakaoInvite = async () => {
     try {
