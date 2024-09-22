@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
-import {flexBox} from '../../styles/common';
-import {theme} from '../../styles';
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import {IcPlus} from '../../assets/icon';
 import KakaoShareLink from 'react-native-kakao-share-link';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {TabParamList} from '../../navigators/types';
 import {usePostInvitationToken} from '../../hooks/mutations/friend/usePostInvitationToken';
+import {styles} from './Friend.style';
 
 type Screen2Route = RouteProp<TabParamList, 'SettingTab'>;
 
@@ -17,10 +16,10 @@ export default function Friend() {
 
   const {mutate: getFriendToken} = usePostInvitationToken({
     onSuccess(res) {
-      const friendToken = res.result; // Extract the friendToken
+      const friendToken = res.result;
       console.log('kakao token : ', friendToken);
       if (friendToken) {
-        handleKakaoInvite(friendToken); // Pass friendToken to handleKakaoInvite
+        handleKakaoInvite(friendToken);
       }
     },
     onError(e) {
@@ -45,7 +44,7 @@ export default function Friend() {
             androidExecutionParams: [
               {key: 'friendToken', value: `${friendToken}`},
             ], // Pass the friendToken
-            iosExecutionParams: [{key: 'friendToken', value: `${friendToken}`}], // Pass the friendToken
+            iosExecutionParams: [{key: 'friendToken', value: `${friendToken}`}],
           },
           description: '초대수락 버튼을 누르면 스킵으로 이동해요!',
         },
@@ -81,51 +80,15 @@ export default function Friend() {
       <Text style={styles.description}>
         친구를 추가해 여행지를 공유해 보세요!
       </Text>
-      <TouchableOpacity
+      <View style={styles.centeredButton}>
+         <TouchableOpacity
         style={styles.addButton}
         onPress={() => getFriendToken()}>
         <IcPlus />
         <Text style={styles.addButtonText}>카카오톡으로 친구 추가</Text>
       </TouchableOpacity>
+      </View>
+     
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-  addButton: {
-    ...flexBox('row', 'center', 'center'),
-    backgroundColor: theme.palette.primary,
-    paddingVertical: 12,
-    gap: 5,
-    width: 230,
-    borderRadius: 30,
-  },
-  addButtonText: {
-    color: theme.palette.white,
-    ...theme.typography.button_sb_15,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  description: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 15,
-  },
-  kakaoButton: {
-    backgroundColor: '#3AB0FF',
-    paddingVertical: 10,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  kakaoButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
