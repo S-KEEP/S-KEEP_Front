@@ -43,7 +43,7 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
     },
     onError(e) {
       console.error('❌ 친구 추가 실패: ', e);
-      Alert.alert('친구 추가 실패');
+      Alert.alert('⚠️ 친구 추가 실패:', e.message);
       navigation.setParams({test: 'default value'});
     },
   });
