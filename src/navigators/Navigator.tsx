@@ -6,37 +6,12 @@ import {TokenKeys} from '../libs/async-storage/constants/keys';
 import useInitialData from '../hooks/auth/useInitialData';
 import SplashScreen from 'react-native-splash-screen';
 import {Interceptor} from '../apis/client';
-import {
-  DefaultTheme,
-  LinkingOptions,
-  NavigationContainer,
-} from '@react-navigation/native';
-import {StackParamList} from './types';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {lightPalette} from '../styles';
+import linking from './Linking';
 
-export const DEEPLINK_PREFIX_URL = ['kakao378c5d01c3e4b03529594678b0a76911://'];
 const Navigator = () => {
   const {authData, setAuthData} = useInitialData();
-  const linking: LinkingOptions<StackParamList> = {
-    prefixes: DEEPLINK_PREFIX_URL,
-    config: {
-      screens: {
-        TabNavigator: {
-          screens: {
-            SettingTab: {
-              path: 'kakaolink',
-            },
-          },
-        },
-        Detail: {
-          path: 'detail/:id',
-          parse: {
-            id: id => `${id}`,
-          },
-        },
-      },
-    },
-  };
 
   const theme = {
     ...DefaultTheme,

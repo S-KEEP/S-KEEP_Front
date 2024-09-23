@@ -5,8 +5,8 @@ import {
   FirebaseMessagingTypes,
 } from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
-import {DEEPLINK_PREFIX_URL} from '../navigators/Navigator';
 import {Linking} from 'react-native';
+import {DEEPLINK_PREFIX_URL} from '../navigators/Linking';
 
 export const messaging = firebase.messaging();
 
