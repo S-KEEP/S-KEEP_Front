@@ -16,6 +16,7 @@ import CategoryAdd from '../screens/CategoryAdd/CategoryAdd';
 import {TouchableOpacity} from 'react-native';
 import {IcLeft} from '../assets/icon';
 import Icon from '../components/common/Icon/Icon';
+import Notification from '../screens/Notification/Notification';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -61,6 +62,9 @@ export default function StackNavigator() {
       {/* 장소 상세 */}
       <Stack.Screen name={StackMenu.Detail} component={Detail} />
       <Stack.Screen name={StackMenu.DetailTour} component={DetailTour} />
+
+      {/* 알림 */}
+      <Stack.Screen name={StackMenu.Notification} component={Notification} />
     </Stack.Navigator>
   );
 }

@@ -7,6 +7,7 @@ import {RecoilRoot} from 'recoil';
 import AppSetupWrapper from './src/container/AppSetupContainer';
 import Snackbar from './src/components/common/Global/Snackbar/Snackbar';
 import Toast from './src/components/common/Global/Toast/Toast';
+import usePushNotification from './src/hooks/usePushNotification';
 import {
   DefaultTheme,
   LinkingOptions,
@@ -36,6 +37,8 @@ const theme = {
 };
 
 const App = () => {
+  usePushNotification();
+
   return (
     <AppSetupWrapper>
       <SafeAreaProvider>

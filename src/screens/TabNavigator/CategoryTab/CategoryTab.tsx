@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import styles from './CategoryTab.style';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import Card from '../../../components/common/Category/CategoryCard/CategoryCard';
@@ -13,8 +13,35 @@ import {
 import {CardData} from '../../../types/components/category/category';
 import {TabOfStackScreenProps} from '../../../navigators/types';
 
+import {usePatchFCMToken} from '../../../hooks/mutations/user/usePatchFCMToken';
+import {checkPermission} from '../../../utils/pushUtils';
+
 type CategoryTabProps = TabOfStackScreenProps<'TabNavigator', 'CategoryTab'>;
 export default function CategoryTab({navigation}: CategoryTabProps) {
+  const {mutate: registerToken} = usePatchFCMToken({
+    onSuccess(res) {
+      console.log(res);
+    },
+    onError(e) {
+      console.error(e);
+    },
+  });
+
+  useEffect(() => {
+    checkFCMToken();
+  }, []);
+
+  async function checkFCMToken() {
+    checkPermission()
+      .then(token => {
+        console.log('Token is', token);
+        registerToken(token);
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  }
+
   const cardListData = useGetCategoryListQuery();
 
   const mappedData = cardListData.map(item => ({

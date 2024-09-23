@@ -9,6 +9,8 @@ import Profile from '../../../components/Settings/Profile';
 import SettingsList from '../../../components/Settings/SettingList';
 import {TabOfStackScreenProps, TabParamList} from '../../../navigators/types';
 import {userInfoState} from '../../../libs/recoil/states/userInfo';
+import Icon from '../../../components/common/Icon/Icon';
+import {IcBell} from '../../../assets/icon';
 import {IcPlus} from '../../../assets/icon';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {usePatchFriendAdd} from '../../../hooks/mutations/friend/useFriendAdd';
@@ -89,6 +91,14 @@ export default function SettingTab({navigation}: SettingTabProps) {
 
   return (
     <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Icon
+          style={{alignSelf: 'flex-end'}}
+          onPress={() => navigation.push('Notification')}
+          children={<IcBell />}
+        />
+      </View>
+
       <Profile userInfo={userInfoData.user} />
       <View style={styles.divider} />
       <View style={styles.friendContainer}>
