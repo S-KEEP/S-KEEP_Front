@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* skeepcliTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* skeepcliTests.m */; };
-		12681B572C95CDFC0065D40C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12681B562C95CDFC0065D40C /* GoogleService-Info.plist */; };
 		12DB3F3A2C55164E006AEB5B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 12DB3F392C55164E006AEB5B /* Base */; };
 		12DB3F3E2C55164E006AEB5B /* share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 12DB3F342C55164E006AEB5B /* share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		12DB3F452C551745006AEB5B /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DB3F442C551745006AEB5B /* ShareViewController.swift */; };
@@ -69,7 +68,6 @@
 		03D43B87C5634D7F93F1145C /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.ttf"; path = "../src/assets/fonts/Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		122334E02C77710D002D80B6 /* share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = share.entitlements; sourceTree = "<group>"; };
 		1242C0412C959D09002C8CEE /* skeepcliDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = skeepcliDebug.entitlements; path = skeepcli/skeepcliDebug.entitlements; sourceTree = "<group>"; };
-		12681B562C95CDFC0065D40C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12DB3F342C55164E006AEB5B /* share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12DB3F392C55164E006AEB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		12DB3F3B2C55164E006AEB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				12681B562C95CDFC0065D40C /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* skeepcli */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* skeepcliTests */,
@@ -398,7 +395,6 @@
 				3F68F7E0F96E41BFB28F93AE /* Pretendard-Regular.ttf in Resources */,
 				4F9FB9465E9B4C60AF919AB8 /* Pretendard-SemiBold.ttf in Resources */,
 				339CD38B2BE544679FE21F0C /* Pretendard-Thin.ttf in Resources */,
-				12681B572C95CDFC0065D40C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -989,10 +985,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -1075,10 +1068,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
