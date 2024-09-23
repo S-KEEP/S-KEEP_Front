@@ -28,15 +28,17 @@ export default function SettingTab({navigation}: SettingTabProps) {
   const {mutate: getFriendToken} = usePostInvitationToken({
     onSuccess(res) {
       const friendToken = res.result.friendToken;
-      console.log('kakao token : ', friendToken);
+      const username = userInfoData?.user.name || '사용자';
+
       if (friendToken) {
-        handleKakaoInvite(friendToken);
+        handleKakaoInvite(friendToken, username);
       }
     },
     onError(e) {
       console.error(e);
     },
   });
+
   const {mutate: addFriendWithToken} = usePatchFriendAdd({
     onSuccess(res) {
       console.log('✅ 친구 추가 성공: ', res);

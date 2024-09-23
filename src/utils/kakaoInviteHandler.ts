@@ -1,20 +1,25 @@
 import KakaoShareLink from 'react-native-kakao-share-link';
 import {Alert} from 'react-native';
 
-export const handleKakaoInvite = async (friendToken: string) => {
+export const handleKakaoInvite = async (
+  friendToken: string,
+  username: string,
+) => {
   try {
     const response = await KakaoShareLink.sendFeed({
       content: {
-        title: '님의 친구가 되어주세요!',
+        title: `스킵에서 ${username}님이 함께 하고 싶어해요!`,
         imageUrl:
-          'http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg',
+          'https://postfiles.pstatic.net/MjAyNDA5MjNfNjYg/MDAxNzI3MDc5NTA5NjAx.25bHWdX7FzJXtxyLs8JMc_DDGgOyksg5UNn4AJQrn_Mg.HwZEoIWUhOXaWoFI5wTT6aojfGkaRvEc9nLqqhqbKMkg.PNG/img_share.png?type=w773',
         link: {
-          webUrl: 'https://developers.kakao.com/',
-          mobileWebUrl: 'https://developers.kakao.com/',
+          webUrl:
+            'https://apps.apple.com/kr/app/%EC%8A%A4%ED%82%B5-%EC%97%AC%ED%96%89-%EB%AA%85%EC%86%8C-%EB%B6%84%EC%84%9D/id6547865892',
+          mobileWebUrl:
+            'https://apps.apple.com/kr/app/%EC%8A%A4%ED%82%B5-%EC%97%AC%ED%96%89-%EB%AA%85%EC%86%8C-%EB%B6%84%EC%84%9D/id6547865892',
           androidExecutionParams: [{key: 'test', value: String(friendToken)}],
           iosExecutionParams: [{key: 'test', value: String(friendToken)}],
         },
-        description: '초대수락 버튼을 누르면 스킵으로 이동해요!',
+        description: `${username}님의 숨은 여행지를 확인해요 ✈️`,
       },
       buttons: [
         {
