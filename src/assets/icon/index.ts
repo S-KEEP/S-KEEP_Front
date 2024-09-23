@@ -69,3 +69,4 @@ export {default as IcRoundRest} from './ic_round_rest.svg';
 export {default as IcRoundEtc} from './ic_round_etc.svg';
 
 export {default as IcBell} from './ic_bell.svg';
+export {default as IcNotiEmpty} from './ic_noti_empty.svg';

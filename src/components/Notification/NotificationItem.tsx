@@ -2,13 +2,8 @@ import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {theme} from '../../styles';
 import {flexBox} from '../../styles/common';
+import {NotificationDTO} from '../../hooks/queries/notification/useGetNotification';
 
-export interface NotificationDTO {
-  title: string;
-  date: string;
-  type: string;
-  isRead: boolean;
-}
 interface NotificationItemProps {
   item: NotificationDTO;
 }
@@ -26,11 +21,11 @@ export default function NotificationItem({item}: NotificationItemProps) {
       onPress={handleOnPress}>
       <View style={styles.topBox}>
         <Text style={styles.subtitle}>{item.type}</Text>
-        {!item.isRead && <View style={styles.flag} />}
+        {!item.isChecked && <View style={styles.flag} />}
       </View>
 
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.date}>{item.date}</Text>
+      <Text style={styles.date}>{item.createdAt}</Text>
     </Pressable>
   );
 }

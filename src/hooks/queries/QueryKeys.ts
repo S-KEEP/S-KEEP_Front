@@ -33,4 +33,20 @@ const TOUR_KEYS = {
     [...TOUR_KEYS.details(), {x: location.x, y: location.y}] as const, // ["tours", "detail", {x: "x", y: "y"}]
 };
 
-export {LOCATION_KEYS, CATEGORY_KEYS, WEATHER_KEYS, TOUR_KEYS};
+const NOTIFICATION_KEYS = {
+  all: ['notifications'] as const,
+
+  lists: () => [...NOTIFICATION_KEYS.all, 'list'] as const, // ["notifications", "list"]
+  list: (filters: object) => [...NOTIFICATION_KEYS.lists(), {filters}] as const, // ["notifications", "list", "..."]
+
+  details: () => [...NOTIFICATION_KEYS.all, 'detail'] as const, // ["notifications", "detail"]
+  detail: (id: string) => [...NOTIFICATION_KEYS.details(), id] as const, // ["notifications", "detail", "id"]
+};
+
+export {
+  LOCATION_KEYS,
+  CATEGORY_KEYS,
+  WEATHER_KEYS,
+  TOUR_KEYS,
+  NOTIFICATION_KEYS,
+};
