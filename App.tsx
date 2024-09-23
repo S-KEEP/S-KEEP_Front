@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     return notifee.onForegroundEvent(({type, detail}) => {
-      console.log('-->', type, detail);
+      console.log('onForegroundEvent', type, detail);
 
       if (type === EventType.PRESS) {
         const url = detail.notification?.data?.url as string;

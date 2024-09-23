@@ -8,10 +8,22 @@ export default function usePushNotification() {
       displayNotification(remoteMessage);
     });
 
+    messaging.onNotificationOpenedApp(remoteMessage => {
+      console.log(
+        'Notification caused app to open from background state:',
+        remoteMessage.notification,
+      );
+    });
+
+    messaging.getInitialNotification().then(remoteMessage => {
+      if (remoteMessage) {
+        console.log(
+          'Notification caused app to open from quit state:',
+          remoteMessage.notification,
+        );
+      }
+    });
+
     return unsubscribe;
   }, []);
-
-  messaging.setBackgroundMessageHandler(async remoteMessage => {
-    console.log('Message handled in the background!', remoteMessage);
-  });
 }
