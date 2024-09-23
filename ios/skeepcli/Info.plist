@@ -128,6 +128,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>kakao378c5d01c3e4b03529594678b0a76911</string>
+				<string>skeepcustomscheme</string>
 			</array>
 		</dict>
 	</array>
