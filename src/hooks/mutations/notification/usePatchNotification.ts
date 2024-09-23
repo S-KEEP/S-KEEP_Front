@@ -1,6 +1,5 @@
 import {useMutation} from '@tanstack/react-query';
-import {BaseResponse, POST} from '../../../apis/client';
-import {checkPermission} from '../../../utils/pushUtils';
+import {BaseResponse, PATCH} from '../../../apis/client';
 
 interface CheckNotificationRequest {
   id: number;
@@ -11,7 +10,7 @@ interface CheckNotificationRequest {
  *  푸시 확인 API
  */
 export const checkNotification = async (req: CheckNotificationRequest) => {
-  const res = await POST<string>(`/api/notification/check`, req);
+  const res = await PATCH<string>(`/api/notification/check`, req);
   return res.data;
 };
 

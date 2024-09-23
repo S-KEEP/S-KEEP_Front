@@ -1,7 +1,7 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
 import {GET} from '../../../apis/client';
 import {useCallback} from 'react';
-import {CATEGORY_KEYS} from '../QueryKeys';
+import {NOTIFICATION_KEYS} from '../QueryKeys';
 
 const getNotificationList = async (page: number) => {
   const {
@@ -17,7 +17,7 @@ const getNotificationList = async (page: number) => {
 };
 
 export interface NotificationDTO {
-  id: string;
+  id: number;
   title: string;
   body: string;
   type: string;
@@ -32,7 +32,7 @@ interface GetNotificationResponse {
 
 const useGetNotification = (page: number) => {
   const {data, hasNextPage, fetchNextPage, isFetching} = useInfiniteQuery({
-    queryKey: CATEGORY_KEYS.list({page: page}),
+    queryKey: NOTIFICATION_KEYS.list({page: page}),
     queryFn: ({pageParam = 1}: {pageParam?: number}) =>
       getNotificationList(pageParam),
     getNextPageParam: lastPage => lastPage.nextPage,

@@ -3,13 +3,31 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {theme} from '../../styles';
 import {flexBox} from '../../styles/common';
 import {NotificationDTO} from '../../hooks/queries/notification/useGetNotification';
+import {usePatchNotification} from '../../hooks/mutations/notification/usePatchNotification';
+import {useQueryClient} from '@tanstack/react-query';
+import {NOTIFICATION_KEYS} from '../../hooks/queries/QueryKeys';
 
 interface NotificationItemProps {
   item: NotificationDTO;
 }
 export default function NotificationItem({item}: NotificationItemProps) {
+  const queryClient = useQueryClient();
+
+  const {mutate: checkNotitifcation} = usePatchNotification({
+    onSuccess(res) {
+      console.log(res);
+      queryClient.invalidateQueries({
+        queryKey: NOTIFICATION_KEYS.all,
+      });
+    },
+    onError(e) {
+      console.error(e);
+    },
+  });
   function handleOnPress() {
     /* 알림 타입 별로 랜딩 로직 수행 */
+    // 1. 푸시 확인 API
+    checkNotitifcation({id: item.id, type: item.type});
   }
 
   return (
