@@ -67,3 +67,5 @@ export {default as IcRoundNature} from './ic_round_nature.svg';
 export {default as IcRoundShopping} from './ic_round_shopping.svg';
 export {default as IcRoundRest} from './ic_round_rest.svg';
 export {default as IcRoundEtc} from './ic_round_etc.svg';
+
+export {default as IcBell} from './ic_bell.svg';

@@ -1,12 +1,17 @@
 import {StyleSheet} from 'react-native';
 import {theme} from '../../../styles';
-import {flexBox} from '../../../styles/common';
+import {flexBox, padding} from '../../../styles/common';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 100,
     backgroundColor: theme.palette.white,
+  },
+  header: {
+    width: '100%',
+    ...padding,
+    paddingBottom: 20,
   },
   friendContainer: {
     padding: 20,
