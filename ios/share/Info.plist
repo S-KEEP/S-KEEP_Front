@@ -5,7 +5,7 @@
 	<key>HostAppBundleIdentifier</key>
 	<string>site.s-keep.skeep</string>
 	<key>HostAppURLScheme</key>
-	<string>skeepcustomscheme://</string>
+	<string>kakao378c5d01c3e4b03529594678b0a76911://</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
