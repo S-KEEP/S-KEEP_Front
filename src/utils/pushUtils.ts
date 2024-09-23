@@ -40,6 +40,9 @@ async function requestUserPermission() {
 }
 
 async function getToken() {
+  const apnsToken = await messaging.getAPNSToken();
+  console.log('Device APNS Token:', apnsToken);
+
   const fcmToken = await messaging.getToken();
   console.log('Device FCM Token:', fcmToken);
 
