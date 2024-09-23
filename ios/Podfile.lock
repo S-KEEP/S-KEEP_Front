@@ -65,12 +65,6 @@ PODS:
   - hermes-engine (0.74.3):
     - hermes-engine/Pre-built (= 0.74.3)
   - hermes-engine/Pre-built (0.74.3)
-  - nanopb (2.30910.0):
-    - nanopb/decode (= 2.30910.0)
-    - nanopb/encode (= 2.30910.0)
-  - nanopb/decode (2.30910.0)
-  - nanopb/encode (2.30910.0)
-  - PromisesObjC (2.4.0)
   - KakaoSDKCommon (2.11.1):
     - KakaoSDKCommon/Common (= 2.11.1)
     - KakaoSDKCommon/Network (= 2.11.1)
@@ -83,6 +77,12 @@ PODS:
     - KakaoSDKTemplate (= 2.11.1)
   - KakaoSDKTemplate (2.11.1):
     - KakaoSDKCommon/Common (= 2.11.1)
+  - nanopb (2.30910.0):
+    - nanopb/decode (= 2.30910.0)
+    - nanopb/encode (= 2.30910.0)
+  - nanopb/decode (2.30910.0)
+  - nanopb/encode (2.30910.0)
+  - PromisesObjC (2.4.0)
   - RCT-Folly (2024.01.01.00):
     - boost
     - DoubleConversion
@@ -1450,9 +1450,6 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - BEMCheckBox
-    - KakaoSDKCommon
-    - KakaoSDKShare
-    - KakaoSDKTemplate
     - Firebase
     - FirebaseCore
     - FirebaseCoreExtension
@@ -1461,6 +1458,9 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleDataTransport
     - GoogleUtilities
+    - KakaoSDKCommon
+    - KakaoSDKShare
+    - KakaoSDKTemplate
     - nanopb
     - PromisesObjC
     - SocketRocket
@@ -1627,11 +1627,11 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   hermes-engine: 1f547997900dd0752dc0cc0ae6dd16173c49e09b
-  nanopb: 438bc412db1928dac798aa6fd75726007be04262
-  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   KakaoSDKCommon: 555e1bb46595b842ded01cf7888cc17bbae4e113
   KakaoSDKShare: 9752730ce3339536f9d7812eb70eccb87643e9a6
   KakaoSDKTemplate: f8ee0b33f649e436c1aaf2a3a6bd6aa3dcae2451
+  nanopb: 438bc412db1928dac798aa6fd75726007be04262
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
   RCTDeprecation: 4c7eeb42be0b2e95195563c49be08d0b839d22b4
   RCTRequired: d530a0f489699c8500e944fde963102c42dcd0c2
