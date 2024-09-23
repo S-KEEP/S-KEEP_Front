@@ -21,7 +21,7 @@ export const addCategory = async (data: ICategoryData) => {
 
 export const usePostAddCategory = () => {
   const addCategoryMutation = useMutation({
-    mutationFn: (data: ICategoryData) => addCategory(data), // Use the mutation function with typed data
+    mutationFn: (data: ICategoryData) => addCategory(data), 
   });
 
   return {addCategoryMutation};

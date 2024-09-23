@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Navigator from './src/navigators/Navigator';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
