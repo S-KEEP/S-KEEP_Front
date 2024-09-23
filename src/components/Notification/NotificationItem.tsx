@@ -15,8 +15,16 @@ export default function NotificationItem({item}: NotificationItemProps) {
   return (
     <Pressable
       style={({pressed}) => [
-        {backgroundColor: pressed ? '#43C7FF1A' : 'white'},
         styles.container,
+        {
+          backgroundColor: pressed
+            ? !item.isChecked
+              ? '#43C7FF26'
+              : 'white'
+            : !item.isChecked
+              ? '#43C7FF1A'
+              : 'white',
+        },
       ]}
       onPress={handleOnPress}>
       <View style={styles.topBox}>
