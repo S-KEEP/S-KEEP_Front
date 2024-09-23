@@ -5,6 +5,8 @@ import {
   FirebaseMessagingTypes,
 } from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
+import {DEEPLINK_PREFIX_URL} from '../navigators/Navigator';
+import {Linking} from 'react-native';
 
 export const messaging = firebase.messaging();
 
@@ -62,12 +64,35 @@ export async function displayNotification(
   });
 
   const {notification, data} = message;
-  await notifee.displayNotification({
-    title: notification?.title,
-    body: notification?.body,
-    data: data,
-    ios: {
-      sound: 'default',
-    },
-  });
+  console.log('>>data', data?.data);
+  try {
+    const parsedData = JSON.parse(data?.data as string);
+
+    await notifee.displayNotification({
+      title: notification?.title,
+      body: notification?.body,
+      data: parsedData,
+      ios: {
+        sound: 'default',
+      },
+    });
+  } catch (error) {
+    console.error('Failed to parse notification data:', error);
+  }
+}
+
+/**
+ * linkUrl
+ * 딥링크 랜딩 로직 수행
+ */
+export async function linkUrl(url: string) {
+  const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
+  const deepurl = `${DEEPLINK_PREFIX_URL[0]}${cleanUrl}`;
+  console.log('🚀 DEEPLINK - ', deepurl);
+
+  try {
+    await Linking.openURL(deepurl);
+  } catch (error) {
+    console.error('Failed to open deep link:', error);
+  }
 }

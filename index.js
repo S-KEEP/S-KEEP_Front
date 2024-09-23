@@ -10,11 +10,11 @@ import notifee, {EventType} from '@notifee/react-native';
 notifee.onBackgroundEvent(async ({type, detail}) => {
   const {notification, pressAction} = detail;
 
-  // Check if the user pressed the "Mark as read" action
-  if (type === EventType.ACTION_PRESS && pressAction.id === 'mark-as-read') {
+  console.log('onBackgroundEvent', type, detail);
+
+  if (type === EventType.ACTION_PRESS) {
     console.log('notifee', type, detail);
 
-    // Remove the notification
     await notifee.cancelNotification(notification.id);
   }
 });
