@@ -1,5 +1,12 @@
 import {useEffect} from 'react';
-import {displayNotification, messaging} from '../utils/pushUtils';
+import {
+  displayNotification,
+  getDeepLinkUrl,
+  getDeepLinkUrlFromUrl,
+  linkToDeepLinkURL,
+  messaging,
+  parseNotificationData,
+} from '../utils/pushUtils';
 
 export default function usePushNotification() {
   useEffect(() => {
@@ -9,18 +16,26 @@ export default function usePushNotification() {
     });
 
     messaging.onNotificationOpenedApp(remoteMessage => {
-      console.log(
-        'Notification caused app to open from background state:',
-        remoteMessage.notification,
-      );
+      console.log('background state:', remoteMessage);
+
+      const parsedData = parseNotificationData(remoteMessage?.data?.data);
+      const deepLinkURL = getDeepLinkUrlFromUrl(parsedData.url);
+      if (deepLinkURL) {
+        console.log('url', deepLinkURL);
+        linkToDeepLinkURL(deepLinkURL);
+      }
     });
 
     messaging.getInitialNotification().then(remoteMessage => {
       if (remoteMessage) {
-        console.log(
-          'Notification caused app to open from quit state:',
-          remoteMessage.notification,
-        );
+        console.log('quit state:', remoteMessage);
+
+        const parsedData = parseNotificationData(remoteMessage?.data?.data);
+        const deepLinkURL = getDeepLinkUrlFromUrl(parsedData.url);
+        if (deepLinkURL) {
+          console.log('url', deepLinkURL);
+          linkToDeepLinkURL(deepLinkURL);
+        }
       }
     });
 

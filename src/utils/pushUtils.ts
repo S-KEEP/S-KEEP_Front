@@ -4,7 +4,7 @@ import {
   firebase,
   FirebaseMessagingTypes,
 } from '@react-native-firebase/messaging';
-import notifee from '@notifee/react-native';
+import notifee, {Notification} from '@notifee/react-native';
 import {Linking} from 'react-native';
 import {DEEPLINK_PREFIX_URL} from '../navigators/Linking';
 
@@ -66,7 +66,7 @@ export async function displayNotification(
   const {notification, data} = message;
   console.log('>>data', data?.data);
   try {
-    const parsedData = JSON.parse(data?.data as string);
+    const parsedData = parseNotificationData(data?.data);
 
     await notifee.displayNotification({
       title: notification?.title,
@@ -85,14 +85,55 @@ export async function displayNotification(
  * linkUrl
  * 딥링크 랜딩 로직 수행
  */
-export async function linkUrl(url: string) {
-  const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
-  const deepurl = `${DEEPLINK_PREFIX_URL[0]}${cleanUrl}`;
-  console.log('🚀 DEEPLINK - ', deepurl);
+export async function linkToDeepLinkURL(deepLinkURL: string) {
+  console.log('🚀 DEEPLINK - ', deepLinkURL);
 
   try {
-    await Linking.openURL(deepurl);
+    await Linking.openURL(deepLinkURL);
   } catch (error) {
     console.error('Failed to open deep link:', error);
+  }
+}
+
+/**
+ * getDeepLinkUrl
+ * notification에서 deeplink url 추출
+ */
+export function getDeepLinkUrl(notification?: Notification) {
+  try {
+    const url = notification?.data?.url as string;
+    if (!url) throw new Error('url이 존재하지 않습니다.');
+
+    return getDeepLinkUrlFromUrl(url);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+/**
+ * getDeepLinkUrlFromUrl
+ * deeplinkurl 생성
+ */
+export function getDeepLinkUrlFromUrl(url?: string) {
+  try {
+    if (!url) throw new Error('url이 존재하지 않습니다.');
+
+    const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
+    const deepurl = `${DEEPLINK_PREFIX_URL[0]}${cleanUrl}`;
+
+    return deepurl;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+/**
+ * parseNotificationData
+ */
+export function parseNotificationData(data: string | object | undefined) {
+  try {
+    return JSON.parse(data as string);
+  } catch (e) {
+    console.error(e);
   }
 }

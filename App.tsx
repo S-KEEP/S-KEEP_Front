@@ -9,7 +9,7 @@ import Snackbar from './src/components/common/Global/Snackbar/Snackbar';
 import Toast from './src/components/common/Global/Toast/Toast';
 import usePushNotification from './src/hooks/usePushNotification';
 import notifee, {EventType} from '@notifee/react-native';
-import {linkUrl} from './src/utils/pushUtils';
+import {getDeepLinkUrl, linkToDeepLinkURL} from './src/utils/pushUtils';
 
 const App = () => {
   usePushNotification();
@@ -19,10 +19,10 @@ const App = () => {
       console.log('onForegroundEvent', type, detail);
 
       if (type === EventType.PRESS) {
-        const url = detail.notification?.data?.url as string;
-        if (url) {
-          console.log('url', url);
-          linkUrl(url);
+        const deepLinkURL = getDeepLinkUrl(detail.notification);
+        if (deepLinkURL) {
+          console.log('url', deepLinkURL);
+          linkToDeepLinkURL(deepLinkURL);
         }
       }
     });
