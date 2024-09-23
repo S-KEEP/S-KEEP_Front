@@ -7,36 +7,34 @@ import {useGetUserInfoQuery} from '../../../hooks/queries/settings/useGetUserInf
 import styles from './SettingTab.style';
 import Profile from '../../../components/Settings/Profile';
 import SettingsList from '../../../components/Settings/SettingList';
-import {TabOfStackScreenProps, TabParamList} from '../../../navigators/types';
+import {TabOfStackScreenProps} from '../../../navigators/types';
 import {userInfoState} from '../../../libs/recoil/states/userInfo';
 import {IcPlus} from '../../../assets/icon';
-import {RouteProp, useRoute} from '@react-navigation/native';
 import {usePatchFriendAdd} from '../../../hooks/mutations/friend/useFriendAdd';
 import {usePostInvitationToken} from '../../../hooks/mutations/friend/usePostInvitationToken';
 import {handleKakaoInvite} from '../../../utils/kakaoInviteHandler';
 
 type SettingTabProps = TabOfStackScreenProps<'TabNavigator', 'SettingTab'>;
-type Screen2Route = RouteProp<TabParamList, 'SettingTab'>;
 
-export default function SettingTab({navigation}: SettingTabProps) {
+export default function SettingTab({navigation, route}: SettingTabProps) {
   const userInfoData = useGetUserInfoQuery();
   const setAuth = useSetRecoilState(authState);
   const setUserInfo = useSetRecoilState(userInfoState);
 
-  const route = useRoute<Screen2Route>();
-
   const {mutate: getFriendToken} = usePostInvitationToken({
     onSuccess(res) {
       const friendToken = res.result.friendToken;
-      console.log('kakao token : ', friendToken);
+      const username = userInfoData?.user.name || '사용자';
+
       if (friendToken) {
-        handleKakaoInvite(friendToken);
+        handleKakaoInvite(friendToken, username);
       }
     },
     onError(e) {
       console.error(e);
     },
   });
+
   const {mutate: addFriendWithToken} = usePatchFriendAdd({
     onSuccess(res) {
       console.log('✅ 친구 추가 성공: ', res);
