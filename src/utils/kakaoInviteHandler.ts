@@ -28,14 +28,14 @@ export const handleKakaoInvite = async (
       content: {
         title: `스킵에서 ${username}님이 함께 하고 싶어해요!`,
         imageUrl:
-          'https://postfiles.pstatic.net/MjAyNDA5MjNfNjYg/MDAxNzI3MDc5NTA5NjAx.25bHWdX7FzJXtxyLs8JMc_DDGgOyksg5UNn4AJQrn_Mg.HwZEoIWUhOXaWoFI5wTT6aojfGkaRvEc9nLqqhqbKMkg.PNG/img_share.png?type=w773',
+          'https://postfiles.pstatic.net/MjAyNDA5MjNfMjY1/MDAxNzI3MDk1Mjg3NDYw.5NwEXapS9toeSy67eUFtQWu7PY1LVjyirTy9y705YCsg.kFMQJm80jjYIBi1iOVMQHh2NiyKl9EEIhN-X9aMt7kcg.PNG/img_share_kakao.png?type=w773',
         link: {
           webUrl: 'https://developers.kakao.com/',
           mobileWebUrl: 'https://developers.kakao.com/',
           androidExecutionParams: [{key: 'test', value: String(friendToken)}],
           iosExecutionParams: [{key: 'test', value: String(friendToken)}],
         },
-        description: '초대수락 버튼을 누르면 스킵으로 이동해요!',
+        description: `${username}님의 숨은 여행지를 확인해요 ✈️`,
       },
       buttons: [
         {
@@ -53,10 +53,10 @@ export const handleKakaoInvite = async (
     });
 
     kakaoLinkResponse.then(() => {
-      appLaunched = true; // 앱이 정상적으로 실행된 경우
+      appLaunched = true;
     });
 
-    await Promise.race([kakaoLinkResponse, timeout]); // 둘 중 빠른 것이 실행됨
+    await Promise.race([kakaoLinkResponse, timeout]);
   } catch (e) {
     console.error(e);
     Alert.alert('공유 실패');
