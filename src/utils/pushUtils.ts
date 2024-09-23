@@ -61,15 +61,13 @@ export async function displayNotification(
     name: 'SKEEP',
   });
 
-  const {notification} = message;
+  const {notification, data} = message;
   await notifee.displayNotification({
     title: notification?.title,
     body: notification?.body,
-    android: {
-      channelId,
-      pressAction: {
-        id: 'default',
-      },
+    data: data,
+    ios: {
+      sound: 'default',
     },
   });
 }

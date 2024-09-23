@@ -14,10 +14,11 @@ import {
 import {StackParamList} from './types';
 import {lightPalette} from '../styles';
 
+export const DEEPLINK_PREFIX_URL = ['kakao378c5d01c3e4b03529594678b0a76911://'];
 const Navigator = () => {
   const {authData, setAuthData} = useInitialData();
   const linking: LinkingOptions<StackParamList> = {
-    prefixes: ['kakao378c5d01c3e4b03529594678b0a76911://'],
+    prefixes: DEEPLINK_PREFIX_URL,
     config: {
       screens: {
         TabNavigator: {
@@ -25,6 +26,12 @@ const Navigator = () => {
             SettingTab: {
               path: 'kakaolink',
             },
+          },
+        },
+        Detail: {
+          path: 'detail/:id',
+          parse: {
+            id: id => `${id}`,
           },
         },
       },
