@@ -75,18 +75,6 @@
 	<string>지도에서 현재 위치를 나타내기 위해 사용합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>스크린샷 이미지 첨부를 위해 사용합니다</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Pretendard-Black.ttf</string>
-		<string>Pretendard-Bold.ttf</string>
-		<string>Pretendard-ExtraBold.ttf</string>
-		<string>Pretendard-ExtraLight.ttf</string>
-		<string>Pretendard-Light.ttf</string>
-		<string>Pretendard-Medium.ttf</string>
-		<string>Pretendard-Regular.ttf</string>
-		<string>Pretendard-SemiBold.ttf</string>
-		<string>Pretendard-Thin.ttf</string>
-	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>processing</string>
@@ -125,10 +113,10 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
+			<key>CFBundleURLS₩chemes</key>
 			<array>
-				<string>kakao378c5d01c3e4b03529594678b0a76911</string>
-				<string>skeepcustomscheme</string>
+			<string>skeepcustomscheme</string>
+			<string>kakao378c5d01c3e4b03529594678b0a76911</string>
 			</array>
 		</dict>
 	</array>
