@@ -25,7 +25,7 @@ export default function Notification({navigation}: NotificationProps) {
 
       <FlatList
         data={data}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => `${item.id}-${item.createdAt}`}
         renderItem={({item}: {item: NotificationDTO}) => (
           <NotificationItem item={item} />
         )}
