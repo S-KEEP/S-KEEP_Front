@@ -25,6 +25,7 @@ import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
 import EmptyCategoryList from '../../components/Category/EmptyCategoryList';
 import Modal from '../../components/common/Modal/Modal';
 import Icon from '../../components/common/Icon/Icon';
+import SkeletonPlaceDetail from '../../components/common/PlaceDetail/SkeletonPlaceDetail';
 
 type CategoryListProps = StackScreenProps<'CategoryList'>;
 
@@ -36,26 +37,12 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
   const IconComponent = ICON_DETAIL_MAPS[title] || IcRoundEtc;
 
   const {mutate: deleteCategory} = useDeleteCategory();
-  const {data, loadMore, isFetching, hasNextPage, totalElement} =
+  const {data, loadMore, isFetching, isLoading, hasNextPage, totalElement} =
     useGetCategoryList({
       userCategoryId: id,
       page: 1,
     });
 
-  const renderItem = ({item}: {item: UserLocation}) => (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('Detail', {id: item.id})}>
-      <PlaceDetail
-        title={item.location.placeName}
-        description={item.location.roadAddress}
-        imageSrc={item.photoUrl}
-      />
-    </TouchableOpacity>
-  );
-
-  function handleGoBack() {
-    navigation.goBack();
-  }
   function handleDeleteCategory() {
     const userCategoryId = id;
     deleteCategory(
@@ -72,6 +59,21 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
         },
       },
     );
+  }
+
+  const renderItem = ({item}: {item: UserLocation}) => (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Detail', {id: item.id})}>
+      <PlaceDetail
+        title={item.location.placeName}
+        description={item.location.roadAddress}
+        imageSrc={item.photoUrl}
+      />
+    </TouchableOpacity>
+  );
+
+  function handleGoBack() {
+    navigation.goBack();
   }
 
   return (
@@ -100,19 +102,23 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
 
       <Text style={styles.itemCount}>총 {totalElement}개</Text>
 
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-        onEndReached={hasNextPage ? loadMore : undefined}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={
-          isFetching ? (
-            <ActivityIndicator size="large" color={theme.palette.primary} />
-          ) : null
-        }
-        ListEmptyComponent={EmptyCategoryList}
-      />
+      {isLoading ? (
+        <SkeletonPlaceDetail />
+      ) : (
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={item => item.id.toString()}
+          onEndReached={hasNextPage ? loadMore : undefined}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={
+            isFetching ? (
+              <ActivityIndicator size="large" color={theme.palette.primary} />
+            ) : null
+          }
+          ListEmptyComponent={EmptyCategoryList}
+        />
+      )}
 
       <Modal
         visible={modalVisible}
