@@ -6,6 +6,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.palette.white,
   },
+  modalIcon: {
+    marginBottom: 10,
+  },
   FriendTopContainer: {
     backgroundColor: '#E3F7FF',
     paddingHorizontal: 28,

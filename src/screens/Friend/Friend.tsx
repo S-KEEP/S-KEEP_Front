@@ -11,7 +11,7 @@ import {useGetFriendCategoryList} from '../../hooks/queries/friends/useGetFriend
 import {UserCategory, UserLocation} from '../../types/dtos/category';
 import {StackScreenProps} from '../../navigators/types';
 import {ICON_FRIEND_MAPS} from '../../constants/components/CategoryCard';
-import {IcFriendDelete, IcLeft} from '../../assets/icon';
+import {IcFriendDelete, IcLeft, IcSad} from '../../assets/icon';
 import {styles} from './Friend.style';
 import useGetFriendCategoryDetail from '../../hooks/queries/friends/useGetFriendCategoryDetail';
 import {theme} from '../../styles';
@@ -20,6 +20,7 @@ import PlaceDetail from '../../components/common/PlaceDetail/PlaceDetail';
 import {useDeleteFriend} from '../../hooks/mutations/friend/useDeleteFriend';
 import queryClient from '../../apis/queryClient';
 import {FRIEND_DETAIL_KEYS} from '../../hooks/queries/QueryKeys';
+import Modal from '../../components/common/Modal/Modal';
 
 type FriendProps = StackScreenProps<'Friend'>;
 
@@ -27,6 +28,7 @@ export default function Friend({navigation, route}: FriendProps) {
   const {id, name} = route.params;
   const {data: categoryListData} = useGetFriendCategoryList(id);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const {mutate: remove} = useDeleteFriend({
     onSuccess: res => {
@@ -119,7 +121,7 @@ export default function Friend({navigation, route}: FriendProps) {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <IcLeft />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleDelete}>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
             <IcFriendDelete />
           </TouchableOpacity>
         </View>
@@ -159,6 +161,17 @@ export default function Friend({navigation, route}: FriendProps) {
           ListEmptyComponent={EmptyFriendCategoryList}
         />
       )}
+
+      <Modal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onConfirm={handleDelete}
+        IconComponent={<IcSad style={styles.modalIcon} />}
+        modalTitle={`${name}님과 친구를 끊으실 건가요?`}
+        modalSubtitle={`끊어도 다시 친구 추가가 가능해요`}
+        modalButtonCancelText="놔둘래요"
+        modalButtonConfirmText="끊을래요"
+      />
     </SafeAreaView>
   );
 }
