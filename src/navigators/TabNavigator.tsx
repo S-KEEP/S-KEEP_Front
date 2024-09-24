@@ -97,7 +97,7 @@ const screenOptions: (
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,
   tabBarStyle: {
-    height: bottomSize ? 50 + bottomSize : 60,
+    height: bottomSize ? 60 + bottomSize : 60,
     borderTopColor: theme.palette.gray1,
     borderTopWidth: 1,
   },

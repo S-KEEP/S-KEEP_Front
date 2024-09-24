@@ -82,26 +82,28 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
 
   return (
     <SafeAreaView style={{...wrapper}}>
-      <View style={styles.backIcon}>
-        <Icon
-          onPress={handleGoBack}
-          children={<IcLeft />}
-          style={{paddingVertical: 5}}
-        />
+      <View style={[styles.topContainer, {backgroundColor}]}>
+        <View style={styles.header}>
+          <Icon
+            onPress={handleGoBack}
+            children={<IcLeft />}
+            style={{paddingVertical: 5}}
+          />
 
-        <Icon
-          onPress={() => setModalVisible(true)}
-          children={<Text>삭제</Text>}
-        />
-      </View>
-
-      <View style={[styles.headerContainer, {backgroundColor}]}>
-        <View style={styles.icon}>
-          <IconComponent />
+          <Icon
+            onPress={() => setModalVisible(true)}
+            children={<Text>삭제</Text>}
+          />
         </View>
 
-        <Text style={styles.headerTitle}>{category?.name}</Text>
-        <Text style={styles.headerDescription}>{category?.description}</Text>
+        <View style={styles.category}>
+          <View style={styles.icon}>
+            <IconComponent />
+          </View>
+
+          <Text style={styles.headerTitle}>{category?.name}</Text>
+          <Text style={styles.headerDescription}>{category?.description}</Text>
+        </View>
       </View>
 
       <Text style={styles.itemCount}>총 {totalElement}개</Text>
