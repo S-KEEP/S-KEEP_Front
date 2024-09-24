@@ -4,12 +4,12 @@ import {theme} from '../../../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 10,
-    padding: 20,
-    ...flexBox('column', 'flex-start', 'center'),
+    borderRadius: 16,
+    paddingHorizontal: 28,
+    ...flexBox('column'),
     gap: 10,
     width: 211,
-    height: 235,
+    height: 260,
   },
   iconContainer: {
     alignItems: 'center',

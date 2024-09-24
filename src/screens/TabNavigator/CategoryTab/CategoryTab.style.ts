@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   subTitle: {
-    top: -130,
+    top: -120,
     textAlign: 'center',
     ...theme.typography.body_m_15,
     marginBottom: 20,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     ...flexBox('row', 'center', 'center'),
-    top: -130,
+    top: -110,
     backgroundColor: theme.palette.primary,
     paddingVertical: 12,
     gap: 5,
