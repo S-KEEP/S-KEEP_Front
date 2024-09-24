@@ -12,4 +12,13 @@ export const styles = StyleSheet.create({
     ...theme.typography.title_sb_21,
     marginVertical: 25,
   },
+  emptyContainer: {
+    flex: 1,
+    ...flexBox('column'),
+    gap: 20,
+    paddingBottom: '30%',
+  },
+  emptyText: {
+    ...theme.typography.body_sb_17,
+  },
 });

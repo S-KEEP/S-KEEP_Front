@@ -2,35 +2,56 @@ import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {theme} from '../../styles';
 import {flexBox} from '../../styles/common';
+import {NotificationDTO} from '../../hooks/queries/notification/useGetNotification';
+import {usePatchNotification} from '../../hooks/mutations/notification/usePatchNotification';
+import {useQueryClient} from '@tanstack/react-query';
+import {NOTIFICATION_KEYS} from '../../hooks/queries/QueryKeys';
 
-export interface NotificationDTO {
-  title: string;
-  date: string;
-  type: string;
-  isRead: boolean;
-}
 interface NotificationItemProps {
   item: NotificationDTO;
 }
 export default function NotificationItem({item}: NotificationItemProps) {
+  const queryClient = useQueryClient();
+
+  const {mutate: checkNotitifcation} = usePatchNotification({
+    onSuccess(res) {
+      console.log(res);
+      queryClient.invalidateQueries({
+        queryKey: NOTIFICATION_KEYS.all,
+      });
+    },
+    onError(e) {
+      console.error(e);
+    },
+  });
   function handleOnPress() {
     /* 알림 타입 별로 랜딩 로직 수행 */
+    // 1. 푸시 확인 API
+    checkNotitifcation({id: item.id, type: item.type});
   }
 
   return (
     <Pressable
       style={({pressed}) => [
-        {backgroundColor: pressed ? '#43C7FF1A' : 'white'},
         styles.container,
+        {
+          backgroundColor: pressed
+            ? !item.isChecked
+              ? '#43C7FF26'
+              : 'white'
+            : !item.isChecked
+              ? '#43C7FF1A'
+              : 'white',
+        },
       ]}
       onPress={handleOnPress}>
       <View style={styles.topBox}>
         <Text style={styles.subtitle}>{item.type}</Text>
-        {!item.isRead && <View style={styles.flag} />}
+        {!item.isChecked && <View style={styles.flag} />}
       </View>
 
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.date}>{item.date}</Text>
+      <Text style={styles.date}>{item.createdAt}</Text>
     </Pressable>
   );
 }

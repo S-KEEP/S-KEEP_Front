@@ -13,7 +13,6 @@ import Withdraw from '../screens/Withdraw/Withdraw';
 import CategoryList from '../screens/CategoryList/CategoryList';
 import DetailTour from '../screens/DetailTour/DetailTour';
 import CategoryAdd from '../screens/CategoryAdd/CategoryAdd';
-import {TouchableOpacity} from 'react-native';
 import {IcLeft} from '../assets/icon';
 import Icon from '../components/common/Icon/Icon';
 import Notification from '../screens/Notification/Notification';

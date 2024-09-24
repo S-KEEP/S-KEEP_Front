@@ -23,6 +23,7 @@ const getCategoryList = async ({
   console.log(userCategoryId);
   return {
     items: result.userLocationList,
+    category: result.userCategory,
     nextPage: result.totalPage > page ? page + 1 : undefined,
     totalPage: result.totalPage,
     totalElement: result.totalElement,
@@ -37,6 +38,7 @@ const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
     getNextPageParam: lastPage => lastPage.nextPage,
     select: data => ({
       pages: data.pages.flatMap(page => page.items),
+      category: data.pages?.[0]?.category,
       totalElement: data.pages?.[0]?.totalElement ?? 0,
     }),
     initialPageParam: requestParams.page,
@@ -54,6 +56,7 @@ const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
     isFetching,
     hasNextPage,
     totalElement: data?.totalElement,
+    category: data?.category,
   };
 };
 

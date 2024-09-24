@@ -15,7 +15,8 @@
   self.initialProps = @{};
   
   [FIRApp configure];
-
+  [application registerForRemoteNotifications];
+  
   bool didFinish = [super application:application didFinishLaunchingWithOptions:launchOptions];
   [RNSplashScreen show];
  
