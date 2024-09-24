@@ -1,35 +1,36 @@
 import {Dimensions, StyleSheet} from 'react-native';
 import {theme} from '../../../styles';
-import {flexBox, wrapperFull} from '../../../styles/common';
+import {flexBox} from '../../../styles/common';
 
 const styles = StyleSheet.create({
   container: {
-    ...flexBox('column'),
+    paddingTop: 150,
     backgroundColor: theme.palette.white,
     flex: 1,
-    paddingBottom: 60,
-    borderColor: 'red',
-    borderWidth: 10,
+    alignItems: 'center',
   },
   title: {
     paddingLeft: 28,
     ...theme.typography.title_sb_21,
+    textAlign: 'left',
     alignSelf: 'flex-start',
   },
   subTitle: {
+    top: -120,
+    textAlign: 'center',
     ...theme.typography.body_m_15,
     marginBottom: 20,
-    marginTop: 20,
   },
   cardContainer: {
-    // paddingLeft: 28,
-    // marginTop: 50,
+    paddingLeft: 28,
+    marginTop: 50,
   },
   cardWrapper: {
     width: Dimensions.get('window').width - 150,
   },
   addButton: {
     ...flexBox('row', 'center', 'center'),
+    top: -110,
     backgroundColor: theme.palette.primary,
     paddingVertical: 12,
     gap: 5,
