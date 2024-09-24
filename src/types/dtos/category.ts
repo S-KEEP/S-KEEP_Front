@@ -6,6 +6,15 @@ export type CardEntity = {
   description: string;
 };
 
+export interface UserFriend {
+  id: number;
+  name: string;
+}
+
+export interface UserFriendResponseDto {
+  friendList: UserFriend[];
+}
+
 export type CategoryCardResponseDto = CardEntity[];
 
 export interface Location {
@@ -15,6 +24,16 @@ export interface Location {
   roadAddress: string;
   x: string;
   y: string;
+}
+
+export interface UserCategory {
+  id: number;
+  title: string;
+  description: string;
+}
+
+export interface FriendCategory {
+  userCategoryDtoList: UserCategory[];
 }
 
 export interface UserLocation {

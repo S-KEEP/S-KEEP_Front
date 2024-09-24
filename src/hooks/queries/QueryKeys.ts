@@ -17,6 +17,34 @@ const CATEGORY_KEYS = {
   list: (filters: object) => [...CATEGORY_KEYS.lists(), {filters}] as const, // ["categories", "list", {filters}]
 };
 
+const FRIEND_LOCATION_KEYS = {
+  all: ['locations'] as const,
+
+  details: () => [...FRIEND_LOCATION_KEYS.all, 'detail'] as const, // ["locations", "detail"]
+  detail: (id: string) => [...FRIEND_LOCATION_KEYS.details(), id] as const, // ["locations", "detail", "id"]
+};
+
+const FRIEND_KEYS = {
+  all: ['friends'] as const,
+
+  lists: () => [...FRIEND_KEYS.all, 'list'] as const, // ["friends", "list"]
+  list: (filters: object) => [...FRIEND_KEYS.lists(), {filters}] as const, // ["friends", "list", "..."]
+
+  details: () => [...FRIEND_KEYS.all, 'detail'] as const, // ["friends", "detail"]
+  detail: (id: string) => [...FRIEND_KEYS.details(), id] as const, // ["friends", "detail", "id"]
+};
+
+const FRIEND_DETAIL_KEYS = {
+  all: ['friendsDetail'] as const,
+
+  lists: () => [...FRIEND_DETAIL_KEYS.all, 'list'] as const, // ["friends", "list"]
+  list: (filters: object) =>
+    [...FRIEND_DETAIL_KEYS.lists(), {filters}] as const, // ["friends", "list", "..."]
+
+  details: () => [...FRIEND_DETAIL_KEYS.all, 'detail'] as const, // ["friends", "detail"]
+  detail: (id: string) => [...FRIEND_DETAIL_KEYS.details(), id] as const, // ["friends", "detail", "id"]
+};
+
 const WEATHER_KEYS = {
   all: ['weathers'] as const,
 
@@ -43,10 +71,14 @@ const NOTIFICATION_KEYS = {
   detail: (id: string) => [...NOTIFICATION_KEYS.details(), id] as const, // ["notifications", "detail", "id"]
 };
 
+
 export {
   LOCATION_KEYS,
   CATEGORY_KEYS,
   WEATHER_KEYS,
   TOUR_KEYS,
   NOTIFICATION_KEYS,
+  FRIEND_KEYS,
+  FRIEND_DETAIL_KEYS,
+  FRIEND_LOCATION_KEYS,
 };

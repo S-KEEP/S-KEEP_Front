@@ -32,6 +32,12 @@ export {default as IcCardShopping} from './ic_card_shopping.svg';
 
 export {default as IcRight} from './ic_right.svg';
 export {default as IcProfile} from './ic_profile.svg';
+export {default as IcProfileBlue} from './ic_profile_blue.svg';
+export {default as IcProfileGreen} from './ic_profile_green.svg';
+export {default as IcProfileOrange} from './ic_profile_orange.svg';
+export {default as IcProfileFriend} from './ic_profile_basic.svg';
+export {default as IcProfilePlus} from './ic_friend_plus.svg';
+export {default as IcFriendDelete} from './ic_friend_delete.svg';
 export {default as IcApple} from './ic_apple.svg';
 export {default as IcWarning} from './ic_warning.svg';
 
@@ -61,4 +67,15 @@ export {default as IcEmpty} from './ic_empty.svg';
 export {default as IcDelete} from './ic_delete.svg';
 
 export {default as IcBell} from './ic_bell.svg';
+export {default as IcFriendRest} from './ic_friend_rest.svg';
+export {default as IcFriendActivity} from './ic_friend_activity.svg';
+export {default as IcFriendEtc} from './ic_friend_etc.svg';
+export {default as IcFriendFood} from './ic_friend_food.svg';
+export {default as IcFriendFestival} from './ic_friend_festival.svg';
+export {default as IcFriendHistory} from './ic_friend_history.svg';
+export {default as IcFriendNature} from './ic_friend_nature.svg';
+export {default as IcFriendShopping} from './ic_friend_shopping.svg';
+
+
+
 export {default as IcNotiEmpty} from './ic_noti_empty.svg';

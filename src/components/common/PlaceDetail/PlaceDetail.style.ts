@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   address: {
     ...theme.typography.body_m_16,
     marginTop: 10,
-    width: '70%',
+    width: '90%',
   },
   textContainer: {
     flex: 1,

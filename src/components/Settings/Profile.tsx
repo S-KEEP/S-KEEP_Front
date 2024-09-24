@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {IcApple, IcProfile} from '../../assets/icon';
+import {IcApple, IcProfileBlue} from '../../assets/icon';
 import styles from './Profile.style';
 
 type ProfileProps = {
@@ -14,7 +14,7 @@ type ProfileProps = {
 export default function Profile({userInfo}: ProfileProps) {
   return (
     <View style={styles.profileSection}>
-      <IcProfile width={60} height={60} />
+      <IcProfileBlue width={60} height={60} />
 
       <View style={styles.profileTextContainer}>
         <Text style={styles.name}>{userInfo.name}</Text>

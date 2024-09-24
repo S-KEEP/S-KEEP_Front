@@ -23,6 +23,7 @@ import EmptyCategoryList from '../../components/Category/EmptyCategoryList';
 import Modal from '../../components/common/Modal/Modal';
 import Icon from '../../components/common/Icon/Icon';
 import IcCategoryRound from '../../components/Category/Icon/IcCategoryRound';
+import SkeletonPlaceDetail from '../../components/common/PlaceDetail/SkeletonPlaceDetail';
 
 type CategoryListProps = StackScreenProps<'CategoryList'>;
 
@@ -41,6 +42,8 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
   const backgroundColor = useMemo(() => {
     return COLOR_DETAIL_MAP[category?.name as string] || '#E3F7FF';
   }, [category]);
+
+
 
   const renderItem = ({item}: {item: UserLocation}) => (
     <TouchableOpacity
@@ -74,6 +77,7 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
     );
   }
 
+ 
   return (
     <SafeAreaView style={{...wrapper}}>
       <View style={[styles.topContainer, {backgroundColor}]}>
@@ -100,7 +104,9 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
         </View>
       </View>
 
-      <FlatList
+      {isFetching ? (
+        <SkeletonPlaceDetail />
+      ) : (<FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
@@ -119,7 +125,7 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
           )
         }
         ListEmptyComponent={EmptyCategoryList}
-      />
+      />)}
 
       <Modal
         visible={modalVisible}

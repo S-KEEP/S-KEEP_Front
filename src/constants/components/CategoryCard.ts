@@ -10,6 +10,14 @@ import {
   IcCardShopping,
   IcFestival,
   IcFood,
+  IcFriendActivity,
+  IcFriendEtc,
+  IcFriendFestival,
+  IcFriendFood,
+  IcFriendHistory,
+  IcFriendNature,
+  IcFriendRest,
+  IcFriendShopping,
   IcHistory,
   IcNature,
   IcShopping,
@@ -27,7 +35,19 @@ export const ICON_MAPS: Record<string, React.ComponentType<{}>> = {
   '쇼핑/도심': IcCardShopping,
 };
 
-// Square 아이콘
+
+
+export const ICON_FRIEND_MAPS: Record<string, React.ComponentType<{}>> = {
+  액티비티: IcFriendActivity,
+  '문화/축제': IcFriendFestival,
+  맛집: IcFriendFood,
+  '역사/유적지': IcFriendHistory,
+  '공원/자연': IcFriendNature,
+  휴식: IcFriendRest,
+  '쇼핑/도심': IcFriendShopping,
+  기타: IcFriendEtc,
+};
+
 export const IC_MAPS: Record<string, React.ComponentType<{}>> = {
   액티비티: IcActivity,
   '문화/축제': IcFestival,

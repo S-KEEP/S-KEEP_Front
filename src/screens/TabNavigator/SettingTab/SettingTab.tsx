@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, Text, ScrollView, Alert, TouchableOpacity} from 'react-native';
+import {View, Text, Alert, TouchableOpacity, FlatList} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSetRecoilState} from 'recoil';
 import {authState} from '../../../libs/recoil/states/auth';
@@ -10,15 +10,26 @@ import SettingsList from '../../../components/Settings/SettingList';
 import {TabOfStackScreenProps} from '../../../navigators/types';
 import {userInfoState} from '../../../libs/recoil/states/userInfo';
 import Icon from '../../../components/common/Icon/Icon';
-import {IcBell} from '../../../assets/icon';
-import {IcPlus} from '../../../assets/icon';
+import {
+  IcBell,
+  IcProfileBlue,
+  IcProfileFriend,
+  IcProfileGreen,
+  IcProfileOrange,
+  IcProfilePlus,
+} from '../../../assets/icon';
 import {usePatchFriendAdd} from '../../../hooks/mutations/friend/useFriendAdd';
 import {usePostInvitationToken} from '../../../hooks/mutations/friend/usePostInvitationToken';
 import {handleKakaoInvite} from '../../../utils/kakaoInviteHandler';
+import {UserFriend} from '../../../types/dtos/category';
+import {useGetFriendList} from '../../../hooks/queries/friends/useGetFriendList';
+import queryClient from '../../../apis/queryClient';
+import {FRIEND_DETAIL_KEYS} from '../../../hooks/queries/QueryKeys';
 
 type SettingTabProps = TabOfStackScreenProps<'TabNavigator', 'SettingTab'>;
 
 export default function SettingTab({navigation, route}: SettingTabProps) {
+  const userFriend = useGetFriendList(0);
   const userInfoData = useGetUserInfoQuery();
   const setAuth = useSetRecoilState(authState);
   const setUserInfo = useSetRecoilState(userInfoState);
@@ -39,9 +50,12 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
 
   const {mutate: addFriendWithToken} = usePatchFriendAdd({
     onSuccess(res) {
-      console.log('✅ 친구 추가 성공: ', res);
       Alert.alert('친구 추가 성공');
       navigation.setParams({test: 'default value'});
+
+      queryClient.invalidateQueries({
+        queryKey: FRIEND_DETAIL_KEYS.all,
+      });
     },
     onError(e) {
       console.error('❌ 친구 추가 실패: ', e);
@@ -52,10 +66,7 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
 
   useEffect(() => {
     if (route?.params?.test !== 'default value') {
-      console.log('==========딥링크를 통해 들어온 화면입니다==========');
       addFriendWithToken({token: route.params.test});
-    } else {
-      console.log('==========일반적인 더보기 화면입니다==========');
     }
   }, [route.params]);
 
@@ -77,6 +88,28 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
     }
   };
 
+  const renderFriendItem = ({item}: {item: UserFriend}) => {
+    const icons = [
+      IcProfileOrange,
+      IcProfileBlue,
+      IcProfileGreen,
+      IcProfileFriend,
+    ];
+
+    // 랜덤으로 아이콘 선택
+    const RandomIcon = icons[Math.floor(Math.random() * icons.length)];
+    return (
+      <TouchableOpacity
+        style={styles.friendItem}
+        onPress={() =>
+          navigation.navigate('Friend', {id: item.id, name: item.name})
+        }>
+        <RandomIcon />
+        <Text style={styles.friendName}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   if (!userInfoData) {
     return (
       <View>
@@ -86,7 +119,7 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Icon
           style={{alignSelf: 'flex-end'}}
@@ -102,16 +135,34 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
         <Text style={styles.description}>
           친구를 추가해 여행지를 공유해 보세요!
         </Text>
-        <View style={styles.centeredButton}>
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={() => getFriendToken()}>
-            <IcPlus />
-            <Text style={styles.addButtonText}>카카오톡으로 친구 추가</Text>
-          </TouchableOpacity>
-        </View>
+
+        {userFriend.data?.friendList.length === 0 ? (
+          <View style={styles.centeredButton}>
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={() => getFriendToken()}>
+              <Text style={styles.addButtonText}>카카오톡으로 친구 추가</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <>
+            <FlatList
+              horizontal
+              data={userFriend.data?.friendList}
+              keyExtractor={item => item.id.toString()}
+              renderItem={renderFriendItem}
+              ListHeaderComponent={
+                <TouchableOpacity
+                  style={styles.friendItem}
+                  onPress={() => getFriendToken()}>
+                  <IcProfilePlus />
+                </TouchableOpacity>
+              }
+            />
+          </>
+        )}
       </View>
       <SettingsList onLogout={handleLogout} />
-    </ScrollView>
+    </View>
   );
 }

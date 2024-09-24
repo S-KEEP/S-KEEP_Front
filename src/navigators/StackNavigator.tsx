@@ -8,7 +8,6 @@ import Analyze from '../screens/Analyze/Analyze';
 import ReAnalyze from '../screens/ReAnalyze/ReAnalyze';
 import AnalyzeError from '../screens/AnalyzeError/AnalyzeError';
 import Login from '../screens/Login/Login';
-
 import Withdraw from '../screens/Withdraw/Withdraw';
 import CategoryList from '../screens/CategoryList/CategoryList';
 import DetailTour from '../screens/DetailTour/DetailTour';
@@ -16,6 +15,8 @@ import CategoryAdd from '../screens/CategoryAdd/CategoryAdd';
 import {IcLeft} from '../assets/icon';
 import Icon from '../components/common/Icon/Icon';
 import Notification from '../screens/Notification/Notification';
+import Friend from '../screens/Friend/Friend';
+import FriendDetail from '../screens/FriendDetail/FriendDetail';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -64,6 +65,10 @@ export default function StackNavigator() {
 
       {/* 알림 */}
       <Stack.Screen name={StackMenu.Notification} component={Notification} />
+
+      {/* 친구 상세 명소 */}
+      <Stack.Screen name={StackMenu.Friend} component={Friend} />
+      <Stack.Screen name={StackMenu.FriendDetail} component={FriendDetail} />
     </Stack.Navigator>
   );
 }
