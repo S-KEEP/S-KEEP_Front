@@ -106,8 +106,6 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
         </View>
       </View>
 
-      <Text style={styles.itemCount}>총 {totalElement}개</Text>
-
       <FlatList
         data={data}
         renderItem={renderItem}
@@ -118,6 +116,13 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
           isFetching ? (
             <ActivityIndicator size="large" color={theme.palette.primary} />
           ) : null
+        }
+        ListHeaderComponent={
+          data && data.length > 0 ? (
+            <Text style={styles.itemCount}>총 {totalElement}개</Text>
+          ) : (
+            <View style={{height: 50}} />
+          )
         }
         ListEmptyComponent={EmptyCategoryList}
       />

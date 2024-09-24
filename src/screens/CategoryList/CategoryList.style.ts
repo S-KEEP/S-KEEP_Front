@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   itemCount: {
-    padding: 20,
+    paddingTop: 20,
     paddingLeft: 28,
     ...theme.typography.sb_13,
   },
