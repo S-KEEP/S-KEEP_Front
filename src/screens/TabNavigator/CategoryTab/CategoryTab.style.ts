@@ -4,7 +4,7 @@ import {flexBox} from '../../../styles/common';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 100,
+    paddingTop: 150,
     backgroundColor: theme.palette.white,
     flex: 1,
     alignItems: 'center',
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     paddingLeft: 28,
-    marginTop: 80,
+    marginTop: 50,
   },
   cardWrapper: {
     width: Dimensions.get('window').width - 150,

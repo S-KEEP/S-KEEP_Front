@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     padding: 20,
     ...flexBox('column', 'flex-start', 'center'),
     gap: 10,
-    width: 210,
+    width: 211,
     height: 235,
   },
   iconContainer: {
