@@ -2,11 +2,6 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {IcApple, IcProfile} from '../../assets/icon';
 import styles from './Profile.style';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {
-  sendCategoryPush,
-  sendDetailPush,
-} from '../../hooks/mutations/test/useTestNotification';
 
 type ProfileProps = {
   userInfo: {
@@ -19,21 +14,17 @@ type ProfileProps = {
 export default function Profile({userInfo}: ProfileProps) {
   return (
     <View style={styles.profileSection}>
-      <TouchableOpacity onPress={() => sendCategoryPush()}>
-        <IcProfile width={60} height={60} />
-      </TouchableOpacity>
+      <IcProfile width={60} height={60} />
 
-      <TouchableOpacity onPress={() => sendDetailPush()}>
-        <View style={styles.profileTextContainer}>
-          <Text style={styles.name}>{userInfo.name}</Text>
-          <View style={styles.emailContainer}>
-            <Text style={styles.email}>{userInfo.email}</Text>
-            {userInfo.provider === 'APPLE' && (
-              <IcApple width={18} height={18} style={styles.appleIcon} />
-            )}
-          </View>
+      <View style={styles.profileTextContainer}>
+        <Text style={styles.name}>{userInfo.name}</Text>
+        <View style={styles.emailContainer}>
+          <Text style={styles.email}>{userInfo.email}</Text>
+          {userInfo.provider === 'APPLE' && (
+            <IcApple width={18} height={18} style={styles.appleIcon} />
+          )}
         </View>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 }
