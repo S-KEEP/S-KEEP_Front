@@ -13,17 +13,41 @@ import {StackScreenProps} from '../../navigators/types';
 import {ICON_FRIEND_MAPS} from '../../constants/components/CategoryCard';
 import {IcFriendDelete, IcLeft} from '../../assets/icon';
 import {styles} from './Friend.style';
-import useGetFreindCategoryDetail from '../../hooks/queries/friends/useGetFriendCategoryDetail';
+import useGetFriendCategoryDetail from '../../hooks/queries/friends/useGetFriendCategoryDetail';
 import {theme} from '../../styles';
 import EmptyFriendCategoryList from '../../components/Category/EmptyFriendCategoryList';
 import PlaceDetail from '../../components/common/PlaceDetail/PlaceDetail';
+import {useDeleteFriend} from '../../hooks/mutations/friend/useDeleteFriend';
+import queryClient from '../../apis/queryClient';
+import {FRIEND_DETAIL_KEYS} from '../../hooks/queries/QueryKeys';
 
 type FriendProps = StackScreenProps<'Friend'>;
 
 export default function Friend({navigation, route}: FriendProps) {
-  const {id} = route.params;
+  const {id, name} = route.params;
   const {data: categoryListData} = useGetFriendCategoryList(id);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+
+  const {mutate: remove} = useDeleteFriend({
+    onSuccess: res => {
+      const {errorCode, message, result} = res;
+
+      if (errorCode) {
+        console.error(`${errorCode} - ${message}`);
+        navigation.pop();
+        return;
+      }
+
+      console.log('[Remove] ', res.result);
+      queryClient.invalidateQueries({
+        queryKey: FRIEND_DETAIL_KEYS.all,
+      });
+      navigation.pop();
+    },
+    onError: e => {
+      console.error('[Remove] ', e);
+    },
+  });
 
   useEffect(() => {
     if (categoryListData?.userCategoryDtoList?.length) {
@@ -32,7 +56,7 @@ export default function Friend({navigation, route}: FriendProps) {
   }, [categoryListData]);
 
   const {data, loadMore, isFetching, hasNextPage, totalElement} =
-    useGetFreindCategoryDetail({
+    useGetFriendCategoryDetail({
       targetId: id,
       userCategoryId: selectedCategory ?? 0,
       page: 1,
@@ -73,7 +97,9 @@ export default function Friend({navigation, route}: FriendProps) {
 
   const renderItem = ({item}: {item: UserLocation}) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Detail', {id: item.id})}>
+      onPress={() =>
+        navigation.navigate('FriendDetail', {id: item.id, targetId: id})
+      }>
       <PlaceDetail
         title={item.location.placeName}
         description={item.location.roadAddress}
@@ -82,6 +108,10 @@ export default function Friend({navigation, route}: FriendProps) {
     </TouchableOpacity>
   );
 
+  function handleDelete() {
+    remove({targetId: id});
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.FriendTopContainer}>
@@ -89,13 +119,13 @@ export default function Friend({navigation, route}: FriendProps) {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <IcLeft />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log('Open settings')}>
+          <TouchableOpacity onPress={handleDelete}>
             <IcFriendDelete />
           </TouchableOpacity>
         </View>
 
         <Text style={styles.title}>
-          채린 님이 {'\n'}
+          {name} 님이 {'\n'}
           기록한 여행지들이에요!
         </Text>
 

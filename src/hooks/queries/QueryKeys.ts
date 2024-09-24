@@ -17,6 +17,13 @@ const CATEGORY_KEYS = {
   list: (filters: object) => [...CATEGORY_KEYS.lists(), {filters}] as const, // ["categories", "list", {filters}]
 };
 
+const FRIEND_LOCATION_KEYS = {
+  all: ['locations'] as const,
+
+  details: () => [...FRIEND_LOCATION_KEYS.all, 'detail'] as const, // ["locations", "detail"]
+  detail: (id: string) => [...FRIEND_LOCATION_KEYS.details(), id] as const, // ["locations", "detail", "id"]
+};
+
 const FRIEND_KEYS = {
   all: ['friends'] as const,
 
@@ -61,4 +68,5 @@ export {
   TOUR_KEYS,
   FRIEND_KEYS,
   FRIEND_DETAIL_KEYS,
+  FRIEND_LOCATION_KEYS,
 };

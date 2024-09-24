@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.palette.white,
   },
   FriendTopContainer: {
-    backgroundColor: theme.palette.primary,
+    backgroundColor: '#E3F7FF',
     paddingHorizontal: 28,
   },
   header: {
