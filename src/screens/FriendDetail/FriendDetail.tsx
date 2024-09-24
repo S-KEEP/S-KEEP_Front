@@ -49,43 +49,6 @@ export default function FriendDetail({navigation, route}: DetailProps) {
   });
 
   const bottomSheetRef = useRef<CategoryBottomSheetRef>(null);
-  const {mutate: addCategory} = usePostTourLocation({
-    onSuccess(res, variables) {
-      console.log(res, variables);
-
-      // 카테고리 추가 성공 후,
-      //  토스트 노출 & 카테고리 메인으로 이동
-      setIsLoadingBottom(false);
-
-      const {tourLocation, category} = variables;
-      DeviceEventEmitter.emit('openToast', {
-        content: (
-          <View style={styles.snackbar}>
-            <IcCheck />
-            <Text style={styles.snackbarText}>
-              {category.name}에 저장했어요.
-            </Text>
-          </View>
-        ),
-      });
-
-      navigation.replace('CategoryList', {
-        title: category.name,
-        description: category.description,
-        id: category.id,
-      });
-    },
-    onError(e) {
-      console.error(e);
-
-      setIsLoadingBottom(false);
-      DeviceEventEmitter.emit('openToast', {
-        content: (
-          <Text style={styles.snackbarText}>여행지 저장에 실패했습니다</Text>
-        ),
-      });
-    },
-  });
 
   const [modalVisible, setModalVisible] = useState(false);
 
