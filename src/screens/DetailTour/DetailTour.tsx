@@ -10,7 +10,6 @@ import {padding, wrapperFull} from '../../styles/common';
 import {IcCancel, IcCheck} from '../../assets/icon';
 import {StackScreenProps} from '../../navigators/types';
 import Map from '../../components/Detail/Map/Map';
-import PlaceDetail from '../../components/Detail/PlaceDetail/PlaceDetail';
 import Tourism from '../../components/common/Tourism/Tourism';
 import Weather from '../../components/common/Weather/Weather';
 import Button from '../../components/common/Button/Button';
@@ -23,6 +22,7 @@ import {ICategory} from '../../types/dtos/location';
 import {theme} from '../../styles';
 import {styles} from './DetailTour.styles';
 import Icon from '../../components/common/Icon/Icon';
+import PlaceDetail from '../../components/common/PlaceDetail/PlaceDetail';
 
 type DetailTourProps = StackScreenProps<'DetailTour'>;
 export default function DetailTour({navigation, route}: DetailTourProps) {

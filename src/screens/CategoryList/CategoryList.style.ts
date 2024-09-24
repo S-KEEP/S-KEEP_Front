@@ -3,39 +3,35 @@ import {theme} from '../../styles';
 import {flexBox} from '../../styles/common';
 
 export const styles = StyleSheet.create({
-  headerContainer: {
+  topContainer: {
+    backgroundColor: theme.palette.secondary,
+    paddingTop: 10,
+  },
+  header: {
+    width: '95%',
+    ...flexBox('row', 'space-between'),
+    paddingLeft: 28,
+  },
+  category: {
     alignItems: 'center',
     paddingVertical: 30,
-    backgroundColor: theme.palette.secondary,
+  },
+  icon: {
+    marginBottom: 20,
+  },
+  headerTitle: {
+    ...theme.typography.title_sb_21,
+  },
+  headerDescription: {
+    ...theme.typography.body_m_15,
+    paddingTop: 15,
   },
   modalIcon: {
     marginBottom: 10,
   },
-  icon: {
-    marginBottom: 16,
-  },
-  backIcon: {
-    width: '95%',
-    ...flexBox('row', 'space-between'),
-    position: 'absolute',
-    zIndex: 9,
-    top: 70,
-    paddingLeft: 28,
-  },
-  headerTitle: {
-    ...theme.typography.Title1Bold,
-  },
-  headerDescription: {
-    ...theme.typography.title_m_16,
-    paddingTop: 15,
-  },
   itemCount: {
-    padding: 15,
+    paddingTop: 20,
     paddingLeft: 28,
-    ...theme.typography.title_m_16,
-  },
-  itemContainer: {
-    alignItems: 'center',
-    paddingVertical: 10,
+    ...theme.typography.sb_13,
   },
 });
