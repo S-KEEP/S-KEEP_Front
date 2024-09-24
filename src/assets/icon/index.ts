@@ -31,6 +31,9 @@ export {default as IcCardShopping} from './ic_card_shopping.svg';
 
 export {default as IcRight} from './ic_right.svg';
 export {default as IcProfile} from './ic_profile.svg';
+export {default as IcProfileBlue} from './ic_profile_blue.svg';
+export {default as IcProfileGreen} from './ic_profile_green.svg';
+export {default as IcProfileOrange} from './ic_profile_orange.svg';
 export {default as IcProfileFriend} from './ic_profile_basic.svg';
 export {default as IcProfilePlus} from './ic_friend_plus.svg';
 export {default as IcFriendDelete} from './ic_friend_delete.svg';

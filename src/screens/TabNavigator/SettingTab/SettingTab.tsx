@@ -10,7 +10,14 @@ import SettingsList from '../../../components/Settings/SettingList';
 import {TabOfStackScreenProps} from '../../../navigators/types';
 import {userInfoState} from '../../../libs/recoil/states/userInfo';
 import Icon from '../../../components/common/Icon/Icon';
-import {IcBell, IcProfileFriend, IcProfilePlus} from '../../../assets/icon';
+import {
+  IcBell,
+  IcProfileBlue,
+  IcProfileFriend,
+  IcProfileGreen,
+  IcProfileOrange,
+  IcProfilePlus,
+} from '../../../assets/icon';
 import {usePatchFriendAdd} from '../../../hooks/mutations/friend/useFriendAdd';
 import {usePostInvitationToken} from '../../../hooks/mutations/friend/usePostInvitationToken';
 import {handleKakaoInvite} from '../../../utils/kakaoInviteHandler';
@@ -81,14 +88,27 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
     }
   };
 
-  const renderFriendItem = ({item}: {item: UserFriend}) => (
-    <TouchableOpacity
-      style={styles.friendItem}
-      onPress={() => navigation.navigate('Friend', {id: item.id, name: item.name})}>
-      <IcProfileFriend />
-      <Text style={styles.friendName}>{item.name}</Text>
-    </TouchableOpacity>
-  );
+  const renderFriendItem = ({item}: {item: UserFriend}) => {
+    const icons = [
+      IcProfileOrange,
+      IcProfileBlue,
+      IcProfileGreen,
+      IcProfileFriend,
+    ];
+
+    // 랜덤으로 아이콘 선택
+    const RandomIcon = icons[Math.floor(Math.random() * icons.length)];
+    return (
+      <TouchableOpacity
+        style={styles.friendItem}
+        onPress={() =>
+          navigation.navigate('Friend', {id: item.id, name: item.name})
+        }>
+        <RandomIcon />
+        <Text style={styles.friendName}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   if (!userInfoData) {
     return (

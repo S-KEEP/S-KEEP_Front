@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   divider: {
-    height: 1,
-    backgroundColor: theme.palette.gray3,
+    height: 7,
+    backgroundColor: theme.palette.gray1,
     marginTop: 10,
     marginBottom: 10,
     marginHorizontal: 0,
