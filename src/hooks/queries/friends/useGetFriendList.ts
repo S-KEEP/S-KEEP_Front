@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {GET} from '../../../apis/client';
-import {FRIEND_KEYS} from '../QueryKeys';
+import {FRIEND_DETAIL_KEYS} from '../QueryKeys';
 import {UserFriendResponseDto} from '../../../types/dtos/category';
 
 /**
@@ -13,7 +13,7 @@ export const getFriendList = async (page: number) => {
 };
 
 export const useGetFriendList = (page: number) => {
-  const QUERY_KEY = FRIEND_KEYS.all;
+  const QUERY_KEY = FRIEND_DETAIL_KEYS.all;
 
   const {data, isPending, isError, refetch} = useQuery({
     queryKey: QUERY_KEY,

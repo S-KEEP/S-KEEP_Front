@@ -28,13 +28,14 @@ const FRIEND_KEYS = {
 };
 
 const FRIEND_DETAIL_KEYS = {
-  all: ['friends'] as const,
+  all: ['friendsDetail'] as const,
 
-  lists: () => [...FRIEND_KEYS.all, 'list'] as const, // ["friends", "list"]
-  list: (filters: object) => [...FRIEND_KEYS.lists(), {filters}] as const, // ["friends", "list", "..."]
+  lists: () => [...FRIEND_DETAIL_KEYS.all, 'list'] as const, // ["friends", "list"]
+  list: (filters: object) =>
+    [...FRIEND_DETAIL_KEYS.lists(), {filters}] as const, // ["friends", "list", "..."]
 
-  details: () => [...FRIEND_KEYS.all, 'detail'] as const, // ["friends", "detail"]
-  detail: (id: string) => [...FRIEND_KEYS.details(), id] as const, // ["friends", "detail", "id"]
+  details: () => [...FRIEND_DETAIL_KEYS.all, 'detail'] as const, // ["friends", "detail"]
+  detail: (id: string) => [...FRIEND_DETAIL_KEYS.details(), id] as const, // ["friends", "detail", "id"]
 };
 
 const WEATHER_KEYS = {
