@@ -12,19 +12,11 @@ import {
   IcFood,
   IcHistory,
   IcNature,
-  IcRoundActivity,
-  IcRoundEtc,
-  IcRoundFestival,
-  IcRoundFood,
-  IcRoundHistory,
-  IcRoundNature,
-  IcRoundRest,
-  IcRoundShopping,
   IcShopping,
   IcVacation,
 } from '../../assets/icon';
-import {theme} from '../../styles';
 
+// 아이콘
 export const ICON_MAPS: Record<string, React.ComponentType<{}>> = {
   액티비티: IcCardActivity,
   '문화/축제': IcCardFestival,
@@ -35,17 +27,7 @@ export const ICON_MAPS: Record<string, React.ComponentType<{}>> = {
   '쇼핑/도심': IcCardShopping,
 };
 
-export const ICON_DETAIL_MAPS: Record<string, React.ComponentType<{}>> = {
-  액티비티: IcRoundActivity,
-  '문화/축제': IcRoundFestival,
-  맛집: IcRoundFood,
-  '역사/유적지': IcRoundHistory,
-  '공원/자연': IcRoundNature,
-  휴식: IcRoundRest,
-  '쇼핑/도심': IcRoundShopping,
-  기타: IcRoundEtc,
-};
-
+// Square 아이콘
 export const IC_MAPS: Record<string, React.ComponentType<{}>> = {
   액티비티: IcActivity,
   '문화/축제': IcFestival,
@@ -56,6 +38,7 @@ export const IC_MAPS: Record<string, React.ComponentType<{}>> = {
   '쇼핑/도심': IcShopping,
 };
 
+// 카드색
 export const COLOR_MAP: Record<string, string> = {
   휴식: '#C8EEFF',
   '공원/자연': '#CBF6C4',
@@ -64,9 +47,9 @@ export const COLOR_MAP: Record<string, string> = {
   '역사/유적지': '#E3E3E3',
   맛집: '#FFCFA2',
   액티비티: '#BEFBF0',
-  기타: '#BEFBF0',
 };
 
+// 배경색
 export const COLOR_DETAIL_MAP: Record<string, string> = {
   휴식: '#E3F7FF',
   '공원/자연': '#E5FBE1',
@@ -75,8 +58,8 @@ export const COLOR_DETAIL_MAP: Record<string, string> = {
   '역사/유적지': '#F2F2F2',
   맛집: '#FFE7D1',
   액티비티: '#DFFDF7',
-  기타: theme.palette.primary,
 };
+
 export const CARD_SIZE = Dimensions.get('window').width - 150;
 export const MARGIN = 20;
 export const OFFSET = CARD_SIZE - MARGIN;

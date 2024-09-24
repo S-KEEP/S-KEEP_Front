@@ -9,11 +9,8 @@ import {
 } from 'react-native';
 import {StackScreenProps} from '../../navigators/types';
 import {styles} from './CategoryList.style';
-import {IcDelete, IcLeft, IcRoundEtc} from '../../assets/icon';
-import {
-  COLOR_DETAIL_MAP,
-  ICON_DETAIL_MAPS,
-} from '../../constants/components/CategoryCard';
+import {IcDelete, IcLeft} from '../../assets/icon';
+import {COLOR_DETAIL_MAP} from '../../constants/components/CategoryCard';
 import {theme} from '../../styles';
 import {wrapper} from '../../styles/common';
 import PlaceDetail from '../../components/common/PlaceDetail/PlaceDetail';
@@ -25,6 +22,7 @@ import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
 import EmptyCategoryList from '../../components/Category/EmptyCategoryList';
 import Modal from '../../components/common/Modal/Modal';
 import Icon from '../../components/common/Icon/Icon';
+import IcCategoryRound from '../../components/Category/Icon/IcCategoryRound';
 
 type CategoryListProps = StackScreenProps<'CategoryList'>;
 
@@ -41,11 +39,7 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
     });
 
   const backgroundColor = useMemo(() => {
-    return COLOR_DETAIL_MAP[category?.name as string] || theme.palette.gray1;
-  }, [category]);
-
-  const IconComponent = useMemo(() => {
-    return ICON_DETAIL_MAPS[category?.name as string] || IcRoundEtc;
+    return COLOR_DETAIL_MAP[category?.name as string] || '#E3F7FF';
   }, [category]);
 
   const renderItem = ({item}: {item: UserLocation}) => (
@@ -82,29 +76,29 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
 
   return (
     <SafeAreaView style={{...wrapper}}>
-      <View style={styles.backIcon}>
-        <Icon
-          onPress={handleGoBack}
-          children={<IcLeft />}
-          style={{paddingVertical: 5}}
-        />
+      <View style={[styles.topContainer, {backgroundColor}]}>
+        <View style={styles.header}>
+          <Icon
+            onPress={handleGoBack}
+            children={<IcLeft />}
+            style={{paddingVertical: 5}}
+          />
 
-        <Icon
-          onPress={() => setModalVisible(true)}
-          children={<Text>삭제</Text>}
-        />
-      </View>
-
-      <View style={[styles.headerContainer, {backgroundColor}]}>
-        <View style={styles.icon}>
-          <IconComponent />
+          <Icon
+            onPress={() => setModalVisible(true)}
+            children={<Text>삭제</Text>}
+          />
         </View>
 
-        <Text style={styles.headerTitle}>{category?.name}</Text>
-        <Text style={styles.headerDescription}>{category?.description}</Text>
-      </View>
+        <View style={styles.category}>
+          <View style={styles.icon}>
+            <IcCategoryRound category={category?.name as string} />
+          </View>
 
-      <Text style={styles.itemCount}>총 {totalElement}개</Text>
+          <Text style={styles.headerTitle}>{category?.name}</Text>
+          <Text style={styles.headerDescription}>{category?.description}</Text>
+        </View>
+      </View>
 
       <FlatList
         data={data}
@@ -116,6 +110,13 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
           isFetching ? (
             <ActivityIndicator size="large" color={theme.palette.primary} />
           ) : null
+        }
+        ListHeaderComponent={
+          data && data.length > 0 ? (
+            <Text style={styles.itemCount}>총 {totalElement}개</Text>
+          ) : (
+            <View style={{height: 50}} />
+          )
         }
         ListEmptyComponent={EmptyCategoryList}
       />
