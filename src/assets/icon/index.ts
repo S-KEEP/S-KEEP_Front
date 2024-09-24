@@ -86,3 +86,4 @@ export {default as IcFriendShopping} from './ic_friend_shopping.svg';
 
 
 
+export {default as IcNotiEmpty} from './ic_noti_empty.svg';

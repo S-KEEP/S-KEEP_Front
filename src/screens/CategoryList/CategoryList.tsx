@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {
   View,
   Text,
@@ -30,18 +30,26 @@ import SkeletonPlaceDetail from '../../components/common/PlaceDetail/SkeletonPla
 type CategoryListProps = StackScreenProps<'CategoryList'>;
 
 export default function CategoryList({navigation, route}: CategoryListProps) {
-  const {title, description, id} = route.params;
+  const {id} = route.params;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const queryClient = useQueryClient();
-  const backgroundColor = COLOR_DETAIL_MAP[title] || theme.palette.gray1;
-  const IconComponent = ICON_DETAIL_MAPS[title] || IcRoundEtc;
 
   const {mutate: deleteCategory} = useDeleteCategory();
-  const {data, loadMore, isFetching, isLoading, hasNextPage, totalElement} =
+  const {data, loadMore, isFetching, hasNextPage, totalElement, category} =
     useGetCategoryList({
       userCategoryId: id,
       page: 1,
     });
+
+  const backgroundColor = useMemo(() => {
+    return COLOR_DETAIL_MAP[category?.name as string] || theme.palette.gray1;
+  }, [category]);
+
+  const IconComponent = useMemo(() => {
+    return ICON_DETAIL_MAPS[category?.name as string] || IcRoundEtc;
+  }, [category]);
+
+
 
   function handleDeleteCategory() {
     const userCategoryId = id;
@@ -96,13 +104,13 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
           <IconComponent />
         </View>
 
-        <Text style={styles.headerTitle}>{title}</Text>
-        <Text style={styles.headerDescription}>{description}</Text>
+        <Text style={styles.headerTitle}>{category?.name}</Text>
+        <Text style={styles.headerDescription}>{category?.description}</Text>
       </View>
 
       <Text style={styles.itemCount}>총 {totalElement}개</Text>
 
-      {isLoading ? (
+      {isFetching ? (
         <SkeletonPlaceDetail />
       ) : (
         <FlatList

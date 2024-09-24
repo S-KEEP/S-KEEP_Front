@@ -28,7 +28,7 @@ export type StackParamList = {
   Detail: {id: number};
   DetailTour: {location: TourLocationDTO};
 
-  CategoryList: {title: string; description: string; id: number};
+  CategoryList: {id: number};
   CategoryAdd: undefined;
 
   Notification: undefined;

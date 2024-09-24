@@ -95,8 +95,6 @@ export default function CategoryAdd({navigation}: CategoryAddProps) {
 
           if (userCategoryId) {
             navigation.replace('CategoryList', {
-              title: nameValue,
-              description: memoValue,
               id: userCategoryId,
             });
           } else {

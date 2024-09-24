@@ -1,3 +1,5 @@
+import {ICategory} from './location';
+
 export type CardEntity = {
   id: number;
   name: string;
@@ -38,13 +40,14 @@ export interface UserLocation {
   id: number;
   photoUrl: string;
   location: Location;
-  userCategory: UserCategory;
+  userCategory: ICategory;
 }
 
 export interface IPage<T> {
   totalElement: number;
   totalPage: number;
   userLocationList: any;
+  userCategory: ICategory;
   result: {
     userLocationList: T[];
   };
