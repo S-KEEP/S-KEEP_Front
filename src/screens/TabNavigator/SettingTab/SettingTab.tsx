@@ -84,7 +84,7 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
   const renderFriendItem = ({item}: {item: UserFriend}) => (
     <TouchableOpacity
       style={styles.friendItem}
-      onPress={() => navigation.navigate('Friend', {id: item.id})}>
+      onPress={() => navigation.navigate('Friend', {id: item.id, name: item.name})}>
       <IcProfileFriend />
       <Text style={styles.friendName}>{item.name}</Text>
     </TouchableOpacity>

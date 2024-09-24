@@ -35,6 +35,11 @@ export type StackParamList = {
 
   Friend: {
     id: number;
+    name: string;
+  };
+  FriendDetail: {
+    id: number;
+    targetId: number;
   };
 };
 

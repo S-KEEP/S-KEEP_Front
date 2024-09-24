@@ -16,6 +16,7 @@ import {IcLeft} from '../assets/icon';
 import Icon from '../components/common/Icon/Icon';
 import Notification from '../screens/Notification/Notification';
 import Friend from '../screens/Friend/Friend';
+import FriendDetail from '../screens/FriendDetail/FriendDetail';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -66,7 +67,8 @@ export default function StackNavigator() {
       <Stack.Screen name={StackMenu.Notification} component={Notification} />
 
       {/* 친구 상세 명소 */}
-      <Stack.Screen name={StackMenu.Freind} component={Friend} />
+      <Stack.Screen name={StackMenu.Friend} component={Friend} />
+      <Stack.Screen name={StackMenu.FriendDetail} component={FriendDetail} />
     </Stack.Navigator>
   );
 }

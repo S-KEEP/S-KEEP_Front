@@ -18,7 +18,8 @@ export const enum StackMenu {
 
   Notification = 'Notification',
 
-  Freind = 'Friend',
+  Friend = 'Friend',
+  FriendDetail = 'FriendDetail',
 }
 
 export const enum TabMenu {
