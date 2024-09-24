@@ -9,11 +9,8 @@ import {
 } from 'react-native';
 import {StackScreenProps} from '../../navigators/types';
 import {styles} from './CategoryList.style';
-import {IcDelete, IcLeft, IcRoundEtc} from '../../assets/icon';
-import {
-  COLOR_DETAIL_MAP,
-  ICON_DETAIL_MAPS,
-} from '../../constants/components/CategoryCard';
+import {IcDelete, IcLeft} from '../../assets/icon';
+import {COLOR_DETAIL_MAP} from '../../constants/components/CategoryCard';
 import {theme} from '../../styles';
 import {wrapper} from '../../styles/common';
 import PlaceDetail from '../../components/common/PlaceDetail/PlaceDetail';
@@ -25,6 +22,7 @@ import {CATEGORY_KEYS} from '../../hooks/queries/QueryKeys';
 import EmptyCategoryList from '../../components/Category/EmptyCategoryList';
 import Modal from '../../components/common/Modal/Modal';
 import Icon from '../../components/common/Icon/Icon';
+import IcCategoryRound from '../../components/Category/Icon/IcCategoryRound';
 
 type CategoryListProps = StackScreenProps<'CategoryList'>;
 
@@ -41,11 +39,7 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
     });
 
   const backgroundColor = useMemo(() => {
-    return COLOR_DETAIL_MAP[category?.name as string] || theme.palette.gray1;
-  }, [category]);
-
-  const IconComponent = useMemo(() => {
-    return ICON_DETAIL_MAPS[category?.name as string] || IcRoundEtc;
+    return COLOR_DETAIL_MAP[category?.name as string] || '#E3F7FF';
   }, [category]);
 
   const renderItem = ({item}: {item: UserLocation}) => (
@@ -98,7 +92,7 @@ export default function CategoryList({navigation, route}: CategoryListProps) {
 
         <View style={styles.category}>
           <View style={styles.icon}>
-            <IconComponent />
+            <IcCategoryRound category={category?.name as string} />
           </View>
 
           <Text style={styles.headerTitle}>{category?.name}</Text>
