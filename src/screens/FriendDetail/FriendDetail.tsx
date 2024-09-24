@@ -18,7 +18,6 @@ import CategoryBottomSheet, {
 import {useRef, useState} from 'react';
 import CategoryItem from '../../components/common/Category/CategoryItem/CategoryItem';
 import {ICategory} from '../../types/dtos/location';
-import PlaceDetail from '../../components/Detail/PlaceDetail/PlaceDetail';
 import {usePatchLocation} from '../../hooks/mutations/location/usePatchLocation';
 import {useQueryClient} from '@tanstack/react-query';
 import {CATEGORY_KEYS, LOCATION_KEYS} from '../../hooks/queries/QueryKeys';
@@ -34,6 +33,7 @@ import Modal from '../../components/common/Modal/Modal';
 import Icon from '../../components/common/Icon/Icon';
 import {useGetFriendLocation} from '../../hooks/queries/friends/useGetFriendLocation';
 import {usePostTourLocation} from '../../hooks/mutations/location/usePostTourLocation';
+import PlaceDetail from '../../components/common/PlaceDetail/PlaceDetail';
 
 type DetailProps = StackScreenProps<'FriendDetail'>;
 export default function FriendDetail({navigation, route}: DetailProps) {
