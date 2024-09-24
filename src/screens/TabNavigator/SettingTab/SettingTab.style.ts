@@ -8,6 +8,32 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     backgroundColor: theme.palette.white,
   },
+  friendsListContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+    paddingHorizontal: 16,
+  },
+
+  friendItem: {
+    alignItems: 'center',
+    marginRight: 16,
+  },
+
+  friendAvatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#e0e0e0', // Placeholder background color
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  friendName: {
+    marginTop: 5,
+    fontSize: 12,
+    color: '#000',
+  },
+
   header: {
     width: '100%',
     ...padding,

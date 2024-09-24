@@ -9,6 +9,10 @@ export interface UserFriend {
   name: string;
 }
 
+export interface UserFriendResponseDto {
+  friendList: UserFriend[];
+}
+
 export type CategoryCardResponseDto = CardEntity[];
 
 export interface Location {
