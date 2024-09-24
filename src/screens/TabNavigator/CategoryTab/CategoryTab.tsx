@@ -15,6 +15,7 @@ import {TabOfStackScreenProps} from '../../../navigators/types';
 
 import {usePatchFCMToken} from '../../../hooks/mutations/user/usePatchFCMToken';
 import {checkPermission} from '../../../utils/pushUtils';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 type CategoryTabProps = TabOfStackScreenProps<'TabNavigator', 'CategoryTab'>;
 export default function CategoryTab({navigation}: CategoryTabProps) {
@@ -77,11 +78,12 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
         나만의 카테고리로 {'\n'}
         여행지를 기록해봐요
       </Text>
+
       <FlatList
         data={mappedData}
         renderItem={renderItem}
@@ -92,6 +94,7 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
         snapToOffsets={snapToOffsets}
         contentContainerStyle={styles.cardContainer}
       />
+
       <Text style={styles.subTitle}>
         카테고리별로 다양한 여행지를 만나봐요!
       </Text>
@@ -101,6 +104,6 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
         <IcPlus />
         <Text style={styles.addButtonText}>카테고리 추가</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
