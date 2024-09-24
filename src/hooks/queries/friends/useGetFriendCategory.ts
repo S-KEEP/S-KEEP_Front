@@ -1,7 +1,7 @@
 import {useQuery} from '@tanstack/react-query';
 import {GET} from '../../../apis/client';
 import {FRIEND_KEYS} from '../QueryKeys';
-import {FriendCategory, UserCategory} from '../../../types/dtos/category';
+import {FriendCategory} from '../../../types/dtos/category';
 
 /**
  *  친구 카테고리 목록 조회

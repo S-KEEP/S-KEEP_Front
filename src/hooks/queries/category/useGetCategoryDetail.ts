@@ -30,7 +30,7 @@ const getCategoryList = async ({
 };
 
 const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
-  const {data, hasNextPage, fetchNextPage, isFetching} = useInfiniteQuery({
+  const {data, hasNextPage, fetchNextPage, isFetching, isLoading} = useInfiniteQuery({
     queryKey: CATEGORY_KEYS.list(requestParams),
     queryFn: ({pageParam = 1}: {pageParam?: number}) =>
       getCategoryList({...requestParams, page: pageParam}),
@@ -52,6 +52,7 @@ const useGetCategoryList = (requestParams: GetPostHistoryRequest) => {
     data: data?.pages,
     loadMore,
     isFetching,
+    isLoading,
     hasNextPage,
     totalElement: data?.totalElement,
   };
