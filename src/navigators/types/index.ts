@@ -32,6 +32,10 @@ export type StackParamList = {
   CategoryAdd: undefined;
 
   Notification: undefined;
+
+  Friend: {
+    id: number;
+  };
 };
 
 export type TabParamList = {
