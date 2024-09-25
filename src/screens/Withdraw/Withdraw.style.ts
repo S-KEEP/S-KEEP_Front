@@ -8,11 +8,18 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     backgroundColor: theme.palette.white,
   },
+  scrollview: {
+    alignItems: 'center',
+    // paddingBottom: 100,
+    // paddingHorizontal: 24,
+    width: '90%',
+  },
   backIcon: {
-    position: 'absolute',
-    zIndex: 9,
-    top: 70,
-    left: 0,
+    // position: 'absolute',
+    // zIndex: 9,
+    // top: 70,
+    // left: 0,
+    alignSelf: 'flex-start',
     paddingLeft: 24,
   },
   title: {
@@ -20,7 +27,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
     alignSelf: 'flex-start',
-    paddingLeft: 24,
+    // paddingLeft: 24,
   },
   subtitle: {
     ...theme.typography.title_m_16,
@@ -28,7 +35,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     alignSelf: 'flex-start',
-    paddingLeft: 24,
+    // paddingLeft: 24,
   },
   iconContainer: {
     marginTop: 50,
@@ -39,7 +46,7 @@ const styles = StyleSheet.create({
 
     padding: 20,
     backgroundColor: theme.palette.gray1,
-    width: '85%',
+    width: '90%',
     borderRadius: 10,
     marginTop: 40,
     marginBottom: 40,
@@ -58,10 +65,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   checkboxContainer: {
+    alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 20,
-    width: '85%',
   },
   checkboxText: {
     ...theme.typography.title_m_16,

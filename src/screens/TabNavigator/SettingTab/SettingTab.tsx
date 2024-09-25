@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {View, Text, Alert, TouchableOpacity, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  Alert,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSetRecoilState} from 'recoil';
 import {authState} from '../../../libs/recoil/states/auth';
@@ -25,6 +32,7 @@ import {UserFriend} from '../../../types/dtos/category';
 import {useGetFriendList} from '../../../hooks/queries/friends/useGetFriendList';
 import queryClient from '../../../apis/queryClient';
 import {FRIEND_DETAIL_KEYS} from '../../../hooks/queries/QueryKeys';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 type SettingTabProps = TabOfStackScreenProps<'TabNavigator', 'SettingTab'>;
 
@@ -119,50 +127,53 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Icon
-          style={{alignSelf: 'flex-end'}}
-          onPress={() => navigation.push('Notification')}
-          children={<IcBell />}
-        />
-      </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.header}>
+          <Icon
+            style={{alignSelf: 'flex-end'}}
+            onPress={() => navigation.push('Notification')}
+            children={<IcBell />}
+          />
+        </View>
 
-      <Profile userInfo={userInfoData.user} />
-      <View style={styles.divider} />
-      <View style={styles.friendContainer}>
-        <Text style={styles.title}>친구</Text>
-        <Text style={styles.description}>
-          친구를 추가해 여행지를 공유해 보세요!
-        </Text>
+        <Profile userInfo={userInfoData.user} />
+        <View style={styles.divider} />
+        <View style={styles.friendContainer}>
+          <Text style={styles.title}>친구</Text>
+          <Text style={styles.description}>
+            친구를 추가해 여행지를 공유해 보세요!
+          </Text>
 
-        {userFriend.data?.friendList.length === 0 ? (
-          <View style={styles.centeredButton}>
-            <TouchableOpacity
-              style={styles.addButton}
-              onPress={() => getFriendToken()}>
-              <Text style={styles.addButtonText}>카카오톡으로 친구 추가</Text>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <>
-            <FlatList
-              horizontal
-              data={userFriend.data?.friendList}
-              keyExtractor={item => item.id.toString()}
-              renderItem={renderFriendItem}
-              ListHeaderComponent={
-                <TouchableOpacity
-                  style={styles.friendItem}
-                  onPress={() => getFriendToken()}>
-                  <IcProfilePlus />
-                </TouchableOpacity>
-              }
-            />
-          </>
-        )}
-      </View>
-      <SettingsList onLogout={handleLogout} />
-    </View>
+          {userFriend.data?.friendList.length === 0 ? (
+            <View style={styles.centeredButton}>
+              <TouchableOpacity
+                style={styles.addButton}
+                onPress={() => getFriendToken()}>
+                <Text style={styles.addButtonText}>카카오톡으로 친구 추가</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <>
+              <FlatList
+                horizontal
+                data={userFriend.data?.friendList}
+                keyExtractor={item => item.id.toString()}
+                renderItem={renderFriendItem}
+                ListHeaderComponent={
+                  <TouchableOpacity
+                    style={styles.friendItem}
+                    onPress={() => getFriendToken()}>
+                    <IcProfilePlus />
+                  </TouchableOpacity>
+                }
+              />
+            </>
+          )}
+        </View>
+
+        <SettingsList onLogout={handleLogout} />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
