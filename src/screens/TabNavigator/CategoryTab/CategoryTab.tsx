@@ -95,6 +95,7 @@ export default function CategoryTab({navigation}: CategoryTabProps) {
       <Text style={styles.subTitle}>
         카테고리별로 다양한 여행지를 만나봐요!
       </Text>
+
       <TouchableOpacity
         style={styles.addButton}
         onPress={() => navigation.navigate('CategoryAdd')}>
