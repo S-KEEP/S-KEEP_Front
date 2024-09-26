@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {Text, View, TouchableOpacity, Alert, SafeAreaView} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {IcWarning, IcSad, IcLeft} from '../../assets/icon';
 import styles from './Withdraw.style';
@@ -100,45 +107,48 @@ export default function Withdraw({navigation}: WithdrawProps) {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.backIcon}>
         <Icon onPress={handleGoBack} children={<IcLeft />} />
       </View>
-      <Text style={styles.title}>정말로 스킵을 탈퇴하실 건가요?</Text>
-      <Text style={styles.subtitle}>탈퇴 전, 확인해야 될 정보가 있어요.</Text>
 
-      <View style={styles.iconContainer}>
-        <IcWarning />
-      </View>
+      <ScrollView contentContainerStyle={styles.scrollview}>
+        <Text style={styles.title}>정말로 스킵을 탈퇴하실 건가요?</Text>
+        <Text style={styles.subtitle}>탈퇴 전, 확인해야 될 정보가 있어요.</Text>
 
-      <View style={styles.textBox}>
-        <Text style={styles.infoTextTitle}>
-          탈퇴 즉시, {userInfo.username}님의 모든 이용 내역은 삭제돼요.
-        </Text>
-        <Text style={styles.infoText}>
-          계정 정보, 등록된 여행지, 친구 등 스킵에서 활동했던 모든 내용들은
-          삭제되며, 다시 가입해도 복구되지 않아요!
-        </Text>
-      </View>
+        <View style={styles.iconContainer}>
+          <IcWarning />
+        </View>
 
-      <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isChecked}
-          onValueChange={setIsChecked}
-          boxType="square"
-          tintColors={{
-            true: theme.palette.primary,
-            false: theme.palette.primary,
-          }}
-          onCheckColor="#FFFFFF"
-          onFillColor={theme.palette.primary}
-          onTintColor={theme.palette.primary}
-          style={styles.checkbox}
-        />
-        <Text style={styles.checkboxText}>
-          해당 내용을 모두 확인했고, 탈퇴에 동의합니다.
-        </Text>
-      </View>
+        <View style={styles.textBox}>
+          <Text style={styles.infoTextTitle}>
+            탈퇴 즉시, {userInfo.username}님의 모든 이용 내역은 삭제돼요.
+          </Text>
+          <Text style={styles.infoText}>
+            계정 정보, 등록된 여행지, 친구 등 스킵에서 활동했던 모든 내용들은
+            삭제되며, 다시 가입해도 복구되지 않아요!
+          </Text>
+        </View>
+
+        <View style={styles.checkboxContainer}>
+          <CheckBox
+            value={isChecked}
+            onValueChange={setIsChecked}
+            boxType="square"
+            tintColors={{
+              true: theme.palette.primary,
+              false: theme.palette.primary,
+            }}
+            onCheckColor="#FFFFFF"
+            onFillColor={theme.palette.primary}
+            onTintColor={theme.palette.primary}
+            style={styles.checkbox}
+          />
+          <Text style={styles.checkboxText}>
+            해당 내용을 모두 확인했고, 탈퇴에 동의합니다.
+          </Text>
+        </View>
+      </ScrollView>
 
       <TouchableOpacity
         style={[
@@ -160,6 +170,6 @@ export default function Withdraw({navigation}: WithdrawProps) {
         modalButtonCancelText="더 써볼래요"
         modalButtonConfirmText="탈퇴할래요"
       />
-    </View>
+    </SafeAreaView>
   );
 }

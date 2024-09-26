@@ -5,7 +5,7 @@ import {flexBox, padding} from '../../../styles/common';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 100,
+    // paddingTop: 100,
     backgroundColor: theme.palette.white,
   },
   friendsListContainer: {

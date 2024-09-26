@@ -1,10 +1,12 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
 import {theme} from '../../../styles';
 import {flexBox} from '../../../styles/common';
 
+const {height} = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 150,
+    paddingTop: 100,
     backgroundColor: theme.palette.white,
     flex: 1,
     alignItems: 'center',
@@ -16,10 +18,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   subTitle: {
-    top: -120,
+    marginTop: 30,
     textAlign: 'center',
     ...theme.typography.body_m_15,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   cardContainer: {
     paddingLeft: 28,
@@ -30,12 +32,15 @@ const styles = StyleSheet.create({
   },
   addButton: {
     ...flexBox('row', 'center', 'center'),
-    top: -110,
     backgroundColor: theme.palette.primary,
     paddingVertical: 12,
     gap: 5,
     paddingHorizontal: 32,
     borderRadius: 30,
+    marginTop: 10,
+    // iOS 기기에 따른 조건부 marginBottom 설정
+    // height 667은 iPhone SE의 높이. 이보다 크면 60, 아니면 30
+    marginBottom: Platform.OS === 'ios' && height <= 667 ? 30 : 80,
   },
   addButtonText: {
     color: theme.palette.white,
