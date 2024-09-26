@@ -46,16 +46,14 @@ export const useAppleLogin = () => {
             },
             {
               onError: error => {
-                console.error('Apple Sign In Error ---- ✈️', error);
+                console.error('Apple Sign In Error!!! ---- ✈️', error);
                 reject(error);
               },
               onSuccess: async ({accessToken, refreshToken}) => {
-                // Update local storage and Recoil states
                 setAuthData({accessToken, refreshToken});
                 setUserInfo({username});
                 setAuth({isAuthenticated: true});
 
-                // Prepare updated Apple login information
                 const updatedAppleInfo: UserAppleInfoType = {
                   email: email || '',
                   user: user || '',
@@ -68,7 +66,6 @@ export const useAppleLogin = () => {
                 };
                 setUserAppleInfo(updatedAppleInfo);
 
-                // Resolve with the updated Apple login information
                 resolve(updatedAppleInfo);
               },
             },

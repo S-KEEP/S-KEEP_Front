@@ -9,7 +9,8 @@ interface FriendTokenPropRequest {
  *  친구 추가하기
  */
 export const pathchFriendAdd = async ({token}: FriendTokenPropRequest) => {
-  const res = await PATCH<string>(`/api/friend`, {token}); // 객체로 전달
+  const res = await PATCH<string>(`/api/friend`, {token}); 
+  
   return res.data;
 };
 
