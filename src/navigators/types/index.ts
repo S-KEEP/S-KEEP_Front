@@ -8,7 +8,7 @@ import {AnalyzeLocationResponse} from '../../hooks/mutations/location/usePostLoc
 import {ReanalyzeRequest} from '../../hooks/mutations/location/usePatchLocationReAnalyze';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import type {CompositeScreenProps} from '@react-navigation/native';
-import {TourLocationDTO} from '../../types/dtos/tourLocation';
+import {EditorTourLocationDto, TourLocationDTO} from '../../types/dtos/tourLocation';
 
 export type StackParamList = {
   TabNavigator: undefined;
@@ -41,6 +41,7 @@ export type StackParamList = {
     id: number;
     targetId: number;
   };
+  EditorDetail: {location: EditorTourLocationDto};
 };
 
 export type TabParamList = {

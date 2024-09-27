@@ -20,6 +20,8 @@ export const enum StackMenu {
 
   Friend = 'Friend',
   FriendDetail = 'FriendDetail',
+
+  EditorDetail = 'EditorDetail',
 }
 
 export const enum TabMenu {

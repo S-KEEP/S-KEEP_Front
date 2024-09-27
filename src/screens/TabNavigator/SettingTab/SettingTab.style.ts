@@ -5,7 +5,6 @@ import {flexBox, padding} from '../../../styles/common';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: 100,
     backgroundColor: theme.palette.white,
   },
   friendsListContainer: {
@@ -13,7 +12,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 16,
   },
-
+  itemContainer: {
+    marginTop: 20,
+    gap: 20,
+  },
   friendItem: {
     alignItems: 'center',
     marginRight: 16,

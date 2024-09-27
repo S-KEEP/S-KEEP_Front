@@ -1,7 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {GET} from '../../../apis/client';
 import {TOUR_KEYS} from '../QueryKeys';
-import {WeatherDTO} from '../../../types/dtos/weather';
 import {TourLocationDTO} from '../../../types/dtos/tourLocation';
 
 export interface GetTourListRequest {
