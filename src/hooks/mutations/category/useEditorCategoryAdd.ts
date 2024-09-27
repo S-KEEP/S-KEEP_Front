@@ -7,17 +7,17 @@ interface AddEditorLocationRequest {
 }
 
 /**
- *  /api/picks?userCategoryId=1&title=
+ *  /api/picks/user-category?userCategoryId=1&title=
  */
 
 export const postEditorLocationAdd = async ({
   title,
   userCategoryId,
 }: AddEditorLocationRequest) => {
-  const res = await POST<string>(`/api/picks`, {
-    userCategoryId,
-    title,
-  });
+  const res = await POST<string>(
+    `/api/picks/user-category?userCategoryId=${userCategoryId}&title=${encodeURIComponent(title)}`,
+    {},
+  );
 
   console.log('✅ 친구 명소 내 카테고리 추가 완료 : ', res.data);
   return res.data;

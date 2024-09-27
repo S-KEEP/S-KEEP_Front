@@ -63,8 +63,6 @@ export default function EditorDetail({navigation, route}: DetailTourProps) {
   });
 
   function handleAddCategory(category: ICategory) {
-    console.log(category);
-
     bottomSheetRef.current?.close();
     setIsLoading(true);
     addCategory({title: location.title, userCategoryId: category.id});
