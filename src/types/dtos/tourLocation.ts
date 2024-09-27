@@ -7,3 +7,13 @@ export interface TourLocationDTO {
   contentTypeId: string;
   imageUrl: string;
 }
+
+export interface EditorTourLocationDto {
+  title: string;
+  address: string;
+  mapX: string;
+  mapY: string;
+  imageUrl: string;
+  category: string;
+  editorName: string;
+}

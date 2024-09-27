@@ -61,6 +61,10 @@ const TOUR_KEYS = {
     [...TOUR_KEYS.details(), {x: location.x, y: location.y}] as const, // ["tours", "detail", {x: "x", y: "y"}]
 };
 
+const EDITOR_TOUR_KEYS = {
+  all: ['EditorTours'] as const,
+};
+
 const NOTIFICATION_KEYS = {
   all: ['notifications'] as const,
 
@@ -81,4 +85,5 @@ export {
   FRIEND_KEYS,
   FRIEND_DETAIL_KEYS,
   FRIEND_LOCATION_KEYS,
+  EDITOR_TOUR_KEYS,
 };
