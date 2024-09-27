@@ -13,7 +13,7 @@ export default function EditorTourismItem({item}: TourismItemProps) {
   const {stackNavigation} = useNavigator();
 
   function handleOnPress() {
-    // stackNavigation.navigate('DetailTour', {location: item.address});
+     stackNavigation.navigate('EditorDetail', {location: item});
   }
 
   return (

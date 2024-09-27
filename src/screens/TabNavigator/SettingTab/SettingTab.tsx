@@ -33,12 +33,17 @@ import {useGetFriendList} from '../../../hooks/queries/friends/useGetFriendList'
 import queryClient from '../../../apis/queryClient';
 import {FRIEND_DETAIL_KEYS} from '../../../hooks/queries/QueryKeys';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useGetEditorPickTourList} from '../../../hooks/queries/tourism/useGetEditorPickTourList';
+import {EditorTourLocationDto} from '../../../types/dtos/tourLocation';
+import EditorTourismItem from '../../../components/common/Tourism/EditorPickTourismItem';
 
 type SettingTabProps = TabOfStackScreenProps<'TabNavigator', 'SettingTab'>;
 
 export default function SettingTab({navigation, route}: SettingTabProps) {
   const userFriend = useGetFriendList(0);
   const userInfoData = useGetUserInfoQuery();
+  const recommendationTour = useGetEditorPickTourList();
+  console.log('✅ ', recommendationTour);
   const setAuth = useSetRecoilState(authState);
   const setUserInfo = useSetRecoilState(userInfoState);
 
@@ -136,7 +141,6 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
             children={<IcBell />}
           />
         </View>
-
         <Profile userInfo={userInfoData.user} />
         <View style={styles.divider} />
         <View style={styles.friendContainer}>
@@ -170,6 +174,22 @@ export default function SettingTab({navigation, route}: SettingTabProps) {
               />
             </>
           )}
+        </View>
+        {/* 에디터 픽 추천 여행지  */}
+
+        <View style={styles.friendContainer}>
+          <Text style={styles.title}>스킵 에디터가 추천하는 여행지</Text>
+          <FlatList
+            data={recommendationTour.data?.picksDtoList}
+            renderItem={({item}: {item: EditorTourLocationDto}) => (
+              <EditorTourismItem item={item} />
+            )}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            snapToAlignment="center"
+            decelerationRate="fast"
+            contentContainerStyle={styles.itemContainer}
+          />
         </View>
 
         <SettingsList onLogout={handleLogout} />
