@@ -23,9 +23,7 @@ export default function TourismItem({item}: TourismItemProps) {
         <Text style={styles.itemTitle} numberOfLines={1} ellipsizeMode="tail">
           {item.title}
         </Text>
-        <Text style={styles.itemDistance}>
-          {Number(item.dist).toFixed(0)}km
-        </Text>
+        <Text style={styles.itemDistance}>{Number(item.dist).toFixed(0)}m</Text>
       </View>
     </TouchableOpacity>
   );
