@@ -51,7 +51,9 @@ export default function NotificationItem({item}: NotificationItemProps) {
         {!item.isChecked && <View style={styles.flag} />}
       </View>
 
-      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.title}>
+        {item.title} {item.body}
+      </Text>
       <Text style={styles.date}>{formatDate(item.createdAt)}</Text>
     </Pressable>
   );
