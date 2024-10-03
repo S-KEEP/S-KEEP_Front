@@ -6,6 +6,7 @@ import {NotificationDTO} from '../../hooks/queries/notification/useGetNotificati
 import {usePatchNotification} from '../../hooks/mutations/notification/usePatchNotification';
 import {useQueryClient} from '@tanstack/react-query';
 import {NOTIFICATION_KEYS} from '../../hooks/queries/QueryKeys';
+import {formatDate, getCategoryName} from '../../utils/pushUtils';
 
 interface NotificationItemProps {
   item: NotificationDTO;
@@ -46,12 +47,12 @@ export default function NotificationItem({item}: NotificationItemProps) {
       ]}
       onPress={handleOnPress}>
       <View style={styles.topBox}>
-        <Text style={styles.subtitle}>{item.type}</Text>
+        <Text style={styles.subtitle}>{getCategoryName(item.type)}</Text>
         {!item.isChecked && <View style={styles.flag} />}
       </View>
 
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.date}>{item.createdAt}</Text>
+      <Text style={styles.date}>{formatDate(item.createdAt)}</Text>
     </Pressable>
   );
 }

@@ -137,3 +137,43 @@ export function parseNotificationData(data: string | object | undefined) {
     console.error(e);
   }
 }
+
+/**
+ * 카테고리 타입 별 이름 변환해 주는 함수
+ * @param type
+ */
+export function getCategoryName(type: string) {
+  if (type === 'userLocation') return '날짜 추천 받고 여행 떠나기';
+  else if (type === 'category') return '카테고리 리마인드';
+  else type;
+}
+
+/**
+ * ISO Date를 포맷팅해 주는 함수
+ * @param isoString
+ */
+export function formatDate(isoString: string): string {
+  try {
+    const date = new Date(isoString);
+
+    if (isNaN(date.getTime())) throw new Error('Invalid date');
+
+    const today = new Date();
+    const isToday =
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate();
+
+    if (isToday) {
+      return '오늘';
+    }
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}.${month}.${day}`;
+  } catch (error) {
+    return isoString;
+  }
+}
