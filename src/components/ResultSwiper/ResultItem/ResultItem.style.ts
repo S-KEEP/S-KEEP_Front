@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     ...flexBox('row', 'flex-start', 'center'),
     gap: 10,
     flex: 1,
+    paddingEnd: 20,
   },
   boxItemWSpace: {...flexBox('row', 'space-between'), width: '100%'},
   text: {
