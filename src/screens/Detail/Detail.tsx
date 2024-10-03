@@ -57,7 +57,11 @@ export default function Detail({navigation, route}: DetailProps) {
       queryClient.invalidateQueries({
         queryKey: LOCATION_KEYS.detail(String(id)),
       });
+      queryClient.invalidateQueries({
+        queryKey: CATEGORY_KEYS.lists(),
+      });
 
+      navigation.pop();
       bottomSheetRef.current?.close();
     },
     onError: e => {
